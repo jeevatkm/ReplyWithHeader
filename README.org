@@ -19,19 +19,21 @@ back on someones request. I don't use it much myself nor do I spend time develop
 So if things break, I might not fix things quickly.
 
 * Requirements:
+
 Mail: Version 4.3 (1081)
+
 Snow Leopard: 10.6.4
 
 * Installation
 
 1. Quit Mail.app
-2. Save and unzip the attachment in ~/Library/Mail/Bundles (create the
-directory if missing)
-   Unzipping will return "ReplyWithHeaders.mailbundle" - copy this to
-~/Library/Mail/Bundles
+2. Save and unzip the attachment in ~/Library/Mail/Bundles (create the directory if missing)
+   Unzipping will return "ReplyWithHeaders.mailbundle" - copy this to ~/Library/Mail/Bundles
 3. In the terminal:
-> defaults write com.apple.mail EnableBundles -bool true
-> defaults write com.apple.mail BundleCompatibilityVersion 4
+
+   > defaults write com.apple.mail EnableBundles -bool true
+
+   > defaults write com.apple.mail BundleCompatibilityVersion 4
 4. Start Console.app (/Applications/Utilities)
 5. In the search bar (top right corner of Console.app) type: Mail
    This will restrict your information to Mail.app messages
@@ -40,6 +42,6 @@ directory if missing)
 In the console, if all goes well, you should see
 
 ReplyWithHeaders: Oh its a wonderful life
+
 Loaded ReplyWithHeaders
-Powered by the Dedicated Servers and
-Cloud Computing of Rackspace Hosting®
+
