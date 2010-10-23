@@ -1,4 +1,4 @@
-* ABout
+* About
 The reply in Mail.app creates a new email with the preamble
 
 On 21 July 2010, John Doe wrote:
