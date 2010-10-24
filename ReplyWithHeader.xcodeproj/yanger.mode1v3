@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -268,15 +266,15 @@
 								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>4D01283F12741EBB00F93221</string>
-								<string>4D01284012741EBB00F93221</string>
+								<string>4DD8A67D1274BEBD006EB33C</string>
 								<string>1C37FAAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
-									<integer>18</integer>
+									<integer>17</integer>
+									<integer>16</integer>
+									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -315,7 +313,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ComposeBackEnd2.m</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,19 +321,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ComposeBackEnd2.m</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4D0128691274216900F93221</string>
+										<string>4DD8A6A11274C6A7006EB33C</string>
 										<key>history</key>
 										<array>
 											<string>4D5FEFDD1272437000A945C5</string>
-											<string>4D5FF0271272471200A945C5</string>
 											<string>4D5FF3971272A94900A945C5</string>
 											<string>4D5FF3981272A94900A945C5</string>
 											<string>4D0127EC1274155100F93221</string>
-											<string>4D0127ED1274155100F93221</string>
+											<string>4DD8A69F1274C6A7006EB33C</string>
+											<string>4DD8A6A01274C6A7006EB33C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -393,9 +391,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>4D0127D812740A9600F93221</string>
+				<string>4DD8A68C1274BEC6006EB33C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>4D0127D912740A9600F93221</string>
+				<string>4DD8A68D1274BEC6006EB33C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -533,9 +531,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>4D01285412741FFF00F93221</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>4D4C1AFE1272242200302633</string>
 		<string>/Users/yanger/mystuff/programming/CocoaCode/ReplyWithHeaders/ReplyWithHeader.xcodeproj</string>
 	</array>
@@ -578,8 +573,6 @@
 							<string>436pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -619,7 +612,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>4D4C1AFE1272242200302633</string>
-				<string>4D0127DA12740A9600F93221</string>
+				<string>4DD8A68E1274BEC6006EB33C</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -632,7 +625,7 @@
 			<key>WindowToolGUID</key>
 			<string>4D4C1AFE1272242200302633</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

@@ -93,8 +93,11 @@ char *rph_ms = "_continueToSetupContentsForView:withParsedMessages:";
 										useBold:boldhead
 										includeBCC:YES];
 	DOMHTMLCollection *dhc = [origemail children];
+//	for(int i=0; i< dhc.length;i++){	
+//		NSLog(@"%d=%@\n",i, [dhc item:i]);
+//	}
 	// the first one is "On .... X wrote"
-	[origemail removeChild:[dhc item:0]];
+	if(dhc.length>1) [origemail removeChild:[dhc item:0]];
 	WebArchive * headerwebarchive=[headerString webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
 	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
 	[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
