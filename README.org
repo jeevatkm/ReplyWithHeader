@@ -19,11 +19,12 @@ Date:
 
 etc.
 
-ReplyWithHeaders causes the reply to behave like forwarding. I developed this long time
-back on someones request. I don't use it much myself nor do I spend time developing it.
-So if things break, I might not fix things quickly.
+ReplyWithHeaders causes the reply message to behave like forwarding. I developed
+this a long time back on someones request. I don't use it much myself nor do I
+spend time developing it.  So if things break, I might not fix things quickly.
 
 * Requirements:
+At least
 
 Mail: Version 4.3 (1081)
 
