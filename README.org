@@ -1,4 +1,8 @@
 * NEWS
+Sun Mar 27 14:08:21 PDT 2011
+- Updated for Mail and Message 4.5
+- Version is 1.1.5
+
 Sun Nov 28 10:59:29 PST 2010:
 - Updated the bundle for the latest Message and Mail framework UUIDs.
 - Version is 1.1.4
