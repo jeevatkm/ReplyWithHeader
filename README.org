@@ -1,4 +1,8 @@
 * NEWS
+Wed Sep 14 
+- Fixes provided Jason Schroth to make ReplyWithHeader compatible with Lion (version 1.1.6)
+- Version 1.1.5 works for Snow Leopard.
+
 Sun Mar 27 14:08:21 PDT 2011
 - Updated for Mail and Message 4.5
 - Version is 1.1.5
