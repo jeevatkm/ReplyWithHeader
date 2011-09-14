@@ -17,10 +17,12 @@
 
 
 #import "ComposeBackEnd2.h"
+
 #import "WebKit/DOMDocumentFragment.h"
 #import "WebKit/DOMNodeList.h"
 #import "WebKit/DOMHTMLCollection.h"
 #import "WebKit/DOMHTMLElement.h"
+#import "WebKit/DOMHTMLDocument.h"
 #import "WebKit/DOMHTMLDivElement.h"
 #import "WebKit/WebResource.h"
 #import "WebKit/WebArchive.h"
@@ -38,14 +40,29 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 
 @implementation ComposeBackEnd2
 
+
+
 +(void)load{
 	ComposeBackEndClass = NSClassFromString(@"ComposeBackEnd");
 	if(!ComposeBackEndClass){
 		NSLog(@"ReplyWithHeader: Could not find ComposeBackEnd, not good");
 		return;
 	}
+    
+
 	class_setSuperclass([self class], ComposeBackEndClass);
-	
+
+   /*Class MessageHeadersClass = NSClassFromString(@"MessageHeaders");
+    unsigned int outCount;
+    Method *array = class_copyMethodList(MessageHeadersClass, &outCount);
+    NSLog(@"Count=%d",outCount);
+    
+    for( int i = 0; i < outCount; i++ )
+    {
+        //char *type = method_copyReturnType(array[i]);
+        NSLog(@"Meth=%s returns=%s",sel_getName(method_getName(array[i])),method_copyReturnType(array[i]));
+    }
+    */
 	
 	Method oldm,newm;
 	oldm  = 
@@ -69,6 +86,11 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 //    method_exchangeImplementations(oldm, newm);
 	
 }
+
+-(void)domystuff{
+    return;
+}
+
 //- (void)rph_setOriginalMessageWebArchive:(id)fp8{
 //	NSLog(@"setOriginalMessageWebArchive %@",fp8);
 //}
@@ -86,7 +108,8 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 //		NSLog(@"Document=%@",document);
 		DOMDocumentFragment *border=[ [document htmlDocument]
 								 createDocumentFragmentWithMarkupString:
-								 @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
+                                 @"-----Original Message-----"
+								// @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
 								 ];
 
 		BOOL boldhead=YES;
@@ -120,11 +143,13 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 			}	
 			boldhead=NO;
 		}
+        
 	NSAttributedString *headerString =[[self originalMessageHeaders] 
-										attributedStringShowingHeaderDetailLevel:1
-										useHeadIndents:NO
-										useBold:boldhead
-										includeBCC:YES];
+                                       attributedStringShowingHeaderDetailLevel:1];
+									//	useHeadIndents:NO
+									//	useBold:boldhead
+									//	includeBCC:YES];
+        
 	DOMNodeList *dhc = [origemail childNodes];
 	NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
 	BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];	
@@ -154,8 +179,14 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 			// if signature at top, item==3 else item==1
 			[origemail removeChild:[dhc item:which]];
 		}
-		
-	WebArchive * headerwebarchive=[headerString webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
+	
+    //remove the color attribute so that the text is black instead of gray
+    NSMutableAttributedString *newheaderString = [headerString mutableCopy];
+    [newheaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[newheaderString length])];
+    
+    //NSLog(@"Sig=%@",newheaderString);
+    
+	WebArchive * headerwebarchive=[newheaderString webArchiveForRange:NSMakeRange(0,[newheaderString length]) fixUpNewlines:YES];
 	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
 	if(howdeep==0){
 			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];

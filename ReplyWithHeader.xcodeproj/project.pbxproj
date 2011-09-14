@@ -11,24 +11,10 @@
 		4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FEF8512723EC800A945C5 /* LICENSE */; };
 		4D5FEFF31272445E00A945C5 /* KnockKnock.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FEFF21272445E00A945C5 /* KnockKnock.m */; };
 		4D5FF0AA127255C500A945C5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
-		4D5FF1BC12725B2900A945C5 /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 		4D5FF2A012728DDB00A945C5 /* ComposeBackEnd2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FEF8912723EC800A945C5 /* ComposeBackEnd2.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4D5FF1B412725AE500A945C5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /Users/yanger/Library/Mail/Bundles;
-			dstSubfolderSpec = 0;
-			files = (
-				4D5FF1BC12725B2900A945C5 /* ReplyWithHeader.mailbundle in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -157,7 +143,6 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				4D5FEE9312723CCE00A945C5 /* ShellScript */,
-				4D5FF1B412725AE500A945C5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
