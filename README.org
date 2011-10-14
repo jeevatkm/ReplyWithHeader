@@ -1,4 +1,9 @@
 * NEWS
+Thursday Oct 13
+- Info.plist updated by Json Schroth for 10.7.2
+- version 1.1.7
+- Removed the older UUIDs that were there for 10.6 installations. Snow Leopard supports ends at is 1.1.5.
+
 Wed Sep 14 
 - Fixes provided Jason Schroth to make ReplyWithHeader compatible with Lion (version 1.1.6)
 - Version 1.1.5 works for Snow Leopard.
