@@ -151,14 +151,19 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 									//	includeBCC:YES];
         
 	DOMNodeList *dhc = [origemail childNodes];
-	NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
-	BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];	
+	//NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
+	//BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];	
 //	for(int i=0; i< dhc.length;i++){	
-//		NSLog(@"%d=%@\n%@\n",i, [dhc item:i], [[dhc item:i] stringValue]);
+//		NSLog(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
 //	}
 	// the first one is "On .... X wrote"
 		if(dhc.length>1 && howdeep==0) {
-			[origemail removeChild:[dhc item:0]];
+			[origemail removeChild:[dhc item:0]]; 
+//            NSLog(@"Removed Original Text, only %d children left",[origemail childElementCount]);
+            if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] ) {                
+                [origemail removeChild:[origemail firstChild]];
+//                NSLog(@"Removed BR element, only %d children left",[origemail childElementCount]);
+            }
 		}
 		if(dhc.length>1 && howdeep==1) {
 			// is this signature?
@@ -178,6 +183,17 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 				
 			// if signature at top, item==3 else item==1
 			[origemail removeChild:[dhc item:which]];
+            
+            
+            //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
+            for(int i =0;i < [origemail childElementCount];i++) {
+                if( [[[[origemail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {                
+                    //this is the quoted text
+                    which=i;
+                    break;
+                    
+                }
+            }
 		}
 	
     //remove the color attribute so that the text is black instead of gray
@@ -189,12 +205,19 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 	WebArchive * headerwebarchive=[newheaderString webArchiveForRange:NSMakeRange(0,[newheaderString length]) fixUpNewlines:YES];
 	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
 	if(howdeep==0){
-			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
-			[origemail insertBefore:border refChild: [origemail firstChild] ];
+			[[origemail firstChild] insertBefore:headerfragment refChild: [[origemail firstChild] firstChild] ];
+			[[origemail firstChild] insertBefore:border refChild: [[origemail firstChild] firstChild]];
 	}else if(howdeep==1){
-		if([dhc item:1] != NULL && which>0){
-			[origemail insertBefore:headerfragment refChild: [dhc item:which] ];
-			[origemail insertBefore:border refChild: [dhc item:which] ];
+		if(which>0){
+            //check if this is plain text by seeing if -which- points to a br element... if not, include in blockquote
+            if( [[[[origemail childNodes] item:which] nodeName] isEqualToString:@"BR"] ) {
+                [origemail insertBefore:headerfragment refChild:[dhc item:which] ];
+                [origemail insertBefore:border refChild:[dhc item:which] ];
+            }
+            else {
+                [[[origemail childNodes] item:which] insertBefore:headerfragment refChild:[[[origemail childNodes] item:which] firstChild] ];
+                [[[origemail childNodes] item:which] insertBefore:border refChild:[[[origemail childNodes] item:which] firstChild] ];
+            }
 		}
 	}
 		
