@@ -153,6 +153,7 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 	DOMNodeList *dhc = [origemail childNodes];
 	//NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
 	//BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];	
+//    NSLog(@"howdeep = %d", howdeep);
 //	for(int i=0; i< dhc.length;i++){	
 //		NSLog(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
 //	}
@@ -183,13 +184,14 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 				
 			// if signature at top, item==3 else item==1
 			[origemail removeChild:[dhc item:which]];
-            
+//            NSLog(@"removed item %d",which);
             
             //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
             for(int i =0;i < [origemail childElementCount];i++) {
                 if( [[[[origemail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {                
                     //this is the quoted text
                     which=i;
+//                    NSLog(@"which item is now %d",which);
                     break;
                     
                 }
@@ -205,8 +207,23 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 	WebArchive * headerwebarchive=[newheaderString webArchiveForRange:NSMakeRange(0,[newheaderString length]) fixUpNewlines:YES];
 	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
 	if(howdeep==0){
+         //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
+        //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
+        //so account for that too
+        int numgrandchild = 0;
+        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] ) {
+            numgrandchild = [[origemail firstChild] childElementCount];
+        }
+     
+//        NSLog(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
+        if( numgrandchild == 0 ) {
+			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
+			[origemail insertBefore:border refChild: [origemail firstChild] ];
+        }
+        else {
 			[[origemail firstChild] insertBefore:headerfragment refChild: [[origemail firstChild] firstChild] ];
 			[[origemail firstChild] insertBefore:border refChild: [[origemail firstChild] firstChild]];
+        }
 	}else if(howdeep==1){
 		if(which>0){
             //check if this is plain text by seeing if -which- points to a br element... if not, include in blockquote
