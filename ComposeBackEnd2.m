@@ -199,8 +199,11 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 		}
 	
     //remove the color attribute so that the text is black instead of gray
+    //also remove paragraph style included in the header to avoid spacing issues when received by some mail clients
     NSMutableAttributedString *newheaderString = [headerString mutableCopy];
     [newheaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[newheaderString length])];
+    [newheaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[newheaderString length])];
+    
     
     //NSLog(@"Sig=%@",newheaderString);
     
