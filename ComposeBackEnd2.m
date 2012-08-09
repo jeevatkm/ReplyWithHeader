@@ -161,6 +161,25 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 		if(dhc.length>1 && howdeep==0) {
 			[origemail removeChild:[dhc item:0]]; 
 //            NSLog(@"Removed Original Text, only %d children left",[origemail childElementCount]);
+            
+            //Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
+            // on those messages that arrive after mail.app is opened
+            
+            //unfortunately, there is no containsString routine so we have to do it by using a range.
+            // this method is documented at http://mobiledevelopertips.com/cocoa/nsrange-and-nsstring-objects.html
+            NSRange textRange;
+            NSString* wrotestring = @"wrote:";
+            textRange =[[[origemail firstChild] stringValue] rangeOfString:wrotestring];
+            
+            //            NSLog(@"Range is: %@", NSStringFromRange(textRange));
+            //            NSLog(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
+            //Do a double test... since it is possible that someone will type the text "wrote:" somewhere
+            // in an email, this will at least narrow it down to the one I am trying to get rid of
+            if( textRange.location != NSNotFound && [[[origemail firstChild] stringValue] length]==8 ){
+                [origemail removeChild:[dhc item:0]];
+                //NSLog(@"Removed extra Text, only %d children left",[origemail childElementCount]);
+            }
+            
             if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] ) {                
                 [origemail removeChild:[origemail firstChild]];
 //                NSLog(@"Removed BR element, only %d children left",[origemail childElementCount]);
@@ -205,7 +224,7 @@ char *rph_sih = "setOriginalMessageWebArchive:";
     [newheaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[newheaderString length])];
     
     
-    //NSLog(@"Sig=%@",newheaderString);
+//    NSLog(@"Sig=%@",newheaderString);
     
 	WebArchive * headerwebarchive=[newheaderString webArchiveForRange:NSMakeRange(0,[newheaderString length]) fixUpNewlines:YES];
 	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
