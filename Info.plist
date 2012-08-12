@@ -21,16 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3.0</string>
+	<string>3.1</string>
 	<key>NSPrincipalClass</key>
 	<string>KnockKnock</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
-		<string>2DE49D65-B49E-4303-A280-8448872EFE87</string>
-		<string>1146A009-E373-4DB6-AB4D-47E59A7E50FD</string>
-		<string>6E7970A3-E5F1-4C41-A904-B18D3D8FAA7D</string>
-		<string>EF59EC5E-EFCD-4EA7-B617-6C5708397D24</string>
-		<string>4C286C70-7F18-4839-B903-6F2D58FA4C71</string>
 		<string>1146A009-E373-4DB6-AB4D-47E59A7E50FD</string>
 		<string>608CE00F-4576-4CAD-B362-F3CCB7DE8D67</string>
 	</array>

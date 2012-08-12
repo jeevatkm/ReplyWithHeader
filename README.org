@@ -1,4 +1,9 @@
 * NEWS
+Sunday 12-Aug-2012
+- Mountain Lion support
+- Extra "wrote" line that appears when responding to new messages handled (I think, but it is difficult to repeat)
+- Attribute names are now bold again
+
 Thursday Oct 13
 - Info.plist updated by Json Schroth for 10.7.2
 - version 1.1.7

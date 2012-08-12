@@ -223,6 +223,54 @@ char *rph_sih = "setOriginalMessageWebArchive:";
     [newheaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[newheaderString length])];
     [newheaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[newheaderString length])];
     
+    //[self addBoldFonts:&newheaderString];
+    //############################CODE TO ADD BOLD FONTS FOR MESSAGE ATTRIBUTE NAMES############################
+    //This needs to go into it's own routine when I have time to do a rewrite
+
+    //get all of the fonts in use, but onlu use the first one
+    NSDictionary *dict = [newheaderString fontAttributesInRange:NSMakeRange(0,[newheaderString length])];
+    
+    NSEnumerator *enumer = [dict objectEnumerator];
+        
+    NSFont *basicFont  = (NSFont *) [enumer nextObject]; //[dict objectForKey:key];
+    //    NSLog(@"font = %@",basicFont);
+        
+    NSString *fontName = [basicFont fontName];
+    // NSLog(@"orig font name is: %@",fontName);
+    const CGFloat *mat = [basicFont matrix];
+        
+    //check if the font is already bold before making it bold
+    NSRange boldRangeLoc;
+    boldRangeLoc =[fontName rangeOfString:@"-Bold"];
+    if( boldRangeLoc.location == NSNotFound )
+    {
+        fontName = [[fontName autorelease] stringByAppendingString:@"-Bold"];
+    }
+    
+    //NSLog(@"font name is: %@",fontName);
+    
+    NSFont *boldFont = [NSFont fontWithName:fontName matrix:mat];
+    
+    //setup a regular expression to find a word followed by a colon and then space
+    // should get the first item (e.g. "From:").
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:[newheaderString string] options:0 range:NSMakeRange(0, [newheaderString length])];
+    
+    //NSLog(@"Match Range is: %@", NSStringFromRange(rangeOfFirstMatch));
+    [newheaderString addAttribute:@"NSFont" value:boldFont range:rangeOfFirstMatch];
+    
+    //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *matches=[regex matchesInString:[newheaderString string] options:0 range:NSMakeRange(0,[newheaderString length])];
+    for (NSTextCheckingResult *match in matches)
+    {
+        NSRange matchRange = [match range];
+        [newheaderString addAttribute:@"NSFont" value:boldFont range:matchRange];
+    }
+    
+    //##########################END CODE TO ADD BOLD FONTS FOR MESSAGE ATTRIBUTE NAMES##########################
     
 //    NSLog(@"Sig=%@",newheaderString);
     
