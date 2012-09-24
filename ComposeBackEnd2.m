@@ -18,14 +18,10 @@
 
 #import "ComposeBackEnd2.h"
 
-#import "WebKit/DOMDocumentFragment.h"
-#import "WebKit/DOMNodeList.h"
-#import "WebKit/DOMHTMLCollection.h"
-#import "WebKit/DOMHTMLElement.h"
-#import "WebKit/DOMHTMLDocument.h"
-#import "WebKit/DOMHTMLDivElement.h"
-#import "WebKit/WebResource.h"
-#import "WebKit/WebArchive.h"
+#import "MailHeaderString.h"
+
+#import "MailQuotedOriginal.h"
+
 #import <objc/objc.h>
 #import <objc/objc-runtime.h>
 #import <objc/objc-class.h>
@@ -101,214 +97,25 @@ char *rph_sih = "setOriginalMessageWebArchive:";
 //	NSLog(@"%@",arg2);
 	id beforewhat;
 	(rph_imp1)(self,rph_sel1,arg1,arg2);
-	int selftype=[self type];
-		int which =0;
-	if( selftype==1 || selftype ==2) {
-		id document = [self document];
-//		NSLog(@"Document=%@",document);
-		DOMDocumentFragment *border=[ [document htmlDocument]
-								 createDocumentFragmentWithMarkupString:
-                                 @"-----Original Message-----"
-								// @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
-								 ];
-
-		BOOL boldhead=YES;
-//		DOMNode *voo = [document htmlDocument];
-//		DOMNodeList *vl = [[[[[voo childNodes] item:0] childNodes] item:0] childNodes];
-			
-		DOMHTMLDivElement *origemail=[[[document htmlDocument] 
-									   descendantsWithClassName:@"AppleOriginalContents"] objectAtIndex:0];
 	
-		int howdeep = 0; //AppleOriginalContents=0 ApplePlainTextBody=1
-		if([origemail firstChild]==NULL){
-			origemail=[[[document htmlDocument] descendantsWithClassName:@"ApplePlainTextBody"] objectAtIndex:0]; 
-//			NSLog(@"Orig is now %@", origemail);
-			howdeep=1;
-//			DOMNodeList *vl = [origemail childNodes];
-//			for(int i=0;i< vl.length;i++){
-//				id ii=[ vl item:i];
-//				NSLog(@"%d(%d,%@,%@,%@,%@,%@)=",i,[ii nodeType],[ii nodeName],[ii attributes],[ii prefix],[ii namespaceURI],[ii localName]);
-//				if([ii nodeType] != 3) NSLog(@"Origemail child (%@) = %@",[vl item:i],[[vl item:i] outerHTML]);
-//				else NSLog(@"ND(%d)=%@",i,[ [vl item:i] data]);
-//			}
-			
-			
-						//	children] item:1];
-			if ([[ origemail idName] isEqualToString:@"AppleMailSignature"]){
-				origemail=[[[[[document htmlDocument] descendantsWithClassName:@"ApplePlainTextBody"] objectAtIndex:0]
-							children] item:2];
-			if ([[origemail outerHTML] isEqualToString:@"<br>"]) 
-				origemail=[[[[[document htmlDocument] descendantsWithClassName:@"ApplePlainTextBody"] objectAtIndex:0]
-							children] item:3];
-			}	
-			boldhead=NO;
-		}
-        
-	NSAttributedString *headerString =[[self originalMessageHeaders] 
-                                       attributedStringShowingHeaderDetailLevel:1];
-									//	useHeadIndents:NO
-									//	useBold:boldhead
-									//	includeBCC:YES];
-        
-	DOMNodeList *dhc = [origemail childNodes];
-	//NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
-	//BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];	
-//    NSLog(@"howdeep = %d", howdeep);
-//	for(int i=0; i< dhc.length;i++){	
-//		NSLog(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
-//	}
-	// the first one is "On .... X wrote"
-		if(dhc.length>1 && howdeep==0) {
-			[origemail removeChild:[dhc item:0]]; 
-//            NSLog(@"Removed Original Text, only %d children left",[origemail childElementCount]);
-            
-            //Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
-            // on those messages that arrive after mail.app is opened
-            
-            //unfortunately, there is no containsString routine so we have to do it by using a range.
-            // this method is documented at http://mobiledevelopertips.com/cocoa/nsrange-and-nsstring-objects.html
-            NSRange textRange;
-            NSString* wrotestring = @"wrote:";
-            textRange =[[[origemail firstChild] stringValue] rangeOfString:wrotestring];
-            
-            //            NSLog(@"Range is: %@", NSStringFromRange(textRange));
-            //            NSLog(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
-            //Do a double test... since it is possible that someone will type the text "wrote:" somewhere
-            // in an email, this will at least narrow it down to the one I am trying to get rid of
-            if( textRange.location != NSNotFound && [[[origemail firstChild] stringValue] length]==8 ){
-                [origemail removeChild:[dhc item:0]];
-                //NSLog(@"Removed extra Text, only %d children left",[origemail childElementCount]);
-            }
-            
-            if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] ) {                
-                [origemail removeChild:[origemail firstChild]];
-//                NSLog(@"Removed BR element, only %d children left",[origemail childElementCount]);
-            }
-		}
-		if(dhc.length>1 && howdeep==1) {
-			// is this signature?
-//			NSLog(@"Sig=%@ %d<%@>",[dhc item:0],[[dhc item:0] nodeType],[[dhc item:0] stringValue]);
-//			NSLog(@"Sig=%@ %d<%@>",[dhc item:1],[[dhc item:1] nodeType],[[dhc item:1] stringValue]);
-//			NSLog(@"Sig=%@ %d<%@>",[dhc item:2],[[dhc item:2] nodeType],[[dhc item:2] stringValue]);
-//			NSLog(@"Sig=%@ %d<%@>",[dhc item:3],[[dhc item:3] nodeType],[[dhc item:3] stringValue]);
-//			NSLog(@"Sig=%@ %d<%@>",[dhc item:4],[[dhc item:4] nodeType],[[dhc item:4] stringValue]);
-//
-//			NSLog(@"===END===");
-		
-			for(int i =0;i < dhc.length;i++) {
-				if ([[dhc item:i] nodeType]==3){
-					// Text node, On ..., Wrote is text 
-					which=i; break;
-				}}
-				
-			// if signature at top, item==3 else item==1
-			[origemail removeChild:[dhc item:which]];
-//            NSLog(@"removed item %d",which);
-            
-            //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
-            for(int i =0;i < [origemail childElementCount];i++) {
-                if( [[[[origemail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {                
-                    //this is the quoted text
-                    which=i;
-//                    NSLog(@"which item is now %d",which);
-                    break;
-                    
-                }
-            }
-		}
-	
-    //remove the color attribute so that the text is black instead of gray
-    //also remove paragraph style included in the header to avoid spacing issues when received by some mail clients
-    NSMutableAttributedString *newheaderString = [headerString mutableCopy];
-    [newheaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[newheaderString length])];
-    [newheaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[newheaderString length])];
-    
-    //[self addBoldFonts:&newheaderString];
-    //############################CODE TO ADD BOLD FONTS FOR MESSAGE ATTRIBUTE NAMES############################
-    //This needs to go into it's own routine when I have time to do a rewrite
-
-    //get all of the fonts in use, but onlu use the first one
-    NSDictionary *dict = [newheaderString fontAttributesInRange:NSMakeRange(0,[newheaderString length])];
-    
-    NSEnumerator *enumer = [dict objectEnumerator];
-        
-    NSFont *basicFont  = (NSFont *) [enumer nextObject]; //[dict objectForKey:key];
-    //    NSLog(@"font = %@",basicFont);
-        
-    NSString *fontName = [basicFont fontName];
-    // NSLog(@"orig font name is: %@",fontName);
-    const CGFloat *mat = [basicFont matrix];
-        
-    //check if the font is already bold before making it bold
-    NSRange boldRangeLoc;
-    boldRangeLoc =[fontName rangeOfString:@"-Bold"];
-    if( boldRangeLoc.location == NSNotFound )
+    //get my type and check it
+    int selftype=[self type];
+	if( selftype==1 || selftype ==2)
     {
-        fontName = [[fontName autorelease] stringByAppendingString:@"-Bold"];
+        //start by setting up the quoted text from the original email
+        MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
+        
+        //create the header string element
+        MailHeaderString *newheaderString = [[MailHeaderString alloc] initWithBackEnd:self];
+        
+        //this is required for Mountain Lion - for some reason the mail headers are not bold anymore.
+        [newheaderString boldHeaderLabels];
+        
+//        NSLog(@"Sig=%@",[newheaderString string]);
+        
+        //insert the new header text
+        [quotedText insertMailHeader:newheaderString];
     }
-    
-    //NSLog(@"font name is: %@",fontName);
-    
-    NSFont *boldFont = [NSFont fontWithName:fontName matrix:mat];
-    
-    //setup a regular expression to find a word followed by a colon and then space
-    // should get the first item (e.g. "From:").
-    NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    
-    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:[newheaderString string] options:0 range:NSMakeRange(0, [newheaderString length])];
-    
-    //NSLog(@"Match Range is: %@", NSStringFromRange(rangeOfFirstMatch));
-    [newheaderString addAttribute:@"NSFont" value:boldFont range:rangeOfFirstMatch];
-    
-    //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches=[regex matchesInString:[newheaderString string] options:0 range:NSMakeRange(0,[newheaderString length])];
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSRange matchRange = [match range];
-        [newheaderString addAttribute:@"NSFont" value:boldFont range:matchRange];
-    }
-    
-    //##########################END CODE TO ADD BOLD FONTS FOR MESSAGE ATTRIBUTE NAMES##########################
-    
-//    NSLog(@"Sig=%@",newheaderString);
-    
-	WebArchive * headerwebarchive=[newheaderString webArchiveForRange:NSMakeRange(0,[newheaderString length]) fixUpNewlines:YES];
-	DOMDocumentFragment *headerfragment=[ [document htmlDocument] createFragmentForWebArchive:headerwebarchive];
-	if(howdeep==0){
-         //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
-        //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
-        //so account for that too
-        int numgrandchild = 0;
-        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] ) {
-            numgrandchild = [[origemail firstChild] childElementCount];
-        }
-     
-//        NSLog(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
-        if( numgrandchild == 0 ) {
-			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
-			[origemail insertBefore:border refChild: [origemail firstChild] ];
-        }
-        else {
-			[[origemail firstChild] insertBefore:headerfragment refChild: [[origemail firstChild] firstChild] ];
-			[[origemail firstChild] insertBefore:border refChild: [[origemail firstChild] firstChild]];
-        }
-	}else if(howdeep==1){
-		if(which>0){
-            //check if this is plain text by seeing if -which- points to a br element... if not, include in blockquote
-            if( [[[[origemail childNodes] item:which] nodeName] isEqualToString:@"BR"] ) {
-                [origemail insertBefore:headerfragment refChild:[dhc item:which] ];
-                [origemail insertBefore:border refChild:[dhc item:which] ];
-            }
-            else {
-                [[[origemail childNodes] item:which] insertBefore:headerfragment refChild:[[[origemail childNodes] item:which] firstChild] ];
-                [[[origemail childNodes] item:which] insertBefore:border refChild:[[[origemail childNodes] item:which] firstChild] ];
-            }
-		}
-	}
-		
-	}
 }
 
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		011C2BD91447FA81001EA252 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 011C2BD81447FA81001EA252 /* Info.plist */; };
+		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
+		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
 		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
 		4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FEF8512723EC800A945C5 /* LICENSE */; };
@@ -38,6 +40,10 @@
 		256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader_Prefix.pch; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		310639C615DB8D6E00B81836 /* MailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeaderString.h; sourceTree = "<group>"; };
+		310639C715DB8D6F00B81836 /* MailHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeaderString.m; sourceTree = "<group>"; };
+		311AB2A015DE15A100956061 /* MailQuotedOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailQuotedOriginal.h; sourceTree = "<group>"; };
+		311AB2A115DE15A100956061 /* MailQuotedOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailQuotedOriginal.m; sourceTree = "<group>"; };
 		4D5FEE7912723B4900A945C5 /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		4D5FEF8512723EC800A945C5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D5FEF8812723EC800A945C5 /* ComposeBackEnd2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeBackEnd2.h; sourceTree = "<group>"; };
@@ -143,6 +149,10 @@
 				4D5FEFF21272445E00A945C5 /* KnockKnock.m */,
 				4D5FEF8812723EC800A945C5 /* ComposeBackEnd2.h */,
 				4D5FEF8912723EC800A945C5 /* ComposeBackEnd2.m */,
+				310639C615DB8D6E00B81836 /* MailHeaderString.h */,
+				310639C715DB8D6F00B81836 /* MailHeaderString.m */,
+				311AB2A015DE15A100956061 /* MailQuotedOriginal.h */,
+				311AB2A115DE15A100956061 /* MailQuotedOriginal.m */,
 			);
 			name = Code;
 			sourceTree = "<group>";
@@ -231,6 +241,8 @@
 			files = (
 				4D5FEFF31272445E00A945C5 /* KnockKnock.m in Sources */,
 				4D5FF2A012728DDB00A945C5 /* ComposeBackEnd2.m in Sources */,
+				310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */,
+				311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
