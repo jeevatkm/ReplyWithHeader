@@ -16,7 +16,7 @@
         //good stuff...
     }
     else {
-        NSLog(@"MailQuotedOriginal: Init failed");
+        RWH_LOG(@"MailQuotedOriginal: Init failed");
     }
     return self;
 }
@@ -29,7 +29,7 @@
     {
 		//set the class document variable
         document = [backend document];
-        //		NSLog(@"Document=%@",document);
+        RWH_LOG(@"Document=%@",document);
         
         //now initialize the other vars
         [self initVars];
@@ -64,8 +64,10 @@
 
 -(void)initVars
 {
+    NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
+    NSString *headLine = [prefs objectForKey:@"headerText"];
     //now set the border variable
-    border = [[document htmlDocument] createDocumentFragmentWithMarkupString: @"-----Original Message-----"];
+    border = [[document htmlDocument] createDocumentFragmentWithMarkupString: headLine];
     // @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
     
     boldhead=YES;
@@ -85,7 +87,7 @@
 {
     
     origemail=[[[document htmlDocument] descendantsWithClassName:@"ApplePlainTextBody"] objectAtIndex:0];
-    //			NSLog(@"Orig is now %@", origemail);
+    RWH_LOG(@"Orig is now %@", origemail);
     
     isPlainText = YES;
     
@@ -93,9 +95,9 @@
     //for(int i=0;i< vl.length;i++)
     //{
     //  id ii=[ vl item:i];
-    //  NSLog(@"%d(%d,%@,%@,%@,%@,%@)=",i,[ii nodeType],[ii nodeName],[ii attributes],[ii prefix],[ii namespaceURI],[ii localName]);
-    //	if([ii nodeType] != 3) NSLog(@"Origemail child (%@) = %@",[vl item:i],[[vl item:i] outerHTML]);
-    //	else NSLog(@"ND(%d)=%@",i,[ [vl item:i] data]);
+    //  RWH_LOG(@"%d(%d,%@,%@,%@,%@,%@)=",i,[ii nodeType],[ii nodeName],[ii attributes],[ii prefix],[ii namespaceURI],[ii localName]);
+    //	if([ii nodeType] != 3) RWH_LOG(@"Origemail child (%@) = %@",[vl item:i],[[vl item:i] outerHTML]);
+    //	else RWH_LOG(@"ND(%d)=%@",i,[ [vl item:i] data]);
     //}
     
     if( [[origemail idName] isEqualToString:@"AppleMailSignature"] )
@@ -119,9 +121,9 @@
 {
     //NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
     //BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];
-    //    NSLog(@"isPlainText = %d", isPlainText);
+    //    RWH_LOG(@"isPlainText = %d", isPlainText);
     //	for(int i=0; i< dhc.length;i++){
-    //		NSLog(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
+    //		RWH_LOG(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
     //	}
     
     //Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
@@ -136,8 +138,8 @@
     //keep removing items until we find the "wrote:" text...
     while( textRange.location == NSNotFound )
     {
-        //NSLog(@"Range is: %@", NSStringFromRange(textRange));
-        //NSLog(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
+        RWH_LOG(@"Range is: %@", NSStringFromRange(textRange));
+        RWH_LOG(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
         [origemail removeChild:[dhc item:0]];
         textRange =[[[origemail firstChild] stringValue] rangeOfString:wrotestring];
     }
@@ -148,7 +150,7 @@
     if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] )
     {
         [origemail removeChild:[origemail firstChild]];
-        //                NSLog(@"Removed BR element, only %d children left",[origemail childElementCount]);
+        RWH_LOG(@"Removed BR element, only %d children left",[origemail childElementCount]);
     }
 
 }
@@ -156,13 +158,13 @@
 -(void)removeOriginalPlainTextHeader
 {
     // is this signature?
-    //			NSLog(@"Sig=%@ %d<%@>",[dhc item:0],[[dhc item:0] nodeType],[[dhc item:0] stringValue]);
-    //			NSLog(@"Sig=%@ %d<%@>",[dhc item:1],[[dhc item:1] nodeType],[[dhc item:1] stringValue]);
-    //			NSLog(@"Sig=%@ %d<%@>",[dhc item:2],[[dhc item:2] nodeType],[[dhc item:2] stringValue]);
-    //			NSLog(@"Sig=%@ %d<%@>",[dhc item:3],[[dhc item:3] nodeType],[[dhc item:3] stringValue]);
-    //			NSLog(@"Sig=%@ %d<%@>",[dhc item:4],[[dhc item:4] nodeType],[[dhc item:4] stringValue]);
+    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:0],[[dhc item:0] nodeType],[[dhc item:0] stringValue]);
+    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:1],[[dhc item:1] nodeType],[[dhc item:1] stringValue]);
+    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:2],[[dhc item:2] nodeType],[[dhc item:2] stringValue]);
+    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:3],[[dhc item:3] nodeType],[[dhc item:3] stringValue]);
+    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:4],[[dhc item:4] nodeType],[[dhc item:4] stringValue]);
     //
-    //			NSLog(@"===END===");
+    //			RWH_LOG(@"===END===");
     
     for(int i =0;i < dhc.length;i++) {
         if ([[dhc item:i] nodeType]==3){
@@ -172,7 +174,7 @@
     
     // if signature at top, item==3 else item==1
     [origemail removeChild:[dhc item:textNodeLocation]];
-    //            NSLog(@"removed item %d",textNodeLocation);
+    //            RWH_LOG(@"removed item %d",textNodeLocation);
     
     //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
     for(int i =0;i < [origemail childElementCount];i++)
@@ -181,7 +183,7 @@
         {
             //this is the quoted text
             textNodeLocation=i;
-            //                    NSLog(@"textNodeLocation item is now %d",textNodeLocation);
+            //                    RWH_LOG(@"textNodeLocation item is now %d",textNodeLocation);
             break;
         }
     }
@@ -191,6 +193,16 @@
 {
     //this routine will also add the border
     DOMDocumentFragment *headerfragment=[[document htmlDocument] createFragmentForWebArchive:[headStr getWebArch]];
+    
+    //check if we need to do Entourage 2004 text size transformations...
+    NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
+    BOOL supportEntourage = [prefs boolForKey:@"entourage2004Support"];
+    
+    if( supportEntourage )
+    {
+        [self supportEntourage2004:headerfragment];
+    }
+    
     if( isPlainText )
     {
         if( textNodeLocation>0 )
@@ -220,7 +232,7 @@
             numgrandchild = [[origemail firstChild] childElementCount];
         }
         
-        //        NSLog(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
+        RWH_LOG(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
         if( numgrandchild == 0 )
         {
 			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
@@ -234,6 +246,69 @@
 
     }
     
+}
+
+-(void)supportEntourage2004:(DOMDocumentFragment *) headFrag
+{
+    
+    //kind of silly, but this code is required so that the adulation appears correctly in Entourage 2004
+    //2004 would interpret the paragraph tag and ignore the specified style information creating large spaces
+    //between line items
+    DOMNodeList *fragnodes = [[headFrag firstChild] childNodes];
+    
+    for(int i=0; i< fragnodes.length;i++)
+    {
+        RWH_LOG(@"%d=(Type %d) %@ %@ %@",i, [[fragnodes item:i] nodeType], [fragnodes item:i], [[fragnodes item:i] nodeName],[[fragnodes item:i] nodeValue]);
+        
+        if( [[fragnodes item:i] nodeType] == 1 )
+        {
+            RWH_LOG(@" HTML = %@",[[fragnodes item:i] outerHTML]);
+            
+            if( [[[fragnodes item:i] nodeName] isEqualToString:@"FONT"] )
+            {
+                NSString *fontTag = [[fragnodes item:i] outerHTML];
+                NSArray *tagComponents = [fontTag componentsSeparatedByString:@" "];
+                NSString *oldSize;
+                for( int j=0; j < tagComponents.count; j++) {
+                    NSString *testString = [[tagComponents objectAtIndex:j] commonPrefixWithString:@"size" options:NSCaseInsensitiveSearch];
+                    if( [testString isEqualToString:@"size"] ) {
+                        oldSize = [tagComponents objectAtIndex:j];
+                        RWH_LOG(@" sizeString = %@",oldSize);
+                    }
+                }
+                oldSize = [@" " stringByAppendingString:oldSize];
+                RWH_LOG(@" newsizetext = %@",fontTag);
+                NSString *newTag = [fontTag stringByReplacingOccurrencesOfString:oldSize withString:@""];
+                RWH_LOG(@" newString = %@",newTag);
+                [[fragnodes item:i] setOuterHTML:newTag];
+            }
+        }
+        
+        if( [[[fragnodes item:i] nodeName] isEqualToString:@"P"] )
+        {
+            //we have a paragraph element, so now replace it with a break element
+            DOMDocumentFragment *brelem=[ [document htmlDocument]
+                                         createDocumentFragmentWithMarkupString:
+                                         @"<br />"
+                                         ];
+            if( i == 0)
+            {
+                //because the paragraphs are the containers so you get two initially...
+                brelem = [ [document htmlDocument]
+                          createDocumentFragmentWithMarkupString:
+                          @"<span />"
+                          ];
+            }
+            DOMNodeList *pnodes = [[fragnodes item:i] childNodes];
+            for(int j=0; j< pnodes.length;j++)
+            {
+                //copy all child nodes to the new node...
+                [brelem appendChild:[pnodes item:j]];
+            }
+            //now replace the paragraph node...
+            [[headFrag firstChild] replaceChild:brelem oldChild:[fragnodes item:i] ];
+        }
+    }
 }
 
 @end

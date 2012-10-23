@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>org.godhuli.replywithheader</string>
+	<string>com.github.replywithheader</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -21,9 +21,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>NSPrincipalClass</key>
-	<string>KnockKnock</string>
+	<string>ReplyWithHeader</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
 		<string>1146A009-E373-4DB6-AB4D-47E59A7E50FD</string>

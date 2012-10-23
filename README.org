@@ -1,11 +1,17 @@
 * NEWS
+Monday 22-Oct-2012
+- New Preferences Pane (RWH) in Mail Preferences
+  - enable or disable the plugin from the preferences.
+  - specify the leading string (i.e. "-----Original Message-----").
+  - Enable or Disable font fixes for Entourage 2004.
+
 Sunday 12-Aug-2012
 - Mountain Lion support
 - Extra "wrote" line that appears when responding to new messages handled (I think, but it is difficult to repeat)
 - Attribute names are now bold again
 
 Thursday Oct 13
-- Info.plist updated by Json Schroth for 10.7.2
+- Info.plist updated by Jason Schroth for 10.7.2
 - version 1.1.7
 - Removed the older UUIDs that were there for 10.6 installations. Snow Leopard supports ends at is 1.1.5.
 
@@ -37,16 +43,14 @@ Date:
 
 etc.
 
-ReplyWithHeaders causes the reply message to behave like forwarding. I developed
-this a long time back on someones request. I don't use it much myself nor do I
-spend time developing it.  So if things break, I might not fix things quickly.
+ReplyWithHeaders causes the reply message to behave like forwarding.
 
 * Requirements:
 At least
 
-Mail: Version 4.3 (1081)
+Mail: Version 6.2 (1499)
 
-Snow Leopard: 10.6.4
+Mountain Lion: 10.8
 
 * Installation
 
@@ -57,7 +61,6 @@ Snow Leopard: 10.6.4
 
    > defaults write com.apple.mail EnableBundles -bool true
 
-   > defaults write com.apple.mail BundleCompatibilityVersion 4
 4. Start Console.app (/Applications/Utilities)
 5. In the search bar (top right corner of Console.app) type: Mail
 
@@ -66,7 +69,8 @@ Snow Leopard: 10.6.4
 
 In the console, if all goes well, you should see
 
+Loaded ReplyWithHeader
 ReplyWithHeaders: Oh its a wonderful life
 
-Loaded ReplyWithHeaders
+
 

@@ -16,7 +16,7 @@
         //good stuff...
     }
     else {
-        NSLog(@"MailHeaderString: Init failed");
+        RWH_LOG(@"MailHeaderString: Init failed");
     }
     return self;
 }
@@ -80,10 +80,10 @@
     NSEnumerator *enumer = [dict objectEnumerator];
     
     NSFont *basicFont  = (NSFont *) [enumer nextObject]; //[dict objectForKey:key];
-    //    NSLog(@"font = %@",basicFont);
+    RWH_LOG(@"font = %@",basicFont);
     
     NSString *fontName = [basicFont fontName];
-    // NSLog(@"orig font name is: %@",fontName);
+    RWH_LOG(@"orig font name is: %@",fontName);
     const CGFloat *mat = [basicFont matrix];
     
     //check if the font is already bold before making it bold
@@ -94,7 +94,7 @@
         fontName = [[fontName autorelease] stringByAppendingString:@"-Bold"];
     }
     
-    //NSLog(@"font name is: %@",fontName);
+    RWH_LOG(@"font name is: %@",fontName);
     
     NSFont *boldFont = [NSFont fontWithName:fontName matrix:mat];
     
@@ -105,7 +105,7 @@
     
     NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:[headstr string] options:0 range:NSMakeRange(0, [headstr length])];
     
-    //NSLog(@"Match Range is: %@", NSStringFromRange(rangeOfFirstMatch));
+    RWH_LOG(@"Match Range is: %@", NSStringFromRange(rangeOfFirstMatch));
     [headstr addAttribute:@"NSFont" value:boldFont range:rangeOfFirstMatch];
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)

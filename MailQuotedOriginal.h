@@ -43,5 +43,6 @@
 -(void)removeOriginalPlainTextHeader;
 -(void)removeOriginalHeader;
 -(void)insertMailHeader:(MailHeaderString *)headStr;
+-(void)supportEntourage2004:(DOMDocumentFragment *) headFrag;
 
 @end
