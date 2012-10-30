@@ -57,6 +57,9 @@
             }
         }
     }
+    else {
+        RWH_LOG(@"MailQuotedOriginal: Init Backend failed");
+    }
     
     return self;
 }
@@ -64,11 +67,16 @@
 
 -(void)initVars
 {
+    
     NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
     NSString *headLine = [prefs objectForKey:@"headerText"];
+    NSString *fwdLine = [prefs objectForKey:@"forwardHeader"];
+    RWH_LOG(@"MailQuotedOriginal: initvar Header text: %@",headLine);
     //now set the border variable
     border = [[document htmlDocument] createDocumentFragmentWithMarkupString: headLine];
     // @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
+    
+    fwdborder = [[document htmlDocument] createDocumentFragmentWithMarkupString: fwdLine];
     
     boldhead=YES;
     //		DOMNode *voo = [document htmlDocument];
@@ -132,16 +140,21 @@
     
     //unfortunately, there is no containsString routine so we have to do it by using a range.
     // this method is documented at http://mobiledevelopertips.com/cocoa/nsrange-and-nsstring-objects.html
-    NSRange textRange;
-    NSString* wrotestring = @"wrote:";
-    textRange =[[[origemail firstChild] stringValue] rangeOfString:wrotestring];
+    
+    //setup a regular expression to find a colon followed by some space and a new line -
+    // the first one should be the original line...
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@":\\s*(\\n|\\r)" options: NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSRange textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
+    
     //keep removing items until we find the "wrote:" text...
     while( textRange.location == NSNotFound )
     {
         RWH_LOG(@"Range is: %@", NSStringFromRange(textRange));
         RWH_LOG(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
         [origemail removeChild:[dhc item:0]];
-        textRange =[[[origemail firstChild] stringValue] rangeOfString:wrotestring];
+        textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
     }
     //remove the line with the "wrote:" text
     [origemail removeChild:[dhc item:0]];
@@ -166,12 +179,14 @@
     //
     //			RWH_LOG(@"===END===");
     
+    
     for(int i =0;i < dhc.length;i++) {
         if ([[dhc item:i] nodeType]==3){
             // Text node, On ..., Wrote is text
             textNodeLocation=i; break;
         }}
     
+    RWH_LOG(@"Removing plain text header at %d",textNodeLocation);
     // if signature at top, item==3 else item==1
     [origemail removeChild:[dhc item:textNodeLocation]];
     //            RWH_LOG(@"removed item %d",textNodeLocation);
@@ -187,6 +202,9 @@
             break;
         }
     }
+    
+    RWH_LOG(@"New header location is %d",textNodeLocation);
+    
 }
 
 -(void)insertMailHeader:(MailHeaderString *)headStr
@@ -246,6 +264,52 @@
 
     }
     
+}
+
+-(void)insertFwdHeader
+{
+    
+    if( isPlainText )
+    {
+        if( textNodeLocation>0 )
+        {
+            //check if this is plain text by seeing if textNodeLocation points to a br element...
+            //  if not, include in blockquote
+            if( [[[[origemail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
+            {
+                [origemail insertBefore:fwdborder refChild:[dhc item:textNodeLocation] ];
+            }
+            else
+            {
+                [[[origemail childNodes] item:textNodeLocation] insertBefore:fwdborder refChild:[[[origemail childNodes] item:textNodeLocation] firstChild] ];
+            }
+		}
+    }
+    else
+    {
+        //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
+        //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
+        //so account for that too
+        int numgrandchild = 0;
+        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] )
+        {
+            numgrandchild = [[origemail firstChild] childElementCount];
+        }
+        
+        RWH_LOG(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
+        if( numgrandchild == 0 )
+        {
+			[origemail insertBefore:fwdborder refChild: [origemail firstChild] ];
+        }
+        else
+        {
+            //I don't know why this <br /> element is needed here, but it is so I will leave it
+            DOMDocumentFragment *brelem = [[document htmlDocument] createDocumentFragmentWithMarkupString: @"<br />"];
+            [[origemail firstChild] insertBefore:brelem refChild: [[origemail firstChild] firstChild]];
+			[[origemail firstChild] insertBefore:fwdborder refChild: [[origemail firstChild] firstChild]];
+        }
+        
+    }
 }
 
 -(void)supportEntourage2004:(DOMDocumentFragment *) headFrag

@@ -30,24 +30,38 @@
 	
     NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
     BOOL enabled = [prefs boolForKey:@"enableBundle"];
+    BOOL replaceForward = [prefs boolForKey:@"replaceForward"];
     
     //get my type and check it - reply or replyall only
     int selftype=[self type];
-	if( enabled && (selftype==1 || selftype ==2) )
+    RWH_LOG(@"message type is %d",selftype);
+    
+	if( enabled )
     {
-        //start by setting up the quoted text from the original email
-        MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
+    
+        if( (selftype==1 || selftype==2) )
+        {
+            //start by setting up the quoted text from the original email
+            MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
         
-        //create the header string element
-        MailHeaderString *newheaderString = [[MailHeaderString alloc] initWithBackEnd:self];
+            //create the header string element
+            MailHeaderString *newheaderString = [[MailHeaderString alloc] initWithBackEnd:self];
         
-        //this is required for Mountain Lion - for some reason the mail headers are not bold anymore.
-        [newheaderString boldHeaderLabels];
+            //this is required for Mountain Lion - for some reason the mail headers are not bold anymore.
+            [newheaderString boldHeaderLabels];
         
-        RWH_LOG(@"Sig=%@",[newheaderString string]);
+            RWH_LOG(@"Sig=%@",[newheaderString string]);
         
-        //insert the new header text
-        [quotedText insertMailHeader:newheaderString];
+            //insert the new header text
+            [quotedText insertMailHeader:newheaderString];
+        }
+        if( replaceForward && selftype == 3 )
+        {
+            //start by setting up the quoted text from the original email
+            MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
+            [quotedText insertFwdHeader];
+            
+        }
     }
 }
 

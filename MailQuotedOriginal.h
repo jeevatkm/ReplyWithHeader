@@ -25,6 +25,7 @@
 @private
     id document;
     DOMDocumentFragment *border;
+    DOMDocumentFragment *fwdborder;
     BOOL boldhead;
     DOMHTMLDivElement *origemail;
     BOOL isPlainText; //howdeep
@@ -43,6 +44,7 @@
 -(void)removeOriginalPlainTextHeader;
 -(void)removeOriginalHeader;
 -(void)insertMailHeader:(MailHeaderString *)headStr;
+-(void)insertFwdHeader;
 -(void)supportEntourage2004:(DOMDocumentFragment *) headFrag;
 
 @end
