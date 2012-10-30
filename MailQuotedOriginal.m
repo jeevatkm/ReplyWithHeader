@@ -160,6 +160,7 @@
     [origemail removeChild:[dhc item:0]];
     
     //remove the first new line element to shorten the distance between the new email and quoted text
+    // this is required in order to get the header inside the quoted text line
     if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] )
     {
         [origemail removeChild:[origemail firstChild]];
@@ -303,9 +304,6 @@
         }
         else
         {
-            //I don't know why this <br /> element is needed here, but it is so I will leave it
-            DOMDocumentFragment *brelem = [[document htmlDocument] createDocumentFragmentWithMarkupString: @"<br />"];
-            [[origemail firstChild] insertBefore:brelem refChild: [[origemail firstChild] firstChild]];
 			[[origemail firstChild] insertBefore:fwdborder refChild: [[origemail firstChild] firstChild]];
         }
         

@@ -63,7 +63,7 @@
                           @"-----Original Message-----", @"headerText",
                           [NSNumber numberWithBool:NO], @"entourage2004Support",
                           [NSNumber numberWithBool:NO], @"replaceForward",
-                          @"-----Forwarded Message-----", @"forwardHeader",
+                          @"-----Forwarded Message-----<br />", @"forwardHeader",
                           nil];
     
     [prefs registerDefaults:dict];
