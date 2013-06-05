@@ -208,6 +208,42 @@
     
 }
 
+
+-(void)removeOriginalForwardHeader
+{
+    
+    //remove the elements with text followed by a colon
+    //setup a regular expression to find a colon followed by some space and a new line -
+    // the first one should be the original line...
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[^:]+:" options: NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSRange textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
+    
+    //keep removing items until we find the "wrote:" text...
+    while( textRange.location == NSNotFound )
+    {
+        RWH_LOG(@"Range is: %@", NSStringFromRange(textRange));
+        RWH_LOG(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
+        [origemail removeChild:[dhc item:0]];
+        textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
+    }
+    //remove the line with the "wrote:" text
+    [origemail removeChild:[dhc item:0]];
+    
+    //remove the first new line element to shorten the distance between the new email and quoted text
+    // this is required in order to get the header inside the quoted text line
+    if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] )
+    {
+        [origemail removeChild:[origemail firstChild]];
+        RWH_LOG(@"Removed BR element, only %d children left",[origemail childElementCount]);
+    }
+    
+    
+    
+}
+
+
 -(void)insertMailHeader:(MailHeaderString *)headStr
 {
     //this routine will also add the border

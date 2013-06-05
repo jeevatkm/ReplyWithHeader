@@ -115,7 +115,7 @@
     [headstr addAttribute:@"NSFont" value:boldFont range:rangeOfFirstMatch];
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches=[regex matchesInString:[headstr string] options:0 range:NSMakeRange(0,[headstr length])];
     for (NSTextCheckingResult *match in matches)
     {
