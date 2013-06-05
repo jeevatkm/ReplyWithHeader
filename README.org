@@ -1,4 +1,8 @@
 * NEWS
+Wednesday 05-Jun-2013
+ - Updated support for 10.8.4 (Mail 6.5 (1508))
+ - Download latest version https://www.box.com/s/vvazf1g87b0rumtng4k1 (past versions will be posted here soon)
+
 Monday 22-Oct-2012
 - New Preferences Pane (RWH) in Mail Preferences
   - enable or disable the plugin from the preferences.
