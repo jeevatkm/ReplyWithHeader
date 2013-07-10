@@ -1,4 +1,8 @@
 * NEWS
+Wednesday 10-Jul-2013
+- Changed license terms to MIT license with agreement from Saptarshi Guha
+- Due to unforeseen circumstances, I am no longer able to support this software. I hope someone else will be able to continue supporting it going forward.
+
 Wednesday 05-Jun-2013
  - Updated support for 10.8.4 (Mail 6.5 (1508))
  - Download latest version https://www.box.com/s/vvazf1g87b0rumtng4k1 (past versions will be posted here soon)
