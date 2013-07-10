@@ -261,7 +261,7 @@
 										<string key="NSFrame">{{36, 59}, {419, 43}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="48007352"/>
+										<reference key="NSNextKeyView" ref="923067041"/>
 										<string key="NSReuseIdentifierKey">_NS:1535</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="502270534">
@@ -282,13 +282,13 @@
 										<string key="NSFrameSize">{499, 17}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="923067041"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:1535</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="185393685">
 											<int key="NSCellFlags">68157504</int>
 											<int key="NSCellFlags2">4457472</int>
-											<string key="NSContents">Reply With Headers copyright © 2013 Jason Schroth</string>
+											<string key="NSContents">copyright</string>
 											<object class="NSFont" key="NSSupport" id="22">
 												<string key="NSName">LucidaGrande</string>
 												<double key="NSSize">9</double>
@@ -304,9 +304,10 @@
 									<object class="NSTextField" id="923067041">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">289</int>
-										<string key="NSFrame">{{0, -1}, {499, 17}}</string>
+										<string key="NSFrame">{{0, 1}, {499, 17}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="48007352"/>
 										<string key="NSReuseIdentifierKey">_NS:1535</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="990172393">
@@ -515,6 +516,22 @@
 						</object>
 					</object>
 					<int key="connectionID">99</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: rwhCopyright</string>
+						<reference key="source" ref="48007352"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="48007352"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">value: rwhCopyright</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">rwhCopyright</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">128</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -849,7 +866,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">126</int>
+			<int key="maxID">128</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
