@@ -1,4 +1,7 @@
 * NEWS
+Monday 16-Sep-2013
+- Updated Support for 10.8.5 (Mail 6.6 [1510]) 
+
 Wednesday 10-Jul-2013
 - Changed license terms to MIT license with agreement from Saptarshi Guha
 - Due to unforeseen circumstances, I am no longer able to support this software. I hope someone else will be able to continue supporting it going forward.
