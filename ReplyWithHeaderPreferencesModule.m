@@ -31,7 +31,7 @@
 - (NSString*)preferencesNibName
 {
     RWH_LOG();
-    //return @"ReplyWithHeaderPanel";
+    
     return @"RwhPreferencesPanel";
 }
 

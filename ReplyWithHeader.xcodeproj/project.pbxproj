@@ -10,7 +10,6 @@
 		13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */; };
 		13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */; };
 		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
-		3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */; };
 		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
 		31716FCD16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31716FCC16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m */; };
 		319C9B631633DED300C420B3 /* ReplyWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 319C9B621633DED300C420B3 /* ReplyWithHeader.m */; };
@@ -48,7 +47,6 @@
 		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		310639C615DB8D6E00B81836 /* MailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeaderString.h; sourceTree = "<group>"; };
 		310639C715DB8D6F00B81836 /* MailHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeaderString.m; sourceTree = "<group>"; };
-		3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyWithHeaderPanel.xib; sourceTree = "<group>"; };
 		311AB2A015DE15A100956061 /* MailQuotedOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailQuotedOriginal.h; sourceTree = "<group>"; };
 		311AB2A115DE15A100956061 /* MailQuotedOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailQuotedOriginal.m; sourceTree = "<group>"; };
 		31716FCB16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderPreferencesModule.h; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */,
 				13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */,
 				13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */,
-				3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */,
-				3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */,
 				13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */,
 				13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */,
 			);
