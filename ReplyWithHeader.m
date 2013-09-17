@@ -30,12 +30,13 @@
 
 + (void)initialize {
     RWH_LOG();
+    [super initialize];
     
     //class_setSuperclass - Deprecated, but there does not appear to be a better way for this...
     if (self == [ReplyWithHeader class]) {
         class_setSuperclass(self, NSClassFromString(@"MVMailBundle"));
     }
-    
+     
     [super registerBundle];
     
     //add the ReplyWithHeaderMessage methods to the ComposeBackEnd class
@@ -44,21 +45,20 @@
     //now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation so that the
     // newly added rph_continueToSetupContentsForView method is called instead...
     [NSClassFromString(@"ComposeBackEnd")
-        rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-        meth:@selector(rph_continueToSetupContentsForView:withParsedMessages:)
-        classMeth:NO // it is an implementation method
+     rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
+     meth:@selector(rph_continueToSetupContentsForView:withParsedMessages:)
+     classMeth:NO // it is an implementation method
      ];
     
     
     [ReplyWithHeaderPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
-    
+        
     [NSClassFromString(@"NSPreferences")
      rwhSwizzle:@selector(sharedPreferences)
      meth:@selector(rwhSharedPreferences)
      classMeth:YES
      ];
     
-        
     
     //enableBundle
     //headerText
@@ -75,8 +75,8 @@
     [prefs registerDefaults:dict];
     
     //The modules have been loaded
-	NSLog(@"Loaded ReplyWithHeader %@",[[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
-    NSLog(@"ReplyWithHeaders: Oh its a wonderful life");
+    NSLog(@"RWH %@ mail bundle loaded sccessfully",[[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
+    NSLog(@"RWH %@ Oh it's a wonderful life", [[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
     
 }
 

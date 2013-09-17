@@ -1,87 +1,66 @@
-* NEWS
-Monday 16-Sep-2013
-- Updated Support for 10.8.5 (Mail 6.6 [1510]) 
+ReplyWithHeader for quoting headers of email in Apple Mail.app
+--------------------------------------------------------------
+[ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
-Wednesday 10-Jul-2013
-- Changed license terms to MIT license with agreement from Saptarshi Guha
-- Due to unforeseen circumstances, I am no longer able to support this software. I hope someone else will be able to continue supporting it going forward.
+Mail Bundle Download
+--------------------
+* Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
 
-Wednesday 05-Jun-2013
- - Updated support for 10.8.4 (Mail 6.5 (1508))
- - Download latest version https://www.box.com/s/vvazf1g87b0rumtng4k1 (past versions will be posted here soon)
+Release v3.5
+--------------------
+* Added support for 10.8.5 - Mail 6.6 [1510]
+* Detailed information is [available here][2] coming soon!!!
 
-Monday 22-Oct-2012
-- New Preferences Pane (RWH) in Mail Preferences
-  - enable or disable the plugin from the preferences.
-  - specify the leading string (i.e. "-----Original Message-----").
-  - Enable or Disable font fixes for Entourage 2004.
+Issue Tracker
+-------------
+Please submit any bugs or annoyances on the [Issues][3]
 
-Sunday 12-Aug-2012
-- Mountain Lion support
-- Extra "wrote" line that appears when responding to new messages handled (I think, but it is difficult to repeat)
-- Attribute names are now bold again
+***Note: Existing enhancements requests will be taken care in upcoming days!***
 
-Thursday Oct 13
-- Info.plist updated by Jason Schroth for 10.7.2
-- version 1.1.7
-- Removed the older UUIDs that were there for 10.6 installations. Snow Leopard supports ends at is 1.1.5.
+Author
+------
+Jeevanandam M. - jeeva@myjeeva.com ([myjeeva.com][1])
 
-Wed Sep 14 
-- Fixes provided Jason Schroth to make ReplyWithHeader compatible with Lion (version 1.1.6)
-- Version 1.1.5 works for Snow Leopard.
+Credits
+-------
+* Jason Schroth (jschroth) extended his helping hands towards maintaining [ReplyWithHeader][2] mail bundle on Aug 9th, 2012 to Sep 16, 2013
+* Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth).
 
-Sun Mar 27 14:08:21 PDT 2011
-- Updated for Mail and Message 4.5
-- Version is 1.1.5
-
-Sun Nov 28 10:59:29 PST 2010:
-- Updated the bundle for the latest Message and Mail framework UUIDs.
-- Version is 1.1.4
-
-* About
-The reply in Mail.app creates a new email with the preamble
-
-On 21 July 2010, John Doe wrote:
-
-....
-
-
-When forward, the first few lines is the 
-
-From:
-Subject:
-Date:
-
-etc.
-
-ReplyWithHeaders causes the reply message to behave like forwarding.
-
-* Requirements:
+Requirements
+------------
 At least
-
 Mail: Version 6.2 (1499)
-
 Mountain Lion: 10.8
 
-* Installation
+License
+-------
+See [LICENSE][4]
+
+Step to Installation ReplyWithHeader
+------------------------------------
 
 1. Quit Mail.app
-2. Save and unzip the attachment in ~/Library/Mail/Bundles (create the directory if missing)
-   Unzipping will return "ReplyWithHeaders.mailbundle" - copy this to ~/Library/Mail/Bundles
-3. In the terminal:
+2. Download and unzip the attachment in `~/Library/Mail/Bundles` (create the directory if missing)
+   Unzipping will return `ReplyWithHeaders.mailbundle` - copy this to `~/Library/Mail/Bundles`
+3. In the terminal
+<pre><code>defaults write com.apple.mail EnableBundles -bool true</pre>/<code>
 
-   > defaults write com.apple.mail EnableBundles -bool true
+4. Restart Mail.app
 
-4. Start Console.app (/Applications/Utilities)
-5. In the search bar (top right corner of Console.app) type: Mail
+**Verification**
+
+1. Start Console.app (/Applications/Utilities)
+
+2. In the search bar (top right corner of Console.app) type: `Mail`
 
    This will restrict your information to Mail.app messages
-6. Restart Mail.app
 
-In the console, if all goes well, you should see
+3. In the console, if all goes well, you should see
+<pre><code>RWH 3.5 mail bundle loaded sccessfully
+RWH 3.5 - Oh it's a wonderful life</pre></code>
 
-Loaded ReplyWithHeader
-ReplyWithHeaders: Oh its a wonderful life
-
-
-
+[1]: http://myjeeva.com
+[2]: http://myjeeva.com/replywithheader
+[3]: https://github.com/jeevatkm/ReplyWithHeaders/issues
+[4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/LICENSE
+[5]: https://app.box.com/s/5yo06qpgm299jp3k0hro
