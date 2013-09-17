@@ -93,7 +93,7 @@
 									<object class="NSButton" id="253931335">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{22, 308}, {116, 18}}</string>
+										<string key="NSFrame">{{22, 308}, {187, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="947392743"/>
@@ -102,7 +102,7 @@
 										<object class="NSButtonCell" key="NSCell" id="770500333">
 											<int key="NSCellFlags">-2080374784</int>
 											<int key="NSCellFlags2">268435456</int>
-											<string key="NSContents">Enable Bundle</string>
+											<string key="NSContents">Enable ReplyWithHeader</string>
 											<reference key="NSSupport" ref="563141123"/>
 											<string key="NSCellIdentifier">_NS:9</string>
 											<reference key="NSControlView" ref="253931335"/>
@@ -185,7 +185,7 @@
 									<object class="NSButton" id="149260813">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{22, 102}, {177, 18}}</string>
+										<string key="NSFrame">{{22, 102}, {187, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="1012690996"/>
@@ -198,7 +198,7 @@
 											<reference key="NSSupport" ref="563141123"/>
 											<string key="NSCellIdentifier">_NS:9</string>
 											<reference key="NSControlView" ref="149260813"/>
-											<int key="NSButtonFlags">1210863872</int>
+											<int key="NSButtonFlags">1211912448</int>
 											<int key="NSButtonFlags2">2</int>
 											<reference key="NSNormalImage" ref="802832140"/>
 											<reference key="NSAlternateImage" ref="1066573553"/>
@@ -282,6 +282,7 @@
 										<string key="NSFrameSize">{499, 17}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:1535</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="185393685">
@@ -324,7 +325,7 @@
 									<object class="NSButton" id="482978685">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{22, 189}, {175, 18}}</string>
+										<string key="NSFrame">{{22, 189}, {187, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="883625582"/>
@@ -889,10 +890,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
-			<real value="4600" key="NS.object.0"/>
-		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">

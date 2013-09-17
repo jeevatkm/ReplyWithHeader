@@ -31,7 +31,8 @@
 - (NSString*)preferencesNibName
 {
     RWH_LOG();
-    return @"ReplyWithHeaderPanel";
+    //return @"ReplyWithHeaderPanel";
+    return @"RwhPreferencesPanel";
 }
 
 #pragma mark Instance methods
@@ -44,6 +45,6 @@
 
 - (NSString*)rwhCopyright
 {
-    return @"Reply With Headers copyright © 2013 Saptarshi Guha and Jason Schroth";
+    return @"Copyright © 2013 Saptarshi Guha and Jason Schroth";
 }
 @end

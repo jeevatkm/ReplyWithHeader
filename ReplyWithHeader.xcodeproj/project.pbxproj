@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */; };
+		13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */; };
 		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
 		3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */; };
 		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
@@ -19,7 +21,6 @@
 		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
 		4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FEF8512723EC800A945C5 /* LICENSE */; };
 		4D5FF0AA127255C500A945C5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +39,9 @@
 
 /* Begin PBXFileReference section */
 		011C2BD81447FA81001EA252 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
+		13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader_Prefix.pch; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -79,13 +81,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +101,14 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		13B83AC717E85C8B004F3D59 /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				31716FD216352E2E00EF8A27 /* NSPreferencesModule.h */,
+			);
+			name = AppKit;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,12 +120,10 @@
 		29B97314FDCFA39411CA2CEA /* ReplyWithHeader */ = {
 			isa = PBXGroup;
 			children = (
-				4D5FEF8412723EC800A945C5 /* Code */,
-				080E96DDFE201D6D7F000001 /* Classes */,
+				4D5FEF8412723EC800A945C5 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				31024ADB161182FF0071587E /* Preferences */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = ReplyWithHeader;
@@ -131,7 +132,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				31716FD216352E2E00EF8A27 /* NSPreferencesModule.h */,
+				13B83AC717E85C8B004F3D59 /* AppKit */,
 				256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -140,8 +141,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */,
+				13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */,
+				3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */,
 				011C2BD81447FA81001EA252 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -155,15 +158,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		31024ADB161182FF0071587E /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */,
-			);
-			name = Preferences;
-			sourceTree = "<group>";
-		};
-		4D5FEF8412723EC800A945C5 /* Code */ = {
+		4D5FEF8412723EC800A945C5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				4D5FEF8512723EC800A945C5 /* LICENSE */,
@@ -180,7 +175,7 @@
 				31716FCB16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.h */,
 				31716FCC16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m */,
 			);
-			name = Code;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +210,7 @@
 				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ReplyWithHeader" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -238,9 +233,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */,
 				3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */,
+				13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */,
+				13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,17 +274,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
@@ -329,6 +314,7 @@
 				GENERATE_PKGINFO_FILE = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
+				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;
 				OTHER_LDFLAGS = (
 					"-undefined",
