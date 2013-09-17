@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */; };
 		13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */; };
-		13B83ACD17E8726E004F3D59 /* Rwh-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */; };
 		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
 		3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */; };
 		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
@@ -39,7 +38,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		011C2BD81447FA81001EA252 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
 		13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */,
 				13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */,
 				3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */,
-				011C2BD81447FA81001EA252 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -240,7 +237,6 @@
 				3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */,
 				13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */,
 				13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */,
-				13B83ACD17E8726E004F3D59 /* Rwh-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +287,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Rwh-Info.plist";
+				INFOPLIST_FILE = "Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
@@ -316,7 +312,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Rwh-Info.plist";
+				INFOPLIST_FILE = "Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;

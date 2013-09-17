@@ -8,7 +8,10 @@
 
 /*#import <AppKit/NSPreferencesModule-Protocol.h>*/
 
-@protocol NSPreferencesModule;
+@protocol NSPreferencesModule <NSObject>
+    // the definition for NSPreferencesModule
+@end
+
 @class NSBox;
 
 @interface NSPreferencesModule : NSObject <NSPreferencesModule>
