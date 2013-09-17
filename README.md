@@ -6,8 +6,13 @@ Mail Bundle Download
 --------------------
 * Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
 
-Release v3.5
---------------------
+Development started for v3.6
+----------------------------
+* Improvement Preference pane in Mail.app
+* Enhancement implementation
+
+Released v3.5
+-------------
 * Added support for 10.8.5 - Mail 6.6 [1510]
 * Detailed information is [available here][2] coming soon!!!
 
