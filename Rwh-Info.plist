@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>ReplyWithHeader</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.github.replywithheader</string>
+	<string>com.github.apple.mail.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -33,5 +33,9 @@
 		<string>2B98D2DD-000B-4521-83EB-7BFCB9B161C8</string>
 		<string>DAFFB2B4-77BC-4C25-8CE1-2405E652D54B</string>
 	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 </dict>
 </plist>

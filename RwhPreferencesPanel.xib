@@ -58,7 +58,7 @@
 										<string key="NSFrame">{{16, 347}, {115, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSNextKeyView" ref="404746024"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSButtonCell" key="NSCell" id="770500333">
@@ -184,7 +184,7 @@
 															<object class="NSTextFieldCell" key="NSCell" id="840455411">
 																<int key="NSCellFlags">68157504</int>
 																<int key="NSCellFlags2">272630784</int>
-																<string key="NSContents">HTML Header String:  (Default is plain text is used in mail header)</string>
+																<string key="NSContents">HTML Header String:  (Default is plain text)</string>
 																<object class="NSFont" key="NSSupport" id="26">
 																	<string key="NSName">LucidaGrande</string>
 																	<double key="NSSize">11</double>
@@ -216,7 +216,7 @@
 															<string key="NSFrame">{{14, 17}, {438, 29}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="253931335"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="502270534">
@@ -567,7 +567,6 @@
 															<int key="NSvFlags">292</int>
 															<string key="NSFrame">{{14, 225}, {438, 21}}</string>
 															<reference key="NSSuperview" ref="741342458"/>
-															<reference key="NSNextKeyView" ref="253931335"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="185393685">
@@ -624,7 +623,7 @@
 								<string key="NSFrame">{{1, 1}, {508, 381}}</string>
 								<reference key="NSSuperview" ref="144494481"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="404746024"/>
+								<reference key="NSNextKeyView" ref="253931335"/>
 								<string key="NSReuseIdentifierKey">_NS:11</string>
 							</object>
 						</array>

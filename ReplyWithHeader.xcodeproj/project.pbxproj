@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */; };
 		13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */; };
+		13B83ACD17E8726E004F3D59 /* Rwh-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */; };
 		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
 		3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */; };
 		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
@@ -42,6 +43,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
 		13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
+		13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rwh-Info.plist"; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader_Prefix.pch; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -141,6 +143,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */,
 				13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */,
 				13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */,
 				3110BBD21635F02D000882B8 /* ReplyWithHeaderPanel.xib */,
@@ -237,6 +240,7 @@
 				3110BBD31635F02D000882B8 /* ReplyWithHeaderPanel.xib in Resources */,
 				13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */,
 				13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */,
+				13B83ACD17E8726E004F3D59 /* Rwh-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +291,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
@@ -312,7 +316,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;
@@ -334,7 +338,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -346,6 +352,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
+				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
 			};
 			name = Release;
