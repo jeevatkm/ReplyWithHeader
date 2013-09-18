@@ -2,19 +2,39 @@ RWH - quoting headers of email in Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
-Released v3.5
--------------
-* Added support for 10.8.5 - Mail 6.6 [1510]
-* Detailed information is [available here][2] coming soon!!!
+**Table of Contents**
+	* [Latest Release](#latest-release)
+	* [Mail Bundle/Plugin version details](#mail-bundle-plugin-version-details)
+	* [Release Downloads](#release-downloads)
+	* [NEWS - Upcoming](#news-upcoming)
+	* [Issue Tracker](#issue-tracker)
+	* [Author](#author)
+	* [Credits](#credits)
+	* [License](#license)
+	* [Steps to Installation ReplyWithHeader](#steps-to-installation-replywithheader)
 
-Mail Bundle Download
---------------------
+* * *
+
+Latest Release
+--------------
+* **Released in v3.5**
+	* Added support for 10.8.5 - Mail 6.6 [1510]
+
+Mail Bundle/Plugin version details
+----------------------------------
+* 3.x versions are for Mountain Lion
+* 2.x versions are for Lion
+* 1.x versions are for Snow Leopard and earlier
+
+I hope this is helpful to choose appropriate plugin/bundle version :)
+
+Release Downloads
+-----------------
 * Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
 
-Development started for v3.6
-----------------------------
-* Preferences UI improvement in Mail.app
-* Enhancements implementation
+NEWS - Upcoming
+---------------
+* Development started for RWH 3.6, [milestone details here][3]
 
 Issue Tracker
 -------------
@@ -31,13 +51,11 @@ Credits
 * Jason Schroth (jschroth) extended his helping hands towards maintaining [ReplyWithHeader][2] mail bundle from Aug 9th, 2012 to Sep 16, 2013
 * Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth).
 
-Requirements
-------------
-At least Mail: Version 6.2 (1499) Mountain Lion: 10.8
-
 License
 -------
 See [LICENSE][4]
+
+* * *
 
 Steps to Installation ReplyWithHeader
 -------------------------------------
