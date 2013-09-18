@@ -59,8 +59,8 @@ Steps to Installation ReplyWithHeader
    This will restrict your information to Mail.app messages
 
 3. In the console, if all goes well, you should see
-<pre><code>RWH 3.5 mail bundle loaded sccessfully
-RWH 3.5 Oh it's a wonderful life</pre></code>
+<pre><code>RWH &lt;version number> mail bundle loaded successfully
+RWH &lt;version number> Oh it's a wonderful life</pre></code>
 
 [1]: http://myjeeva.com
 [2]: http://myjeeva.com/replywithheader

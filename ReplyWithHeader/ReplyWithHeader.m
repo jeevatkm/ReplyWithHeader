@@ -75,7 +75,7 @@
     [prefs registerDefaults:dict];
     
     //The modules have been loaded
-    NSLog(@"RWH %@ mail bundle loaded sccessfully",[[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
+    NSLog(@"RWH %@ mail bundle loaded successfully",[[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
     NSLog(@"RWH %@ Oh it's a wonderful life", [[NSBundle bundleForClass:[ReplyWithHeader class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]);
     
 }
