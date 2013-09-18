@@ -2,19 +2,19 @@ RWH - quoting headers of email in Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
+Released v3.5
+-------------
+* Added support for 10.8.5 - Mail 6.6 [1510]
+* Detailed information is [available here][2] coming soon!!!
+
 Mail Bundle Download
 --------------------
 * Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
 
 Development started for v3.6
 ----------------------------
-* Preferences pane improvement in Mail.app
+* Preferences UI improvement in Mail.app
 * Enhancements implementation
-
-Released v3.5
--------------
-* Added support for 10.8.5 - Mail 6.6 [1510]
-* Detailed information is [available here][2] coming soon!!!
 
 Issue Tracker
 -------------
@@ -33,9 +33,7 @@ Credits
 
 Requirements
 ------------
-At least
-Mail: Version 6.2 (1499)
-Mountain Lion: 10.8
+At least Mail: Version 6.2 (1499) Mountain Lion: 10.8
 
 License
 -------
@@ -56,16 +54,16 @@ Steps to Installation ReplyWithHeader
 
 1. Start Console.app (/Applications/Utilities)
 
-2. In the search bar (top right corner of Console.app) type: `Mail`
+2. In the search bar (top right corner of Console.app) type: **Mail**
 
    This will restrict your information to Mail.app messages
 
 3. In the console, if all goes well, you should see
 <pre><code>RWH 3.5 mail bundle loaded sccessfully
-RWH 3.5 - Oh it's a wonderful life</pre></code>
+RWH 3.5 Oh it's a wonderful life</pre></code>
 
 [1]: http://myjeeva.com
 [2]: http://myjeeva.com/replywithheader
 [3]: https://github.com/jeevatkm/ReplyWithHeaders/issues
-[4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/LICENSE
+[4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/ReplyWithHeader/LICENSE
 [5]: https://app.box.com/s/5yo06qpgm299jp3k0hro

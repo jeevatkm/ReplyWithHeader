@@ -1,2 +1,0 @@
-defaults read /Applications/Mail.app/Contents/Info PluginCompatibilityUUID
-defaults read /System/Library/Frameworks/Message.framework/Resources/Info PluginCompatibilityUUID

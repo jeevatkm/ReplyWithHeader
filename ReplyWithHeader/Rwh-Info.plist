@@ -18,10 +18,14 @@
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>3.6</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>3.6</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.productivity</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2013 Jeevanandam M.</string>
 	<key>NSPrincipalClass</key>
 	<string>ReplyWithHeader</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
@@ -33,9 +37,5 @@
 		<string>2B98D2DD-000B-4521-83EB-7BFCB9B161C8</string>
 		<string>DAFFB2B4-77BC-4C25-8CE1-2405E652D54B</string>
 	</array>
-	<key>LSMinimumSystemVersion</key>
-	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
 </dict>
 </plist>

@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */; };
-		13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */; };
-		310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 310639C715DB8D6F00B81836 /* MailHeaderString.m */; };
-		311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AB2A115DE15A100956061 /* MailQuotedOriginal.m */; };
-		31716FCD16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31716FCC16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m */; };
-		319C9B631633DED300C420B3 /* ReplyWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 319C9B621633DED300C420B3 /* ReplyWithHeader.m */; };
-		319C9B681633EC3500C420B3 /* ReplyWithHeaderMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 319C9B671633EC3500C420B3 /* ReplyWithHeaderMessage.m */; };
+		133A917F17E9745A00E3CC62 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 133A916C17E9745A00E3CC62 /* LICENSE */; };
+		133A918017E9745A00E3CC62 /* MailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MailHeaderString.m */; };
+		133A918117E9745A00E3CC62 /* MailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MailQuotedOriginal.m */; };
+		133A918217E9745A00E3CC62 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 133A917317E9745A00E3CC62 /* ReplyWithHeader.icns */; };
+		133A918317E9745A00E3CC62 /* ReplyWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917417E9745A00E3CC62 /* ReplyWithHeader.m */; };
+		133A918417E9745A00E3CC62 /* ReplyWithHeaderMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* ReplyWithHeaderMessage.m */; };
+		133A918517E9745A00E3CC62 /* ReplyWithHeaderPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917917E9745A00E3CC62 /* ReplyWithHeaderPreferences.m */; };
+		133A918617E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.m */; };
+		133A918817E9745A00E3CC62 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */; };
 		319C9B6C1634042200C420B3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31024ADF161184340071587E /* PreferencePanes.framework */; };
-		319C9B6F16351CFD00C420B3 /* ReplyWithHeaderPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 319C9B6E16351CFD00C420B3 /* ReplyWithHeaderPreferences.m */; };
 		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
-		4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D5FEF8512723EC800A945C5 /* LICENSE */; };
 		4D5FF0AA127255C500A945C5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -38,30 +38,36 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
-		13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
-		13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rwh-Info.plist"; sourceTree = "<group>"; };
-		256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader_Prefix.pch; sourceTree = "<group>"; };
+		133A916B17E9745A00E3CC62 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		133A916C17E9745A00E3CC62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		133A916D17E9745A00E3CC62 /* MailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeaderString.h; sourceTree = "<group>"; };
+		133A916E17E9745A00E3CC62 /* MailHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeaderString.m; sourceTree = "<group>"; };
+		133A916F17E9745A00E3CC62 /* MailQuotedOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailQuotedOriginal.h; sourceTree = "<group>"; };
+		133A917017E9745A00E3CC62 /* MailQuotedOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailQuotedOriginal.m; sourceTree = "<group>"; };
+		133A917117E9745A00E3CC62 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
+		133A917217E9745A00E3CC62 /* ReplyWithHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader.h; sourceTree = "<group>"; };
+		133A917317E9745A00E3CC62 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
+		133A917417E9745A00E3CC62 /* ReplyWithHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeader.m; sourceTree = "<group>"; };
+		133A917517E9745A00E3CC62 /* ReplyWithHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader_Prefix.pch; sourceTree = "<group>"; };
+		133A917617E9745A00E3CC62 /* ReplyWithHeaderMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderMessage.h; sourceTree = "<group>"; };
+		133A917717E9745A00E3CC62 /* ReplyWithHeaderMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderMessage.m; sourceTree = "<group>"; };
+		133A917817E9745A00E3CC62 /* ReplyWithHeaderPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderPreferences.h; sourceTree = "<group>"; };
+		133A917917E9745A00E3CC62 /* ReplyWithHeaderPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderPreferences.m; sourceTree = "<group>"; };
+		133A917A17E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderPreferencesModule.h; sourceTree = "<group>"; };
+		133A917B17E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderPreferencesModule.m; sourceTree = "<group>"; };
+		133A917C17E9745A00E3CC62 /* Rwh-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rwh-Info.plist"; sourceTree = "<group>"; };
+		133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
+		133A919217E9785C00E3CC62 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		133A919717E9785C00E3CC62 /* ReplyWithHeaders-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ReplyWithHeaders-Info.plist"; sourceTree = "<group>"; };
+		133A919917E9785C00E3CC62 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		133A919B17E9785C00E3CC62 /* ReplyWithHeaders-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReplyWithHeaders-Prefix.pch"; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
-		310639C615DB8D6E00B81836 /* MailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeaderString.h; sourceTree = "<group>"; };
-		310639C715DB8D6F00B81836 /* MailHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeaderString.m; sourceTree = "<group>"; };
-		311AB2A015DE15A100956061 /* MailQuotedOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailQuotedOriginal.h; sourceTree = "<group>"; };
-		311AB2A115DE15A100956061 /* MailQuotedOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailQuotedOriginal.m; sourceTree = "<group>"; };
-		31716FCB16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderPreferencesModule.h; sourceTree = "<group>"; };
-		31716FCC16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderPreferencesModule.m; sourceTree = "<group>"; };
-		31716FD216352E2E00EF8A27 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
-		319C9B611633DED300C420B3 /* ReplyWithHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader.h; sourceTree = "<group>"; };
-		319C9B621633DED300C420B3 /* ReplyWithHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeader.m; sourceTree = "<group>"; };
-		319C9B661633EC3500C420B3 /* ReplyWithHeaderMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderMessage.h; sourceTree = "<group>"; };
-		319C9B671633EC3500C420B3 /* ReplyWithHeaderMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderMessage.m; sourceTree = "<group>"; };
-		319C9B6D16351CFD00C420B3 /* ReplyWithHeaderPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeaderPreferences.h; sourceTree = "<group>"; };
-		319C9B6E16351CFD00C420B3 /* ReplyWithHeaderPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeaderPreferences.m; sourceTree = "<group>"; };
 		4D5FEE7912723B4900A945C5 /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
-		4D5FEF8512723EC800A945C5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D5FF0A9127255C500A945C5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReplyWithHeader.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReplyWithHeader.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,16 +101,85 @@
 			children = (
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				133A919417E9785C00E3CC62 /* CoreData.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		13B83AC717E85C8B004F3D59 /* AppKit */ = {
+		133A916917E9745A00E3CC62 /* ReplyWithHeader */ = {
 			isa = PBXGroup;
 			children = (
-				31716FD216352E2E00EF8A27 /* NSPreferencesModule.h */,
+				133A916C17E9745A00E3CC62 /* LICENSE */,
+				133A918C17E9751A00E3CC62 /* Source */,
+				133A918A17E974CE00E3CC62 /* Other Sources */,
+				133A918917E974AF00E3CC62 /* Resources */,
+			);
+			path = ReplyWithHeader;
+			sourceTree = "<group>";
+		};
+		133A918917E974AF00E3CC62 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				133A916A17E9745A00E3CC62 /* InfoPlist.strings */,
+				133A917317E9745A00E3CC62 /* ReplyWithHeader.icns */,
+				133A917C17E9745A00E3CC62 /* Rwh-Info.plist */,
+				133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		133A918A17E974CE00E3CC62 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				133A918B17E974DF00E3CC62 /* AppKit */,
+				133A917517E9745A00E3CC62 /* ReplyWithHeader_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		133A918B17E974DF00E3CC62 /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				133A917117E9745A00E3CC62 /* NSPreferencesModule.h */,
 			);
 			name = AppKit;
+			sourceTree = "<group>";
+		};
+		133A918C17E9751A00E3CC62 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				133A916D17E9745A00E3CC62 /* MailHeaderString.h */,
+				133A916E17E9745A00E3CC62 /* MailHeaderString.m */,
+				133A916F17E9745A00E3CC62 /* MailQuotedOriginal.h */,
+				133A917017E9745A00E3CC62 /* MailQuotedOriginal.m */,
+				133A917217E9745A00E3CC62 /* ReplyWithHeader.h */,
+				133A917417E9745A00E3CC62 /* ReplyWithHeader.m */,
+				133A917617E9745A00E3CC62 /* ReplyWithHeaderMessage.h */,
+				133A917717E9745A00E3CC62 /* ReplyWithHeaderMessage.m */,
+				133A917817E9745A00E3CC62 /* ReplyWithHeaderPreferences.h */,
+				133A917917E9745A00E3CC62 /* ReplyWithHeaderPreferences.m */,
+				133A917A17E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.h */,
+				133A917B17E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		133A919517E9785C00E3CC62 /* ReplyWithHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				133A919617E9785C00E3CC62 /* Supporting Files */,
+			);
+			path = ReplyWithHeaders;
+			sourceTree = "<group>";
+		};
+		133A919617E9785C00E3CC62 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				133A919717E9785C00E3CC62 /* ReplyWithHeaders-Info.plist */,
+				133A919817E9785C00E3CC62 /* InfoPlist.strings */,
+				133A919B17E9785C00E3CC62 /* ReplyWithHeaders-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -118,61 +193,22 @@
 		29B97314FDCFA39411CA2CEA /* ReplyWithHeader */ = {
 			isa = PBXGroup;
 			children = (
-				4D5FEF8412723EC800A945C5 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
+				133A916917E9745A00E3CC62 /* ReplyWithHeader */,
+				133A919517E9785C00E3CC62 /* ReplyWithHeaders */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = ReplyWithHeader;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-				13B83AC717E85C8B004F3D59 /* AppKit */,
-				256AC3F00F4B6AF500CF3369 /* ReplyWithHeader_Prefix.pch */,
-			);
-			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				13B83ACC17E8726E004F3D59 /* Rwh-Info.plist */,
-				13B83ACA17E8615C004F3D59 /* RwhPreferencesPanel.xib */,
-				13B83AC817E85D06004F3D59 /* ReplyWithHeader.icns */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				133A919217E9785C00E3CC62 /* Cocoa.framework */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4D5FEF8412723EC800A945C5 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4D5FEF8512723EC800A945C5 /* LICENSE */,
-				310639C615DB8D6E00B81836 /* MailHeaderString.h */,
-				310639C715DB8D6F00B81836 /* MailHeaderString.m */,
-				311AB2A015DE15A100956061 /* MailQuotedOriginal.h */,
-				311AB2A115DE15A100956061 /* MailQuotedOriginal.m */,
-				319C9B661633EC3500C420B3 /* ReplyWithHeaderMessage.h */,
-				319C9B671633EC3500C420B3 /* ReplyWithHeaderMessage.m */,
-				319C9B611633DED300C420B3 /* ReplyWithHeader.h */,
-				319C9B621633DED300C420B3 /* ReplyWithHeader.m */,
-				319C9B6D16351CFD00C420B3 /* ReplyWithHeaderPreferences.h */,
-				319C9B6E16351CFD00C420B3 /* ReplyWithHeaderPreferences.m */,
-				31716FCB16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.h */,
-				31716FCC16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +232,7 @@
 			productInstallPath = "$(HOME)/Applications";
 			productName = ReplyWithHeader;
 			productReference = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */;
-			productType = "com.apple.product-type.application";
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -215,6 +251,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -230,9 +267,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D5FEF8C12723EC800A945C5 /* LICENSE in Resources */,
-				13B83AC917E85D06004F3D59 /* ReplyWithHeader.icns in Resources */,
-				13B83ACB17E8615C004F3D59 /* RwhPreferencesPanel.xib in Resources */,
+				133A917F17E9745A00E3CC62 /* LICENSE in Resources */,
+				133A918217E9745A00E3CC62 /* ReplyWithHeader.icns in Resources */,
+				133A918817E9745A00E3CC62 /* RwhPreferencesPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,16 +297,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310639C815DB8D6F00B81836 /* MailHeaderString.m in Sources */,
-				311AB2A215DE15A100956061 /* MailQuotedOriginal.m in Sources */,
-				319C9B631633DED300C420B3 /* ReplyWithHeader.m in Sources */,
-				319C9B681633EC3500C420B3 /* ReplyWithHeaderMessage.m in Sources */,
-				319C9B6F16351CFD00C420B3 /* ReplyWithHeaderPreferences.m in Sources */,
-				31716FCD16352CCA00EF8A27 /* ReplyWithHeaderPreferencesModule.m in Sources */,
+				133A918017E9745A00E3CC62 /* MailHeaderString.m in Sources */,
+				133A918117E9745A00E3CC62 /* MailQuotedOriginal.m in Sources */,
+				133A918317E9745A00E3CC62 /* ReplyWithHeader.m in Sources */,
+				133A918417E9745A00E3CC62 /* ReplyWithHeaderMessage.m in Sources */,
+				133A918517E9745A00E3CC62 /* ReplyWithHeaderPreferences.m in Sources */,
+				133A918617E9745A00E3CC62 /* ReplyWithHeaderPreferencesModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		133A916A17E9745A00E3CC62 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				133A916B17E9745A00E3CC62 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		133A919817E9785C00E3CC62 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				133A919917E9785C00E3CC62 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
@@ -281,12 +337,13 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
+				GCC_PREFIX_HEADER = ReplyWithHeader/ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "Rwh-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -306,12 +363,13 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReplyWithHeader_Prefix.pch;
+				GCC_PREFIX_HEADER = ReplyWithHeader/ReplyWithHeader_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "Rwh-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -330,7 +388,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
@@ -344,7 +402,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
 			};
