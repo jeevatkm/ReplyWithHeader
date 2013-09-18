@@ -59,9 +59,6 @@
 		133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
 		133A919217E9785C00E3CC62 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		133A919717E9785C00E3CC62 /* ReplyWithHeaders-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ReplyWithHeaders-Info.plist"; sourceTree = "<group>"; };
-		133A919917E9785C00E3CC62 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		133A919B17E9785C00E3CC62 /* ReplyWithHeaders-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReplyWithHeaders-Prefix.pch"; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
@@ -164,24 +161,6 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		133A919517E9785C00E3CC62 /* ReplyWithHeaders */ = {
-			isa = PBXGroup;
-			children = (
-				133A919617E9785C00E3CC62 /* Supporting Files */,
-			);
-			path = ReplyWithHeaders;
-			sourceTree = "<group>";
-		};
-		133A919617E9785C00E3CC62 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				133A919717E9785C00E3CC62 /* ReplyWithHeaders-Info.plist */,
-				133A919817E9785C00E3CC62 /* InfoPlist.strings */,
-				133A919B17E9785C00E3CC62 /* ReplyWithHeaders-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				133A916917E9745A00E3CC62 /* ReplyWithHeader */,
-				133A919517E9785C00E3CC62 /* ReplyWithHeaders */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -313,14 +291,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				133A916B17E9745A00E3CC62 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		133A919817E9785C00E3CC62 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				133A919917E9785C00E3CC62 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
