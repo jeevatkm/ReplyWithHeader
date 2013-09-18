@@ -39,11 +39,13 @@
 #import <objc/objc-runtime.h>
 #import <objc/objc-class.h>
 
-#import "MailHeaderString.h"
-#import "MailQuotedOriginal.h"
-#import "ReplyWithHeaderMessage.h"
-#import "ReplyWithHeaderPreferences.h"
-#import "ReplyWithHeaderPreferencesModule.h"
+#import "RwhMailHeaderString.h"
+#import "RwhMailQuotedOriginal.h"
+#import "RwhMailMessage.h"
+#import "RwhMailPreferences.h"
+#import "RwhMailPreferencesModule.h"
+#import "RwhMacros.h"
+#import "RwhConstants.h"
 
 /*!
  * @class
@@ -53,8 +55,7 @@
  * @version \@(#) $Id$
  * @updated $Date$
  */
-@interface ReplyWithHeader : NSObject {
-}
+@interface ReplyWithHeader : NSObject 
 
 #pragma mark Class initialization
 /*! @group Class initialization */

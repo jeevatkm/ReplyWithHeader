@@ -45,9 +45,11 @@
 #import <objc/objc-runtime.h>
 #import <objc/objc-class.h>
 
-#import "MailHeaderString.h"
+#import "RwhMailHeaderString.h"
+#import "RwhMacros.h"
+#import "RwhConstants.h"
 
-@interface MailQuotedOriginal : NSObject{
+@interface RwhMailQuotedOriginal : NSObject {
 @private
     id document;
     DOMDocumentFragment *border;
@@ -64,12 +66,12 @@
 @end
 
 //private methods declared here
-@interface MailQuotedOriginal ()
+@interface RwhMailQuotedOriginal ()
 -(void)initVars;
 -(void)prepQuotedPlainText;
 -(void)removeOriginalPlainTextHeader;
 -(void)removeOriginalHeader;
--(void)insertMailHeader:(MailHeaderString *)headStr;
+-(void)insertMailHeader:(RwhMailHeaderString *)headStr;
 -(void)insertFwdHeader;
 -(void)supportEntourage2004:(DOMDocumentFragment *) headFrag;
 

@@ -25,22 +25,27 @@
  */
 
 
-#import "ReplyWithHeader.h"
 
-@interface ReplyWithHeaderMessage : NSObject
+#import "RwhMailPreferencesModule.h"
+
+@implementation RwhMailPreferencesModule
+
+#pragma mark NSPreferencesModule instance methods
+
+- (NSString*)preferencesNibName {
+    RWH_LOG();
+    
+    return RwhMailPreferencesNibName;
+}
+
+#pragma mark Instance methods
+
+- (NSString*)rwhVersion {
+    return RwhCurrentBundleVersion;
+}
 
 
-#pragma mark Implementation methods
-/*! @group implementation methods */
-/*!
- * Changes the Contents for view, adding the message headers to Reply and Reply All messages
- * the format of this function is taken from ComposeBackEnd _continueToSetupContentsForView method
- * @param arg1
- *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
- * @param arg2
- *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
- */
-- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
-
-
+- (NSString*)rwhCopyright {
+    return RwhCurrentCopyRightOwner;
+}
 @end

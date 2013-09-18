@@ -40,7 +40,7 @@
 #import <objc/objc-runtime.h>
 #import <objc/objc-class.h>
 
-@interface MailHeaderString : NSObject {
+@interface RwhMailHeaderString : NSObject {
     @private
     NSMutableAttributedString *headstr;
 }

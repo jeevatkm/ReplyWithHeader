@@ -33,12 +33,11 @@
 //
 //
 
-#import "MailHeaderString.h"
+#import "RwhMailHeaderString.h"
 
-@implementation MailHeaderString
+@implementation RwhMailHeaderString
 
--(id)init
-{
+- (id)init {
     if (self = [super init]) {
         //good stuff...
     }
@@ -48,8 +47,7 @@
     return self;
 }
 
--(id)initWithStr: (NSAttributedString *)str
-{
+- (id)initWithStr: (NSAttributedString *)str {
     //initialze the value with a mutable copy of the attributed string
     if( self = [super init] )
     {
@@ -74,8 +72,7 @@
 }
 
 
--(id)initWithBackEnd:(id)backend
-{
+- (id)initWithBackEnd:(id)backend {
     //initialze the value with a mutable copy of the attributed string
     if( self = [super init] )
     {
@@ -105,8 +102,7 @@
 /*
  * descr: Bolds the lables for header elements (i.e., From:, To:, Subject:, Date:, etc.).
  */
--(void)boldHeaderLabels
-{
+- (void)boldHeaderLabels {
     //get all of the fonts in use, but only use the first one
     NSDictionary *dict = [headstr fontAttributesInRange:NSMakeRange(0,[headstr length])];
     
@@ -151,14 +147,12 @@
     }
 }
 
--(WebArchive *)getWebArch
-{
+- (WebArchive *)getWebArch {
     WebArchive *arch = [headstr webArchiveForRange:NSMakeRange(0,[headstr length]) fixUpNewlines:YES];
     return arch;
 }
 
--(NSMutableAttributedString *)string
-{
+- (NSMutableAttributedString *)string {
     return headstr;
 }
 

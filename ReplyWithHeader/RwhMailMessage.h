@@ -25,34 +25,22 @@
  */
 
 
-/*!
- * @header
- * Defines the <code>ReplyWithHeaderPreferences</code> category for
- * <code>NSPreferences</code>.
- * @version \@(#) $Id$
- * @updated $Date$
- */
 #import "ReplyWithHeader.h"
 
+@interface RwhMailMessage : NSObject
+
+
+#pragma mark Implementation methods
+/*! @group implementation methods */
 /*!
- * @class
- * Adds a method for overriding the preference-loading behavior of
- * <code>NSPreferences</code>.
- * @version \@(#) $Id$
- * @updated $Date$
+ * Changes the Contents for view, adding the message headers to Reply and Reply All messages
+ * the format of this function is taken from ComposeBackEnd _continueToSetupContentsForView method
+ * @param arg1
+ *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
+ * @param arg2
+ *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
  */
-@interface ReplyWithHeaderPreferences : NSObject
-
-
-#pragma mark Swizzled class methods
-/*! @group Swizzled class methods */
-
-/*!
- * Adds the RWH preferences.
- * @result
- *   The shared <code>NSPreferences</code> for this application.
- */
-+ (id)rwhSharedPreferences;
+- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
 
 
 @end

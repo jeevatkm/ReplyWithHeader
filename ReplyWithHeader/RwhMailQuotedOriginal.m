@@ -32,12 +32,11 @@
 //
 //
 
-#import "MailQuotedOriginal.h"
+#import "RwhMailQuotedOriginal.h"
 
-@implementation MailQuotedOriginal
+@implementation RwhMailQuotedOriginal
 
--(id)init
-{
+- (id)init {
     if (self = [super init]) {
         //good stuff...
     }
@@ -48,21 +47,19 @@
 }
 
 
--(id)initWithBackEnd:(id)backend
-{
+- (id)initWithBackEnd:(id)backend {
     //initialze the value with a mutable copy of the attributed string
-    if( self = [super init] )
-    {
+    if( self = [super init] ) {
 		//set the class document variable
         document = [backend document];
+        
         RWH_LOG(@"Document=%@",document);
         
         //now initialize the other vars
         [self initVars];
         
         //if there is not a child in the original email, it must be plain text
-        if([origemail firstChild]==NULL)
-        {
+        if([origemail firstChild]==NULL) {
             //prep the plain text
             [self prepQuotedPlainText];
         }
@@ -71,14 +68,11 @@
         dhc = [origemail childNodes];
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
-        if( dhc.length > 1)
-        {
-            if( isPlainText )
-            {   
+        if( dhc.length > 1) {
+            if( isPlainText ) {   
                 [self removeOriginalPlainTextHeader];
             }
-            else
-            {
+            else {
                 [self removeOriginalHeader];
             }
         }
@@ -91,18 +85,18 @@
 }
 
 
--(void)initVars
-{
+- (void)initVars {
     
-    NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
-    NSString *headLine = [prefs objectForKey:@"headerText"];
-    NSString *fwdLine = [prefs objectForKey:@"forwardHeader"];
-    RWH_LOG(@"MailQuotedOriginal: initvar Header text: %@",headLine);
+    NSString *replyHeadline = DEFAULT_GET(RwhReplyHeaderText);
+    NSString *forwardHeadline = DEFAULT_GET(RwhForwardHeaderText);
+    
+    RWH_LOG(@"MailQuotedOriginal: initvar Header text: %@", replyHeadline);    
+    
     //now set the border variable
-    border = [[document htmlDocument] createDocumentFragmentWithMarkupString: headLine];
+    border = [[document htmlDocument] createDocumentFragmentWithMarkupString: replyHeadline];
     // @"<div style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;'></div>"
     
-    fwdborder = [[document htmlDocument] createDocumentFragmentWithMarkupString: fwdLine];
+    fwdborder = [[document htmlDocument] createDocumentFragmentWithMarkupString: forwardHeadline];
     
     boldhead=YES;
     //		DOMNode *voo = [document htmlDocument];
@@ -117,29 +111,18 @@
 
 }
 
--(void)prepQuotedPlainText
-{
+- (void)prepQuotedPlainText {
     
     origemail=[[[document htmlDocument] descendantsWithClassName:@"ApplePlainTextBody"] objectAtIndex:0];
+    
     RWH_LOG(@"Orig is now %@", origemail);
     
     isPlainText = YES;
     
-    //DOMNodeList *vl = [origemail childNodes];
-    //for(int i=0;i< vl.length;i++)
-    //{
-    //  id ii=[ vl item:i];
-    //  RWH_LOG(@"%d(%d,%@,%@,%@,%@,%@)=",i,[ii nodeType],[ii nodeName],[ii attributes],[ii prefix],[ii namespaceURI],[ii localName]);
-    //	if([ii nodeType] != 3) RWH_LOG(@"Origemail child (%@) = %@",[vl item:i],[[vl item:i] outerHTML]);
-    //	else RWH_LOG(@"ND(%d)=%@",i,[ [vl item:i] data]);
-    //}
-    
-    if( [[origemail idName] isEqualToString:@"AppleMailSignature"] )
-    {
+    if( [[origemail idName] isEqualToString:@"AppleMailSignature"] ) {
         int itemnum = 2;
         //check that the second child isn't a break element and if so, go to the child 3
-        if( [[[[origemail children] item:itemnum] outerHTML] isEqualToString:@"<br>"] )
-        {
+        if( [[[[origemail children] item:itemnum] outerHTML] isEqualToString:@"<br>"] ) {
             itemnum = 3;
         }
         
@@ -151,14 +134,7 @@
     
 }
 
--(void)removeOriginalHeader
-{
-    //NSUserDefaults *nsd=	[NSUserDefaults standardUserDefaults];
-    //BOOL signatureattop = [nsd boolForKey:@"SignaturePlacedAboveQuotedText"];
-    //    RWH_LOG(@"isPlainText = %d", isPlainText);
-    //	for(int i=0; i< dhc.length;i++){
-    //		RWH_LOG(@"%d=(Type %d) %@\n%@\n",i, [[dhc item:i] nodeType], [dhc item:i], [[dhc item:i] nodeName]);
-    //	}
+- (void)removeOriginalHeader {
     
     //Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
     // on those messages that arrive after mail.app is opened - so we'll just keep removing items
@@ -175,57 +151,48 @@
     NSRange textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
     
     //keep removing items until we find the "wrote:" text...
-    while( textRange.location == NSNotFound )
-    {
+    while( textRange.location == NSNotFound ) {
         RWH_LOG(@"Range is: %@", NSStringFromRange(textRange));
         RWH_LOG(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
+        
         [origemail removeChild:[dhc item:0]];
         textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
     }
+    
     //remove the line with the "wrote:" text
     [origemail removeChild:[dhc item:0]];
     
     //remove the first new line element to shorten the distance between the new email and quoted text
     // this is required in order to get the header inside the quoted text line
-    if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] )
-    {
+    if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] ) {
+        
         [origemail removeChild:[origemail firstChild]];
+        
         RWH_LOG(@"Removed BR element, only %d children left",[origemail childElementCount]);
     }
 
 }
 
--(void)removeOriginalPlainTextHeader
-{
-    // is this signature?
-    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:0],[[dhc item:0] nodeType],[[dhc item:0] stringValue]);
-    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:1],[[dhc item:1] nodeType],[[dhc item:1] stringValue]);
-    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:2],[[dhc item:2] nodeType],[[dhc item:2] stringValue]);
-    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:3],[[dhc item:3] nodeType],[[dhc item:3] stringValue]);
-    //			RWH_LOG(@"Sig=%@ %d<%@>",[dhc item:4],[[dhc item:4] nodeType],[[dhc item:4] stringValue]);
-    //
-    //			RWH_LOG(@"===END===");
-    
+- (void)removeOriginalPlainTextHeader {  
     
     for(int i =0;i < dhc.length;i++) {
-        if ([[dhc item:i] nodeType]==3){
+        if( [[dhc item:i] nodeType]==3 ) {
             // Text node, On ..., Wrote is text
             textNodeLocation=i; break;
-        }}
+        }
+    }
     
     RWH_LOG(@"Removing plain text header at %d",textNodeLocation);
+    
     // if signature at top, item==3 else item==1
     [origemail removeChild:[dhc item:textNodeLocation]];
-    //            RWH_LOG(@"removed item %d",textNodeLocation);
     
     //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
-    for(int i =0;i < [origemail childElementCount];i++)
-    {
-        if( [[[[origemail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] )
-        {
+    for(int i =0;i < [origemail childElementCount];i++) {
+        if( [[[[origemail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {
             //this is the quoted text
             textNodeLocation=i;
-            //                    RWH_LOG(@"textNodeLocation item is now %d",textNodeLocation);
+            // RWH_LOG(@"textNodeLocation item is now %d",textNodeLocation);
             break;
         }
     }
@@ -235,8 +202,7 @@
 }
 
 
--(void)removeOriginalForwardHeader
-{
+- (void)removeOriginalForwardHeader {
     
     //remove the elements with text followed by a colon
     //setup a regular expression to find a colon followed by some space and a new line -
@@ -247,80 +213,71 @@
     NSRange textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
     
     //keep removing items until we find the "wrote:" text...
-    while( textRange.location == NSNotFound )
-    {
+    while( textRange.location == NSNotFound ) {
+        
         RWH_LOG(@"Range is: %@", NSStringFromRange(textRange));
         RWH_LOG(@"Length=%ld Text=%@",[[[origemail firstChild] stringValue] length],[[origemail firstChild] stringValue]);
+        
         [origemail removeChild:[dhc item:0]];
         textRange = [regex rangeOfFirstMatchInString:[[origemail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[origemail firstChild] stringValue] length])];
     }
+    
     //remove the line with the "wrote:" text
     [origemail removeChild:[dhc item:0]];
     
     //remove the first new line element to shorten the distance between the new email and quoted text
     // this is required in order to get the header inside the quoted text line
-    if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] )
-    {
+    if( [[[origemail firstChild] nodeName] isEqualToString:@"BR"] ) {
         [origemail removeChild:[origemail firstChild]];
+        
         RWH_LOG(@"Removed BR element, only %d children left",[origemail childElementCount]);
-    }
-    
-    
-    
+    }    
 }
 
 
--(void)insertMailHeader:(MailHeaderString *)headStr
-{
+- (void)insertMailHeader:(RwhMailHeaderString *)headStr {
     //this routine will also add the border
     DOMDocumentFragment *headerfragment=[[document htmlDocument] createFragmentForWebArchive:[headStr getWebArch]];
     
     //check if we need to do Entourage 2004 text size transformations...
-    NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
-    BOOL supportEntourage = [prefs boolForKey:@"entourage2004Support"];
+    BOOL isEntourage2004SupportRequired = DEFAULT_GET_BOOL(RwhEntourage2004SupportEnabled);
+    // NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
+    // BOOL supportEntourage = [prefs boolForKey:@"entourage2004Support"];
     
-    if( supportEntourage )
-    {
+    if( isEntourage2004SupportRequired ) {
         [self supportEntourage2004:headerfragment];
     }
     
-    if( isPlainText )
-    {
-        if( textNodeLocation>0 )
-        {
+    if( isPlainText ) {
+        if( textNodeLocation>0 ) {
             //check if this is plain text by seeing if textNodeLocation points to a br element...
             //  if not, include in blockquote
-            if( [[[[origemail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
-            {
+            if( [[[[origemail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
                 [origemail insertBefore:headerfragment refChild:[dhc item:textNodeLocation] ];
                 [origemail insertBefore:border refChild:[dhc item:textNodeLocation] ];
             }
-            else
-            {
+            else {
                 [[[origemail childNodes] item:textNodeLocation] insertBefore:headerfragment refChild:[[[origemail childNodes] item:textNodeLocation] firstChild] ];
                 [[[origemail childNodes] item:textNodeLocation] insertBefore:border refChild:[[[origemail childNodes] item:textNodeLocation] firstChild] ];
             }
 		}
     }
-    else
-    {   
+    else {   
         //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
         //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
         //so account for that too
         int numgrandchild = 0;
-        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] )
-        {
+        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] ) {
             numgrandchild = [[origemail firstChild] childElementCount];
         }
         
         RWH_LOG(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
-        if( numgrandchild == 0 )
-        {
+        
+        if( numgrandchild == 0 ) {
 			[origemail insertBefore:headerfragment refChild: [origemail firstChild] ];
 			[origemail insertBefore:border refChild: [origemail firstChild] ];
         }
-        else
-        {
+        else {
 			[[origemail firstChild] insertBefore:headerfragment refChild: [[origemail firstChild] firstChild] ];
 			[[origemail firstChild] insertBefore:border refChild: [[origemail firstChild] firstChild]];
         }
@@ -329,67 +286,54 @@
     
 }
 
--(void)insertFwdHeader
-{
+- (void)insertFwdHeader {
     
-    if( isPlainText )
-    {
-        if( textNodeLocation>0 )
-        {
+    if( isPlainText ) {
+        if( textNodeLocation>0 ) {
             //check if this is plain text by seeing if textNodeLocation points to a br element...
             //  if not, include in blockquote
-            if( [[[[origemail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
-            {
+            if( [[[[origemail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
                 [origemail insertBefore:fwdborder refChild:[dhc item:textNodeLocation] ];
             }
-            else
-            {
+            else {
                 [[[origemail childNodes] item:textNodeLocation] insertBefore:fwdborder refChild:[[[origemail childNodes] item:textNodeLocation] firstChild] ];
             }
 		}
     }
-    else
-    {
+    else {
         //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
         //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
         //so account for that too
         int numgrandchild = 0;
-        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] )
-        {
+        if( ![ [[origemail firstChild] nodeName] isEqualToString:@"#text"] ) {
             numgrandchild = [[origemail firstChild] childElementCount];
         }
         
         RWH_LOG(@"numgrandchildren %d=(Type %d) %@\n%@\n",numgrandchild, [[origemail firstChild] nodeType], [origemail firstChild], [[origemail firstChild] nodeName]);
-        if( numgrandchild == 0 )
-        {
+        if( numgrandchild == 0 ) {
 			[origemail insertBefore:fwdborder refChild: [origemail firstChild] ];
         }
-        else
-        {
+        else {
 			[[origemail firstChild] insertBefore:fwdborder refChild: [[origemail firstChild] firstChild]];
         }
         
     }
 }
 
--(void)supportEntourage2004:(DOMDocumentFragment *) headFrag
-{
+- (void)supportEntourage2004:(DOMDocumentFragment *) headFrag {
     
     //kind of silly, but this code is required so that the adulation appears correctly in Entourage 2004
     //2004 would interpret the paragraph tag and ignore the specified style information creating large spaces
     //between line items
     DOMNodeList *fragnodes = [[headFrag firstChild] childNodes];
     
-    for(int i=0; i< fragnodes.length;i++)
-    {
+    for(int i=0; i< fragnodes.length;i++) {
         RWH_LOG(@"%d=(Type %d) %@ %@ %@",i, [[fragnodes item:i] nodeType], [fragnodes item:i], [[fragnodes item:i] nodeName],[[fragnodes item:i] nodeValue]);
         
-        if( [[fragnodes item:i] nodeType] == 1 )
-        {
+        if( [[fragnodes item:i] nodeType] == 1 ) {
             RWH_LOG(@" HTML = %@",[[fragnodes item:i] outerHTML]);
             
-            if( [[[fragnodes item:i] nodeName] isEqualToString:@"FONT"] )
-            {
+            if( [[[fragnodes item:i] nodeName] isEqualToString:@"FONT"] ) {
                 NSString *fontTag = [[fragnodes item:i] outerHTML];
                 NSArray *tagComponents = [fontTag componentsSeparatedByString:@" "];
                 NSString *oldSize;
@@ -408,15 +352,13 @@
             }
         }
         
-        if( [[[fragnodes item:i] nodeName] isEqualToString:@"P"] )
-        {
+        if( [[[fragnodes item:i] nodeName] isEqualToString:@"P"] ) {
             //we have a paragraph element, so now replace it with a break element
             DOMDocumentFragment *brelem=[ [document htmlDocument]
                                          createDocumentFragmentWithMarkupString:
                                          @"<br />"
                                          ];
-            if( i == 0)
-            {
+            if( i == 0) {
                 //because the paragraphs are the containers so you get two initially...
                 brelem = [ [document htmlDocument]
                           createDocumentFragmentWithMarkupString:
@@ -424,8 +366,7 @@
                           ];
             }
             DOMNodeList *pnodes = [[fragnodes item:i] childNodes];
-            for(int j=0; j< pnodes.length;j++)
-            {
+            for(int j=0; j< pnodes.length;j++) {
                 //copy all child nodes to the new node...
                 [brelem appendChild:[pnodes item:j]];
             }

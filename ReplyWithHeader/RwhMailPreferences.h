@@ -25,30 +25,34 @@
  */
 
 
+/*!
+ * @header
+ * Defines the <code>ReplyWithHeaderPreferences</code> category for
+ * <code>NSPreferences</code>.
+ * @version \@(#) $Id$
+ * @updated $Date$
+ */
+#import "ReplyWithHeader.h"
 
-#import "ReplyWithHeaderPreferencesModule.h"
-
-@implementation ReplyWithHeaderPreferencesModule
-
-#pragma mark NSPreferencesModule instance methods
-
-- (NSString*)preferencesNibName
-{
-    RWH_LOG();
-    
-    return @"RwhPreferencesPanel";
-}
-
-#pragma mark Instance methods
-
-- (NSString*)rwhVersion
-{
-    return [[[NSBundle bundleForClass:[ReplyWithHeader class]] infoDictionary] objectForKey:@"CFBundleVersion"];
-}
+/*!
+ * @class
+ * Adds a method for overriding the preference-loading behavior of
+ * <code>NSPreferences</code>.
+ * @version \@(#) $Id$
+ * @updated $Date$
+ */
+@interface RwhMailPreferences : NSObject
 
 
-- (NSString*)rwhCopyright
-{
-    return @"Copyright © 2013 Jeevanandam M.";
-}
+#pragma mark Swizzled class methods
+/*! @group Swizzled class methods */
+
+/*!
+ * Adds the RWH preferences.
+ * @result
+ *   The shared <code>NSPreferences</code> for this application.
+ */
++ (id)rwhSharedPreferences;
+
+
 @end

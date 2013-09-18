@@ -24,36 +24,18 @@
  * THE SOFTWARE.
  */
 
+//
+//  RwhMacros.h
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 9/18/13.
+//
+// Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-
-#import "NSPreferencesModule.h"
-#import "ReplyWithHeader.h"
-
-/*!
- * @class
- * The <code>ReplyWithHeaderPreferencesModule</code> class is the subclass of
- * <code>NSPreferencesModule</code> that displays and manages preferences
- * specific to the ReplyWithHeader plugin.
- * @version \@(#) $Id$
- * @updated $Date$
- */
-@interface ReplyWithHeaderPreferencesModule : NSPreferencesModule
-
-
-#pragma mark NSPreferencesModule instance methods
-/*! @group NSPreferencesModule instance methods */
-
-/*!
- * Returns the name of the nib file containing the ReplyWithHeader preferences
- * panel.
- * @result
- *   <code>ReplyWithHeaderPanel</code>.
- */
-- (NSString*)preferencesNibName;
-
-#pragma mark Instance methods
-
-- (NSString*)rwhVersion;
-- (NSString*)rwhCopyright;
-
-@end
+#define DEFAULT_GET(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
+#define DEFAULT_SET(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
+#define DEFAULT_REMOVE(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
+#define DEFAULT_GET_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
+#define DEFAULT_SET_BOOL(b,k) DEFAULT_SET( [NSNumber numberWithBool: b], k )
+#define DEFAULT_SYNC [[NSUserDefaults standardUserDefaults] synchronize]
+#define CLEAN_RELEASE(p) {[p release]; p = nil;}

@@ -25,34 +25,35 @@
  */
 
 
-#import "ReplyWithHeaderPreferences.h"
 
-@implementation ReplyWithHeaderPreferences
+#import "NSPreferencesModule.h"
+#import "ReplyWithHeader.h"
+
+/*!
+ * @class
+ * The <code>ReplyWithHeaderPreferencesModule</code> class is the subclass of
+ * <code>NSPreferencesModule</code> that displays and manages preferences
+ * specific to the ReplyWithHeader plugin.
+ * @version \@(#) $Id$
+ * @updated $Date$
+ */
+@interface RwhMailPreferencesModule : NSPreferencesModule
 
 
-#pragma mark Swizzled class methods
+#pragma mark NSPreferencesModule instance methods
+/*! @group NSPreferencesModule instance methods */
 
-//see http://nohejl.name/2011/07/21/mail-preferences-modules-in-mac-os-x-10-7/
-// for more info about why this is needed
-+ (id)rwhSharedPreferences
-{
-    RWH_LOG();
-    
-    static BOOL added = NO;
-    //we don't have the NSPreferences class, so get it by name during runtime
-    id prefs = [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
-    
-    if ((prefs != nil) && !added)
-    {
-        added = YES;
-        
-        [[NSClassFromString(@"NSPreferences") rwhSharedPreferences]
-         addPreferenceNamed:[ReplyWithHeader preferencesPanelName]
-         owner:[ReplyWithHeaderPreferencesModule sharedInstance]
-         ];
-    }
-    
-    return [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
-}
+/*!
+ * Returns the name of the nib file containing the ReplyWithHeader preferences
+ * panel.
+ * @result
+ *   <code>ReplyWithHeaderPanel</code>.
+ */
+- (NSString*)preferencesNibName;
+
+#pragma mark Instance methods
+
+- (NSString*)rwhVersion;
+- (NSString*)rwhCopyright;
 
 @end

@@ -25,36 +25,32 @@
  */
 
 
-#import "ReplyWithHeaderMessage.h"
+#import "RwhMailMessage.h"
 
-@implementation ReplyWithHeaderMessage
+@implementation RwhMailMessage
 
-- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2
-{
+- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
     //Log that we are here
     RWH_LOG();
     
     //if we sizzled, this should be fine... (because this would be calling the original implementation)
     [self rph_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
-	
-    NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
-    BOOL enabled = [prefs boolForKey:@"enableBundle"];
-    BOOL replaceForward = [prefs boolForKey:@"replaceForward"];
+
+    BOOL rwhEnabled = DEFAULT_GET_BOOL(RwhBundleEnabled);
+    BOOL rwhReplaceForwardHeaderEnabled = DEFAULT_GET_BOOL(RwhForwardHeaderEnabled);
     
     //get my type and check it - reply or replyall only
     int selftype=[self type];
+    
     RWH_LOG(@"message type is %d",selftype);
     
-	if( enabled )
-    {
-    
-        if( (selftype==1 || selftype==2) )
-        {
+	if( rwhEnabled ) {    
+        if( (selftype==1 || selftype==2) ) {
             //start by setting up the quoted text from the original email
-            MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
+            RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithBackEnd:self];
         
             //create the header string element
-            MailHeaderString *newheaderString = [[MailHeaderString alloc] initWithBackEnd:self];
+            RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithBackEnd:self];
         
             //this is required for Mountain Lion - for some reason the mail headers are not bold anymore.
             [newheaderString boldHeaderLabels];
@@ -64,12 +60,11 @@
             //insert the new header text
             [quotedText insertMailHeader:newheaderString];
         }
-        if( replaceForward && selftype == 3 )
-        {
+        
+        if( rwhReplaceForwardHeaderEnabled && selftype == 3 ) {
             //start by setting up the quoted text from the original email
-            MailQuotedOriginal *quotedText = [[MailQuotedOriginal alloc] initWithBackEnd:self];
+            RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithBackEnd:self];
             [quotedText insertFwdHeader];
-            
         }
     }
 }
