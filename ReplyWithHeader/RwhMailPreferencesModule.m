@@ -30,6 +30,26 @@
 
 @implementation RwhMailPreferencesModule
 
+- (IBAction)rwhMailBundlePressed:(id)sender {
+    if( [sender state] ){
+        NSLog(@"RWH %@ mail bundle is enabled", RwhCurrentBundleVersion);
+        
+        [_RwhReplyHeaderText setEnabled:YES];
+        [_RwhEntourage2004SupportEnabled setEnabled:YES];
+        [_RwhForwardHeaderEnabled setEnabled:YES];
+        [_RwhForwardHeaderText setEnabled:YES];
+    }
+    else {
+        NSLog(@"RWH %@ mail bundle is disabled", RwhCurrentBundleVersion);
+        
+        [_RwhReplyHeaderText setEnabled:NO];
+        [_RwhEntourage2004SupportEnabled setEnabled:NO];
+        [_RwhForwardHeaderEnabled setEnabled:NO];
+        [_RwhForwardHeaderText setEnabled:NO];
+    }
+}
+
+
 #pragma mark NSPreferencesModule instance methods
 
 - (NSString*)preferencesNibName {

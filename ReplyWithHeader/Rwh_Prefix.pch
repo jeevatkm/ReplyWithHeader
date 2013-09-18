@@ -7,7 +7,7 @@
 #
 
 #  ifdef RWH_DEBUG
-#    define RWH_LOG(fmt, ...) NSLog((@"%s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
+#    define RWH_LOG(fmt, ...) NSLog((@"RWH:: %s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
 #  else
 #    define RWH_LOG(...)
 #  endif

@@ -32,10 +32,11 @@
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-#define DEFAULT_GET(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
-#define DEFAULT_SET(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
-#define DEFAULT_REMOVE(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
-#define DEFAULT_GET_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
-#define DEFAULT_SET_BOOL(b,k) DEFAULT_SET( [NSNumber numberWithBool: b], k )
-#define DEFAULT_SYNC [[NSUserDefaults standardUserDefaults] synchronize]
+#define GET_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
+#define SET_USER_DEFAULT(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
+#define REMOVE_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
+#define GET_BOOL_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
+#define SET_BOOL_USER_DEFAULT(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
+#define SYNC_USER_DEFAULT [[NSUserDefaults standardUserDefaults] synchronize]
+
 #define CLEAN_RELEASE(p) {[p release]; p = nil;}

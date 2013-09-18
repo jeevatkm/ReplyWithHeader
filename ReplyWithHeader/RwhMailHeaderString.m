@@ -74,22 +74,20 @@
 
 - (id)initWithBackEnd:(id)backend {
     //initialze the value with a mutable copy of the attributed string
-    if( self = [super init] )
-    {
-        //Mountain Lion call
-        //headstr =[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1
-        //	useHeadIndents:NO
-        //	useBold:YES
-        //	includeBCC:YES];
-
-        //new call for Lion
-        headstr = [[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+    if( self = [super init] ) {
         
+        /*headstr =[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1
+                                                                             useHeadIndents:NO
+                                                                                    useBold:YES
+                                                                                 includeBCC:NO];*/
+
+        headstr = [[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];        
         
         //remove the color attribute so that the text is black instead of gray
         //also remove paragraph style included in the header to avoid spacing issues when received by some mail clients
         [headstr removeAttribute:@"NSColor" range:NSMakeRange(0,[headstr length])];
         [headstr removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headstr length])];
+        
         RWH_LOG(@"MailHeaderString: created headstr: %@",headstr);
     }
     else {

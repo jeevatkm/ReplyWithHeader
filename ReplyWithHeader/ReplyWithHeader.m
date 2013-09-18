@@ -42,24 +42,24 @@
         class_setSuperclass(self, NSClassFromString(@"MVMailBundle"));
     }
     
-    if (!DEFAULT_GET(RwhBundleEnabled)) {
-        DEFAULT_SET_BOOL(YES, RwhBundleEnabled);
+    if (!GET_USER_DEFAULT(RwhBundleEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhBundleEnabled);
     }
     
-    if (!DEFAULT_GET(RwhForwardHeaderEnabled)) {
-        DEFAULT_SET_BOOL(YES, RwhForwardHeaderEnabled);
+    if (!GET_USER_DEFAULT(RwhForwardHeaderEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhForwardHeaderEnabled);
     }
     
-    if (!DEFAULT_GET(RwhEntourage2004SupportEnabled)) {
-        DEFAULT_SET_BOOL(YES, RwhEntourage2004SupportEnabled);
+    if (!GET_USER_DEFAULT(RwhEntourage2004SupportEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhEntourage2004SupportEnabled);
     }
     
-    if (!DEFAULT_GET(RwhReplyHeaderText)) {
-        DEFAULT_SET(RwhDefaultReplyHeaderText, RwhReplyHeaderText);
+    if (!GET_USER_DEFAULT(RwhReplyHeaderText)) {
+        SET_BOOL_USER_DEFAULT(RwhDefaultReplyHeaderText, RwhReplyHeaderText);
     }
     
-    if (!DEFAULT_GET(RwhForwardHeaderText)) {
-        DEFAULT_SET(RwhDefaultForwardHeaderText, RwhForwardHeaderText);
+    if (!GET_USER_DEFAULT(RwhForwardHeaderText)) {
+        SET_BOOL_USER_DEFAULT(RwhDefaultForwardHeaderText, RwhForwardHeaderText);
     }
     
     // add the ReplyWithHeaderMessage methods to the ComposeBackEnd class
@@ -82,15 +82,12 @@
      classMeth:YES
      ];
     
-    // RWH version number
-    NSString *rwhVersionNumber = [[NSBundle bundleForClass:[self class]] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    
     // Registering RWH mail bundle
     [super registerBundle];
     
     // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle loaded successfully",rwhVersionNumber);
-    NSLog(@"RWH %@ Oh it's a wonderful life", rwhVersionNumber);
+    NSLog(@"RWH %@ mail bundle loaded successfully", RwhCurrentBundleVersion);
+    NSLog(@"RWH %@ Oh it's a wonderful life", RwhCurrentBundleVersion);
     
 }
 

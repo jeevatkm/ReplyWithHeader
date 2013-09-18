@@ -36,8 +36,8 @@
     //if we sizzled, this should be fine... (because this would be calling the original implementation)
     [self rph_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
 
-    BOOL rwhEnabled = DEFAULT_GET_BOOL(RwhBundleEnabled);
-    BOOL rwhReplaceForwardHeaderEnabled = DEFAULT_GET_BOOL(RwhForwardHeaderEnabled);
+    BOOL rwhEnabled = GET_BOOL_USER_DEFAULT(RwhBundleEnabled);
+    BOOL rwhReplaceForwardHeaderEnabled = GET_BOOL_USER_DEFAULT(RwhForwardHeaderEnabled);
     
     //get my type and check it - reply or replyall only
     int selftype=[self type];

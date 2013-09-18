@@ -37,8 +37,15 @@
  * @version \@(#) $Id$
  * @updated $Date$
  */
-@interface RwhMailPreferencesModule : NSPreferencesModule
+@interface RwhMailPreferencesModule : NSPreferencesModule {    
+    IBOutlet NSButton *_RwhMailBundleEnabled;
+    IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
+    IBOutlet NSTextField *_RwhReplyHeaderText;
+    IBOutlet NSTextField *_RwhForwardHeaderText;
+    IBOutlet NSButton *_RwhForwardHeaderEnabled;
+}
 
+- (IBAction)rwhMailBundlePressed:(id)sender;
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */
