@@ -2,16 +2,15 @@ RWH - quoting headers of email in Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
-**Table of Contents**
-	* [Latest Release](#latest-release)
-	* [Mail Bundle/Plugin version details](#mail-bundle-plugin-version-details)
-	* [Release Downloads](#release-downloads)
-	* [NEWS - Upcoming](#news-upcoming)
-	* [Issue Tracker](#issue-tracker)
-	* [Author](#author)
-	* [Credits](#credits)
-	* [License](#license)
-	* [Steps to Installation ReplyWithHeader](#steps-to-installation-replywithheader)
+* [Latest Release](#latest-release)
+* [Mail Bundle/Plugin version details](#mail-bundleplugin-version-details)
+* [Release Downloads](#release-downloads)
+* [NEWS](#news)
+* [Issue Tracker](#issue-tracker)
+* [Author](#author)
+* [Credits](#credits)
+* [License](#license)
+* [Steps to Installation ReplyWithHeader](#steps-to-installation-replywithheader)
 
 * * *
 
@@ -32,8 +31,8 @@ Release Downloads
 -----------------
 * Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
 
-NEWS - Upcoming
----------------
+NEWS
+----
 * Development started for RWH 3.6, [milestone details here][3]
 
 Issue Tracker
