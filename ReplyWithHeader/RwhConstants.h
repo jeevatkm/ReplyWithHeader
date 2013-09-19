@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2013 Jeevanandam M.
  *               2012, 2013 Jason Schroth
- *               2010, 2013 Saptarshi Guha
+ *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,8 @@
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
+#define RwhBundleFullName @"ReplyWithHeader"
+#define RwhBundleShortName @"RWH"
 #define RwhCurrentCopyRightOwner @"Copyright © 2013 Jeevanandam M."
 
 #define RwhCurrentBundleVersion [[[NSBundle bundleForClass:[ReplyWithHeader class]] infoDictionary] objectForKey:@"CFBundleVersion"]
