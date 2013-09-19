@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2013 Jeevanandam M.
  *               2012, 2013 Jason Schroth
- *               2010, 2013 Saptarshi Guha
+ *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@
     }
     
     if (!GET_USER_DEFAULT(RwhEntourage2004SupportEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhEntourage2004SupportEnabled);
+        SET_BOOL_USER_DEFAULT(NO, RwhEntourage2004SupportEnabled);
     }
     
     if (!GET_USER_DEFAULT(RwhReplyHeaderText)) {
@@ -103,13 +103,13 @@
 + (NSString*)preferencesOwnerClassName {
     RWH_LOG();
     
-    return @"ReplyWithHeaderPreferencesModule";
+    return @"RwhMailPreferencesModule";
 }
 
 + (NSString*)preferencesPanelName {
     RWH_LOG();
     
-    return @"RWH";
+    return RwhBundleShortName;
 }
 
 @end

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2013 Jeevanandam M.
  *               2012, 2013 Jason Schroth
- *               2010, 2013 Saptarshi Guha
+ *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 @implementation RwhMailPreferencesModule
 
 - (IBAction)rwhMailBundlePressed:(id)sender {
-    if( [sender state] ){
+    if( [sender state] ) {
         NSLog(@"RWH %@ mail bundle is enabled", RwhCurrentBundleVersion);
         
         [_RwhReplyHeaderText setEnabled:YES];
