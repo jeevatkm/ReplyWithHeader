@@ -10,12 +10,11 @@
 		133A917F17E9745A00E3CC62 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 133A916C17E9745A00E3CC62 /* LICENSE */; };
 		133A918017E9745A00E3CC62 /* RwhMailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* RwhMailHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* RwhMailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* RwhMailQuotedOriginal.m */; };
-		133A918317E9745A00E3CC62 /* ReplyWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917417E9745A00E3CC62 /* ReplyWithHeader.m */; };
 		133A918417E9745A00E3CC62 /* RwhMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* RwhMailMessage.m */; };
 		133A918517E9745A00E3CC62 /* RwhMailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917917E9745A00E3CC62 /* RwhMailPreferences.m */; };
 		133A918617E9745A00E3CC62 /* RwhMailPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */; };
 		133A918817E9745A00E3CC62 /* RwhPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */; };
-		1375BF0717E9F33A00E9690A /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1375BF0617E9F33A00E9690A /* ReplyWithHeader.icns */; };
+		13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13575F7417EB82690047BF62 /* RwhMailBundle.m */; };
 		319C9B6C1634042200C420B3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31024ADF161184340071587E /* PreferencePanes.framework */; };
 		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
@@ -45,22 +44,21 @@
 		133A916F17E9745A00E3CC62 /* RwhMailQuotedOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailQuotedOriginal.h; sourceTree = "<group>"; };
 		133A917017E9745A00E3CC62 /* RwhMailQuotedOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailQuotedOriginal.m; sourceTree = "<group>"; };
 		133A917117E9745A00E3CC62 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
-		133A917217E9745A00E3CC62 /* ReplyWithHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyWithHeader.h; sourceTree = "<group>"; };
-		133A917417E9745A00E3CC62 /* ReplyWithHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyWithHeader.m; sourceTree = "<group>"; };
 		133A917617E9745A00E3CC62 /* RwhMailMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailMessage.h; sourceTree = "<group>"; };
 		133A917717E9745A00E3CC62 /* RwhMailMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailMessage.m; sourceTree = "<group>"; };
 		133A917817E9745A00E3CC62 /* RwhMailPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailPreferences.h; sourceTree = "<group>"; };
 		133A917917E9745A00E3CC62 /* RwhMailPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailPreferences.m; sourceTree = "<group>"; };
 		133A917A17E9745A00E3CC62 /* RwhMailPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailPreferencesModule.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailPreferencesModule.m; sourceTree = "<group>"; };
-		133A917C17E9745A00E3CC62 /* Rwh-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rwh-Info.plist"; sourceTree = "<group>"; };
 		133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhPreferencesPanel.xib; sourceTree = "<group>"; };
 		133A919217E9785C00E3CC62 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		133A919F17E9A14700E3CC62 /* RwhMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMacros.h; sourceTree = "<group>"; };
-		133A91A017E9A19A00E3CC62 /* RwhConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhConstants.h; sourceTree = "<group>"; };
-		1375BF0517E9F2EF00E9690A /* Rwh_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rwh_Prefix.pch; sourceTree = "<group>"; };
-		1375BF0617E9F33A00E9690A /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
+		13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle_Prefix.pch; sourceTree = "<group>"; };
+		13575F7417EB82690047BF62 /* RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailBundle.m; sourceTree = "<group>"; };
+		13575F7517EB82690047BF62 /* RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle.h; sourceTree = "<group>"; };
+		13575F7717EB83160047BF62 /* RwhMailBundle-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RwhMailBundle-Info.plist"; sourceTree = "<group>"; };
+		13575F7917EB90650047BF62 /* RwhMailMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailMacros.h; sourceTree = "<group>"; };
+		13575F7A17EB90650047BF62 /* RwhMailConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailConstants.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
@@ -119,9 +117,8 @@
 		133A918917E974AF00E3CC62 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1375BF0617E9F33A00E9690A /* ReplyWithHeader.icns */,
+				13575F7717EB83160047BF62 /* RwhMailBundle-Info.plist */,
 				133A916A17E9745A00E3CC62 /* InfoPlist.strings */,
-				133A917C17E9745A00E3CC62 /* Rwh-Info.plist */,
 				133A917D17E9745A00E3CC62 /* RwhPreferencesPanel.xib */,
 			);
 			name = Resources;
@@ -130,7 +127,7 @@
 		133A918A17E974CE00E3CC62 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1375BF0517E9F2EF00E9690A /* Rwh_Prefix.pch */,
+				13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */,
 				133A918B17E974DF00E3CC62 /* AppKit */,
 			);
 			name = "Other Sources";
@@ -147,14 +144,14 @@
 		133A918C17E9751A00E3CC62 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				133A919F17E9A14700E3CC62 /* RwhMacros.h */,
-				133A91A017E9A19A00E3CC62 /* RwhConstants.h */,
+				13575F7917EB90650047BF62 /* RwhMailMacros.h */,
+				13575F7A17EB90650047BF62 /* RwhMailConstants.h */,
+				13575F7417EB82690047BF62 /* RwhMailBundle.m */,
+				13575F7517EB82690047BF62 /* RwhMailBundle.h */,
 				133A916D17E9745A00E3CC62 /* RwhMailHeaderString.h */,
 				133A916E17E9745A00E3CC62 /* RwhMailHeaderString.m */,
 				133A916F17E9745A00E3CC62 /* RwhMailQuotedOriginal.h */,
 				133A917017E9745A00E3CC62 /* RwhMailQuotedOriginal.m */,
-				133A917217E9745A00E3CC62 /* ReplyWithHeader.h */,
-				133A917417E9745A00E3CC62 /* ReplyWithHeader.m */,
 				133A917617E9745A00E3CC62 /* RwhMailMessage.h */,
 				133A917717E9745A00E3CC62 /* RwhMailMessage.m */,
 				133A917817E9745A00E3CC62 /* RwhMailPreferences.h */,
@@ -251,7 +248,6 @@
 			files = (
 				133A917F17E9745A00E3CC62 /* LICENSE in Resources */,
 				133A918817E9745A00E3CC62 /* RwhPreferencesPanel.xib in Resources */,
-				1375BF0717E9F33A00E9690A /* ReplyWithHeader.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,10 +277,10 @@
 			files = (
 				133A918017E9745A00E3CC62 /* RwhMailHeaderString.m in Sources */,
 				133A918117E9745A00E3CC62 /* RwhMailQuotedOriginal.m in Sources */,
-				133A918317E9745A00E3CC62 /* ReplyWithHeader.m in Sources */,
 				133A918417E9745A00E3CC62 /* RwhMailMessage.m in Sources */,
 				133A918517E9745A00E3CC62 /* RwhMailPreferences.m in Sources */,
 				133A918617E9745A00E3CC62 /* RwhMailPreferencesModule.m in Sources */,
+				13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,9 +307,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReplyWithHeader/Rwh_Prefix.pch;
+				GCC_PREFIX_HEADER = ReplyWithHeader/RwhMailBundle_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/RwhMailBundle-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
@@ -337,9 +333,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ReplyWithHeader/Rwh_Prefix.pch;
+				GCC_PREFIX_HEADER = ReplyWithHeader/RwhMailBundle_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "ReplyWithHeader/Rwh-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/RwhMailBundle-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;

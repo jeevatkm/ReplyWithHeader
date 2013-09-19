@@ -24,46 +24,56 @@
  * THE SOFTWARE.
  */
 
+#import "RwhMailBundle.h"
+#import "RwhMailMacros.h"
 
-#import "ReplyWithHeader.h"
-#import "RwhMacros.h"
-
-@implementation ReplyWithHeader
+@implementation RwhMailBundle
 
 
 #pragma mark Class initialization
 
 + (void)initialize {
-    RWH_LOG();
     
-    [super initialize];
+    // Make sure the initializer is only run once.
+    // Usually is run, for every class inheriting from RwhMailBundle.
+    if(self != [RwhMailBundle class])
+        return;
     
-    //class_setSuperclass - Deprecated, but there does not appear to be a better way for this...
-    if (self == [ReplyWithHeader class]) {
-        class_setSuperclass(self, NSClassFromString(@"MVMailBundle"));
+    Class mvMailBundleClass = NSClassFromString(@"MVMailBundle");
+    // If this class is not available that means Mail.app
+    // doesn't allow plugins anymore. Fingers crossed that this never happens!
+    if(!mvMailBundleClass)
+        return;
+    
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated"
+    class_setSuperclass([self class], mvMailBundleClass);
+#pragma GCC diagnostic pop
+    
+    // Registering RWH mail bundle
+    [super registerBundle];
+    
+    if (!GET_USER_DEFAULT(RwhMailBundleEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhMailBundleEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhBundleEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhBundleEnabled);
+    if (!GET_USER_DEFAULT(RwhMailForwardHeaderEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhMailForwardHeaderEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhForwardHeaderEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhForwardHeaderEnabled);
+    if (!GET_USER_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
+        SET_BOOL_USER_DEFAULT(NO, RwhMailEntourage2004SupportEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhEntourage2004SupportEnabled)) {
-        SET_BOOL_USER_DEFAULT(NO, RwhEntourage2004SupportEnabled);
+    if (!GET_USER_DEFAULT(RwhMailReplyHeaderText)) {
+        SET_BOOL_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
     }
     
-    if (!GET_USER_DEFAULT(RwhReplyHeaderText)) {
-        SET_BOOL_USER_DEFAULT(RwhDefaultReplyHeaderText, RwhReplyHeaderText);
+    if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
+        SET_BOOL_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
     }
     
-    if (!GET_USER_DEFAULT(RwhForwardHeaderText)) {
-        SET_BOOL_USER_DEFAULT(RwhDefaultForwardHeaderText, RwhForwardHeaderText);
-    }
-    
-    // add the ReplyWithHeaderMessage methods to the ComposeBackEnd class
+    // add the RwhMailMessage methods to the ComposeBackEnd class
     [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
     // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation
@@ -83,38 +93,30 @@
      classMeth:YES
      ];
     
-    // Registering RWH mail bundle
-    [super registerBundle];
-    
     // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle registered", GET_BUNDLE_VALUE(RwhBundleVersionKey));
-    NSLog(@"RWH %@ Oh it's a wonderful life", GET_BUNDLE_VALUE(RwhBundleVersionKey));
+    NSLog(@"RWH %@ mail bundle registered", GET_BUNDLE_VALUE(RwhMailBundleVersionKey));
+    NSLog(@"RWH %@ Oh it's a wonderful life", GET_BUNDLE_VALUE(RwhMailBundleVersionKey));
 }
 
 
 #pragma mark MVMailBundle class methods
 
 + (BOOL)hasPreferencesPanel {
-    RWH_LOG();
-    
+    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
     return YES;
 }
 
 + (NSString*)preferencesOwnerClassName {
-    RWH_LOG();
-    
-    return @"RwhMailPreferencesModule";
+    return NSStringFromClass([RwhMailPreferencesModule class]);
 }
 
 + (NSString*)preferencesPanelName {
-    RWH_LOG();
-    
-    return RwhBundleShortName;
+    return RwhMailBundleShortName;
 }
 
 @end
 
-@implementation NSObject (ReplyWithHeaderObject)
+@implementation NSObject (RwhMailBundleObject)
 
 #pragma mark Class methods
 

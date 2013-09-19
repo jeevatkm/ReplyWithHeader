@@ -31,23 +31,17 @@
 @implementation RwhMailPreferencesModule
 
 - (void)awakeFromNib {
-    RWH_LOG();
-    
-    [self toggleRwhPreferencesOptions:GET_BOOL_USER_DEFAULT(RwhBundleEnabled)];
+    [self toggleRwhPreferencesOptions:GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled)];
 }
 
-- (IBAction)rwhMailBundlePressed:(id)sender {
-    RWH_LOG();
-    
+- (IBAction)rwhMailBundlePressed:(id)sender {    
     [self toggleRwhPreferencesOptions:[sender state]];
 }
 
 
 #pragma mark NSPreferencesModule instance methods
 
-- (NSString*)preferencesNibName {
-    RWH_LOG();
-    
+- (NSString*)preferencesNibName {    
     return RwhMailPreferencesNibName;
 }
 
@@ -56,12 +50,8 @@
 - (void)toggleRwhPreferencesOptions: (BOOL *)state {
     if ( state ) {
         [self enableRwhPreferencesOptions];
-        
-        NSLog(@"RWH %@ mail bundle is enabled in perferences", GET_BUNDLE_VALUE(RwhBundleVersionKey));
     } else {
         [self disableRwhPreferencesOptions];
-        
-        NSLog(@"RWH %@ mail bundle is disabled in perferences", GET_BUNDLE_VALUE(RwhBundleVersionKey));
     }
 }
 
@@ -79,12 +69,16 @@
     [_RwhForwardHeaderText setEnabled:NO];
 }
 
+- (BOOL)isResizable {
+	return NO;
+}
+
 - (NSString*)rwhVersion {
-    return GET_BUNDLE_VALUE(RwhBundleVersionKey);
+    return GET_BUNDLE_VALUE(RwhMailBundleVersionKey);
 }
 
 
 - (NSString*)rwhCopyright {
-    return GET_BUNDLE_VALUE(RwhCopyRightOwnerKey);
+    return GET_BUNDLE_VALUE(RwhMailCopyRightOwnerKey);
 }
 @end

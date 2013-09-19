@@ -26,7 +26,7 @@
 
 //
 //  MailQuotedOriginal.h
-//  ReplyWithHeader
+//  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/16/12.
 //
@@ -46,8 +46,8 @@
 #import <objc/objc-class.h>
 
 #import "RwhMailHeaderString.h"
-#import "RwhMacros.h"
-#import "RwhConstants.h"
+#import "RwhMailMacros.h"
+#import "RwhMailConstants.h"
 
 @interface RwhMailQuotedOriginal : NSObject {
 @private

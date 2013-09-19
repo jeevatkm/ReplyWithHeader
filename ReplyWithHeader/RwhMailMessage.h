@@ -25,7 +25,7 @@
  */
 
 
-#import "ReplyWithHeader.h"
+#import "RwhMailBundle.h"
 
 @interface RwhMailMessage : NSObject
 

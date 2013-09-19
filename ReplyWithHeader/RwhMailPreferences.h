@@ -27,12 +27,12 @@
 
 /*!
  * @header
- * Defines the <code>ReplyWithHeaderPreferences</code> category for
+ * Defines the <code>RwhMailPreferences</code> category for
  * <code>NSPreferences</code>.
  * @version \@(#) $Id$
  * @updated $Date$
  */
-#import "ReplyWithHeader.h"
+#import "RwhMailBundle.h"
 
 /*!
  * @class

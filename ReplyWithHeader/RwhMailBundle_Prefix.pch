@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'ReplyWithHeader' target in the 'ReplyWithHeader' project
+// Prefix header for all source files of the 'RwhMailBundle' target in the 'RwhMailBundle' project
 //
 
 #ifdef __OBJC__

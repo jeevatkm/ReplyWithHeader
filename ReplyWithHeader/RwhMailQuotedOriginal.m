@@ -26,7 +26,7 @@
 
 
 //  MailQuotedOriginal.m
-//  ReplyWithHeader
+//  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/16/12.
 //
@@ -87,8 +87,8 @@
 
 - (void)initVars {
     
-    NSString *replyHeadline = GET_USER_DEFAULT(RwhReplyHeaderText);
-    NSString *forwardHeadline = GET_USER_DEFAULT(RwhForwardHeaderText);
+    NSString *replyHeadline = GET_USER_DEFAULT(RwhMailReplyHeaderText);
+    NSString *forwardHeadline = GET_USER_DEFAULT(RwhMailForwardHeaderText);
     
     RWH_LOG(@"MailQuotedOriginal: initvar Header text: %@", replyHeadline);    
     
@@ -240,7 +240,7 @@
     DOMDocumentFragment *headerfragment=[[document htmlDocument] createFragmentForWebArchive:[headStr getWebArch]];
     
     //check if we need to do Entourage 2004 text size transformations...
-    BOOL isEntourage2004SupportRequired = GET_BOOL_USER_DEFAULT(RwhEntourage2004SupportEnabled);
+    BOOL isEntourage2004SupportRequired = GET_BOOL_USER_DEFAULT(RwhMailEntourage2004SupportEnabled);
     // NSUserDefaults *prefs = [[NSUserDefaults standardUserDefaults] retain];
     // BOOL supportEntourage = [prefs boolForKey:@"entourage2004Support"];
     

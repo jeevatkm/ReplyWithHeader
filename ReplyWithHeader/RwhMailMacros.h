@@ -26,7 +26,7 @@
 
 //
 //  RwhMacros.h
-//  ReplyWithHeader
+//  RwhMailBundle
 //
 //  Created by Jeevanandam M. on 9/18/13.
 //
@@ -38,4 +38,4 @@
 #define GET_BOOL_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
 #define SET_BOOL_USER_DEFAULT(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
 
-#define GET_BUNDLE_VALUE(k) [[[NSBundle bundleForClass:[ReplyWithHeader class]] infoDictionary] objectForKey: k]
+#define GET_BUNDLE_VALUE(k) [[[NSBundle bundleForClass:[RwhMailBundle class]] infoDictionary] objectForKey: k]

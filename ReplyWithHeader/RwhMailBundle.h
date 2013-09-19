@@ -27,8 +27,8 @@
 
 /*!
  * @header
- * Defines the <code>ReplyWithHeader</code> Mail bundle (the entrypoint for the
- * plugin) and the <code>ReplyWithHeaderObject</code> category for
+ * Defines the <code>RwhMailBundle</code> Mail bundle (the entrypoint for the
+ * plugin) and the <code>RwhMailBundleObject</code> category for
  * <code>NSObject</code>.
  * @copyright Copyright (c) 2013 Saptarshi Guha and Jason Schroth
  * @version \@(#) $Id$
@@ -44,52 +44,29 @@
 #import "RwhMailMessage.h"
 #import "RwhMailPreferences.h"
 #import "RwhMailPreferencesModule.h"
-#import "RwhMacros.h"
-#import "RwhConstants.h"
+#import "RwhMailMacros.h"
+#import "RwhMailConstants.h"
 
 /*!
  * @class
- * The <code>ReplyWithHeader</code> class is the subclass of
+ * The <code>RwhMailBundle</code> class is the subclass of
  * <code>MVMailBundle</code> that provides the plugin entrypoint for the
- * ReplyWithHeader plugin.
+ * RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  */
-@interface ReplyWithHeader : NSObject 
+@interface RwhMailBundle : NSObject {
+    
+}
 
 #pragma mark Class initialization
 /*! @group Class initialization */
 
 /*!
- * Registers this plugin and swizzles the methods necessary for ReplyWithHeader's
+ * Registers this plugin and swizzles the methods necessary for RwhMailBundle's
  * functionality.
  */
-+ (void)initialize;
-
-
-#pragma mark MVMailBundle class methods
-/*! @group MVMailBundle class methods */
-
-/*!
- * Indicates that this plugin has a preference panel.
- * @result
- *   <code>YES</code>.
- */
-+ (BOOL)hasPreferencesPanel;
-
-/*!
- * Returns the class name for this plugin's preference panel owner.
- * @result
- *   <code>ReplyWithHeaderPreferencesModule</code>.
- */
-+ (NSString*)preferencesOwnerClassName;
-
-/*!
- * Returns the name for this plugin's preferences panel.
- * @result
- *   <code>ReplyWithHeader</code>.
- */
-+ (NSString*)preferencesPanelName;
+//+ (void)initialize;
 
 @end
 
@@ -99,7 +76,7 @@
  * @version \@(#) $Id$
  * @updated $Date$
  */
-@interface NSObject (ReplyWithHeaderObject)
+@interface NSObject (RwhMailBundleObject)
 
 #pragma mark Class methods
 /*! @group Class methods */

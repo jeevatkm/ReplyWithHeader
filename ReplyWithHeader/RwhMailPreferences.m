@@ -46,7 +46,7 @@
         added = YES;
         
         [[NSClassFromString(@"NSPreferences") rwhSharedPreferences]
-         addPreferenceNamed:[ReplyWithHeader preferencesPanelName]
+         addPreferenceNamed:[RwhMailBundle preferencesPanelName]
          owner:[RwhMailPreferencesModule sharedInstance]
          ];
     }

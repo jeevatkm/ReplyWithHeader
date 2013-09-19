@@ -26,24 +26,25 @@
 
 //
 //  RwhConstants.h
-//  ReplyWithHeader
+//  RwhMailBundle
 //
 //  Created by Jeevanandam M. on 9/18/13.
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-#define RwhBundleFullName @"ReplyWithHeader"
-#define RwhBundleShortName @"RWH"
-#define RwhBundleVersionKey @"CFBundleVersion"
-#define RwhCopyRightOwnerKey @"NSHumanReadableCopyright"
+#define RwhMailBundleFullName @"ReplyWithHeader"
+#define RwhMailBundleShortName @"RWH"
+#define RwhMailBundleVersionKey @"CFBundleVersion"
+#define RwhMailVersionKey @"CFBundleShortVersionString"
+#define RwhMailCopyRightOwnerKey @"NSHumanReadableCopyright"
 
-#define RwhBundleEnabled @"rwhBundleEnabled"
-#define RwhForwardHeaderEnabled @"rwhForwardHeaderEnabled"
-#define RwhEntourage2004SupportEnabled @"rwhEntourage2004SupportEnabled"
-#define RwhDefaultReplyHeaderText @"-----Original Message-----"
-#define RwhDefaultForwardHeaderText @"-----Forwarded Message-----<br />"
-#define RwhReplyHeaderText @"rwhReplyHeaderText"
-#define RwhForwardHeaderText @"rwhForwardHeaderText"
+#define RwhMailBundleEnabled @"rwhBundleEnabled"
+#define RwhMailForwardHeaderEnabled @"rwhForwardHeaderEnabled"
+#define RwhMailEntourage2004SupportEnabled @"rwhEntourage2004SupportEnabled"
+#define RwhMailDefaultReplyHeaderText @"-----Original Message-----"
+#define RwhMailDefaultForwardHeaderText @"-----Forwarded Message-----<br />"
+#define RwhMailReplyHeaderText @"rwhReplyHeaderText"
+#define RwhMailForwardHeaderText @"rwhForwardHeaderText"
 
 #define RwhMailPreferencesNibName @"RwhPreferencesPanel"
 

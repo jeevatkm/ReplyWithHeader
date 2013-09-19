@@ -27,13 +27,13 @@
 
 
 #import "NSPreferencesModule.h"
-#import "ReplyWithHeader.h"
+#import "RwhMailBundle.h"
 
 /*!
  * @class
- * The <code>ReplyWithHeaderPreferencesModule</code> class is the subclass of
+ * The <code>RwhMailPreferencesModule</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
- * specific to the ReplyWithHeader plugin.
+ * specific to the RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  */
@@ -51,10 +51,10 @@
 /*! @group NSPreferencesModule instance methods */
 
 /*!
- * Returns the name of the nib file containing the ReplyWithHeader preferences
+ * Returns the name of the nib file containing the RwhMailBundle preferences
  * panel.
  * @result
- *   <code>ReplyWithHeaderPanel</code>.
+ *   <code>RwhMailPreferencesPanel</code>.
  */
 - (NSString*)preferencesNibName;
 

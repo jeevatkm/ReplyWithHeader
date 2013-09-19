@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>ReplyWithHeader</string>
+	<string>RwhMailBundle</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.myjeeva.apple.mail.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -27,7 +27,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Jeevanandam M. (jeevatkm)</string>
 	<key>NSPrincipalClass</key>
-	<string>ReplyWithHeader</string>
+	<string>RwhMailBundle</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
 		<string>1146A009-E373-4DB6-AB4D-47E59A7E50FD</string>
