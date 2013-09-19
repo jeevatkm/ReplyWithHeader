@@ -29,12 +29,12 @@
 
 @implementation RwhMailMessage
 
-- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
+- (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
     //Log that we are here
     RWH_LOG();
     
     //if we sizzled, this should be fine... (because this would be calling the original implementation)
-    [self rph_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
+    [self rwhContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
 
     BOOL rwhEnabled = GET_BOOL_USER_DEFAULT(RwhBundleEnabled);
     BOOL rwhReplaceForwardHeaderEnabled = GET_BOOL_USER_DEFAULT(RwhForwardHeaderEnabled);

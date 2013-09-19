@@ -39,6 +39,3 @@
 #define SET_BOOL_USER_DEFAULT(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
 
 #define GET_BUNDLE_VALUE(k) [[[NSBundle bundleForClass:[ReplyWithHeader class]] infoDictionary] objectForKey: k]
-
-#define SYNC_USER_DEFAULT [[NSUserDefaults standardUserDefaults] synchronize]
-#define CLEAN_RELEASE(p) {[p release]; p = nil;}

@@ -40,7 +40,7 @@
  * @param arg2
  *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
  */
-- (void)rph_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
+- (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
 
 
 @end

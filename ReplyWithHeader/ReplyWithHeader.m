@@ -67,10 +67,10 @@
     [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
     // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation
-    // so that the newly added rph_continueToSetupContentsForView method is called instead...
+    // so that the newly added rwhContinueToSetupContentsForView method is called instead...
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-     meth:@selector(rph_continueToSetupContentsForView:withParsedMessages:)
+     meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
      classMeth:NO // it is an implementation method
      ];
     
@@ -159,7 +159,6 @@
     }
     
 }
-
 
 + (void)rwhSwizzle:(SEL)origSel meth:(SEL)newSel classMeth:(BOOL)cls {
     // get the original method and the new method... need to test if it is a class or instance 
