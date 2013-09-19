@@ -32,7 +32,7 @@
 
 - (IBAction)rwhMailBundlePressed:(id)sender {
     if( [sender state] ) {
-        NSLog(@"RWH %@ mail bundle is enabled", RwhCurrentBundleVersion);
+        NSLog(@"RWH %@ mail bundle is enabled", GET_BUNDLE_VALUE(RwhBundleVersionKey));
         
         [_RwhReplyHeaderText setEnabled:YES];
         [_RwhEntourage2004SupportEnabled setEnabled:YES];
@@ -40,7 +40,7 @@
         [_RwhForwardHeaderText setEnabled:YES];
     }
     else {
-        NSLog(@"RWH %@ mail bundle is disabled", RwhCurrentBundleVersion);
+        NSLog(@"RWH %@ mail bundle is disabled", GET_BUNDLE_VALUE(RwhBundleVersionKey));
         
         [_RwhReplyHeaderText setEnabled:NO];
         [_RwhEntourage2004SupportEnabled setEnabled:NO];
@@ -61,11 +61,11 @@
 #pragma mark Instance methods
 
 - (NSString*)rwhVersion {
-    return RwhCurrentBundleVersion;
+    return GET_BUNDLE_VALUE(RwhBundleVersionKey);
 }
 
 
 - (NSString*)rwhCopyright {
-    return RwhCurrentCopyRightOwner;
+    return GET_BUNDLE_VALUE(RwhCopyRightOwnerKey);
 }
 @end

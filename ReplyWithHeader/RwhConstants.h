@@ -34,9 +34,8 @@
 
 #define RwhBundleFullName @"ReplyWithHeader"
 #define RwhBundleShortName @"RWH"
-#define RwhCurrentCopyRightOwner @"Copyright © 2013 Jeevanandam M."
-
-#define RwhCurrentBundleVersion [[[NSBundle bundleForClass:[ReplyWithHeader class]] infoDictionary] objectForKey:@"CFBundleVersion"]
+#define RwhBundleVersionKey @"CFBundleVersion"
+#define RwhCopyRightOwnerKey @"NSHumanReadableCopyright"
 
 #define RwhBundleEnabled @"rwhBundleEnabled"
 #define RwhForwardHeaderEnabled @"rwhForwardHeaderEnabled"

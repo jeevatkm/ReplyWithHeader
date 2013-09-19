@@ -86,8 +86,8 @@
     [super registerBundle];
     
     // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle loaded successfully", RwhCurrentBundleVersion);
-    NSLog(@"RWH %@ Oh it's a wonderful life", RwhCurrentBundleVersion);
+    NSLog(@"RWH %@ mail bundle loaded successfully", GET_BUNDLE_VALUE(RwhBundleVersionKey));
+    NSLog(@"RWH %@ Oh it's a wonderful life", GET_BUNDLE_VALUE(RwhBundleVersionKey));
     
 }
 
