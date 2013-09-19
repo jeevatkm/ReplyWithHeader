@@ -30,23 +30,16 @@
 
 @implementation RwhMailPreferencesModule
 
+- (void)awakeFromNib {
+    RWH_LOG();
+    
+    [self toggleRwhPreferencesOptions:GET_BOOL_USER_DEFAULT(RwhBundleEnabled)];
+}
+
 - (IBAction)rwhMailBundlePressed:(id)sender {
-    if( [sender state] ) {
-        NSLog(@"RWH %@ mail bundle is enabled", GET_BUNDLE_VALUE(RwhBundleVersionKey));
-        
-        [_RwhReplyHeaderText setEnabled:YES];
-        [_RwhEntourage2004SupportEnabled setEnabled:YES];
-        [_RwhForwardHeaderEnabled setEnabled:YES];
-        [_RwhForwardHeaderText setEnabled:YES];
-    }
-    else {
-        NSLog(@"RWH %@ mail bundle is disabled", GET_BUNDLE_VALUE(RwhBundleVersionKey));
-        
-        [_RwhReplyHeaderText setEnabled:NO];
-        [_RwhEntourage2004SupportEnabled setEnabled:NO];
-        [_RwhForwardHeaderEnabled setEnabled:NO];
-        [_RwhForwardHeaderText setEnabled:NO];
-    }
+    RWH_LOG();
+    
+    [self toggleRwhPreferencesOptions:[sender state]];
 }
 
 
@@ -59,6 +52,32 @@
 }
 
 #pragma mark Instance methods
+
+- (void)toggleRwhPreferencesOptions: (BOOL *)state {
+    if ( state ) {
+        [self enableRwhPreferencesOptions];
+        
+        NSLog(@"RWH %@ mail bundle is enabled in perferences", GET_BUNDLE_VALUE(RwhBundleVersionKey));
+    } else {
+        [self disableRwhPreferencesOptions];
+        
+        NSLog(@"RWH %@ mail bundle is disabled in perferences", GET_BUNDLE_VALUE(RwhBundleVersionKey));
+    }
+}
+
+- (void)enableRwhPreferencesOptions {
+    [_RwhReplyHeaderText setEnabled:YES];
+    [_RwhEntourage2004SupportEnabled setEnabled:YES];
+    [_RwhForwardHeaderEnabled setEnabled:YES];
+    [_RwhForwardHeaderText setEnabled:YES];
+}
+
+- (void)disableRwhPreferencesOptions {
+    [_RwhReplyHeaderText setEnabled:NO];
+    [_RwhEntourage2004SupportEnabled setEnabled:NO];
+    [_RwhForwardHeaderEnabled setEnabled:NO];
+    [_RwhForwardHeaderText setEnabled:NO];
+}
 
 - (NSString*)rwhVersion {
     return GET_BUNDLE_VALUE(RwhBundleVersionKey);

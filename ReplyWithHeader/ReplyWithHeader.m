@@ -35,6 +35,7 @@
 
 + (void)initialize {
     RWH_LOG();
+    
     [super initialize];
     
     //class_setSuperclass - Deprecated, but there does not appear to be a better way for this...
@@ -65,7 +66,7 @@
     // add the ReplyWithHeaderMessage methods to the ComposeBackEnd class
     [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
-    // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation 
+    // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation
     // so that the newly added rph_continueToSetupContentsForView method is called instead...
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
@@ -86,9 +87,8 @@
     [super registerBundle];
     
     // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle loaded successfully", GET_BUNDLE_VALUE(RwhBundleVersionKey));
+    NSLog(@"RWH %@ mail bundle registered", GET_BUNDLE_VALUE(RwhBundleVersionKey));
     NSLog(@"RWH %@ Oh it's a wonderful life", GET_BUNDLE_VALUE(RwhBundleVersionKey));
-    
 }
 
 

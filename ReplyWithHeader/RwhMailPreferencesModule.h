@@ -60,6 +60,9 @@
 
 #pragma mark Instance methods
 
+- (void)toggleRwhPreferencesOptions: (BOOL *)state;
+- (void)enableRwhPreferencesOptions;
+- (void)disableRwhPreferencesOptions;
 - (NSString*)rwhVersion;
 - (NSString*)rwhCopyright;
 
