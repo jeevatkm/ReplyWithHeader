@@ -170,11 +170,11 @@
 }
 
 + (NSString *)bundleName {
-    return [[self bundle] infoDictionary][RwhMailBundleNameKey];
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleNameKey];
 }
 
 + (NSString *)bundleVersionString {
-    return [[self bundle] infoDictionary][RwhMailBundleShortVersionKey];
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleShortVersionKey];
 }
 
 + (NSString *)bundleShortName {
@@ -182,7 +182,7 @@
 }
 
 + (NSString *)bundleCopyright {
-    return [[self bundle] infoDictionary][RwhMailCopyRightKey];
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailCopyRightKey];
 }
 
 + (BOOL)isEnabled {

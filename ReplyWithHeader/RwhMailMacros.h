@@ -37,5 +37,3 @@
 #define REMOVE_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
 #define GET_BOOL_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
 #define SET_BOOL_USER_DEFAULT(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
-
-#define GET_BUNDLE_VALUE(k) [[[NSBundle bundleForClass:[RwhMailBundle class]] infoDictionary] objectForKey: k]
