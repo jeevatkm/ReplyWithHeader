@@ -43,9 +43,30 @@
     IBOutlet NSTextField *_RwhReplyHeaderText;
     IBOutlet NSTextField *_RwhForwardHeaderText;
     IBOutlet NSButton *_RwhForwardHeaderEnabled;
+    IBOutlet NSImageView *_RwhMailBundleLogo;
 }
 
+#pragma mark Instance methods
+
+- (void)toggleRwhPreferencesOptions: (BOOL *)state;
+- (void)enableRwhPreferencesOptions;
+- (void)disableRwhPreferencesOptions;
+- (NSString*)rwhCopyright;
+
+// load RWH logo
+- (void)loadRwhMailBundleLogo;
+
+// RWH enabled button press
 - (IBAction)rwhMailBundlePressed:(id)sender;
+
+// Open website page
+- (IBAction)openWebsite:(id)sender;
+
+// Open Feedback email
+- (IBAction)openFeedback:(id)sender;
+
+// Open support page
+- (IBAction)openSupport:(id)sender;
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */
@@ -57,13 +78,5 @@
  *   <code>RwhMailPreferencesPanel</code>.
  */
 - (NSString*)preferencesNibName;
-
-#pragma mark Instance methods
-
-- (void)toggleRwhPreferencesOptions: (BOOL *)state;
-- (void)enableRwhPreferencesOptions;
-- (void)disableRwhPreferencesOptions;
-- (NSString*)rwhVersion;
-- (NSString*)rwhCopyright;
 
 @end

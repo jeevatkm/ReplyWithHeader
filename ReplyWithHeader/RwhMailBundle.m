@@ -36,14 +36,17 @@
     
     // Make sure the initializer is only run once.
     // Usually is run, for every class inheriting from RwhMailBundle.
-    if(self != [RwhMailBundle class])
+    if (self != [RwhMailBundle class])
         return;
     
     Class mvMailBundleClass = NSClassFromString(@"MVMailBundle");
     // If this class is not available that means Mail.app
-    // doesn't allow plugins anymore. Fingers crossed that this never happens!
-    if(!mvMailBundleClass)
+    // doesn't allow bundles anymore. Fingers crossed that this never happens!
+    if (!mvMailBundleClass) {
+        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer!");
+        
         return;
+    }
     
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated"
@@ -52,6 +55,29 @@
     
     // Registering RWH mail bundle
     [super registerBundle];
+    
+    // assigning default value if not present
+    [self assignRwhMailDefaultValues];
+    
+    // for smooth upgrade to new UI
+    [self smoothValueTransToNewRwhMailPrefUI];
+    
+    // add the RwhMailMessage methods to the ComposeBackEnd class
+    [self addRwhMailMessageMethodsToComposeBackEnd];
+    
+    [self addRwhMailPreferencesMethodsToNSPreferences];
+    
+    // RWH Bundle registered successfully
+    NSLog(@"RWH %@ mail bundle registered", [self bundleVersionString]);
+    NSLog(@"RWH %@ Oh it's a wonderful life", [self bundleVersionString]);
+    
+    if (![self isEnabled]) {
+        NSLog(@"RWH mail bundle is disabled in mail preferences");
+    }
+}
+
++ (void)assignRwhMailDefaultValues {
+    RWH_LOG();
     
     if (!GET_USER_DEFAULT(RwhMailBundleEnabled)) {
         SET_BOOL_USER_DEFAULT(YES, RwhMailBundleEnabled);
@@ -66,14 +92,49 @@
     }
     
     if (!GET_USER_DEFAULT(RwhMailReplyHeaderText)) {
-        SET_BOOL_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
+        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
     }
     
     if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
-        SET_BOOL_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
+        SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
+    }
+}
+
++ (void)smoothValueTransToNewRwhMailPrefUI {
+    RWH_LOG();
+    
+    if (GET_BOOL_USER_DEFAULT(@"enableBundle")) {
+        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"enableBundle"), RwhMailBundleEnabled);
+        
+        REMOVE_USER_DEFAULT(@"enableBundle");
     }
     
-    // add the RwhMailMessage methods to the ComposeBackEnd class
+    if (GET_BOOL_USER_DEFAULT(@"replaceForward")) {
+        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"replaceForward"), RwhMailForwardHeaderEnabled);
+        
+        REMOVE_USER_DEFAULT(@"replaceForward");
+    }
+    
+    if (GET_BOOL_USER_DEFAULT(@"entourage2004Support")) {
+        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"entourage2004Support"), RwhMailEntourage2004SupportEnabled);
+        
+        REMOVE_USER_DEFAULT(@"entourage2004Support");
+    }
+    
+    if (GET_USER_DEFAULT(@"headerText")) {
+        SET_USER_DEFAULT(GET_USER_DEFAULT(@"headerText"), RwhMailReplyHeaderText);
+        
+        REMOVE_USER_DEFAULT(@"headerText");
+    }
+    
+    if (GET_USER_DEFAULT(@"forwardHeader")) {
+        SET_USER_DEFAULT(GET_USER_DEFAULT(@"forwardHeader"), RwhMailForwardHeaderText);
+        
+        REMOVE_USER_DEFAULT(@"forwardHeader");
+    }
+}
+
++ (void)addRwhMailMessageMethodsToComposeBackEnd {
     [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
     // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation
@@ -83,8 +144,9 @@
      meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
      classMeth:NO // it is an implementation method
      ];
-    
-    
+}
+
++ (void)addRwhMailPreferencesMethodsToNSPreferences {
     [RwhMailPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
     
     [NSClassFromString(@"NSPreferences")
@@ -92,11 +154,49 @@
      meth:@selector(rwhSharedPreferences)
      classMeth:YES
      ];
-    
-    // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle registered", GET_BUNDLE_VALUE(RwhMailBundleVersionKey));
-    NSLog(@"RWH %@ Oh it's a wonderful life", GET_BUNDLE_VALUE(RwhMailBundleVersionKey));
 }
+
++ (NSBundle *)bundle {
+    static NSBundle *bundle;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        bundle = [NSBundle bundleForClass:[RwhMailBundle class]];
+    });
+    return bundle;
+}
+
++ (NSString *)bundleNameAndVersion {
+    return [NSMutableString stringWithFormat:@"%@ %@", [self bundleName], [self bundleVersionString]];
+}
+
++ (NSString *)bundleName {
+    return [[self bundle] infoDictionary][RwhMailBundleNameKey];
+}
+
++ (NSString *)bundleVersionString {
+    return [[self bundle] infoDictionary][RwhMailBundleShortVersionKey];
+}
+
++ (NSString *)bundleShortName {
+    return RwhMailBundleShortName;
+}
+
++ (NSString *)bundleCopyright {
+    return [[self bundle] infoDictionary][RwhMailCopyRightKey];
+}
+
++ (BOOL)isEnabled {
+    return GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled);
+}
+
++ (NSImage *) loadImage:(NSString *)imageName setSize:(NSSize)size {
+    NSImage *image = [[NSImage alloc]
+                      initByReferencingFile:[[self bundle] pathForImageResource:imageName]];
+    [image setSize:size];
+    
+    return image;
+}
+
 
 
 #pragma mark MVMailBundle class methods
@@ -111,7 +211,7 @@
 }
 
 + (NSString*)preferencesPanelName {
-    return RwhMailBundleShortName;
+    return [self bundleShortName];
 }
 
 @end

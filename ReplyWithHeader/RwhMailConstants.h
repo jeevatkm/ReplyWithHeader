@@ -32,21 +32,21 @@
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-#define RwhMailBundleFullName @"ReplyWithHeader"
+#define RwhMailBundleNameKey @"CFBundleName"
 #define RwhMailBundleShortName @"RWH"
 #define RwhMailBundleVersionKey @"CFBundleVersion"
-#define RwhMailVersionKey @"CFBundleShortVersionString"
-#define RwhMailCopyRightOwnerKey @"NSHumanReadableCopyright"
+#define RwhMailBundleShortVersionKey @"CFBundleShortVersionString"
+#define RwhMailCopyRightKey @"NSHumanReadableCopyright"
 
-#define RwhMailBundleEnabled @"rwhBundleEnabled"
-#define RwhMailForwardHeaderEnabled @"rwhForwardHeaderEnabled"
-#define RwhMailEntourage2004SupportEnabled @"rwhEntourage2004SupportEnabled"
+#define RwhMailBundleEnabled @"RwhMailBundleEnabled"
+#define RwhMailForwardHeaderEnabled @"RwhForwardHeaderEnabled"
+#define RwhMailEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
 #define RwhMailDefaultReplyHeaderText @"-----Original Message-----"
 #define RwhMailDefaultForwardHeaderText @"-----Forwarded Message-----<br />"
-#define RwhMailReplyHeaderText @"rwhReplyHeaderText"
-#define RwhMailForwardHeaderText @"rwhForwardHeaderText"
+#define RwhMailReplyHeaderText @"RwhReplyHeaderText"
+#define RwhMailForwardHeaderText @"RwhForwardHeaderText"
 
-#define RwhMailPreferencesNibName @"RwhPreferencesPanel"
+#define RwhMailPreferencesNibName @"RwhMailPreferencesPanel"
 
 
 

@@ -25,25 +25,12 @@
  */
 
 
-
+#import "RwhMailBundle.h"
 #import "RwhMailPreferencesModule.h"
 
+NSString *rwhMailIconName = @"ReplyWithHeader";
+
 @implementation RwhMailPreferencesModule
-
-- (void)awakeFromNib {
-    [self toggleRwhPreferencesOptions:GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled)];
-}
-
-- (IBAction)rwhMailBundlePressed:(id)sender {    
-    [self toggleRwhPreferencesOptions:[sender state]];
-}
-
-
-#pragma mark NSPreferencesModule instance methods
-
-- (NSString*)preferencesNibName {    
-    return RwhMailPreferencesNibName;
-}
 
 #pragma mark Instance methods
 
@@ -69,16 +56,70 @@
     [_RwhForwardHeaderText setEnabled:NO];
 }
 
+
+
+- (NSString *)rwhNameAndVersion {
+    return [RwhMailBundle bundleNameAndVersion];
+}
+
+- (NSString*)rwhCopyright {
+    return [RwhMailBundle bundleCopyright];
+}
+
+- (IBAction)rwhMailBundlePressed:(id)sender {
+    [self toggleRwhPreferencesOptions:[sender state]];
+}
+
+// Open website page
+- (IBAction)openWebsite:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader"]];
+}
+
+// Open Feedback email
+- (IBAction)openFeedback:(id)sender {
+    
+    NSAlert *infoAlertBox = [[NSAlert alloc] init];
+    
+    [infoAlertBox setAlertStyle:NSInformationalAlertStyle];
+    [infoAlertBox setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
+    [infoAlertBox setInformativeText:@"Please use Disqus thread for RWH feedback, I appreciate your feedback."];
+    
+    [infoAlertBox runModal];
+    
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
+    
+}
+
+// Open support page
+- (IBAction)openSupport:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
+}
+
+// load RWH logo
+- (void)loadRwhMailBundleLogo {
+    [_RwhMailBundleLogo
+     setImage:[RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(256, 256)]];
+}
+
+
+#pragma mark NSPreferencesModule instance methods
+
+- (void)awakeFromNib {
+    [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
+    
+    [self loadRwhMailBundleLogo];
+}
+
+- (NSString*)preferencesNibName {
+    return RwhMailPreferencesNibName;
+}
+
+- (NSImage *)imageForPreferenceNamed:(NSString *)aName {
+	return [RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(256, 256)];
+}
+
 - (BOOL)isResizable {
 	return NO;
 }
 
-- (NSString*)rwhVersion {
-    return GET_BUNDLE_VALUE(RwhMailBundleVersionKey);
-}
-
-
-- (NSString*)rwhCopyright {
-    return GET_BUNDLE_VALUE(RwhMailCopyRightOwnerKey);
-}
 @end

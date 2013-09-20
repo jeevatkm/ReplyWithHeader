@@ -59,6 +59,17 @@
     
 }
 
++ (BOOL)isEnabled;
++ (NSBundle *)bundle;
++ (NSString *)bundleNameAndVersion;
++ (NSString *)bundleName;
++ (NSString *)bundleVersionString;
++ (NSString *)bundleShortName;
++ (NSString *)bundleCopyright;
++ (NSImage *) loadImage:(NSString *)imageName setSize:(NSSize)size;
++ (void)assignRwhMailDefaultValues;
++ (void)smoothValueTransToNewRwhMailPrefUI;
+
 #pragma mark Class initialization
 /*! @group Class initialization */
 
