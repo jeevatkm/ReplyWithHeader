@@ -51,7 +51,7 @@ Steps to Installation ReplyWithHeader
    This will restrict your information to Mail.app messages
 
 3. In the console, if all goes well, you should see
-<pre><code>RWH &lt;version number> mail bundle loaded successfully
+<pre><code>RWH &lt;version number> mail bundle registered
 RWH &lt;version number> Oh it's a wonderful life</pre></code>
 
 [1]: http://myjeeva.com
