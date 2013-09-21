@@ -24,11 +24,11 @@
  * THE SOFTWARE.
  */
 
-
+#import "RwhMailBundle.h"
 #import "RwhMailPreferences.h"
+#import "RwhMailPreferencesModule.h"
 
 @implementation RwhMailPreferences
-
 
 #pragma mark Swizzled class methods
 

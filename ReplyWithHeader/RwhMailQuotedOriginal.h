@@ -32,22 +32,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "WebKit/DOMDocumentFragment.h"
-#import "WebKit/DOMNodeList.h"
-#import "WebKit/DOMHTMLCollection.h"
-#import "WebKit/DOMHTMLElement.h"
-#import "WebKit/DOMHTMLDocument.h"
 #import "WebKit/DOMHTMLDivElement.h"
-#import "WebKit/WebResource.h"
-#import "WebKit/WebArchive.h"
-#import <objc/objc.h>
-#import <objc/objc-runtime.h>
-#import <objc/objc-class.h>
+#import "WebKit/DOMHTMLDocument.h"
+#import "WebKit/DOMNodeList.h"
 
 #import "RwhMailHeaderString.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
 
 @interface RwhMailQuotedOriginal : NSObject {
 @private

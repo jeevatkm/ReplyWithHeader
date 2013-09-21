@@ -33,12 +33,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import "WebKit/WebResource.h"
 #import "WebKit/WebArchive.h"
-#import <objc/objc.h>
-#import <objc/objc-runtime.h>
-#import <objc/objc-class.h>
 
 @interface RwhMailHeaderString : NSObject {
     @private

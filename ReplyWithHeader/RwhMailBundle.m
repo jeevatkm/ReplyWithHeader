@@ -24,15 +24,26 @@
  * THE SOFTWARE.
  */
 
+#import <objc/objc-runtime.h>
+
 #import "RwhMailBundle.h"
 #import "RwhMailMacros.h"
+#import "RwhMailConstants.h"
+#import "RwhMailPreferences.h"
+#import "RwhMailPreferencesModule.h"
+#import "RwhMailMessage.h"
+#import "NSObject+RwhMailBundle.h"
+
+@interface RwhMailBundle (PrivateMethods)
++ (void)registerBundle;
+@end
 
 @implementation RwhMailBundle
 
-
-#pragma mark Class initialization
+#pragma mark Class methods
 
 + (void)initialize {
+    [super initialize];
     
     // Make sure the initializer is only run once.
     // Usually is run, for every class inheriting from RwhMailBundle.
@@ -48,13 +59,8 @@
         return;
     }
     
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated"
-    class_setSuperclass([self class], mvMailBundleClass);
-#pragma GCC diagnostic pop
-    
     // Registering RWH mail bundle
-    [super registerBundle];
+    [mvMailBundleClass registerBundle];
     
     // assigning default value if not present
     [self assignRwhMailDefaultValues];
@@ -65,7 +71,7 @@
     // add the RwhMailMessage methods to the ComposeBackEnd class
     [self addRwhMailMessageMethodsToComposeBackEnd];
     
-    [self addRwhMailPreferencesMethodsToNSPreferences];
+    [self addRwhMailPreferencesToNSPreferences];
     
     // RWH Bundle registered successfully
     NSLog(@"RWH %@ mail bundle registered", [self bundleVersionString]);
@@ -74,6 +80,57 @@
     if (![self isEnabled]) {
         NSLog(@"RWH mail bundle is disabled in mail preferences");
     }
+}
+
++ (BOOL)isEnabled {
+    return GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled);
+}
+
++ (NSBundle *)bundle {
+    static NSBundle *bundle;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        bundle = [NSBundle bundleForClass:[RwhMailBundle class]];
+    });
+    return bundle;
+}
+
++ (NSString *)bundleNameAndVersion {
+    return [NSMutableString stringWithFormat:@"%@ %@", [self bundleName], [self bundleVersionString]];
+}
+
++ (NSString *)bundleName {
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleNameKey];
+}
+
++ (NSString *)bundleVersionString {
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleShortVersionKey];
+}
+
++ (NSString *)bundleShortName {
+    return RwhMailBundleShortName;
+}
+
++ (NSString *)bundleCopyright {
+    return [[[self bundle] infoDictionary] objectForKey:RwhMailCopyRightKey];
+}
+
++ (NSImage *)bundleLogo {
+    static NSImage *logo;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        logo = [self loadImage:@"ReplyWithHeader" setSize:NSMakeSize(128, 128)];
+    });
+    return logo;
+}
+
++ (NSImage *) loadImage:(NSString *)name setSize:(NSSize)size {
+    NSImage *image = [[NSImage alloc]
+                      initByReferencingFile:[[self bundle] pathForImageResource:name]];
+    [image setName:name];
+    [image setSize:size];
+    
+    return image;
 }
 
 + (void)assignRwhMailDefaultValues {
@@ -146,7 +203,7 @@
      ];
 }
 
-+ (void)addRwhMailPreferencesMethodsToNSPreferences {
++ (void)addRwhMailPreferencesToNSPreferences {
     [RwhMailPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
     
     [NSClassFromString(@"NSPreferences")
@@ -155,49 +212,6 @@
      classMeth:YES
      ];
 }
-
-+ (NSBundle *)bundle {
-    static NSBundle *bundle;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        bundle = [NSBundle bundleForClass:[RwhMailBundle class]];
-    });
-    return bundle;
-}
-
-+ (NSString *)bundleNameAndVersion {
-    return [NSMutableString stringWithFormat:@"%@ %@", [self bundleName], [self bundleVersionString]];
-}
-
-+ (NSString *)bundleName {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleNameKey];
-}
-
-+ (NSString *)bundleVersionString {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleShortVersionKey];
-}
-
-+ (NSString *)bundleShortName {
-    return RwhMailBundleShortName;
-}
-
-+ (NSString *)bundleCopyright {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailCopyRightKey];
-}
-
-+ (BOOL)isEnabled {
-    return GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled);
-}
-
-+ (NSImage *) loadImage:(NSString *)imageName setSize:(NSSize)size {
-    NSImage *image = [[NSImage alloc]
-                      initByReferencingFile:[[self bundle] pathForImageResource:imageName]];
-    [image setSize:size];
-    
-    return image;
-}
-
-
 
 #pragma mark MVMailBundle class methods
 
@@ -212,68 +226,6 @@
 
 + (NSString*)preferencesPanelName {
     return [self bundleShortName];
-}
-
-@end
-
-@implementation NSObject (RwhMailBundleObject)
-
-#pragma mark Class methods
-
-+ (void)rwhAddMethodsToClass:(Class)cls {
-    
-    RWH_LOG(@"%@", cls);
-    
-    unsigned int numMeths = 0;
-    Method* meths = class_copyMethodList(object_getClass([self class]), &numMeths);
-    Class c = object_getClass(cls);
-    
-    //add the methods
-    [self rwhAddMethods:meths numMethods:numMeths toClass:&c origClass:&cls];
-    
-    //clean up the memory
-    if (meths != nil) {
-        free(meths);
-    }
-    
-    //keep doing it until they are the same class
-    while(c != cls) {
-        c = cls;
-        meths = class_copyMethodList([self class], &numMeths);
-        [self rwhAddMethods:meths numMethods:numMeths toClass:&c origClass:&cls];
-    }
-}
-
-+ (void)rwhAddMethods:(Method *)m numMethods:(unsigned int)cnt toClass:(Class *)c origClass:(Class *) cls {
-    unsigned int i = 0;
-    
-    //add the method from the current class (self) to the class identified
-    for (i = 0; i < cnt; i++) {
-        //add the methods to Class c class
-        BOOL result = class_addMethod(*c, method_getName(m[i]), method_getImplementation(m[i]),method_getTypeEncoding(m[i]));
-        
-        if( !result )  {
-            RWH_LOG(@"rwhAddMethods: could not add %s to %@",sel_getName(method_getName(m[i])),*cls);
-        }
-        else {
-            RWH_LOG(@"rwhAddMethods: added %s to %@",sel_getName(method_getName(m[i])),*cls);
-        }
-    }
-    
-}
-
-+ (void)rwhSwizzle:(SEL)origSel meth:(SEL)newSel classMeth:(BOOL)cls {
-    // get the original method and the new method... need to test if it is a class or instance 
-    // method to determine the function to call to get the method
-    Method origMeth = (cls?class_getClassMethod([self class], origSel):class_getInstanceMethod([self class], origSel));
-    Method newMeth = (cls?class_getClassMethod([self class], newSel):class_getInstanceMethod([self class], newSel));
-    
-    //log the swizzle for debugging...
-    RWH_LOG(@"%s (%p), %s (%p), %s",sel_getName(origSel), method_getImplementation(origMeth),
-            sel_getName(newSel), method_getImplementation(newMeth),(cls ? "YES" : "NO"));
-    
-    //this is how we swizzle
-    method_exchangeImplementations(origMeth, newMeth);
 }
 
 @end

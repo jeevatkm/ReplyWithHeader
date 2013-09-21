@@ -25,10 +25,7 @@
  */
 
 
-#import "RwhMailBundle.h"
-
 @interface RwhMailMessage : NSObject
-
 
 #pragma mark Implementation methods
 /*! @group implementation methods */
@@ -41,6 +38,5 @@
  *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
  */
 - (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
-
 
 @end

@@ -25,7 +25,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2013 Jeevanandam M. (jeevatkm)</string>
+	<string>© 2013 Jeevanandam M. (jeevatkm), All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>RwhMailBundle</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>

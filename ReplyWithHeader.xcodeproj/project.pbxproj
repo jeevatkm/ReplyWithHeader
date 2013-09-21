@@ -13,14 +13,16 @@
 		133A918417E9745A00E3CC62 /* RwhMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* RwhMailMessage.m */; };
 		133A918517E9745A00E3CC62 /* RwhMailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917917E9745A00E3CC62 /* RwhMailPreferences.m */; };
 		133A918617E9745A00E3CC62 /* RwhMailPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */; };
+		13423DA617EDACF700623E45 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133A919417E9785C00E3CC62 /* CoreData.framework */; };
+		13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
+		13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
+		13423DAA17EDACF700623E45 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		13423DAD17EDAE8100623E45 /* NSObject+RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */; };
 		13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13575F7417EB82690047BF62 /* RwhMailBundle.m */; };
 		1381100617EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */; };
 		13D0803F17ED4FFE008E5CE5 /* ReplyWithHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 13D0803E17ED4FFE008E5CE5 /* ReplyWithHeader.png */; };
-		319C9B6C1634042200C420B3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31024ADF161184340071587E /* PreferencePanes.framework */; };
 		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
-		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
-		4D5FF0AA127255C500A945C5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,8 +53,9 @@
 		133A917917E9745A00E3CC62 /* RwhMailPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailPreferences.m; sourceTree = "<group>"; };
 		133A917A17E9745A00E3CC62 /* RwhMailPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailPreferencesModule.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailPreferencesModule.m; sourceTree = "<group>"; };
-		133A919217E9785C00E3CC62 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RwhMailBundle.m"; sourceTree = "<group>"; };
+		13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RwhMailBundle.h"; sourceTree = "<group>"; };
 		13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle_Prefix.pch; sourceTree = "<group>"; };
 		13575F7417EB82690047BF62 /* RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailBundle.m; sourceTree = "<group>"; };
 		13575F7517EB82690047BF62 /* RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle.h; sourceTree = "<group>"; };
@@ -63,8 +66,6 @@
 		13D0803E17ED4FFE008E5CE5 /* ReplyWithHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReplyWithHeader.png; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
-		4D5FEE7912723B4900A945C5 /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		4D5FF0A9127255C500A945C5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReplyWithHeader.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,37 +75,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				319C9B6C1634042200C420B3 /* PreferencePanes.framework in Frameworks */,
-				4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */,
-				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				4D5FF0AA127255C500A945C5 /* WebKit.framework in Frameworks */,
+				13423DA617EDACF700623E45 /* CoreData.framework in Frameworks */,
+				13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */,
+				13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */,
+				13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */,
+				13423DAA17EDACF700623E45 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				31024ADF161184340071587E /* PreferencePanes.framework */,
-				4D5FF0A9127255C500A945C5 /* WebKit.framework */,
-				4D5FEE7912723B4900A945C5 /* Message.framework */,
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-				133A919417E9785C00E3CC62 /* CoreData.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		133A916917E9745A00E3CC62 /* ReplyWithHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +128,8 @@
 		133A918C17E9751A00E3CC62 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */,
+				13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */,
 				13575F7917EB90650047BF62 /* RwhMailMacros.h */,
 				13575F7A17EB90650047BF62 /* RwhMailConstants.h */,
 				13575F7417EB82690047BF62 /* RwhMailBundle.m */,
@@ -186,9 +169,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				133A919217E9785C00E3CC62 /* Cocoa.framework */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				133A919417E9785C00E3CC62 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				4D5FF0A9127255C500A945C5 /* WebKit.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -285,6 +270,7 @@
 				133A918517E9745A00E3CC62 /* RwhMailPreferences.m in Sources */,
 				133A918617E9745A00E3CC62 /* RwhMailPreferencesModule.m in Sources */,
 				13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */,
+				13423DAD17EDAE8100623E45 /* NSObject+RwhMailBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

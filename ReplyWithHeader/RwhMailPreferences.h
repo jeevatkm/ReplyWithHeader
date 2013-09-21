@@ -24,16 +24,6 @@
  * THE SOFTWARE.
  */
 
-
-/*!
- * @header
- * Defines the <code>RwhMailPreferences</code> category for
- * <code>NSPreferences</code>.
- * @version \@(#) $Id$
- * @updated $Date$
- */
-#import "RwhMailBundle.h"
-
 /*!
  * @class
  * Adds a method for overriding the preference-loading behavior of
@@ -42,7 +32,6 @@
  * @updated $Date$
  */
 @interface RwhMailPreferences : NSObject
-
 
 #pragma mark Swizzled class methods
 /*! @group Swizzled class methods */

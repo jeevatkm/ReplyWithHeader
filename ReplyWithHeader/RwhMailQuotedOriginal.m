@@ -33,6 +33,8 @@
 //
 
 #import "RwhMailQuotedOriginal.h"
+#import "RwhMailMacros.h"
+#import "RwhMailConstants.h"
 
 @implementation RwhMailQuotedOriginal
 

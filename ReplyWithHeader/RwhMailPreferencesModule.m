@@ -27,12 +27,13 @@
 
 #import "RwhMailBundle.h"
 #import "RwhMailPreferencesModule.h"
+#import "RwhMailConstants.h"
 
 NSString *rwhMailIconName = @"ReplyWithHeader";
 
 @implementation RwhMailPreferencesModule
 
-#pragma mark Instance methods
+#pragma mark Class methods
 
 - (void)toggleRwhPreferencesOptions: (BOOL *)state {
     if ( state ) {
@@ -55,8 +56,6 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
     [_RwhForwardHeaderEnabled setEnabled:NO];
     [_RwhForwardHeaderText setEnabled:NO];
 }
-
-
 
 - (NSString *)rwhNameAndVersion {
     return [RwhMailBundle bundleNameAndVersion];
@@ -82,23 +81,16 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
     
     [infoAlertBox setAlertStyle:NSInformationalAlertStyle];
     [infoAlertBox setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
-    [infoAlertBox setInformativeText:@"Please use Disqus thread for RWH feedback, I appreciate your feedback."];
+    [infoAlertBox setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];
     
     [infoAlertBox runModal];
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
-    
 }
 
 // Open support page
 - (IBAction)openSupport:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
-}
-
-// load RWH logo
-- (void)loadRwhMailBundleLogo {
-    [_RwhMailBundleLogo
-     setImage:[RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(128, 128)]];
 }
 
 
@@ -107,15 +99,15 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
 - (void)awakeFromNib {
     [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
     
-    [self loadRwhMailBundleLogo];
+    [_RwhMailBundleLogo setImage:[RwhMailBundle bundleLogo]];
 }
 
 - (NSString*)preferencesNibName {
     return RwhMailPreferencesNibName;
 }
 
-- (NSImage *)imageForPreferenceNamed:(NSString *)aName {
-	return [RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(128, 128)];
+- (NSImage *)imageForPreferenceNamed:(NSString *)aName {    
+	return [RwhMailBundle bundleLogo];
 }
 
 - (BOOL)isResizable {

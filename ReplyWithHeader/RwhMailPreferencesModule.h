@@ -24,10 +24,7 @@
  * THE SOFTWARE.
  */
 
-
-
 #import "NSPreferencesModule.h"
-#import "RwhMailBundle.h"
 
 /*!
  * @class
@@ -53,9 +50,6 @@
 - (void)disableRwhPreferencesOptions;
 - (NSString*)rwhCopyright;
 
-// load RWH logo
-- (void)loadRwhMailBundleLogo;
-
 // RWH enabled button press
 - (IBAction)rwhMailBundlePressed:(id)sender;
 
@@ -77,6 +71,9 @@
  * @result
  *   <code>RwhMailPreferencesPanel</code>.
  */
+- (void)awakeFromNib;
 - (NSString*)preferencesNibName;
+- (NSImage *)imageForPreferenceNamed:(NSString *)aName;
+- (BOOL)isResizable;
 
 @end

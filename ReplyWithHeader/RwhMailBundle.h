@@ -24,29 +24,6 @@
  * THE SOFTWARE.
  */
 
-
-/*!
- * @header
- * Defines the <code>RwhMailBundle</code> Mail bundle (the entrypoint for the
- * plugin) and the <code>RwhMailBundleObject</code> category for
- * <code>NSObject</code>.
- * @copyright Copyright (c) 2013 Saptarshi Guha and Jason Schroth
- * @version \@(#) $Id$
- * @updated $Date$
- */
-
-#import <objc/objc.h>
-#import <objc/objc-runtime.h>
-#import <objc/objc-class.h>
-
-#import "RwhMailHeaderString.h"
-#import "RwhMailQuotedOriginal.h"
-#import "RwhMailMessage.h"
-#import "RwhMailPreferences.h"
-#import "RwhMailPreferencesModule.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
-
 /*!
  * @class
  * The <code>RwhMailBundle</code> class is the subclass of
@@ -56,7 +33,6 @@
  * @updated $Date$
  */
 @interface RwhMailBundle : NSObject {
-    
 }
 
 + (BOOL)isEnabled;
@@ -66,62 +42,7 @@
 + (NSString *)bundleVersionString;
 + (NSString *)bundleShortName;
 + (NSString *)bundleCopyright;
-+ (NSImage *) loadImage:(NSString *)imageName setSize:(NSSize)size;
-+ (void)assignRwhMailDefaultValues;
-+ (void)smoothValueTransToNewRwhMailPrefUI;
-
-#pragma mark Class initialization
-/*! @group Class initialization */
-
-/*!
- * Registers this plugin and swizzles the methods necessary for RwhMailBundle's
- * functionality.
- */
-//+ (void)initialize;
-
-@end
-
-/*!
- * @category
- * Adds a method for method swizzling to <code>NSObject</code> instances.
- * @version \@(#) $Id$
- * @updated $Date$
- */
-@interface NSObject (RwhMailBundleObject)
-
-#pragma mark Class methods
-/*! @group Class methods */
-
-/*!
- * Adds the methods from this class to the specified class.
- * @param inClass
- *   The <code>Class</code> to which this class's methods should be added.
- */
-+ (void)rwhAddMethodsToClass:(Class)cls;
-
-/*!
- * Actually m the specified methods specified to the specified class.  
- * @param m
- *   The list of methods from the cls <code>Class</code>.
- * @param cnt
- *   The number of methods in the list of methods.
- * @param c
- *   The reference to the Class to which the methods will be added.
- * @param cls
- *   The reference to the Class from which the methods were taken.
- */
-+ (void)rwhAddMethods:(Method *)m numMethods:(unsigned int)cnt toClass:(Class *)c origClass:(Class *) cls;
-
-/*!
- * Swizzles two methods.  See http://www.cocoadev.com/index.pl?MethodSwizzling
- * @param origSel
- *   The selector specifying the method being replaced.
- * @param newSel
- *   The selector specifying the replacement method.
- * @param cls
- *   The <code>BOOL</code> indicating whether or not the methods being swizzled
- *   are class methods.
- */
-+ (void)rwhSwizzle:(SEL)origSel meth:(SEL)newSel classMeth:(BOOL)cls;
++ (NSImage *)bundleLogo;
++ (NSImage *)loadImage:(NSString *)name setSize:(NSSize)size;
 
 @end
