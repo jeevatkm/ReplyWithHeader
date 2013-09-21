@@ -14,8 +14,8 @@
 		133A918517E9745A00E3CC62 /* RwhMailPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917917E9745A00E3CC62 /* RwhMailPreferences.m */; };
 		133A918617E9745A00E3CC62 /* RwhMailPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */; };
 		13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13575F7417EB82690047BF62 /* RwhMailBundle.m */; };
-		1381100417EC0ECA0067B6A4 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1381100317EC0ECA0067B6A4 /* ReplyWithHeader.icns */; };
 		1381100617EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */; };
+		13D0803F17ED4FFE008E5CE5 /* ReplyWithHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 13D0803E17ED4FFE008E5CE5 /* ReplyWithHeader.png */; };
 		319C9B6C1634042200C420B3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31024ADF161184340071587E /* PreferencePanes.framework */; };
 		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 		4D5FEE8512723C7000A945C5 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FEE7912723B4900A945C5 /* Message.framework */; };
@@ -59,8 +59,8 @@
 		13575F7717EB83160047BF62 /* RwhMailBundle-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RwhMailBundle-Info.plist"; sourceTree = "<group>"; };
 		13575F7917EB90650047BF62 /* RwhMailMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailMacros.h; sourceTree = "<group>"; };
 		13575F7A17EB90650047BF62 /* RwhMailConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailConstants.h; sourceTree = "<group>"; };
-		1381100317EC0ECA0067B6A4 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
 		1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		13D0803E17ED4FFE008E5CE5 /* ReplyWithHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReplyWithHeader.png; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		31024ADF161184340071587E /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
@@ -119,7 +119,7 @@
 		133A918917E974AF00E3CC62 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1381100317EC0ECA0067B6A4 /* ReplyWithHeader.icns */,
+				13D0803E17ED4FFE008E5CE5 /* ReplyWithHeader.png */,
 				13575F7717EB83160047BF62 /* RwhMailBundle-Info.plist */,
 				133A916A17E9745A00E3CC62 /* InfoPlist.strings */,
 				1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */,
@@ -250,8 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				133A917F17E9745A00E3CC62 /* LICENSE in Resources */,
-				1381100417EC0ECA0067B6A4 /* ReplyWithHeader.icns in Resources */,
 				1381100617EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib in Resources */,
+				13D0803F17ED4FFE008E5CE5 /* ReplyWithHeader.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
