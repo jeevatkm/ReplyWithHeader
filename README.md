@@ -1,11 +1,9 @@
-RWH - quoting headers of email in Mail.app
+RWH Quoting reply/forward headers of email in Apple Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
-* [Latest Release](#latest-release)
-* [Mail Bundle/Plugin version details](#mail-bundleplugin-version-details)
-* [Release Downloads](#release-downloads)
-* [NEWS](#news)
+* [Plugin Homepage - Detailed Information][2]
+* [Latest Release Download from MacUpdate.com][5]
 * [Issue Tracker](#issue-tracker)
 * [Author](#author)
 * [Credits](#credits)
@@ -14,32 +12,9 @@ RWH - quoting headers of email in Mail.app
 
 * * *
 
-Latest Release
---------------
-* **Released in v3.5**
-	* Added support for 10.8.5 - Mail 6.6 [1510]
-
-Mail Bundle/Plugin version details
-----------------------------------
-* 3.x versions are for Mountain Lion
-* 2.x versions are for Lion
-* 1.x versions are for Snow Leopard and earlier
-
-I hope this is helpful to choose appropriate plugin/bundle version :)
-
-Release Downloads
------------------
-* Latest version from [https://app.box.com/s/5yo06qpgm299jp3k0hro][5] [Previous Releases available too]
-
-NEWS
-----
-* Development started for RWH 3.6, [milestone details here][3]
-
 Issue Tracker
 -------------
 Please submit any bugs or annoyances on the [Issues][3]
-
-***Note: Existing enhancements requests will be taken care in upcoming days!***
 
 Author
 ------
@@ -83,4 +58,4 @@ RWH &lt;version number> Oh it's a wonderful life</pre></code>
 [2]: http://myjeeva.com/replywithheader
 [3]: https://github.com/jeevatkm/ReplyWithHeaders/issues
 [4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/ReplyWithHeader/LICENSE
-[5]: https://app.box.com/s/5yo06qpgm299jp3k0hro
+[5]: https://www.macupdate.com/app/mac/49256/replywithheader
