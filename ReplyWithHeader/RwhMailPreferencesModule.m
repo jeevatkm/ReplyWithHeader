@@ -98,7 +98,7 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
 // load RWH logo
 - (void)loadRwhMailBundleLogo {
     [_RwhMailBundleLogo
-     setImage:[RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(256, 256)]];
+     setImage:[RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(128, 128)]];
 }
 
 
@@ -115,7 +115,7 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
 }
 
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName {
-	return [RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(256, 256)];
+	return [RwhMailBundle loadImage:rwhMailIconName setSize:NSMakeSize(128, 128)];
 }
 
 - (BOOL)isResizable {

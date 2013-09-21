@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1080</int>
+		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">12F37</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.39</string>
@@ -97,7 +97,6 @@
 										<string key="NSFrame">{{11, 10}, {486, 330}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="741342458"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<array class="NSMutableArray" key="NSTabViewItems">
 											<object class="NSTabViewItem" id="116127141">
@@ -137,7 +136,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 28}, {438, 28}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="502270534">
@@ -492,7 +490,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{26, 17}, {426, 29}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="535149391">
@@ -614,7 +611,7 @@
 														<object class="NSTextField" id="48007352">
 															<reference key="NSNextResponder" ref="741342458"/>
 															<int key="NSvFlags">292</int>
-															<string key="NSFrame">{{159, 222}, {225, 14}}</string>
+															<string key="NSFrame">{{178, 221}, {207, 14}}</string>
 															<reference key="NSSuperview" ref="741342458"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="587942928"/>
@@ -635,7 +632,7 @@
 														<object class="NSTextField" id="109336783">
 															<reference key="NSNextResponder" ref="741342458"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{159, 253}, {225, 17}}</string>
+															<string key="NSFrame">{{178, 251}, {206, 17}}</string>
 															<reference key="NSSuperview" ref="741342458"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="48007352"/>
@@ -688,7 +685,6 @@
 															<string key="NSFrame">{{14, 26}, {438, 22}}</string>
 															<reference key="NSSuperview" ref="741342458"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="861885166">
@@ -862,7 +858,7 @@
 																<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
 																<string>NeXT TIFF v4.0 pasteboard type</string>
 															</set>
-															<string key="NSFrame">{{89, 216}, {63, 60}}</string>
+															<string key="NSFrame">{{89, 205}, {84, 76}}</string>
 															<reference key="NSSuperview" ref="741342458"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="109336783"/>
@@ -1299,9 +1295,9 @@
 							<reference ref="52550815"/>
 							<reference ref="587942928"/>
 							<reference ref="1068749848"/>
+							<reference ref="266782160"/>
 							<reference ref="48007352"/>
 							<reference ref="109336783"/>
-							<reference ref="266782160"/>
 						</array>
 						<reference key="parent" ref="765787522"/>
 					</object>
@@ -1843,6 +1839,10 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1070" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
