@@ -171,6 +171,18 @@
     if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
         SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
     }
+    
+    if (!GET_USER_DEFAULT(RwhMailHeaderFontName)) {
+        SET_USER_DEFAULT(RwhMailDefaultHeaderFontName , RwhMailHeaderFontName);
+    }
+    
+    if (!GET_USER_DEFAULT(RwhMailHeaderFontSize)) {
+        SET_USER_DEFAULT(RwhMailDefaultHeaderFontSize , RwhMailHeaderFontSize);
+    }
+    
+    if (!GET_USER_DEFAULT(RwhMailHeaderFontColor)) {
+        SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderFontColor);
+    }
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {

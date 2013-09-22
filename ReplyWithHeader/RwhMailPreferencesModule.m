@@ -28,10 +28,24 @@
 #import "RwhMailBundle.h"
 #import "RwhMailPreferencesModule.h"
 #import "RwhMailConstants.h"
+#import "RwhMailMacros.h"
+
+@interface RwhMailPreferencesModule (PrivateMethods)
+- (void)toggleRwhPreferencesOptions: (BOOL *)state;
+- (void)enableRwhPreferencesOptions;
+- (void)disableRwhPreferencesOptions;
+- (NSString *)rwhNameAndVersion;
+- (NSString *)rwhCopyright;
+- (IBAction)rwhMailBundlePressed:(id)sender;
+- (IBAction)rwhSelectFontPressed:(id)sender;
+- (IBAction)openWebsite:(id)sender;
+- (IBAction)openFeedback:(id)sender;
+- (IBAction)openSupport:(id)sender;
+@end
 
 @implementation RwhMailPreferencesModule
 
-#pragma mark Class methods
+#pragma mark Class private methods
 
 - (void)toggleRwhPreferencesOptions:(BOOL *)state {
     if ( state ) {
@@ -59,12 +73,39 @@
     return [RwhMailBundle bundleNameAndVersion];
 }
 
-- (NSString*)rwhCopyright {
+- (NSString *)rwhCopyright {
     return [RwhMailBundle bundleCopyright];
 }
 
 - (IBAction)rwhMailBundlePressed:(id)sender {
     [self toggleRwhPreferencesOptions:[sender state]];
+}
+
+- (IBAction)rwhSelectFontPressed:(id)sender {    
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    
+    [fontManager setDelegate:self];
+    [fontManager setEnabled:YES];
+    [fontManager orderFrontFontPanel:self];
+    
+    NSString *font = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName);
+    NSString *fontSize = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize);
+    
+    RWH_LOG(@"Already choosen Font Name: %@ size: %@", font,fontSize);
+    
+    [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
+}
+
+- (void)changeFont:(id)sender {    
+    NSFont *font = [[NSFontManager sharedFontManager] selectedFont];
+    NSString *fontSize = [NSString stringWithFormat: @"%.0f", font.pointSize];
+    
+    NSString *fontDescription = [NSString stringWithFormat: @"%@ %.0f", font.fontName, font.pointSize];
+    
+    SET_USER_DEFAULT(font.fontName, RwhMailHeaderFontName);
+    SET_USER_DEFAULT(fontSize, RwhMailHeaderFontSize);    
+    
+    [_RwhMailHeaderFontNameAndSize setStringValue:fontDescription];
 }
 
 // Open website page
@@ -98,6 +139,11 @@
 
 - (void)awakeFromNib {
     [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
+    
+    [_RwhMailHeaderFontNameAndSize
+     setStringValue:[NSString stringWithFormat:@"%@ %@",
+                     GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName),
+                     GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize)]];
     
     [_RwhMailBundleLogo setImage:[RwhMailBundle bundleLogo]];
 }

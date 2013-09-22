@@ -12,7 +12,7 @@
 
 @interface NSPreferencesModule : NSObject <NSPreferencesModule>
 {
-    NSBox *_preferencesView;
+    IBOutlet NSBox *_preferencesView;
     struct CGSize _minSize;
     BOOL _hasChanges;
     void *_reserved;

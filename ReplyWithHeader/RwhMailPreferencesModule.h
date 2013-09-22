@@ -34,33 +34,15 @@
  * @version \@(#) $Id$
  * @updated $Date$
  */
-@interface RwhMailPreferencesModule : NSPreferencesModule {    
+@interface RwhMailPreferencesModule : NSPreferencesModule {
     IBOutlet NSButton *_RwhMailBundleEnabled;
     IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
     IBOutlet NSTextField *_RwhReplyHeaderText;
     IBOutlet NSTextField *_RwhForwardHeaderText;
     IBOutlet NSButton *_RwhForwardHeaderEnabled;
     IBOutlet NSImageView *_RwhMailBundleLogo;
+    IBOutlet NSTextField *_RwhMailHeaderFontNameAndSize;
 }
-
-#pragma mark Instance methods
-
-- (void)toggleRwhPreferencesOptions: (BOOL *)state;
-- (void)enableRwhPreferencesOptions;
-- (void)disableRwhPreferencesOptions;
-- (NSString*)rwhCopyright;
-
-// RWH enabled button press
-- (IBAction)rwhMailBundlePressed:(id)sender;
-
-// Open website page
-- (IBAction)openWebsite:(id)sender;
-
-// Open Feedback email
-- (IBAction)openFeedback:(id)sender;
-
-// Open support page
-- (IBAction)openSupport:(id)sender;
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */
