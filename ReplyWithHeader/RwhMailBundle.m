@@ -35,12 +35,17 @@
 #import "NSObject+RwhMailBundle.h"
 
 @interface RwhMailBundle (PrivateMethods)
++ (void)assignRwhMailDefaultValues;
++ (void)smoothValueTransToNewRwhMailPrefUI;
++ (void)addRwhMailMessageMethodsToComposeBackEnd;
++ (void)addRwhMailPreferencesToNSPreferences;
+
 + (void)registerBundle;
 @end
 
 @implementation RwhMailBundle
 
-#pragma mark Class methods
+#pragma mark Class public methods
 
 + (void)initialize {
     [super initialize];
@@ -54,7 +59,7 @@
     // If this class is not available that means Mail.app
     // doesn't allow bundles anymore. Fingers crossed that this never happens!
     if (!mvMailBundleClass) {
-        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer!");
+        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer and relax !");
         
         return;
     }
@@ -119,19 +124,30 @@
     static NSImage *logo;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        logo = [self loadImage:@"ReplyWithHeader" setSize:NSMakeSize(128, 128)];
+        logo = [[NSImage alloc]
+                initByReferencingFile:[[self bundle] pathForImageResource:@"ReplyWithHeader"]];
     });
     return logo;
 }
 
-+ (NSImage *) loadImage:(NSString *)name setSize:(NSSize)size {
-    NSImage *image = [[NSImage alloc]
-                      initByReferencingFile:[[self bundle] pathForImageResource:name]];
-    [image setName:name];
-    [image setSize:size];
-    
-    return image;
+
+#pragma mark MVMailBundle class methods
+
++ (BOOL)hasPreferencesPanel {
+    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
+    return YES;
 }
+
++ (NSString*)preferencesOwnerClassName {
+    return NSStringFromClass([RwhMailPreferencesModule class]);
+}
+
++ (NSString*)preferencesPanelName {
+    return [self bundleShortName];
+}
+
+
+#pragma mark Class private methods
 
 + (void)assignRwhMailDefaultValues {
     RWH_LOG();
@@ -211,21 +227,6 @@
      meth:@selector(rwhSharedPreferences)
      classMeth:YES
      ];
-}
-
-#pragma mark MVMailBundle class methods
-
-+ (BOOL)hasPreferencesPanel {
-    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
-    return YES;
-}
-
-+ (NSString*)preferencesOwnerClassName {
-    return NSStringFromClass([RwhMailPreferencesModule class]);
-}
-
-+ (NSString*)preferencesPanelName {
-    return [self bundleShortName];
 }
 
 @end

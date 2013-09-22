@@ -28,6 +28,10 @@
 #import "RwhMailPreferences.h"
 #import "RwhMailPreferencesModule.h"
 
+@interface RwhMailPreferences (PrivateMethods)
+- (void)addPreferenceNamed:(NSString *)panelName owner:(id)instance;
+@end
+
 @implementation RwhMailPreferences
 
 #pragma mark Swizzled class methods
@@ -40,9 +44,9 @@
     static BOOL added = NO;
     
     //we don't have the NSPreferences class, so get it by name during runtime
-    id prefs = [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
+    id mailPreferences = [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
     
-    if ((prefs != nil) && !added) {
+    if ((mailPreferences != nil) && !added) {
         added = YES;
         
         [[NSClassFromString(@"NSPreferences") rwhSharedPreferences]

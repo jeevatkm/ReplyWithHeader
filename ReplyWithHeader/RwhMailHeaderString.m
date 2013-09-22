@@ -31,15 +31,34 @@
 //
 //  Created by Jason Schroth on 8/15/12.
 //
-//
+//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "RwhMailHeaderString.h"
 
+@interface RwhMailHeaderString (PrivateMethods)
+- (void)initVars;
+- (void)fixHeaderStyles;
+- (void)applyNewHeaderStyles;
+- (void)fixForwardHeaderPrefix;
+- (void)suppressReplyToLabel;
+
+- (id)originalMessageHeaders;
+- (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
+@end
+
+@interface NSMutableAttributedString ()
+- (WebArchive *)webArchiveForRange:(NSRange)range fixUpNewlines:(BOOL)newLineFix;
+@end
+
 @implementation RwhMailHeaderString
+
+#pragma mark Class public methods
 
 - (id)init {
     if (self = [super init]) {
-        //good stuff...
+        // postive lines go here
+        
+        [self initVars];
     }
     else {
         RWH_LOG(@"MailHeaderString: Init failed");
@@ -47,111 +66,134 @@
     return self;
 }
 
-- (id)initWithStr: (NSAttributedString *)str {
-    //initialze the value with a mutable copy of the attributed string
-    if( self = [super init] )
-    {
-        //   NSAttributedString *headerString =[[self originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1];
-        //	useHeadIndents:NO
-        //	useBold:boldhead
-        //	includeBCC:YES];
-        
-        headstr = [str mutableCopy];
-        
-        //remove the color attribute so that the text is black instead of gray
-        //also remove paragraph style included in the header to avoid spacing issues when received by some mail clients
-        [headstr removeAttribute:@"NSColor" range:NSMakeRange(0,[headstr length])];
-        [headstr removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headstr length])];
-        
-    }
-    else {
-        RWH_LOG(@"MailHeaderString: Init failed");
-    }
+- (id)initWithMailMessage:(id)mailMessage {
+    RWH_LOG();
     
-    return self;
-}
-
-
-- (id)initWithBackEnd:(id)backend {
     //initialze the value with a mutable copy of the attributed string
-    if( self = [super init] ) {
+    if (self = [super init]) {
+        [self initVars];
         
-        /*headstr =[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1
-                                                                             useHeadIndents:NO
-                                                                                    useBold:YES
-                                                                                 includeBCC:NO];*/
-
-        headstr = [[[backend originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];        
-        
-        //remove the color attribute so that the text is black instead of gray
-        //also remove paragraph style included in the header to avoid spacing issues when received by some mail clients
-        [headstr removeAttribute:@"NSColor" range:NSMakeRange(0,[headstr length])];
-        [headstr removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headstr length])];
+        mailHeaderString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
         
         RWH_LOG(@"MailHeaderString: created headstr: %@",headstr);
     }
     else {
-        RWH_LOG(@"MailHeaderString: Init Backend failed");
+        RWH_LOG(@"MailHeaderString: Init initWithMailMessage failed");
     }
     
     return self;
 }
 
-/*
- * descr: Bolds the lables for header elements (i.e., From:, To:, Subject:, Date:, etc.).
- */
-- (void)boldHeaderLabels {
-    //get all of the fonts in use, but only use the first one
-    NSDictionary *dict = [headstr fontAttributesInRange:NSMakeRange(0,[headstr length])];
+- (void)processMailHeader {
+    RWH_LOG();
     
-    NSEnumerator *enumer = [dict objectEnumerator];
+    // Style processing
+    [self fixHeaderStyles];
+    [self applyNewHeaderStyles];
     
-    NSFont *basicFont  = (NSFont *) [enumer nextObject]; //[dict objectForKey:key];
-    RWH_LOG(@"font = %@",basicFont);
+    [self suppressReplyToLabel];
     
-    NSString *fontName = [basicFont fontName];
-    RWH_LOG(@"orig font name is: %@",fontName);
-    const CGFloat *mat = [basicFont matrix];
+    RWH_LOG(@"Newly processed RWH header string: %@", headstr);
+}
+
+- (WebArchive *)getWebArchive {
+    RWH_LOG();
     
-    //check if the font is already bold before making it bold
-    NSRange boldRangeLoc;
-    boldRangeLoc =[fontName rangeOfString:@"-Bold"];
-    if( boldRangeLoc.location == NSNotFound )
-    {
-        fontName = [[fontName autorelease] stringByAppendingString:@"-Bold"];
-    }
+    WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
+    return arch;
+}
+
+- (int)getHeaderItemCount {
+    RWH_LOG(@"Mail header count is %d", headerItemCount);
     
-    RWH_LOG(@"font name is: %@",fontName);
+    return headerItemCount;
+}
+
+- (BOOL)isReplyToLabelFound {
+    RWH_LOG(@"Reply-To Label found : %@", isReplyToLabelFound);
     
-    NSFont *boldFont = [NSFont fontWithName:fontName matrix:mat];
+    return replyToLabelFound;
+}
+
+- (void)dealloc {
+    mailHeaderString = nil;
     
-    //setup a regular expression to find a word followed by a colon and then space
+    free(mailHeaderString);
+    
+    [super dealloc];
+}
+
+#pragma mark Class private methods
+
+
+- (void)initVars {
+    headerItemCount = 1;
+}
+
+- (void)fixHeaderStyles {
+    RWH_LOG();
+    
+    [mailHeaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[mailHeaderString length])];
+    [mailHeaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[mailHeaderString length])];
+}
+
+- (void)applyNewHeaderStyles {
+    RWH_LOG();
+    
+    // setup a regular expression to find a word followed by a colon and then space
     // should get the first item (e.g. "From:").
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:[headstr string] options:0 range:NSMakeRange(0, [headstr length])];
+    NSRange fromLabelMatchRange = [regex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
     
-    RWH_LOG(@"Match Range is: %@", NSStringFromRange(rangeOfFirstMatch));
-    [headstr addAttribute:@"NSFont" value:boldFont range:rangeOfFirstMatch];
+    RWH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelMatchRange));
+    
+    [mailHeaderString applyFontTraits:NSBoldFontMask range:fromLabelMatchRange];
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
     regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches=[regex matchesInString:[headstr string] options:0 range:NSMakeRange(0,[headstr length])];
-    for (NSTextCheckingResult *match in matches)
-    {
+    NSArray *matches=[regex matchesInString:[mailHeaderString string] options:0 range:NSMakeRange(0,[mailHeaderString length])];
+    
+    for (NSTextCheckingResult *match in matches) {
         NSRange matchRange = [match range];
-        [headstr addAttribute:@"NSFont" value:boldFont range:matchRange];
+        [mailHeaderString applyFontTraits:NSBoldFontMask range:matchRange];
+        
+        // workaround to get header count
+        headerItemCount++;
     }
+    
 }
 
-- (WebArchive *)getWebArch {
-    WebArchive *arch = [headstr webArchiveForRange:NSMakeRange(0,[headstr length]) fixUpNewlines:YES];
-    return arch;
+// Upcoming...
+- (void)fixForwardHeaderSubjectPrefix {
+    // Upcoming
+    RWH_LOG();
 }
 
-- (NSMutableAttributedString *)string {
-    return headstr;
+- (void)suppressReplyToLabel {
+    RWH_LOG();
+    
+    NSError *error = NULL;
+    NSRegularExpression *subjectRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSRange replyLabelMatch = [subjectRegex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
+    
+    if ( replyLabelMatch.location == NSNotFound ) {
+        RWH_LOG(@"Reply To label doesn't found");
+        
+        replyToLabelFound = NO;
+    }
+    else {
+        replyToLabelFound = YES;
+        
+        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n"]];
+        
+        [mailHeaderString replaceCharactersInRange:NSMakeRange(replyLabelMatch.location, ([mailHeaderString length] - replyLabelMatch.location))
+                     withAttributedString:replaceString];
+        
+        [replaceString release];
+    }    
 }
 
 @end

@@ -29,13 +29,11 @@
 #import "RwhMailPreferencesModule.h"
 #import "RwhMailConstants.h"
 
-NSString *rwhMailIconName = @"ReplyWithHeader";
-
 @implementation RwhMailPreferencesModule
 
 #pragma mark Class methods
 
-- (void)toggleRwhPreferencesOptions: (BOOL *)state {
+- (void)toggleRwhPreferencesOptions:(BOOL *)state {
     if ( state ) {
         [self enableRwhPreferencesOptions];
     } else {
@@ -86,6 +84,8 @@ NSString *rwhMailIconName = @"ReplyWithHeader";
     [infoAlertBox runModal];
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
+    
+    [infoAlertBox release];
 }
 
 // Open support page

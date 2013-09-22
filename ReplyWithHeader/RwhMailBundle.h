@@ -31,6 +31,8 @@
  * RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
+ *
+ * RwhMailBundle Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
 @interface RwhMailBundle : NSObject {
 }
@@ -43,6 +45,10 @@
 + (NSString *)bundleShortName;
 + (NSString *)bundleCopyright;
 + (NSImage *)bundleLogo;
-+ (NSImage *)loadImage:(NSString *)name setSize:(NSSize)size;
+
+#pragma mark MVMailBundle methods
++ (BOOL)hasPreferencesPanel;
++ (NSString*)preferencesOwnerClassName;
++ (NSString*)preferencesPanelName;
 
 @end

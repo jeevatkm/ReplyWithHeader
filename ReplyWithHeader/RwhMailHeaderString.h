@@ -31,21 +31,23 @@
 //
 //  Created by Jason Schroth on 8/15/12.
 //
-//
+//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "WebKit/WebArchive.h"
 
 @interface RwhMailHeaderString : NSObject {
     @private
-    NSMutableAttributedString *headstr;
+    NSMutableAttributedString *mailHeaderString;    
+    int headerItemCount;
+    BOOL replyToLabelFound;
 }
 
--(id)init;
--(id)initWithStr: (NSAttributedString *)str;
--(id)initWithBackEnd: (id)backend;
-
--(void)boldHeaderLabels;
--(WebArchive *)getWebArch;
--(NSMutableAttributedString *)string;
+- (id)init;
+- (id)initWithMailMessage:(id)mailMessage;
+- (void)processMailHeader;
+- (WebArchive *)getWebArchive;
+- (int)getHeaderItemCount;
+- (BOOL)isReplyToLabelFound;
+- (void)dealloc;
 
 @end

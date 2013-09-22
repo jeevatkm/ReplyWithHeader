@@ -24,11 +24,17 @@
  * THE SOFTWARE.
  */
 
+// RwhMailMessage Class completely rewritten by Jeevanandam M. on Sep 23, 2013
+
 #import "RwhMailBundle.h"
 #import "RwhMailMessage.h"
 #import "RwhMailMacros.h"
 #import "RwhMailConstants.h"
 #import "RwhMailQuotedOriginal.h"
+
+@interface RwhMailMessage (PrivateMethods)
+- (id)type;
+@end
 
 @implementation RwhMailMessage
 
@@ -38,39 +44,24 @@
     
     //if we sizzled, this should be fine... (because this would be calling the original implementation)
     [self rwhContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
-
-    BOOL rwhEnabled = [RwhMailBundle isEnabled];
-    BOOL rwhReplaceForwardHeaderEnabled = GET_BOOL_USER_DEFAULT(RwhMailForwardHeaderEnabled);
     
-    //get my type and check it - reply or replyall only
-    int selftype=[self type];
-    
-    RWH_LOG(@"message type is %d",selftype);
-    
-	if( rwhEnabled ) {    
-        if( (selftype==1 || selftype==2) ) {
-            //start by setting up the quoted text from the original email
-            RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithBackEnd:self];
+	if( [RwhMailBundle isEnabled] ) {
+        // Start by setting up the quoted text from the original email
+        RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithMailMessage:self];
         
-            //create the header string element
-            RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithBackEnd:self];
+        // Create the header string element
+        RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithMailMessage:self];
         
-            //this is required for Mountain Lion - for some reason the mail headers are not bold anymore.
-            [newheaderString boldHeaderLabels];
+        // RWH processing Mail header
+        [newheaderString processMailHeader];
         
-            RWH_LOG(@"Sig=%@",[newheaderString string]);
+        //insert the new header text
+        [quotedText insertRwhMailHeader:newheaderString mailMessageType:[self type]];
         
-            //insert the new header text
-            [quotedText insertMailHeader:newheaderString];
-        }
-        
-        if( rwhReplaceForwardHeaderEnabled && selftype == 3 ) {
-            //start by setting up the quoted text from the original email
-            RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithBackEnd:self];
-            [quotedText insertFwdHeader];
-        }
+        // Once release it
+        [newheaderString release];
+        [quotedText release];
     }
 }
-
 
 @end

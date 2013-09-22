@@ -30,39 +30,30 @@
 //
 //  Created by Jason Schroth on 8/16/12.
 //
-//
+//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "WebKit/DOMDocumentFragment.h"
 #import "WebKit/DOMHTMLDivElement.h"
 #import "WebKit/DOMHTMLDocument.h"
 #import "WebKit/DOMNodeList.h"
+#import "WebKit/DOMElement.h"
 
 #import "RwhMailHeaderString.h"
 
 @interface RwhMailQuotedOriginal : NSObject {
 @private
     id document;
-    DOMDocumentFragment *border;
-    DOMDocumentFragment *fwdborder;
-    BOOL boldhead;
-    DOMHTMLDivElement *origemail;
+    DOMDocumentFragment *replyHeaderBorder;
+    DOMDocumentFragment *forwardHeaderBorder;
+    BOOL doBoldHeader;
+    DOMHTMLDivElement *originalEmail;
     BOOL isPlainText; //howdeep
     int textNodeLocation; //which
     DOMNodeList *dhc; //document header children
 }
 
--(id)init;
--(id)initWithBackEnd: (id)backend;
-@end
-
-//private methods declared here
-@interface RwhMailQuotedOriginal ()
--(void)initVars;
--(void)prepQuotedPlainText;
--(void)removeOriginalPlainTextHeader;
--(void)removeOriginalHeader;
--(void)insertMailHeader:(RwhMailHeaderString *)headStr;
--(void)insertFwdHeader;
--(void)supportEntourage2004:(DOMDocumentFragment *) headFrag;
+- (id)init;
+- (id)initWithMailMessage:(id)orgMailMessage;
+- (void)insertRwhMailHeader:(RwhMailHeaderString *)rwhMailHeader mailMessageType:(int)messageType;
 
 @end
