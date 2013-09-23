@@ -34,12 +34,13 @@
 //  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "RwhMailHeaderString.h"
+#import "RwhMailConstants.h"
+#import "RwhMailMacros.h"
+#import "NSMutableAttributedString+RwhMailBundle.h"
 
 @interface RwhMailHeaderString (PrivateMethods)
 - (void)initVars;
 - (void)fixHeaderStyles;
-- (void)applyNewHeaderStyles;
-- (void)fixForwardHeaderPrefix;
 - (void)suppressReplyToLabel;
 
 - (id)originalMessageHeaders;
@@ -71,9 +72,12 @@
     
     //initialze the value with a mutable copy of the attributed string
     if (self = [super init]) {
-        [self initVars];
+        [self init];
         
         mailHeaderString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+        
+        [self fixHeaderStyles];
+        [self suppressReplyToLabel];
         
         RWH_LOG(@"MailHeaderString: created headstr: %@",headstr);
     }
@@ -84,60 +88,24 @@
     return self;
 }
 
-- (void)processMailHeader {
+- (void)applyHeaderTypography {
     RWH_LOG();
     
-    // Style processing
-    [self fixHeaderStyles];
-    [self applyNewHeaderStyles];
+    NSRange range;
+    range.location = 0;
+    range.length = [mailHeaderString length];
     
-    [self suppressReplyToLabel];
+    NSString *fontString = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName);
+    NSString *fontSize = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize);
+    NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
     
-    RWH_LOG(@"Newly processed RWH header string: %@", headstr);
+    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_USER_DATA_DEFAULT(RwhMailHeaderFontColor)];
+    
+    [mailHeaderString addAttribute:@"NSFont" value:font range:range];
+    [mailHeaderString addAttribute:@"NSColor" value:color range:range];
 }
 
-- (WebArchive *)getWebArchive {
-    RWH_LOG();
-    
-    WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
-    return arch;
-}
-
-- (int)getHeaderItemCount {
-    RWH_LOG(@"Mail header count is %d", headerItemCount);
-    
-    return headerItemCount;
-}
-
-- (BOOL)isReplyToLabelFound {
-    RWH_LOG(@"Reply-To Label found : %@", isReplyToLabelFound);
-    
-    return replyToLabelFound;
-}
-
-- (void)dealloc {
-    mailHeaderString = nil;
-    
-    free(mailHeaderString);
-    
-    [super dealloc];
-}
-
-#pragma mark Class private methods
-
-
-- (void)initVars {
-    headerItemCount = 1;
-}
-
-- (void)fixHeaderStyles {
-    RWH_LOG();
-    
-    [mailHeaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[mailHeaderString length])];
-    [mailHeaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[mailHeaderString length])];
-}
-
-- (void)applyNewHeaderStyles {
+- (void)applyBoldFontTraits {
     RWH_LOG();
     
     // setup a regular expression to find a word followed by a colon and then space
@@ -162,22 +130,65 @@
         // workaround to get header count
         headerItemCount++;
     }
-    
 }
 
-// Upcoming...
-- (void)fixForwardHeaderSubjectPrefix {
-    // Upcoming
+- (WebArchive *)getWebArchive {
     RWH_LOG();
+    
+    [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:mailHeaderString];
+    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:mailHeaderString];
+    
+    WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
+    return arch;
+}
+
+- (int)getHeaderItemCount {
+    RWH_LOG(@"Mail header count is %d", headerItemCount);
+    
+    return headerItemCount;
+}
+
+- (BOOL)isReplyToLabelFound {
+    RWH_LOG(@"Reply-To Label found : %@", isReplyToLabelFound);
+    
+    return replyToLabelFound;
+}
+
+- (NSString *)stringValue {
+    return [mailHeaderString string];
+}
+
+- (void)dealloc {
+    mailHeaderString = nil;
+    headerItemCount=nil;
+    
+    free(mailHeaderString);
+    free(headerItemCount);
+    
+    [super dealloc];
+}
+
+
+#pragma mark Class private methods
+
+- (void)initVars {
+    headerItemCount = 1;
+}
+
+- (void)fixHeaderStyles {
+    RWH_LOG();
+    
+    [mailHeaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[mailHeaderString length])];
+    [mailHeaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[mailHeaderString length])];
 }
 
 - (void)suppressReplyToLabel {
     RWH_LOG();
     
     NSError *error = NULL;
-    NSRegularExpression *subjectRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *replyToRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange replyLabelMatch = [subjectRegex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
+    NSRange replyLabelMatch = [replyToRegex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
     
     if ( replyLabelMatch.location == NSNotFound ) {
         RWH_LOG(@"Reply To label doesn't found");
@@ -187,13 +198,13 @@
     else {
         replyToLabelFound = YES;
         
-        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n"]];
+        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]];
         
         [mailHeaderString replaceCharactersInRange:NSMakeRange(replyLabelMatch.location, ([mailHeaderString length] - replyLabelMatch.location))
                      withAttributedString:replaceString];
         
         [replaceString release];
-    }    
+    }
 }
 
 @end

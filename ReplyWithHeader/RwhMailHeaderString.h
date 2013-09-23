@@ -42,9 +42,12 @@
     BOOL replyToLabelFound;
 }
 
+@property (weak, readonly) NSString *stringValue;
+
 - (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
-- (void)processMailHeader;
+- (void)applyHeaderTypography;
+- (void)applyBoldFontTraits;
 - (WebArchive *)getWebArchive;
 - (int)getHeaderItemCount;
 - (BOOL)isReplyToLabelFound;

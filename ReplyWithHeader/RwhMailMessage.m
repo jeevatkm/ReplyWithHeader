@@ -39,21 +39,17 @@
 @implementation RwhMailMessage
 
 - (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
-    //Log that we are here
     RWH_LOG();
     
     //if we sizzled, this should be fine... (because this would be calling the original implementation)
     [self rwhContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
-	if( [RwhMailBundle isEnabled] ) {
-        // Start by setting up the quoted text from the original email
+	if ([RwhMailBundle isEnabled]) {
+        // Initailzing the quoted text from the original email
         RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithMailMessage:self];
         
-        // Create the header string element
+        // Create the header string element from the original email
         RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithMailMessage:self];
-        
-        // RWH processing Mail header
-        [newheaderString processMailHeader];
         
         //insert the new header text
         [quotedText insertRwhMailHeader:newheaderString mailMessageType:[self type]];

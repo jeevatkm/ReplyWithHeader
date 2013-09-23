@@ -24,6 +24,7 @@
  * THE SOFTWARE.
  */
 
+// RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
 
 #import "RwhMailBundle.h"
 #import "RwhMailPreferencesModule.h"
@@ -31,12 +32,12 @@
 #import "RwhMailMacros.h"
 
 @interface RwhMailPreferencesModule (PrivateMethods)
-- (void)toggleRwhPreferencesOptions: (BOOL *)state;
+- (void)toggleRwhPreferencesOptions:(BOOL *)state;
 - (void)enableRwhPreferencesOptions;
 - (void)disableRwhPreferencesOptions;
-- (NSString *)rwhNameAndVersion;
-- (NSString *)rwhCopyright;
+
 - (IBAction)rwhMailBundlePressed:(id)sender;
+- (IBAction)rwhHeaderTypographyPressed:(id)sender;
 - (IBAction)rwhSelectFontPressed:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openFeedback:(id)sender;
@@ -57,16 +58,22 @@
 
 - (void)enableRwhPreferencesOptions {
     [_RwhReplyHeaderText setEnabled:YES];
+    [_RwhHeaderTypographyEnabled setEnabled:YES];
     [_RwhEntourage2004SupportEnabled setEnabled:YES];
     [_RwhForwardHeaderEnabled setEnabled:YES];
     [_RwhForwardHeaderText setEnabled:YES];
+    [_RwhMailSelectFont setEnabled:YES];
+    [_RwhMailColorWell setEnabled:YES];
 }
 
 - (void)disableRwhPreferencesOptions {
     [_RwhReplyHeaderText setEnabled:NO];
+    [_RwhHeaderTypographyEnabled setEnabled:NO];
     [_RwhEntourage2004SupportEnabled setEnabled:NO];
     [_RwhForwardHeaderEnabled setEnabled:NO];
     [_RwhForwardHeaderText setEnabled:NO];
+    [_RwhMailSelectFont setEnabled:NO];
+    [_RwhMailColorWell setEnabled:NO];
 }
 
 - (NSString *)rwhNameAndVersion {
@@ -81,29 +88,41 @@
     [self toggleRwhPreferencesOptions:[sender state]];
 }
 
-- (IBAction)rwhSelectFontPressed:(id)sender {    
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+- (IBAction)rwhHeaderTypographyPressed:(id)sender {
+    if ( [sender state] ) {
+        [_RwhMailSelectFont setEnabled:YES];
+        [_RwhMailColorWell setEnabled:YES];
+    } else {
+        [_RwhMailSelectFont setEnabled:NO];
+        [_RwhMailColorWell setEnabled:NO];
+    }
+}
+
+- (IBAction)rwhSelectFontPressed:(id)sender {
+    RWH_LOG();
     
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
     [fontManager setDelegate:self];
-    [fontManager setEnabled:YES];
+    [fontManager setTarget:self];
     [fontManager orderFrontFontPanel:self];
     
     NSString *font = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName);
     NSString *fontSize = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize);
     
-    RWH_LOG(@"Already choosen Font Name: %@ size: %@", font,fontSize);
-    
     [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (void)changeFont:(id)sender {    
-    NSFont *font = [[NSFontManager sharedFontManager] selectedFont];
+- (void)changeFont:(id)sender {
+    RWH_LOG();
+    
+    NSFont *oldFont = _RwhMailHeaderFontNameAndSize.font;
+    NSFont *font = [sender convertFont:oldFont];
     NSString *fontSize = [NSString stringWithFormat: @"%.0f", font.pointSize];
     
     NSString *fontDescription = [NSString stringWithFormat: @"%@ %.0f", font.fontName, font.pointSize];
     
     SET_USER_DEFAULT(font.fontName, RwhMailHeaderFontName);
-    SET_USER_DEFAULT(fontSize, RwhMailHeaderFontSize);    
+    SET_USER_DEFAULT(fontSize, RwhMailHeaderFontSize);
     
     [_RwhMailHeaderFontNameAndSize setStringValue:fontDescription];
 }
@@ -138,6 +157,8 @@
 #pragma mark NSPreferencesModule instance methods
 
 - (void)awakeFromNib {
+    RWH_LOG();
+    
     [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
     
     [_RwhMailHeaderFontNameAndSize
@@ -157,7 +178,7 @@
 }
 
 - (BOOL)isResizable {
-	return NO;
+	return YES;
 }
 
 @end

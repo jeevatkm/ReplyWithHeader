@@ -42,8 +42,9 @@
 - (void)removeOriginalHeaderPrefix;
 - (void)prepareQuotedPlainText;
 - (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment;
-- (DOMDocumentFragment *)createDocumentFragment: (NSString *)str;
 - (void)removeOriginalForwardHeader:(int)headerCount;
+- (void)checkSpaceAndAddOne;
+- (DOMDocumentFragment *)createDocumentFragment: (NSString *)str;
 
 - (id)htmlDocument;
 - (DOMDocumentFragment *)createDocumentFragmentWithMarkupString: (NSString *)str;
@@ -75,11 +76,11 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     return self;
 }
 
-- (id)initWithMailMessage:(id)orgMailMessage {
+- (id)initWithMailMessage:(id)mailMessage {
     //initialze the value with a mutable copy of the attributed string
     if ( self = [super init] ) {
 		//set the class document variable
-        document = [orgMailMessage document];
+        document = [mailMessage document];
         
         RWH_LOG(@"Mail Document: %@", document);
         
@@ -87,7 +88,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         [self initVars];
          
         //if there is not a child in the original email, it must be plain text
-        if ([originalEmail firstChild]==NULL) {
+        if ([originalEmail firstChild]==NULL) {            
             //prep the plain text
             [self prepareQuotedPlainText];
         }
@@ -112,23 +113,34 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     return self;
 }
 
-- (void)insertRwhMailHeader:(RwhMailHeaderString *)rwhMailHeader mailMessageType:(int)messageType {
+- (void)insertRwhMailHeader:(RwhMailHeaderString *)mailHeader mailMessageType:(int)messageType {
     
     RWH_LOG(@"Composing message type is %d", messageType);
     
-    if (GET_BOOL_USER_DEFAULT(RwhMailForwardHeaderEnabled) && messageType == 3) {
-        [self removeOriginalForwardHeader:[rwhMailHeader getHeaderItemCount]];
+    if (GET_BOOL_USER_DEFAULT(RwhMailHeaderTypographyEnabled) && !isPlainText) {
+        [mailHeader applyHeaderTypography];
     }
-     
-    //this routine will also add the border
-    DOMDocumentFragment *headerFragment=[[document htmlDocument] createFragmentForWebArchive:[rwhMailHeader getWebArchive]];
+    
+    [mailHeader applyBoldFontTraits];
+    
+    if (GET_BOOL_USER_DEFAULT(RwhMailForwardHeaderEnabled) && messageType == 3) {
+        [self removeOriginalForwardHeader:[mailHeader getHeaderItemCount]];
+    }
+    
+    [self checkSpaceAndAddOne];
+    
+    DOMDocumentFragment *headerFragment=[[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     
     //check if we need to do Entourage 2004 text size transformations...    
     if( GET_BOOL_USER_DEFAULT(RwhMailEntourage2004SupportEnabled) ) {
         [self applyEntourage2004Support:headerFragment];
     }
     
+    RWH_LOG(@"Newly processed RWH header: %@", [mailHeader getStringValue]);
+    
     if( isPlainText ) {
+        NSLog(@"Composing mail format is Plain: %c", isPlainText);
+        
         if( textNodeLocation > 0 ) {
             //check if this is plain text by seeing if textNodeLocation points to a br element...
             //  if not, include in blockquote
@@ -336,10 +348,6 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 }
 
-- (DOMDocumentFragment *)createDocumentFragment:(NSString *)htmlString {
-    return [[document htmlDocument]
-            createDocumentFragmentWithMarkupString:htmlString];
-}
 
 - (void)removeOriginalForwardHeader:(int)headerCount {
     RWH_LOG();
@@ -350,5 +358,21 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 }
 
+- (void)checkSpaceAndAddOne {
+    RWH_LOG();
+    
+    /*DOMNodeList *nodes = [originalEmail childNodes];
+    for (int i=0; i<[nodes length]; i++) {
+        DOMNode *node = [nodes item:i];
+        
+        NSLog(@"== Node at %d, content is %@", i, [node textContent]);
+        NSLog(@"Node structure is %@", node);
+    }*/
+}
+
+- (DOMDocumentFragment *)createDocumentFragment:(NSString *)htmlString {
+    return [[document htmlDocument]
+            createDocumentFragmentWithMarkupString:htmlString];
+}
 
 @end

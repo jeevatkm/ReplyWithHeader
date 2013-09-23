@@ -24,6 +24,7 @@
  * THE SOFTWARE.
  */
 
+
 #import "NSPreferencesModule.h"
 
 /*!
@@ -33,16 +34,23 @@
  * specific to the RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
+ *
+ * RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
 @interface RwhMailPreferencesModule : NSPreferencesModule {
     IBOutlet NSButton *_RwhMailBundleEnabled;
-    IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
-    IBOutlet NSTextField *_RwhReplyHeaderText;
-    IBOutlet NSTextField *_RwhForwardHeaderText;
     IBOutlet NSButton *_RwhForwardHeaderEnabled;
+    IBOutlet NSButton *_RwhHeaderTypographyEnabled;
+    IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
+    IBOutlet NSButton *_RwhMailSelectFont;
+    IBOutlet NSTextField *_RwhReplyHeaderText;
+    IBOutlet NSTextField *_RwhForwardHeaderText;    
     IBOutlet NSImageView *_RwhMailBundleLogo;
     IBOutlet NSTextField *_RwhMailHeaderFontNameAndSize;
+    IBOutlet NSColorWell *_RwhMailColorWell;
 }
+
+@property(weak, readonly) NSString *rwhNameAndVersion, *rwhCopyright;
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */

@@ -53,7 +53,7 @@
 }
 
 - (id)init;
-- (id)initWithMailMessage:(id)orgMailMessage;
+- (id)initWithMailMessage:(id)mailMessage;
 - (void)insertRwhMailHeader:(RwhMailHeaderString *)rwhMailHeader mailMessageType:(int)messageType;
 
 @end

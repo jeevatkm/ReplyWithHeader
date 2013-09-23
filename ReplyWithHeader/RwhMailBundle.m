@@ -160,16 +160,8 @@
         SET_BOOL_USER_DEFAULT(YES, RwhMailForwardHeaderEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
-        SET_BOOL_USER_DEFAULT(NO, RwhMailEntourage2004SupportEnabled);
-    }
-    
-    if (!GET_USER_DEFAULT(RwhMailReplyHeaderText)) {
-        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
-    }
-    
-    if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
-        SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
+    if (!GET_USER_DEFAULT(RwhMailHeaderTypographyEnabled)) {
+        SET_BOOL_USER_DEFAULT(YES, RwhMailHeaderTypographyEnabled);
     }
     
     if (!GET_USER_DEFAULT(RwhMailHeaderFontName)) {
@@ -183,6 +175,18 @@
     if (!GET_USER_DEFAULT(RwhMailHeaderFontColor)) {
         SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderFontColor);
     }
+    
+    if (!GET_USER_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
+        SET_BOOL_USER_DEFAULT(NO, RwhMailEntourage2004SupportEnabled);
+    }
+    
+    if (!GET_USER_DEFAULT(RwhMailReplyHeaderText)) {
+        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
+    }
+    
+    if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
+        SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
+    }    
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {

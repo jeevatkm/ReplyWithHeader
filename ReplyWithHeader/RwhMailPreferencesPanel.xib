@@ -50,7 +50,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="144494481">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">12</int>
+						<int key="NSvFlags">268</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="NSView" id="795536607">
 								<reference key="NSNextResponder" ref="144494481"/>
@@ -59,7 +59,7 @@
 									<object class="NSButton" id="253931335">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{16, 340}, {115, 18}}</string>
+										<string key="NSFrame">{{16, 342}, {115, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="404746024"/>
@@ -347,7 +347,7 @@
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="548090529">
 																<int key="NSCellFlags">68157504</int>
-																<int key="NSCellFlags2">4195328</int>
+																<int key="NSCellFlags2">1077941248</int>
 																<string key="NSContents">Font Name and Size</string>
 																<object class="NSFont" key="NSSupport" id="27">
 																	<string key="NSName">LucidaGrande-Bold</string>
@@ -1180,6 +1180,38 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">279</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_RwhHeaderTypographyEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="437544001"/>
+					</object>
+					<int key="connectionID">282</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_RwhMailSelectFont</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="609156550"/>
+					</object>
+					<int key="connectionID">283</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_RwhMailColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="740322338"/>
+					</object>
+					<int key="connectionID">284</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">rwhHeaderTypographyPressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="437544001"/>
+					</object>
+					<int key="connectionID">285</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.RwhMailBundleEnabled</string>
 						<reference key="source" ref="253931335"/>
@@ -1290,6 +1322,22 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<int key="connectionID">254</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.RwhHeaderTypographyEnabled</string>
+						<reference key="source" ref="437544001"/>
+						<reference key="destination" ref="943210722"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="437544001"/>
+							<reference key="NSDestination" ref="943210722"/>
+							<string key="NSLabel">value: values.RwhHeaderTypographyEnabled</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.RwhHeaderTypographyEnabled</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">281</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1974,7 +2022,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">279</int>
+			<int key="maxID">285</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2004,6 +2052,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="openFeedback:">id</string>
 						<string key="openSupport:">id</string>
 						<string key="openWebsite:">id</string>
+						<string key="rwhHeaderTypographyPressed:">id</string>
 						<string key="rwhMailBundlePressed:">id</string>
 						<string key="rwhSelectFontPressed:">id</string>
 					</dictionary>
@@ -2020,6 +2069,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string key="name">openWebsite:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="rwhHeaderTypographyPressed:">
+							<string key="name">rwhHeaderTypographyPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="rwhMailBundlePressed:">
 							<string key="name">rwhMailBundlePressed:</string>
 							<string key="candidateClassName">id</string>
@@ -2033,9 +2086,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="_RwhEntourage2004SupportEnabled">NSButton</string>
 						<string key="_RwhForwardHeaderEnabled">NSButton</string>
 						<string key="_RwhForwardHeaderText">NSTextField</string>
+						<string key="_RwhHeaderTypographyEnabled">NSButton</string>
 						<string key="_RwhMailBundleEnabled">NSButton</string>
 						<string key="_RwhMailBundleLogo">NSImageView</string>
+						<string key="_RwhMailColorWell">NSColorWell</string>
 						<string key="_RwhMailHeaderFontNameAndSize">NSTextField</string>
+						<string key="_RwhMailSelectFont">NSButton</string>
 						<string key="_RwhReplyHeaderText">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -2051,6 +2107,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string key="name">_RwhForwardHeaderText</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="_RwhHeaderTypographyEnabled">
+							<string key="name">_RwhHeaderTypographyEnabled</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="_RwhMailBundleEnabled">
 							<string key="name">_RwhMailBundleEnabled</string>
 							<string key="candidateClassName">NSButton</string>
@@ -2059,9 +2119,17 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string key="name">_RwhMailBundleLogo</string>
 							<string key="candidateClassName">NSImageView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="_RwhMailColorWell">
+							<string key="name">_RwhMailColorWell</string>
+							<string key="candidateClassName">NSColorWell</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="_RwhMailHeaderFontNameAndSize">
 							<string key="name">_RwhMailHeaderFontNameAndSize</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_RwhMailSelectFont">
+							<string key="name">_RwhMailSelectFont</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_RwhReplyHeaderText">
 							<string key="name">_RwhReplyHeaderText</string>
