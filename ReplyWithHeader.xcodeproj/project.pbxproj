@@ -131,8 +131,7 @@
 		133A918C17E9751A00E3CC62 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */,
-				13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */,
+				1376067E17F0C43200BDEB41 /* Category */,
 				13575F7917EB90650047BF62 /* RwhMailMacros.h */,
 				13575F7A17EB90650047BF62 /* RwhMailConstants.h */,
 				13575F7417EB82690047BF62 /* RwhMailBundle.m */,
@@ -147,10 +146,19 @@
 				133A917917E9745A00E3CC62 /* RwhMailPreferences.m */,
 				133A917A17E9745A00E3CC62 /* RwhMailPreferencesModule.h */,
 				133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1376067E17F0C43200BDEB41 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */,
+				13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */,
 				1376067B17F0BC2800BDEB41 /* NSMutableAttributedString+RwhMailBundle.h */,
 				1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */,
 			);
-			name = Source;
+			name = Category;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {

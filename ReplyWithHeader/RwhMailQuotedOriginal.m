@@ -35,6 +35,7 @@
 #import "RwhMailQuotedOriginal.h"
 #import "RwhMailMacros.h"
 #import "RwhMailConstants.h"
+#import "WebKit/DOMHTMLBRElement.h"
 
 @interface RwhMailQuotedOriginal (PrivateMethods)
 - (void)initVars;
@@ -43,7 +44,6 @@
 - (void)prepareQuotedPlainText;
 - (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment;
 - (void)removeOriginalForwardHeader:(int)headerCount;
-- (void)checkSpaceAndAddOne;
 - (DOMDocumentFragment *)createDocumentFragment: (NSString *)str;
 
 - (id)htmlDocument;
@@ -127,9 +127,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         [self removeOriginalForwardHeader:[mailHeader getHeaderItemCount]];
     }
     
-    [self checkSpaceAndAddOne];
-    
-    DOMDocumentFragment *headerFragment=[[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
+    DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
+    DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
     //check if we need to do Entourage 2004 text size transformations...    
     if( GET_BOOL_USER_DEFAULT(RwhMailEntourage2004SupportEnabled) ) {
@@ -138,17 +137,18 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Newly processed RWH header: %@", [mailHeader getStringValue]);
     
-    if( isPlainText ) {
-        NSLog(@"Composing mail format is Plain: %c", isPlainText);
-        
+    if( isPlainText ) {        
         if( textNodeLocation > 0 ) {
             //check if this is plain text by seeing if textNodeLocation points to a br element...
             //  if not, include in blockquote
             if( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
+                [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
                 [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
                 [originalEmail insertBefore:replyHeaderBorder refChild:[dhc item:textNodeLocation]];
             }
             else {
+                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+                
                 [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
                 
                 [[[originalEmail childNodes] item:textNodeLocation] insertBefore:replyHeaderBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
@@ -167,10 +167,12 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         RWH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n",numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
         
         if( numGrandChildCount == 0 ) {
+            [originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
 			[originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
 			[originalEmail insertBefore:replyHeaderBorder refChild: [originalEmail firstChild]];
         }
         else {
+            [[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
 			[[originalEmail firstChild] insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
 			[[originalEmail firstChild] insertBefore:replyHeaderBorder refChild: [[originalEmail firstChild] firstChild]];
         }
@@ -356,18 +358,6 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     for (int i=0; i<=headerCount; i++) {
         [originalEmail removeChild:[originalEmail firstChild]];
     }
-}
-
-- (void)checkSpaceAndAddOne {
-    RWH_LOG();
-    
-    /*DOMNodeList *nodes = [originalEmail childNodes];
-    for (int i=0; i<[nodes length]; i++) {
-        DOMNode *node = [nodes item:i];
-        
-        NSLog(@"== Node at %d, content is %@", i, [node textContent]);
-        NSLog(@"Node structure is %@", node);
-    }*/
 }
 
 - (DOMDocumentFragment *)createDocumentFragment:(NSString *)htmlString {

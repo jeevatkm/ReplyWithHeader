@@ -139,6 +139,7 @@
     [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:mailHeaderString];
     
     WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
+    
     return arch;
 }
 
