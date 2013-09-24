@@ -37,9 +37,10 @@
 
 @interface RwhMailHeaderString : NSObject {
     @private
-    NSMutableAttributedString *mailHeaderString;    
+    NSMutableAttributedString *mailHeaderString;
     int headerItemCount;
-    BOOL replyToLabelFound;
+    BOOL isSuppressLabelsFound;
+    int suppressLabelsCount;
 }
 
 @property (weak, readonly) NSString *stringValue;
@@ -50,7 +51,7 @@
 - (void)applyBoldFontTraits;
 - (WebArchive *)getWebArchive;
 - (int)getHeaderItemCount;
-- (BOOL)isReplyToLabelFound;
+- (BOOL)isSuppressLabelsFound;
 - (void)dealloc;
 
 @end

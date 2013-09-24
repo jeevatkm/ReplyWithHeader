@@ -37,18 +37,15 @@
 #import "RwhMailConstants.h"
 #import "RwhMailMacros.h"
 #import "NSMutableAttributedString+RwhMailBundle.h"
+#import "NSAttributedString+MailAttributedStringToHTML.h"
 
 @interface RwhMailHeaderString (PrivateMethods)
 - (void)initVars;
-- (void)fixHeaderStyles;
-- (void)suppressReplyToLabel;
+- (void)fixHeaderString;
+- (void)suppressImplicateHeaderLabels;
 
 - (id)originalMessageHeaders;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
-@end
-
-@interface NSMutableAttributedString ()
-- (WebArchive *)webArchiveForRange:(NSRange)range fixUpNewlines:(BOOL)newLineFix;
 @end
 
 @implementation RwhMailHeaderString
@@ -76,10 +73,8 @@
         
         mailHeaderString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
         
-        [self fixHeaderStyles];
-        [self suppressReplyToLabel];
-        
-        RWH_LOG(@"MailHeaderString: created headstr: %@",headstr);
+        [self fixHeaderString];
+        [self suppressImplicateHeaderLabels];
     }
     else {
         RWH_LOG(@"MailHeaderString: Init initWithMailMessage failed");
@@ -90,7 +85,7 @@
 
 - (void)applyHeaderTypography {
     RWH_LOG();
-    
+
     NSRange range;
     range.location = 0;
     range.length = [mailHeaderString length];
@@ -99,10 +94,10 @@
     NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
     
-    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderColor)];
+    NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderColor)];
     
     [mailHeaderString addAttribute:@"NSFont" value:font range:range];
-    [mailHeaderString addAttribute:@"NSColor" value:color range:range];
+    [mailHeaderString addAttribute:@"NSColor" value:color range:range];    
 }
 
 - (void)applyBoldFontTraits {
@@ -121,7 +116,7 @@
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
     regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches=[regex matchesInString:[mailHeaderString string] options:0 range:NSMakeRange(0,[mailHeaderString length])];
+    NSArray *matches = [regex matchesInString:[mailHeaderString string] options:0 range:NSMakeRange(0,[mailHeaderString length])];
     
     for (NSTextCheckingResult *match in matches) {
         NSRange matchRange = [match range];
@@ -132,15 +127,9 @@
     }
 }
 
-- (WebArchive *)getWebArchive {
-    RWH_LOG();
-    
-    [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:mailHeaderString];
-    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:mailHeaderString];
-    
+- (WebArchive *)getWebArchive {    
     WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
-    
-    return arch;
+      return arch;
 }
 
 - (int)getHeaderItemCount {
@@ -149,10 +138,10 @@
     return headerItemCount;
 }
 
-- (BOOL)isReplyToLabelFound {
-    RWH_LOG(@"Reply-To Label found : %@", isReplyToLabelFound);
+- (BOOL)isSuppressLabelsFound {
+    RWH_LOG(@"Suppress Labels found: %@ and count is %d", isSuppressLabelsFound, suppressLabelsCount);
     
-    return replyToLabelFound;
+    return isSuppressLabelsFound;
 }
 
 - (NSString *)stringValue {
@@ -174,16 +163,21 @@
 
 - (void)initVars {
     headerItemCount = 1;
+    
+    suppressLabelsCount = 0;
 }
 
-- (void)fixHeaderStyles {
+- (void)fixHeaderString {
     RWH_LOG();
     
     [mailHeaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[mailHeaderString length])];
     [mailHeaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[mailHeaderString length])];
+    
+    [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:mailHeaderString];
+    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:mailHeaderString];
 }
 
-- (void)suppressReplyToLabel {
+- (void)suppressImplicateHeaderLabels {
     RWH_LOG();
     
     NSError *error = NULL;
@@ -194,10 +188,10 @@
     if ( replyLabelMatch.location == NSNotFound ) {
         RWH_LOG(@"Reply To label doesn't found");
         
-        replyToLabelFound = NO;
+        isSuppressLabelsFound = NO;
     }
     else {
-        replyToLabelFound = YES;
+        isSuppressLabelsFound = YES;
         
         NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]];
         

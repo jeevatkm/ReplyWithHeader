@@ -365,7 +365,7 @@
 														<object class="NSButton" id="609156550">
 															<reference key="NSNextResponder" ref="1018010683"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{290, 166}, {95, 19}}</string>
+															<string key="NSFrame">{{290, 166}, {131, 19}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="548579340"/>
@@ -374,7 +374,7 @@
 															<object class="NSButtonCell" key="NSCell" id="587073468">
 																<int key="NSCellFlags">-2080374784</int>
 																<int key="NSCellFlags2">134217728</int>
-																<string key="NSContents">Select Font</string>
+																<string key="NSContents">Select Font and Size</string>
 																<reference key="NSSupport" ref="26"/>
 																<string key="NSCellIdentifier">_NS:9</string>
 																<reference key="NSControlView" ref="609156550"/>
@@ -395,12 +395,13 @@
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="149260813"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
+															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<int key="NSNumRows">1</int>
 															<int key="NSNumCols">2</int>
 															<array class="NSMutableArray" key="NSCells">
 																<object class="NSButtonCell" id="175128492">
-																	<int key="NSCellFlags">-1543503872</int>
+																	<int key="NSCellFlags">-2080374784</int>
 																	<int key="NSCellFlags2">0</int>
 																	<string key="NSContents">Default Order</string>
 																	<reference key="NSSupport" ref="815075143"/>
@@ -417,7 +418,7 @@
 																	<int key="NSPeriodicInterval">25</int>
 																</object>
 																<object class="NSButtonCell" id="870038061">
-																	<int key="NSCellFlags">603979776</int>
+																	<int key="NSCellFlags">67108864</int>
 																	<int key="NSCellFlags2">0</int>
 																	<string key="NSContents">Outlook Mail Order</string>
 																	<reference key="NSSupport" ref="815075143"/>
@@ -434,7 +435,7 @@
 															<int key="NSMatrixFlags">1143480320</int>
 															<string key="NSCellClass">NSActionCell</string>
 															<object class="NSButtonCell" key="NSProtoCell" id="70911774">
-																<int key="NSCellFlags">603979776</int>
+																<int key="NSCellFlags">67108864</int>
 																<int key="NSCellFlags2">0</int>
 																<string key="NSContents">Radio</string>
 																<reference key="NSSupport" ref="563141123"/>
@@ -504,9 +505,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSButtonCell" key="NSCell" id="402549120">
-																<int key="NSCellFlags">-1543503872</int>
+																<int key="NSCellFlags">-2080374784</int>
 																<int key="NSCellFlags2">268435456</int>
-																<string key="NSContents">Header Label Order (Upcoming...)</string>
+																<string key="NSContents">Header Label Order</string>
 																<reference key="NSSupport" ref="563141123"/>
 																<string key="NSCellIdentifier">_NS:9</string>
 																<reference key="NSControlView" ref="144896113"/>
@@ -603,7 +604,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{26, 17}, {426, 29}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="535149391">

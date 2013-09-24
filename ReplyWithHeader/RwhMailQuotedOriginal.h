@@ -43,8 +43,7 @@
 @interface RwhMailQuotedOriginal : NSObject {
 @private
     id document;
-    DOMDocumentFragment *replyHeaderBorder;
-    DOMDocumentFragment *forwardHeaderBorder;
+    DOMDocumentFragment *headerBorder;
     BOOL doHeaderTypography;
     DOMHTMLDivElement *originalEmail;
     BOOL isPlainText; //howdeep

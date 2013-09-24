@@ -55,6 +55,7 @@
 		133A917A17E9745A00E3CC62 /* RwhMailPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailPreferencesModule.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailPreferencesModule.m; sourceTree = "<group>"; };
 		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MailAttributedStringToHTML.h"; sourceTree = "<group>"; };
 		13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RwhMailBundle.m"; sourceTree = "<group>"; };
 		13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RwhMailBundle.h"; sourceTree = "<group>"; };
 		13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle_Prefix.pch; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 				13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */,
 				1376067B17F0BC2800BDEB41 /* NSMutableAttributedString+RwhMailBundle.h */,
 				1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */,
+				133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */,
 			);
 			name = Category;
 			sourceTree = "<group>";

@@ -137,7 +137,8 @@
     
     [infoAlertBox setAlertStyle:NSInformationalAlertStyle];
     [infoAlertBox setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
-    [infoAlertBox setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];
+    [infoAlertBox setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];    
+    [infoAlertBox setIcon:[RwhMailBundle bundleLogo]];
     
     [infoAlertBox runModal];
     
