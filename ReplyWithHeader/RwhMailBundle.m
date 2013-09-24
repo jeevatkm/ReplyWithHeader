@@ -88,7 +88,7 @@
 }
 
 + (BOOL)isEnabled {
-    return GET_BOOL_USER_DEFAULT(RwhMailBundleEnabled);
+    return GET_DEFAULT_BOOL(RwhMailBundleEnabled);
 }
 
 + (NSBundle *)bundle {
@@ -152,39 +152,39 @@
 + (void)assignRwhMailDefaultValues {
     RWH_LOG();
     
-    if (!GET_USER_DEFAULT(RwhMailBundleEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhMailBundleEnabled);
+    if (!GET_DEFAULT(RwhMailBundleEnabled)) {
+        SET_DEFAULT_BOOL(YES, RwhMailBundleEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailForwardHeaderEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhMailForwardHeaderEnabled);
+    if (!GET_DEFAULT(RwhMailForwardHeaderEnabled)) {
+        SET_DEFAULT_BOOL(YES, RwhMailForwardHeaderEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailHeaderTypographyEnabled)) {
-        SET_BOOL_USER_DEFAULT(YES, RwhMailHeaderTypographyEnabled);
+    if (!GET_DEFAULT(RwhMailHeaderTypographyEnabled)) {
+        SET_DEFAULT_BOOL(YES, RwhMailHeaderTypographyEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailHeaderFontName)) {
+    if (!GET_DEFAULT(RwhMailHeaderFontName)) {
         SET_USER_DEFAULT(RwhMailDefaultHeaderFontName , RwhMailHeaderFontName);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailHeaderFontSize)) {
+    if (!GET_DEFAULT(RwhMailHeaderFontSize)) {
         SET_USER_DEFAULT(RwhMailDefaultHeaderFontSize , RwhMailHeaderFontSize);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailHeaderFontColor)) {
+    if (!GET_DEFAULT(RwhMailHeaderFontColor)) {
         SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderFontColor);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
-        SET_BOOL_USER_DEFAULT(NO, RwhMailEntourage2004SupportEnabled);
+    if (!GET_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
+        SET_DEFAULT_BOOL(NO, RwhMailEntourage2004SupportEnabled);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailReplyHeaderText)) {
+    if (!GET_DEFAULT(RwhMailReplyHeaderText)) {
         SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
     }
     
-    if (!GET_USER_DEFAULT(RwhMailForwardHeaderText)) {
+    if (!GET_DEFAULT(RwhMailForwardHeaderText)) {
         SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
     }    
 }
@@ -192,34 +192,34 @@
 + (void)smoothValueTransToNewRwhMailPrefUI {
     RWH_LOG();
     
-    if (GET_BOOL_USER_DEFAULT(@"enableBundle")) {
-        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"enableBundle"), RwhMailBundleEnabled);
+    if (GET_DEFAULT_BOOL(@"enableBundle")) {
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"enableBundle"), RwhMailBundleEnabled);
         
-        REMOVE_USER_DEFAULT(@"enableBundle");
+        REMOVE_DEFAULT(@"enableBundle");
     }
     
-    if (GET_BOOL_USER_DEFAULT(@"replaceForward")) {
-        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"replaceForward"), RwhMailForwardHeaderEnabled);
+    if (GET_DEFAULT_BOOL(@"replaceForward")) {
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"replaceForward"), RwhMailForwardHeaderEnabled);
         
-        REMOVE_USER_DEFAULT(@"replaceForward");
+        REMOVE_DEFAULT(@"replaceForward");
     }
     
-    if (GET_BOOL_USER_DEFAULT(@"entourage2004Support")) {
-        SET_BOOL_USER_DEFAULT(GET_BOOL_USER_DEFAULT(@"entourage2004Support"), RwhMailEntourage2004SupportEnabled);
+    if (GET_DEFAULT_BOOL(@"entourage2004Support")) {
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), RwhMailEntourage2004SupportEnabled);
         
-        REMOVE_USER_DEFAULT(@"entourage2004Support");
+        REMOVE_DEFAULT(@"entourage2004Support");
     }
     
-    if (GET_USER_DEFAULT(@"headerText")) {
-        SET_USER_DEFAULT(GET_USER_DEFAULT(@"headerText"), RwhMailReplyHeaderText);
+    if (GET_DEFAULT(@"headerText")) {
+        SET_USER_DEFAULT(GET_DEFAULT(@"headerText"), RwhMailReplyHeaderText);
         
-        REMOVE_USER_DEFAULT(@"headerText");
+        REMOVE_DEFAULT(@"headerText");
     }
     
-    if (GET_USER_DEFAULT(@"forwardHeader")) {
-        SET_USER_DEFAULT(GET_USER_DEFAULT(@"forwardHeader"), RwhMailForwardHeaderText);
+    if (GET_DEFAULT(@"forwardHeader")) {
+        SET_USER_DEFAULT(GET_DEFAULT(@"forwardHeader"), RwhMailForwardHeaderText);
         
-        REMOVE_USER_DEFAULT(@"forwardHeader");
+        REMOVE_DEFAULT(@"forwardHeader");
     }
 }
 

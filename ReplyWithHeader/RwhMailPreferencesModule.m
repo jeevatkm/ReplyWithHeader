@@ -106,8 +106,8 @@
     [fontManager setTarget:self];
     [fontManager orderFrontFontPanel:self];
     
-    NSString *font = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName);
-    NSString *fontSize = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize);
+    NSString *font = GET_DEFAULT_VALUE(RwhMailHeaderFontName);
+    NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
     
     [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
@@ -163,8 +163,8 @@
     
     [_RwhMailHeaderFontNameAndSize
      setStringValue:[NSString stringWithFormat:@"%@ %@",
-                     GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName),
-                     GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize)]];
+                     GET_DEFAULT_VALUE(RwhMailHeaderFontName),
+                     GET_DEFAULT_VALUE(RwhMailHeaderFontSize)]];
     
     [_RwhMailBundleLogo setImage:[RwhMailBundle bundleLogo]];
 }

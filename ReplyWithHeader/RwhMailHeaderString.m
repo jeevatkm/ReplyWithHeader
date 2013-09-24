@@ -95,11 +95,11 @@
     range.location = 0;
     range.length = [mailHeaderString length];
     
-    NSString *fontString = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontName);
-    NSString *fontSize = GET_USER_VALUE_DEFAULT(RwhMailHeaderFontSize);
+    NSString *fontString = GET_DEFAULT_VALUE(RwhMailHeaderFontName);
+    NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
     
-    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_USER_DATA_DEFAULT(RwhMailHeaderFontColor)];
+    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderFontColor)];
     
     [mailHeaderString addAttribute:@"NSFont" value:font range:range];
     [mailHeaderString addAttribute:@"NSColor" value:color range:range];

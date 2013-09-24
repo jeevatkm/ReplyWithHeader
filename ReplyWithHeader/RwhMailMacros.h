@@ -32,11 +32,13 @@
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-#define GET_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
+#define GET_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
 #define SET_USER_DEFAULT(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
-#define GET_USER_DATA_DEFAULT(k) [[NSUserDefaults standardUserDefaults] dataForKey: k]
-#define GET_USER_VALUE_DEFAULT(k) [[NSUserDefaults standardUserDefaults] valueForKey: k]
-#define REMOVE_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
-#define GET_BOOL_USER_DEFAULT(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
-#define SET_BOOL_USER_DEFAULT(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
-#define SYNCHRONIZE_USER_DEFAULT() [[NSUserDefaults standardUserDefaults] synchronize];
+
+#define GET_DEFAULT_DATA(k) [[NSUserDefaults standardUserDefaults] dataForKey: k]
+#define GET_DEFAULT_VALUE(k) [[NSUserDefaults standardUserDefaults] valueForKey: k]
+
+#define REMOVE_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
+
+#define GET_DEFAULT_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
+#define SET_DEFAULT_BOOL(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )

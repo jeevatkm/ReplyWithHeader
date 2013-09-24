@@ -117,13 +117,13 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Composing message type is %d", messageType);
     
-    if (GET_BOOL_USER_DEFAULT(RwhMailHeaderTypographyEnabled) && !isPlainText) {
+    if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && !isPlainText) {
         [mailHeader applyHeaderTypography];
     }
     
     [mailHeader applyBoldFontTraits];
     
-    if (GET_BOOL_USER_DEFAULT(RwhMailForwardHeaderEnabled) && messageType == 3) {
+    if (GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled) && messageType == 3) {
         [self removeOriginalForwardHeader:[mailHeader getHeaderItemCount]];
     }
     
@@ -131,7 +131,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
     //check if we need to do Entourage 2004 text size transformations...    
-    if( GET_BOOL_USER_DEFAULT(RwhMailEntourage2004SupportEnabled) ) {
+    if( GET_DEFAULT_BOOL(RwhMailEntourage2004SupportEnabled) ) {
         [self applyEntourage2004Support:headerFragment];
     }
     
@@ -186,8 +186,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 
 - (void)initVars {
     
-    NSString *replyHeadline = GET_USER_DEFAULT(RwhMailReplyHeaderText);
-    NSString *forwardHeadline = GET_USER_DEFAULT(RwhMailForwardHeaderText);
+    NSString *replyHeadline = GET_DEFAULT(RwhMailReplyHeaderText);
+    NSString *forwardHeadline = GET_DEFAULT(RwhMailForwardHeaderText);
 
     RWH_LOG(@"RwhMailQuotedOriginal: initvar Reply Header text: %@, Forward Header text %@", replyHeadline, forwardHeadline);
     
