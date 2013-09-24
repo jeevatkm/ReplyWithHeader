@@ -57,21 +57,19 @@
 }
 
 - (void)enableRwhPreferencesOptions {
-    [_RwhReplyHeaderText setEnabled:YES];
+    [_RwhMailHeaderBorderString setEnabled:YES];
     [_RwhHeaderTypographyEnabled setEnabled:YES];
     [_RwhEntourage2004SupportEnabled setEnabled:YES];
     [_RwhForwardHeaderEnabled setEnabled:YES];
-    [_RwhForwardHeaderText setEnabled:YES];
     [_RwhMailSelectFont setEnabled:YES];
     [_RwhMailColorWell setEnabled:YES];
 }
 
 - (void)disableRwhPreferencesOptions {
-    [_RwhReplyHeaderText setEnabled:NO];
+    [_RwhMailHeaderBorderString setEnabled:NO];
     [_RwhHeaderTypographyEnabled setEnabled:NO];
     [_RwhEntourage2004SupportEnabled setEnabled:NO];
     [_RwhForwardHeaderEnabled setEnabled:NO];
-    [_RwhForwardHeaderText setEnabled:NO];
     [_RwhMailSelectFont setEnabled:NO];
     [_RwhMailColorWell setEnabled:NO];
 }

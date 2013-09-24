@@ -99,7 +99,7 @@
     NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
     
-    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderFontColor)];
+    NSColor *color=[NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderColor)];
     
     [mailHeaderString addAttribute:@"NSFont" value:font range:range];
     [mailHeaderString addAttribute:@"NSColor" value:color range:range];

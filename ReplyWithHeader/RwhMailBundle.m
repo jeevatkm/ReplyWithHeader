@@ -172,21 +172,17 @@
         SET_USER_DEFAULT(RwhMailDefaultHeaderFontSize , RwhMailHeaderFontSize);
     }
     
-    if (!GET_DEFAULT(RwhMailHeaderFontColor)) {
-        SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderFontColor);
+    if (!GET_DEFAULT(RwhMailHeaderColor)) {
+        SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderColor);
     }
     
     if (!GET_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
         SET_DEFAULT_BOOL(NO, RwhMailEntourage2004SupportEnabled);
     }
     
-    if (!GET_DEFAULT(RwhMailReplyHeaderText)) {
-        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailReplyHeaderText);
-    }
-    
-    if (!GET_DEFAULT(RwhMailForwardHeaderText)) {
-        SET_USER_DEFAULT(RwhMailDefaultForwardHeaderText, RwhMailForwardHeaderText);
-    }    
+    if (!GET_DEFAULT(RwhMailHeaderBorderText)) {
+        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailHeaderBorderText);
+    } 
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {
@@ -211,16 +207,26 @@
     }
     
     if (GET_DEFAULT(@"headerText")) {
-        SET_USER_DEFAULT(GET_DEFAULT(@"headerText"), RwhMailReplyHeaderText);
+        SET_USER_DEFAULT(GET_DEFAULT(@"headerText"), RwhMailHeaderBorderText);
         
         REMOVE_DEFAULT(@"headerText");
     }
     
     if (GET_DEFAULT(@"forwardHeader")) {
-        SET_USER_DEFAULT(GET_DEFAULT(@"forwardHeader"), RwhMailForwardHeaderText);
-        
         REMOVE_DEFAULT(@"forwardHeader");
     }
+    
+    // [start] for issue #17
+    if (GET_DEFAULT(@"RwhForwardHeaderText")) {
+        REMOVE_DEFAULT(@"RwhForwardHeaderText");
+    }
+    
+    if (GET_DEFAULT(@"RwhReplyHeaderText")) {
+        SET_USER_DEFAULT(GET_DEFAULT(@"RwhReplyHeaderText"), RwhMailHeaderBorderText);
+        
+        REMOVE_DEFAULT(@"RwhReplyHeaderText");
+    }    
+    // [end]
 }
 
 + (void)addRwhMailMessageMethodsToComposeBackEnd {

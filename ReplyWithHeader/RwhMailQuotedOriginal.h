@@ -45,7 +45,7 @@
     id document;
     DOMDocumentFragment *replyHeaderBorder;
     DOMDocumentFragment *forwardHeaderBorder;
-    BOOL doBoldHeader;
+    BOOL doHeaderTypography;
     DOMHTMLDivElement *originalEmail;
     BOOL isPlainText; //howdeep
     int textNodeLocation; //which

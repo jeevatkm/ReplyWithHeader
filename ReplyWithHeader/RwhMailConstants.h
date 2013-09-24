@@ -44,14 +44,12 @@
 #define RwhMailEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
 #define RwhMailDefaultReplyHeaderText @"-----Original Message-----"
 #define RwhMailDefaultForwardHeaderText @"-----Forwarded Message-----<br />"
-#define RwhMailReplyHeaderText @"RwhReplyHeaderText"
-#define RwhMailForwardHeaderText @"RwhForwardHeaderText"
+#define RwhMailHeaderBorderText @"RwhHeaderBorderText"
 #define RwhMailDefaultHeaderFontName @"Lucida Grande"
 #define RwhMailDefaultHeaderFontSize @"12"
-#define RwhMailDefaultHeaderFontColor @"BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARmZmZmAAAAAYY="
-#define RwhMailHeaderFontName @"RwhMailHeaderFontName"
-#define RwhMailHeaderFontSize @"RwhMailHeaderFontSize"
-#define RwhMailHeaderFontColor @"RwhMailHeaderFontColor"
+#define RwhMailHeaderFontName @"RwhHeaderFontName"
+#define RwhMailHeaderFontSize @"RwhHeaderFontSize"
+#define RwhMailHeaderColor @"RwhHeaderColor"
 
 #define RwhMailPreferencesNibName @"RwhMailPreferencesPanel"
 

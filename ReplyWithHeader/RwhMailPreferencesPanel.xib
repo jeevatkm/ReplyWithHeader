@@ -402,7 +402,7 @@
 																<object class="NSButtonCell" id="175128492">
 																	<int key="NSCellFlags">-1543503872</int>
 																	<int key="NSCellFlags2">0</int>
-																	<string key="NSContents">Apple Mail Order</string>
+																	<string key="NSContents">Default Order</string>
 																	<reference key="NSSupport" ref="815075143"/>
 																	<reference key="NSControlView" ref="403424771"/>
 																	<int key="NSTag">1</int>
@@ -538,41 +538,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 													<nil key="NSNextResponder"/>
 													<int key="NSvFlags">256</int>
 													<array class="NSMutableArray" key="NSSubviews">
-														<object class="NSTextField" id="80195126">
-															<reference key="NSNextResponder" ref="366299508"/>
-															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{17, 132}, {432, 42}}</string>
-															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView" ref="557138357"/>
-															<string key="NSReuseIdentifierKey">_NS:9</string>
-															<bool key="NSEnabled">YES</bool>
-															<object class="NSTextFieldCell" key="NSCell" id="439031640">
-																<int key="NSCellFlags">-1805647871</int>
-																<int key="NSCellFlags2">272629760</int>
-																<string key="NSContents"/>
-																<object class="NSFont" key="NSSupport" id="803706566">
-																	<string key="NSName">TimesNewRomanPSMT</string>
-																	<double key="NSSize">10</double>
-																	<int key="NSfFlags">16</int>
-																</object>
-																<string key="NSCellIdentifier">_NS:9</string>
-																<reference key="NSControlView" ref="80195126"/>
-																<bool key="NSDrawsBackground">YES</bool>
-																<object class="NSColor" key="NSBackgroundColor" id="550554692">
-																	<int key="NSColorSpace">6</int>
-																	<string key="NSCatalogName">System</string>
-																	<string key="NSColorName">textBackgroundColor</string>
-																	<reference key="NSColor" ref="591109689"/>
-																</object>
-																<object class="NSColor" key="NSTextColor" id="271408751">
-																	<int key="NSColorSpace">6</int>
-																	<string key="NSCatalogName">System</string>
-																	<string key="NSColorName">textColor</string>
-																	<reference key="NSColor" ref="703527143"/>
-																</object>
-															</object>
-															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-														</object>
 														<object class="NSTextField" id="883625582">
 															<reference key="NSNextResponder" ref="366299508"/>
 															<int key="NSvFlags">268</int>
@@ -604,7 +569,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<object class="NSTextFieldCell" key="NSCell" id="650830847">
 																<int key="NSCellFlags">67108864</int>
 																<int key="NSCellFlags2">272629760</int>
-																<string key="NSContents">For e.g.: Like to have thin blue line seperator above Reply's and Forward's like outlook. Use following sample string in the customization box.</string>
+																<string key="NSContents">For e.g.: Like to have thin blue line seperator above Reply's and Forward's like outlook. Use the following sample string in the customization box.</string>
 																<reference key="NSSupport" ref="26"/>
 																<string key="NSCellIdentifier">_NS:1535</string>
 																<reference key="NSControlView" ref="582335945"/>
@@ -638,6 +603,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{26, 17}, {426, 29}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="535149391">
@@ -669,7 +635,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																<int key="NSCellFlags2">0</int>
 																<string key="NSContents">Box</string>
 																<reference key="NSSupport" ref="563141123"/>
-																<reference key="NSBackgroundColor" ref="550554692"/>
+																<object class="NSColor" key="NSBackgroundColor" id="550554692">
+																	<int key="NSColorSpace">6</int>
+																	<string key="NSCatalogName">System</string>
+																	<string key="NSColorName">textBackgroundColor</string>
+																	<reference key="NSColor" ref="591109689"/>
+																</object>
 																<object class="NSColor" key="NSTextColor">
 																	<int key="NSColorSpace">3</int>
 																	<bytes key="NSWhite">MCAwLjgwMDAwMDAxMTkAA</bytes>
@@ -685,19 +656,28 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{17, 211}, {432, 40}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView" ref="44041934"/>
+															<reference key="NSNextKeyView" ref="557138357"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="1070302111">
 																<int key="NSCellFlags">-1805647871</int>
 																<int key="NSCellFlags2">272629760</int>
 																<string key="NSContents"/>
-																<reference key="NSSupport" ref="803706566"/>
+																<object class="NSFont" key="NSSupport">
+																	<string key="NSName">TimesNewRomanPSMT</string>
+																	<double key="NSSize">10</double>
+																	<int key="NSfFlags">16</int>
+																</object>
 																<string key="NSCellIdentifier">_NS:9</string>
 																<reference key="NSControlView" ref="466479154"/>
 																<bool key="NSDrawsBackground">YES</bool>
 																<reference key="NSBackgroundColor" ref="550554692"/>
-																<reference key="NSTextColor" ref="271408751"/>
+																<object class="NSColor" key="NSTextColor">
+																	<int key="NSColorSpace">6</int>
+																	<string key="NSCatalogName">System</string>
+																	<string key="NSColorName">textColor</string>
+																	<reference key="NSColor" ref="703527143"/>
+																</object>
 															</object>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 														</object>
@@ -712,30 +692,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<object class="NSTextFieldCell" key="NSCell" id="840455411">
 																<int key="NSCellFlags">68157504</int>
 																<int key="NSCellFlags2">272630784</int>
-																<string key="NSContents">Reply Header Customization:</string>
+																<string key="NSContents">Mail Header Border Customization:</string>
 																<reference key="NSSupport" ref="563141123"/>
 																<string key="NSCellIdentifier">_NS:1535</string>
 																<reference key="NSControlView" ref="350443499"/>
-																<reference key="NSBackgroundColor" ref="287130681"/>
-																<reference key="NSTextColor" ref="999774193"/>
-															</object>
-															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-														</object>
-														<object class="NSTextField" id="44041934">
-															<reference key="NSNextResponder" ref="366299508"/>
-															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{14, 182}, {438, 17}}</string>
-															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView" ref="80195126"/>
-															<string key="NSReuseIdentifierKey">_NS:1535</string>
-															<bool key="NSEnabled">YES</bool>
-															<object class="NSTextFieldCell" key="NSCell" id="242729325">
-																<int key="NSCellFlags">68157504</int>
-																<int key="NSCellFlags2">272630784</int>
-																<string key="NSContents">Forward Header Customization:</string>
-																<reference key="NSSupport" ref="563141123"/>
-																<string key="NSCellIdentifier">_NS:1535</string>
-																<reference key="NSControlView" ref="44041934"/>
 																<reference key="NSBackgroundColor" ref="287130681"/>
 																<reference key="NSTextColor" ref="999774193"/>
 															</object>
@@ -1101,22 +1061,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhForwardHeaderText</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="80195126"/>
-					</object>
-					<int key="connectionID">180</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhReplyHeaderText</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="466479154"/>
-					</object>
-					<int key="connectionID">181</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">_RwhForwardHeaderEnabled</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="482978685"/>
@@ -1212,6 +1156,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">285</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_RwhMailHeaderBorderString</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="466479154"/>
+					</object>
+					<int key="connectionID">286</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.RwhMailBundleEnabled</string>
 						<reference key="source" ref="253931335"/>
@@ -1245,19 +1197,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhReplyHeaderText</string>
+						<string key="label">value: values.RwhHeaderBorderText</string>
 						<reference key="source" ref="466479154"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="466479154"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhReplyHeaderText</string>
+							<string key="NSLabel">value: values.RwhHeaderBorderText</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhReplyHeaderText</string>
+							<string key="NSKeyPath">values.RwhHeaderBorderText</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">197</int>
+					<int key="connectionID">287</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1293,22 +1245,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhForwardHeaderText</string>
-						<reference key="source" ref="80195126"/>
-						<reference key="destination" ref="943210722"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="80195126"/>
-							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhForwardHeaderText</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhForwardHeaderText</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">201</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: rwhNameAndVersion</string>
 						<reference key="source" ref="109336783"/>
 						<reference key="destination" ref="1001"/>
@@ -1341,15 +1277,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhMailHeaderFontColor</string>
+						<string key="label">value: values.RwhMailHeaderColor</string>
 						<reference key="source" ref="740322338"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="740322338"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhMailHeaderFontColor</string>
+							<string key="NSLabel">value: values.RwhMailHeaderColor</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhMailHeaderFontColor</string>
+							<string key="NSKeyPath">values.RwhMailHeaderColor</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSValueTransformerName</string>
 								<string key="NS.object.0">NSUnarchiveFromData</string>
@@ -1357,7 +1293,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">278</int>
+					<int key="connectionID">289</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1453,8 +1389,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="350443499"/>
 							<reference ref="466479154"/>
-							<reference ref="80195126"/>
-							<reference ref="44041934"/>
 							<reference ref="883625582"/>
 							<reference ref="582335945"/>
 							<reference ref="163923086"/>
@@ -1521,19 +1455,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="109336783"/>
 						</array>
 						<reference key="parent" ref="765787522"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">118</int>
-						<reference key="object" ref="80195126"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="439031640"/>
-						</array>
-						<reference key="parent" ref="366299508"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">119</int>
-						<reference key="object" ref="439031640"/>
-						<reference key="parent" ref="80195126"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">120</int>
@@ -1798,19 +1719,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="parent" ref="605683583"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">220</int>
-						<reference key="object" ref="44041934"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="242729325"/>
-						</array>
-						<reference key="parent" ref="366299508"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">221</int>
-						<reference key="object" ref="242729325"/>
-						<reference key="parent" ref="44041934"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">222</int>
 						<reference key="object" ref="609156550"/>
 						<array class="NSMutableArray" key="children">
@@ -1941,8 +1849,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="109.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="114.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="115.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="118.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="119.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="120.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="121.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<object class="NSMutableDictionary" key="129.IBAttributePlaceholdersKey">
@@ -1992,8 +1898,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="216.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="217.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="220.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="221.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="222.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="223.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="226.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2022,7 +1926,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">285</int>
+			<int key="maxID">289</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2085,14 +1989,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_RwhEntourage2004SupportEnabled">NSButton</string>
 						<string key="_RwhForwardHeaderEnabled">NSButton</string>
-						<string key="_RwhForwardHeaderText">NSTextField</string>
 						<string key="_RwhHeaderTypographyEnabled">NSButton</string>
 						<string key="_RwhMailBundleEnabled">NSButton</string>
 						<string key="_RwhMailBundleLogo">NSImageView</string>
 						<string key="_RwhMailColorWell">NSColorWell</string>
+						<string key="_RwhMailHeaderBorderString">NSTextField</string>
 						<string key="_RwhMailHeaderFontNameAndSize">NSTextField</string>
 						<string key="_RwhMailSelectFont">NSButton</string>
-						<string key="_RwhReplyHeaderText">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="_RwhEntourage2004SupportEnabled">
@@ -2102,10 +2005,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="IBToOneOutletInfo" key="_RwhForwardHeaderEnabled">
 							<string key="name">_RwhForwardHeaderEnabled</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_RwhForwardHeaderText">
-							<string key="name">_RwhForwardHeaderText</string>
-							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_RwhHeaderTypographyEnabled">
 							<string key="name">_RwhHeaderTypographyEnabled</string>
@@ -2123,6 +2022,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string key="name">_RwhMailColorWell</string>
 							<string key="candidateClassName">NSColorWell</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="_RwhMailHeaderBorderString">
+							<string key="name">_RwhMailHeaderBorderString</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="_RwhMailHeaderFontNameAndSize">
 							<string key="name">_RwhMailHeaderFontNameAndSize</string>
 							<string key="candidateClassName">NSTextField</string>
@@ -2130,10 +2033,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="IBToOneOutletInfo" key="_RwhMailSelectFont">
 							<string key="name">_RwhMailSelectFont</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_RwhReplyHeaderText">
-							<string key="name">_RwhReplyHeaderText</string>
-							<string key="candidateClassName">NSTextField</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

@@ -121,7 +121,9 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         [mailHeader applyHeaderTypography];
     }
     
-    [mailHeader applyBoldFontTraits];
+    if (doHeaderTypography && !isPlainText) {
+        [mailHeader applyBoldFontTraits];
+    }    
     
     if (GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled) && messageType == 3) {
         [self removeOriginalForwardHeader:[mailHeader getHeaderItemCount]];
@@ -186,16 +188,14 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 
 - (void)initVars {
     
-    NSString *replyHeadline = GET_DEFAULT(RwhMailReplyHeaderText);
-    NSString *forwardHeadline = GET_DEFAULT(RwhMailForwardHeaderText);
+    NSString *replyHeadline = GET_DEFAULT(RwhMailHeaderBorderText);
 
     RWH_LOG(@"RwhMailQuotedOriginal: initvar Reply Header text: %@, Forward Header text %@", replyHeadline, forwardHeadline);
     
     //now set the border variable
     replyHeaderBorder = [self createDocumentFragment:replyHeadline];
-    forwardHeaderBorder = [self createDocumentFragment:forwardHeadline];
     
-    doBoldHeader=YES;
+    doHeaderTypography = YES;
     //		DOMNode *voo = [document htmlDocument];
     //		DOMNodeList *vl = [[[[[voo childNodes] item:0] childNodes] item:0] childNodes];
     
@@ -296,7 +296,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 
     //this is plain text so do not bold the header...
-    doBoldHeader = NO;
+    doHeaderTypography = NO;
     
 }
 
