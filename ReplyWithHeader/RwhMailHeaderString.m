@@ -40,10 +40,6 @@
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 
 @interface RwhMailHeaderString (PrivateMethods)
-- (void)initVars;
-- (void)fixHeaderString;
-- (void)suppressImplicateHeaderLabels;
-
 - (id)originalMessageHeaders;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
@@ -71,7 +67,9 @@
     if (self = [super init]) {
         [self init];
         
-        mailHeaderString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+        headerString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+        
+        RWH_LOG(@"Original mail string from backend: %@", mailHeaderString);
         
         [self fixHeaderString];
         [self suppressImplicateHeaderLabels];
@@ -88,7 +86,7 @@
 
     NSRange range;
     range.location = 0;
-    range.length = [mailHeaderString length];
+    range.length = [headerString length];
     
     NSString *fontString = GET_DEFAULT_VALUE(RwhMailHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
@@ -96,8 +94,8 @@
     
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderColor)];
     
-    [mailHeaderString addAttribute:@"NSFont" value:font range:range];
-    [mailHeaderString addAttribute:@"NSColor" value:color range:range];    
+    [headerString addAttribute:@"NSFont" value:font range:range];
+    [headerString addAttribute:@"NSColor" value:color range:range];    
 }
 
 - (void)applyBoldFontTraits {
@@ -108,27 +106,29 @@
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange fromLabelMatchRange = [regex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
+    NSRange fromLabelMatchRange = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
     
     RWH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelMatchRange));
     
-    [mailHeaderString applyFontTraits:NSBoldFontMask range:fromLabelMatchRange];
+    [headerString applyFontTraits:NSBoldFontMask range:fromLabelMatchRange];
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
     regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches = [regex matchesInString:[mailHeaderString string] options:0 range:NSMakeRange(0,[mailHeaderString length])];
+    NSArray *matches = [regex matchesInString:[headerString string] options:0 range:NSMakeRange(0,[headerString length])];
     
     for (NSTextCheckingResult *match in matches) {
         NSRange matchRange = [match range];
-        [mailHeaderString applyFontTraits:NSBoldFontMask range:matchRange];
+        [headerString applyFontTraits:NSBoldFontMask range:matchRange];
         
         // workaround to get header count
         headerItemCount++;
     }
 }
 
-- (WebArchive *)getWebArchive {    
-    WebArchive *arch = [mailHeaderString webArchiveForRange:NSMakeRange(0,[mailHeaderString length]) fixUpNewlines:YES];
+- (WebArchive *)getWebArchive {
+    RWH_LOG(@"Mail string before web archiving it: %@", mailHeaderString);
+    
+    WebArchive *arch = [headerString webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
       return arch;
 }
 
@@ -139,20 +139,20 @@
 }
 
 - (BOOL)isSuppressLabelsFound {
-    RWH_LOG(@"Suppress Labels found: %@ and count is %d", isSuppressLabelsFound, suppressLabelsCount);
+    RWH_LOG(@"Suppress Labels found: %@", isSuppressLabelsFound);
     
     return isSuppressLabelsFound;
 }
 
 - (NSString *)stringValue {
-    return [mailHeaderString string];
+    return [headerString string];
 }
 
 - (void)dealloc {
-    mailHeaderString = nil;
+    headerString = nil;
     headerItemCount=nil;
     
-    free(mailHeaderString);
+    free(headerString);
     free(headerItemCount);
     
     [super dealloc];
@@ -163,18 +163,17 @@
 
 - (void)initVars {
     headerItemCount = 1;
-    
-    suppressLabelsCount = 0;
 }
 
 - (void)fixHeaderString {
     RWH_LOG();
     
-    [mailHeaderString removeAttribute:@"NSColor" range:NSMakeRange(0,[mailHeaderString length])];
-    [mailHeaderString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[mailHeaderString length])];
+    [headerString removeAttribute:@"NSFont" range:NSMakeRange(0,[headerString length])];
+    [headerString removeAttribute:@"NSColor" range:NSMakeRange(0,[headerString length])];
+    [headerString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headerString length])];
     
-    [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:mailHeaderString];
-    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:mailHeaderString];
+    [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:headerString];
+    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];
 }
 
 - (void)suppressImplicateHeaderLabels {
@@ -183,7 +182,7 @@
     NSError *error = NULL;
     NSRegularExpression *replyToRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange replyLabelMatch = [replyToRegex rangeOfFirstMatchInString:[mailHeaderString string] options:0 range:NSMakeRange(0, [mailHeaderString length])];
+    NSRange replyLabelMatch = [replyToRegex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
     
     if ( replyLabelMatch.location == NSNotFound ) {
         RWH_LOG(@"Reply To label doesn't found");
@@ -193,12 +192,77 @@
     else {
         isSuppressLabelsFound = YES;
         
-        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]];
-        
-        [mailHeaderString replaceCharactersInRange:NSMakeRange(replyLabelMatch.location, ([mailHeaderString length] - replyLabelMatch.location))
+        NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
+        [headerString replaceCharactersInRange:NSMakeRange(replyLabelMatch.location, ([headerString length] - replyLabelMatch.location))
                      withAttributedString:replaceString];
+    }
+}
+
+- (void)applyHeaderOrderChange {
+    NSRange subjectRange = [[headerString string] rangeOfString:@"Subject: "];
+    NSRange dateRange = [[headerString string] rangeOfString:@"Date: "];
+    
+    NSRange subCntRange;
+    subCntRange.location = subjectRange.location;
+    subCntRange.length = dateRange.location - subjectRange.location;
+    NSAttributedString *subAttStr = [headerString attributedSubstringFromRange:subCntRange];
+    
+    NSAttributedString *last = [headerString
+                                attributedSubstringFromRange:NSMakeRange(headerString.length - 1, 1)];
+    if (![[last string] isEqualToString:@"\n"]) {
+        NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+        [headerString appendAttributedString:newLine];
+    }
+    
+    // Subject: relocation
+    [headerString appendAttributedString:subAttStr];
+    
+    // removal of old Subject:
+    NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
+    [headerString replaceCharactersInRange:subCntRange withAttributedString:replaceString];    
+}
+
+- (void)applyHeaderLabelChange {
+    // Date: into Sent:
+    NSRange dRange = [[headerString string] rangeOfString:@"Date: "];
+    [headerString replaceCharactersInRange:dRange withString:@"Sent: "];
+    
+    // <email-id>, into ;
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\s<([A-Z][A-Z0-9]*)[^>]*>,?)" options: NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];    
+    NSRange range = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    
+    while (range.length != 0) {        
+        [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
         
-        [replaceString release];
+        range = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    }
+    
+    // double quoutes into empty
+    NSRange qtRange = [[headerString string] rangeOfString:@"\""];
+    while (qtRange.length != 0) {
+        [headerString replaceCharactersInRange:qtRange withString:@""];
+        qtRange = [[headerString string] rangeOfString:@"\""];
+    }    
+}
+
+// For now it does outlook mail label ordering
+- (void)applyHeaderLabelOptions {
+    
+    int headerOrderMode = GET_DEFAULT_INT(RwhMailHeaderOrderMode);
+    NSLog(@"Mail Header Order mode: %d", headerOrderMode);
+    
+    if (headerOrderMode == 2) {    
+        [self applyHeaderOrderChange];
+    }    
+    
+    int headerLabelMode = GET_DEFAULT_INT(RwhMailHeaderLabelMode);
+    NSLog(@"Mail Header Label mode: %d", headerLabelMode);
+    
+    if (headerLabelMode == 2) {
+        [self applyHeaderLabelChange];
     }
 }
 

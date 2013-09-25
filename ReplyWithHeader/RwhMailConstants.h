@@ -41,6 +41,7 @@
 #define RwhMailBundleEnabled @"RwhMailBundleEnabled"
 #define RwhMailForwardHeaderEnabled @"RwhForwardHeaderEnabled"
 #define RwhMailHeaderTypographyEnabled @"RwhHeaderTypographyEnabled"
+#define RwhMailHeaderOptionModeEnabled @"RwhHeaderLabelOptionEnabled"
 #define RwhMailEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
 #define RwhMailDefaultReplyHeaderText @"-----Original Message-----"
 #define RwhMailDefaultForwardHeaderText @"-----Forwarded Message-----<br />"
@@ -50,6 +51,10 @@
 #define RwhMailHeaderFontName @"RwhHeaderFontName"
 #define RwhMailHeaderFontSize @"RwhHeaderFontSize"
 #define RwhMailHeaderColor @"RwhHeaderColor"
+
+// Mode Values (1=Apple Mail, 2=Outlook Mail)
+#define RwhMailHeaderLabelMode @"RwhHeaderLabelMode"
+#define RwhMailHeaderOrderMode @"RwhHeaderOrderMode"
 
 #define RwhMailPreferencesNibName @"RwhMailPreferencesPanel"
 

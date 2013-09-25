@@ -38,14 +38,6 @@
 #import "WebKit/DOMHTMLBRElement.h"
 
 @interface RwhMailQuotedOriginal (PrivateMethods)
-- (void)initVars;
-- (void)removeOriginalPlainTextHeaderPrefix;
-- (void)removeOriginalHeaderPrefix;
-- (void)prepareQuotedPlainText;
-- (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment;
-- (void)removeOriginalForwardHeader:(int)headerCount;
-- (DOMDocumentFragment *)createDocumentFragment: (NSString *)str;
-
 - (id)htmlDocument;
 - (DOMDocumentFragment *)createDocumentFragmentWithMarkupString: (NSString *)str;
 - (id)descendantsWithClassName:(NSString *)str;
@@ -118,6 +110,9 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     RWH_LOG(@"Composing message type is %d", messageType);
     
     // NSLog(@"RWH doHeaderTypography value is %d, isPlainText value is %d", doHeaderTypography, isPlainText);
+    if (GET_DEFAULT_BOOL(RwhMailHeaderOptionModeEnabled)) {
+        [mailHeader applyHeaderLabelOptions];
+    }
     
     if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && doHeaderTypography && !isPlainText) {
         [mailHeader applyHeaderTypography];        

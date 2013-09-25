@@ -32,13 +32,10 @@
 #import "RwhMailMacros.h"
 
 @interface RwhMailPreferencesModule (PrivateMethods)
-- (void)toggleRwhPreferencesOptions:(BOOL *)state;
-- (void)enableRwhPreferencesOptions;
-- (void)disableRwhPreferencesOptions;
-
 - (IBAction)rwhMailBundlePressed:(id)sender;
 - (IBAction)rwhHeaderTypographyPressed:(id)sender;
 - (IBAction)rwhSelectFontPressed:(id)sender;
+- (IBAction)rwhHeaderLabelModePressed:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openFeedback:(id)sender;
 - (IBAction)openSupport:(id)sender;
@@ -49,29 +46,24 @@
 #pragma mark Class private methods
 
 - (void)toggleRwhPreferencesOptions:(BOOL *)state {
-    if ( state ) {
-        [self enableRwhPreferencesOptions];
-    } else {
-        [self disableRwhPreferencesOptions];
-    }
+    [_RwhMailHeaderBorderString setEnabled:state];
+    [_RwhHeaderTypographyEnabled setEnabled:state];    
+    [_RwhForwardHeaderEnabled setEnabled:state];
+    [_RwhMailHeaderOptionModeEnabled setEnabled:state];
+    [_RwhEntourage2004SupportEnabled setEnabled:state];
+    
+    [self toggleRwhHeaderTypograpghyOptions:state];
+    [self toggleRwhHeaderLabelOptions:state];
 }
 
-- (void)enableRwhPreferencesOptions {
-    [_RwhMailHeaderBorderString setEnabled:YES];
-    [_RwhHeaderTypographyEnabled setEnabled:YES];
-    [_RwhEntourage2004SupportEnabled setEnabled:YES];
-    [_RwhForwardHeaderEnabled setEnabled:YES];
-    [_RwhMailSelectFont setEnabled:YES];
-    [_RwhMailColorWell setEnabled:YES];
+- (void)toggleRwhHeaderLabelOptions:(BOOL *)state {
+    [_RwhMailHeaderOrderMode setEnabled:state];
+    [_RwhMailHeaderLabelMode setEnabled:state];
 }
 
-- (void)disableRwhPreferencesOptions {
-    [_RwhMailHeaderBorderString setEnabled:NO];
-    [_RwhHeaderTypographyEnabled setEnabled:NO];
-    [_RwhEntourage2004SupportEnabled setEnabled:NO];
-    [_RwhForwardHeaderEnabled setEnabled:NO];
-    [_RwhMailSelectFont setEnabled:NO];
-    [_RwhMailColorWell setEnabled:NO];
+- (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state {
+    [_RwhMailSelectFont setEnabled:state];
+    [_RwhMailColorWell setEnabled:state];
 }
 
 - (NSString *)rwhNameAndVersion {
@@ -87,13 +79,7 @@
 }
 
 - (IBAction)rwhHeaderTypographyPressed:(id)sender {
-    if ( [sender state] ) {
-        [_RwhMailSelectFont setEnabled:YES];
-        [_RwhMailColorWell setEnabled:YES];
-    } else {
-        [_RwhMailSelectFont setEnabled:NO];
-        [_RwhMailColorWell setEnabled:NO];
-    }
+    [self toggleRwhHeaderTypograpghyOptions:[sender state]];
 }
 
 - (IBAction)rwhSelectFontPressed:(id)sender {
@@ -108,6 +94,10 @@
     NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
     
     [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
+}
+
+- (IBAction)rwhHeaderLabelModePressed:(id)sender {
+    [self toggleRwhHeaderLabelOptions:[sender state]];
 }
 
 - (void)changeFont:(id)sender {

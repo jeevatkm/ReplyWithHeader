@@ -42,3 +42,6 @@
 
 #define GET_DEFAULT_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
 #define SET_DEFAULT_BOOL(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
+
+#define GET_DEFAULT_INT(k) [[NSUserDefaults standardUserDefaults] integerForKey: k]
+#define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]

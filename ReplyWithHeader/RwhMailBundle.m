@@ -164,6 +164,10 @@
         SET_DEFAULT_BOOL(YES, RwhMailHeaderTypographyEnabled);
     }
     
+    if (!GET_DEFAULT(RwhMailHeaderOptionModeEnabled)) {
+        SET_DEFAULT_BOOL(YES, RwhMailHeaderOptionModeEnabled);
+    }
+    
     if (!GET_DEFAULT(RwhMailHeaderFontName)) {
         SET_USER_DEFAULT(RwhMailDefaultHeaderFontName , RwhMailHeaderFontName);
     }
@@ -182,7 +186,15 @@
     
     if (!GET_DEFAULT(RwhMailHeaderBorderText)) {
         SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailHeaderBorderText);
-    } 
+    }
+    
+    if (!GET_DEFAULT(RwhMailHeaderLabelMode)) {
+        SET_DEFAULT_INT(1, RwhMailHeaderLabelMode);
+    }
+    
+    if (!GET_DEFAULT(RwhMailHeaderOrderMode)) {
+        SET_DEFAULT_INT(1, RwhMailHeaderOrderMode);
+    }
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {
