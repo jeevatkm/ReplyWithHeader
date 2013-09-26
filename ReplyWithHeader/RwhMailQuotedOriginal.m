@@ -78,9 +78,9 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         
         //now initialize the other vars
         [self initVars];
-         
+        
         //if there is not a child in the original email, it must be plain text
-        if ([originalEmail firstChild]==NULL) {            
+        if ([originalEmail firstChild]==NULL || !isHTMLMail) {            
             //prep the plain text
             [self prepareQuotedPlainText];
         }
@@ -90,12 +90,16 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         if ( dhc.length > 1) {
-            if ( isPlainText ) {
-                [self removeOriginalPlainTextHeaderPrefix];
-            }
-            else {
+            RWH_LOG(@"EXP initWithMailMessage before %@", [originalEmail innerHTML]);
+            
+            if (isHTMLMail) {
                 [self removeOriginalHeaderPrefix];
             }
+            else {
+                [self removeOriginalPlainTextHeaderPrefix];
+            }
+            
+            RWH_LOG(@"EXP initWithMailMessage after %@", [originalEmail innerHTML]);
         }
     }
     else {
@@ -109,16 +113,15 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Composing message type is %d", messageType);
     
-    // NSLog(@"RWH doHeaderTypography value is %d, isPlainText value is %d", doHeaderTypography, isPlainText);
     if (GET_DEFAULT_BOOL(RwhMailHeaderOptionModeEnabled)) {
         [mailHeader applyHeaderLabelOptions];
     }
     
-    if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && doHeaderTypography && !isPlainText) {
+    if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && isHTMLMail) {
         [mailHeader applyHeaderTypography];        
     }
     
-    if (doHeaderTypography && doHeaderTypography && !isPlainText) {
+    if (isHTMLMail) {
         [mailHeader applyBoldFontTraits];
     }    
     
@@ -136,25 +139,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Newly processed RWH header: %@", [mailHeader stringValue]);
     
-    if ( isPlainText ) {        
-        if ( textNodeLocation > 0 ) {
-            //check if this is plain text by seeing if textNodeLocation points to a br element...
-            //  if not, include in blockquote
-            if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
-                [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
-                [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
-                [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
-            }
-            else {
-                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-                
-                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-                
-                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-            }
-		}
-    }
-    else {
+    if ( isHTMLMail ) {
         //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
         //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
         //so account for that too
@@ -177,6 +162,24 @@ NSString *AppleMailSignature = @"AppleMailSignature";
             
 			[[originalEmail firstChild] insertBefore:headerBorder refChild: [[originalEmail firstChild] firstChild]];
         }
+    }
+    else { // Plain text mail compose block
+        if ( textNodeLocation > 0 ) {
+            //check if this is plain text by seeing if textNodeLocation points to a br element...
+            //  if not, include in blockquote
+            if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
+                [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
+                [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
+                [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
+            }
+            else {
+                //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+                
+                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+                
+                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            }
+		}
     }    
 }
 
@@ -184,50 +187,75 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 #pragma mark Class private methods
 
 - (void)initVars {
+    // identifying is this plain or html mail compose in reply or reply all;
+    // forward mail is not our compose since it falls
+    // into default setting of compose type in user mail client
+    // AppleOriginalContents: (isHTMLMail=YES) | ApplePlainTextBody: (isHTMLMail=NO)
+    if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL) {
+        isHTMLMail = YES;
+        
+        originalEmail=[[[document htmlDocument]
+                        descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
+    }
+    else {
+        isHTMLMail = NO;
+        
+        originalEmail=[[[document htmlDocument]
+                        descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
+    }
     
-    NSString *borderString = GET_DEFAULT(RwhMailHeaderBorderText);
-
-    RWH_LOG(@"RwhMailQuotedOriginal: initvar Reply Header text: %@", borderString);
+    RWH_LOG(@"Composing mail isHTMLMail %d", isHTMLMail);
     
-    //now set the border variable
+    NSString *borderString = RwhMailDefaultReplyHeaderText;    
+    if (isHTMLMail) {
+        borderString = GET_DEFAULT(RwhMailHeaderBorderText);
+    }
+    
+    RWH_LOG(@"initVars Header border text: %@", borderString);
+    
+    // now initialze header border string into html form
     headerBorder = [self createDocumentFragment:borderString];
     
-    doHeaderTypography = YES;
-    //		DOMNode *voo = [document htmlDocument];
-    //		DOMNodeList *vl = [[[[[voo childNodes] item:0] childNodes] item:0] childNodes];
-    
-    originalEmail=[[[document htmlDocument]
-                descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
-    
-    //howdeep = 0; //AppleOriginalContents=0 ApplePlainTextBody=1
-    isPlainText = NO; //AppleOriginalContents: (isPlainText=NO) | ApplePlainTextBody: (isPlainText=YES)
     textNodeLocation = 0;
 }
 
-- (void)removeOriginalPlainTextHeaderPrefix {
+- (void)removeOriginalPlainTextHeaderPrefix {    
+    BOOL isLocationFound = NO;
     
-    for (int i =0;i < dhc.length;i++) {
-        if( [[dhc item:i] nodeType]==3 ) {
-            // Text node, On ..., Wrote is text
-            textNodeLocation=i; break;
-        }
-    }
-    
-    RWH_LOG(@"Removing plain text header at %d", textNodeLocation);
-    
-    // if signature at top, item==3 else item==1
-    [originalEmail removeChild:[dhc item:textNodeLocation]];
-    
-    //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
-    for (int i =0;i < [originalEmail childElementCount];i++) {
-        if( [[[[originalEmail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {
-            //this is the quoted text
-            textNodeLocation=i;
+    for (int i=0; i<dhc.length; i++) {
+        DOMNode *node = [dhc item:i];        
+        NSRange range = [[[node firstChild] stringValue] rangeOfString:@"wrote:"];
+        
+        if (range.length != 0) {
+            [[node firstChild] setTextContent:@""];
+            textNodeLocation = i;
+            isLocationFound = YES;
             break;
         }
     }
     
-    RWH_LOG(@"New header location is %d", textNodeLocation);    
+    if (!isLocationFound) { // kept for backward workaround, however need a revisit
+        for (int i=0; i < dhc.length; i++) {
+            if( [[dhc item:i] nodeType]==3 ) {
+                // Text node, On ..., Wrote is text
+                textNodeLocation=i; break;
+            }
+        }
+        
+        // if signature at top, item==3 else item==1
+        [originalEmail removeChild:[dhc item:textNodeLocation]];
+        
+        //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
+        for (int i=0; i<[originalEmail childElementCount]; i++) {
+            if( [[[[originalEmail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {
+                //this is the quoted text
+                textNodeLocation=i;
+                break;
+            }
+        }
+    }
+    
+    RWH_LOG(@"New header location for Plain Text mail is %d", textNodeLocation);
 }
 
 - (void)removeOriginalHeaderPrefix {
@@ -268,13 +296,11 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }    
 }
 
-- (void)prepareQuotedPlainText {
-    
-    originalEmail=[[[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
+- (void)prepareQuotedPlainText {    
+    originalEmail=[[[document htmlDocument]
+                        descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     
     RWH_LOG(@"Original plain email: %@", originalEmail);
-    
-    isPlainText = YES;
     
     if( [[originalEmail idName] isEqualToString:AppleMailSignature] ) {
         int itemNum = 2;
@@ -286,11 +312,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
             itemNum = 3;
         }
         
-        originalEmail = [[originalEmail children] item:itemNum];
+        originalEmail = (id)[[originalEmail children] item:itemNum];
     }
-
-    //this is plain text so do not bold the header...
-    doHeaderTypography = NO;    
 }
 
 - (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment {

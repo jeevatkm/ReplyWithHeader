@@ -44,9 +44,8 @@
 @private
     id document;
     DOMDocumentFragment *headerBorder;
-    BOOL doHeaderTypography;
+    BOOL isHTMLMail;
     DOMHTMLDivElement *originalEmail;
-    BOOL isPlainText; //howdeep
     int textNodeLocation; //which
     DOMNodeList *dhc; //document header children
 }

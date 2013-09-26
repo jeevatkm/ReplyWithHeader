@@ -252,14 +252,14 @@
 - (void)applyHeaderLabelOptions {
     
     int headerOrderMode = GET_DEFAULT_INT(RwhMailHeaderOrderMode);
-    NSLog(@"Mail Header Order mode: %d", headerOrderMode);
+    RWH_LOG(@"Mail Header Order mode: %d", headerOrderMode);
     
     if (headerOrderMode == 2) {    
         [self applyHeaderOrderChange];
     }    
     
     int headerLabelMode = GET_DEFAULT_INT(RwhMailHeaderLabelMode);
-    NSLog(@"Mail Header Label mode: %d", headerLabelMode);
+    RWH_LOG(@"Mail Header Label mode: %d", headerLabelMode);
     
     if (headerLabelMode == 2) {
         [self applyHeaderLabelChange];
