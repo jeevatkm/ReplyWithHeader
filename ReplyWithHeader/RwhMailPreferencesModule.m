@@ -45,8 +45,7 @@
 
 #pragma mark Class private methods
 
-- (void)toggleRwhPreferencesOptions:(BOOL *)state {
-    [_RwhMailHeaderBorderString setEnabled:state];
+- (void)toggleRwhPreferencesOptions:(BOOL *)state {    
     [_RwhHeaderTypographyEnabled setEnabled:state];    
     [_RwhForwardHeaderEnabled setEnabled:state];
     [_RwhMailHeaderOptionModeEnabled setEnabled:state];

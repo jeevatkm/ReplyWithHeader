@@ -185,10 +185,6 @@
         SET_DEFAULT_BOOL(NO, RwhMailEntourage2004SupportEnabled);
     }
     
-    if (!GET_DEFAULT(RwhMailHeaderBorderText)) {
-        SET_USER_DEFAULT(RwhMailDefaultReplyHeaderText, RwhMailHeaderBorderText);
-    }
-    
     if (!GET_DEFAULT(RwhMailHeaderLabelMode)) {
         SET_DEFAULT_INT(1, RwhMailHeaderLabelMode);
     }
@@ -220,8 +216,6 @@
     }
     
     if (GET_DEFAULT(@"headerText")) {
-        SET_USER_DEFAULT(GET_DEFAULT(@"headerText"), RwhMailHeaderBorderText);
-        
         REMOVE_DEFAULT(@"headerText");
     }
     
@@ -234,9 +228,7 @@
         REMOVE_DEFAULT(@"RwhForwardHeaderText");
     }
     
-    if (GET_DEFAULT(@"RwhReplyHeaderText")) {
-        SET_USER_DEFAULT(GET_DEFAULT(@"RwhReplyHeaderText"), RwhMailHeaderBorderText);
-        
+    if (GET_DEFAULT(@"RwhReplyHeaderText")) {        
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
     }    
     // [end]

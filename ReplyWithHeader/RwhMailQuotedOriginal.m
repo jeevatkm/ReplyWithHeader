@@ -206,10 +206,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Composing mail isHTMLMail %d", isHTMLMail);
     
-    NSString *borderString = RwhMailDefaultReplyHeaderText;    
-    if (isHTMLMail) {
-        borderString = GET_DEFAULT(RwhMailHeaderBorderText);
-    }
+    NSString *borderString = (isHTMLMail) ? RwhMailHeaderBorderText : RwhMailDefaultReplyHeaderText;
     
     RWH_LOG(@"initVars Header border text: %@", borderString);
     

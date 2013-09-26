@@ -45,7 +45,7 @@
 #define RwhMailEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
 #define RwhMailDefaultReplyHeaderText @"<br />---------- Original Message ----------<br />"
 #define RwhMailDefaultForwardHeaderText @"---------- Forwarded Message ----------<br />"
-#define RwhMailHeaderBorderText @"RwhHeaderBorderText"
+#define RwhMailHeaderBorderText @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
 #define RwhMailDefaultHeaderFontName @"Lucida Grande"
 #define RwhMailDefaultHeaderFontSize @"12"
 #define RwhMailHeaderFontName @"RwhHeaderFontName"

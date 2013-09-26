@@ -44,7 +44,6 @@
     IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
     IBOutlet NSButton *_RwhMailSelectFont;
     IBOutlet NSButton *_RwhMailHeaderOptionModeEnabled;
-    IBOutlet NSTextField *_RwhMailHeaderBorderString;
     IBOutlet NSImageView *_RwhMailBundleLogo;
     IBOutlet NSTextField *_RwhMailHeaderFontNameAndSize;
     IBOutlet NSColorWell *_RwhMailColorWell;
