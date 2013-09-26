@@ -72,6 +72,7 @@
         RWH_LOG(@"Original mail string from backend: %@", mailHeaderString);
         
         [self fixHeaderString];
+        [self findOutHeaderItemCount];
         [self suppressImplicateHeaderLabels];
     }
     else {
@@ -119,9 +120,6 @@
     for (NSTextCheckingResult *match in matches) {
         NSRange matchRange = [match range];
         [headerString applyFontTraits:NSBoldFontMask range:matchRange];
-        
-        // workaround to get header count
-        headerItemCount++;
     }
 }
 
@@ -165,6 +163,15 @@
     headerItemCount = 1;
 }
 
+// Workaround to get header item count
+- (void)findOutHeaderItemCount {
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *matches = [regex matchesInString:[headerString string] options:0 range:NSMakeRange(0,[headerString length])];
+    
+    headerItemCount = headerItemCount + [matches count];
+}
+
 - (void)fixHeaderString {
     RWH_LOG();
     
@@ -173,7 +180,7 @@
     [headerString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headerString length])];
     
     [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:headerString];
-    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];
+    [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];    
 }
 
 - (void)suppressImplicateHeaderLabels {

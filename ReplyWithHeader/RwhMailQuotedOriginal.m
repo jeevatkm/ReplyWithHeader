@@ -109,78 +109,97 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     return self;
 }
 
+- (void)processHTMLMail:(DOMDocumentFragment *)headerFragment newLineFragment:(DOMDocumentFragment *)newLineFragment {
+    //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
+    //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
+    //so account for that too
+    int numGrandChildCount = 0;
+    if ( ![ [[originalEmail firstChild] nodeName] isEqualToString:@"#text"] ) {
+        numGrandChildCount = [[originalEmail firstChild] childElementCount];
+    }
+    
+    RWH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n",numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
+    
+    if ( numGrandChildCount == 0 ) {
+        [originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
+        [originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
+        [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
+    }
+    else {
+        [[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
+        
+        [[originalEmail firstChild] insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
+        
+        [[originalEmail firstChild] insertBefore:headerBorder refChild: [[originalEmail firstChild] firstChild]];
+    }
+}
+
+- (void)processPlainMail:(DOMDocumentFragment *)headerFragment newLineFragment:(DOMDocumentFragment *)newLineFragment {
+    if ( textNodeLocation > 0 ) {
+        //check if this is plain text by seeing if textNodeLocation points to a br element...
+        //  if not, include in blockquote
+        if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
+            [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
+            [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
+            [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
+        }
+        else {
+            //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            
+            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            
+            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+        }
+    }
+}
+
 - (void)insertRwhMailHeader:(RwhMailHeaderString *)mailHeader mailMessageType:(int)messageType {
     
     RWH_LOG(@"Composing message type is %d", messageType);
     
+    // global
     if (GET_DEFAULT_BOOL(RwhMailHeaderOptionModeEnabled)) {
         [mailHeader applyHeaderLabelOptions];
-    }
+    }        
     
     if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && isHTMLMail) {
-        [mailHeader applyHeaderTypography];        
-    }
-    
-    if (isHTMLMail) {
+        [mailHeader applyHeaderTypography];
         [mailHeader applyBoldFontTraits];
-    }    
-    
-    if (GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled) && messageType == 3) {
-        [self removeOriginalForwardHeader:[mailHeader getHeaderItemCount]];
     }
-    
+  
+    // specifics
+    BOOL manageForwardHeader = GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled);    
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
-    //check if we need to do Entourage 2004 text size transformations...    
+    RWH_LOG(@"Newly processed RWH header: %@", [mailHeader stringValue]);
+    
+    // Entourage 2004 text size transformations
     if (GET_DEFAULT_BOOL(RwhMailEntourage2004SupportEnabled)) {
         [self applyEntourage2004Support:headerFragment];
     }
     
-    RWH_LOG(@"Newly processed RWH header: %@", [mailHeader stringValue]);
-    
-    if ( isHTMLMail ) {
-        //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
-        //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
-        //so account for that too
-        int numGrandChildCount = 0;
-        if ( ![ [[originalEmail firstChild] nodeName] isEqualToString:@"#text"] ) {
-            numGrandChildCount = [[originalEmail firstChild] childElementCount];
+    if (messageType == 1 || messageType == 2) {
+        if ( isHTMLMail ) {
+            [self processHTMLMail:headerFragment newLineFragment:newLineFragment];
         }
-        
-        RWH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n",numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
-        
-        if ( numGrandChildCount == 0 ) {
-            [originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
-			[originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
-			[originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
-        }
-        else {
-            [[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
-            
-			[[originalEmail firstChild] insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
-            
-			[[originalEmail firstChild] insertBefore:headerBorder refChild: [[originalEmail firstChild] firstChild]];
+        else { // Plain text mail compose block
+            [self processPlainMail:headerFragment newLineFragment:newLineFragment];
         }
     }
-    else { // Plain text mail compose block
-        if ( textNodeLocation > 0 ) {
-            //check if this is plain text by seeing if textNodeLocation points to a br element...
-            //  if not, include in blockquote
-            if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] ) {
-                [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
-                [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
-                [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
-            }
-            else {
-                //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-                
-                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-                
-                [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-            }
-		}
-    }    
+    else if (manageForwardHeader && messageType == 3) {
+        int hCount = [mailHeader getHeaderItemCount];
+        for (int i=0; i<=hCount; i++) {
+            [originalEmail removeChild:[originalEmail firstChild]];
+        }
+        
+        if ( isHTMLMail ) {
+            [self processHTMLMail:headerFragment newLineFragment:newLineFragment];
+        }
+        else { // Plain text mail compose block
+            [self processPlainMail:headerFragment newLineFragment:newLineFragment];
+        }
+    }
 }
 
 
@@ -360,16 +379,6 @@ NSString *AppleMailSignature = @"AppleMailSignature";
             //now replace the paragraph node...
             [[headerFragment firstChild] replaceChild:brelem oldChild:[fragmentNodes item:i] ];
         }
-    }
-}
-
-
-- (void)removeOriginalForwardHeader:(int)headerCount {
-    RWH_LOG();
-    
-    // Removing original forward header
-    for (int i=0; i<=headerCount; i++) {
-        [originalEmail removeChild:[originalEmail firstChild]];
     }
 }
 
