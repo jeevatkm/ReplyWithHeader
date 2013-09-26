@@ -270,7 +270,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#tar cvfz ReplyWithHeaders.tgz  ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\nSetFile -a B \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\"";
+			shellScript = "#tar cvfz ReplyWithHeaders.tgz  ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\n\n# Apply Resource Fork to bundle\nRez -append ${SOURCE_ROOT}/ReplyWithHeader/Icon.rsrc -o ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/$'Icon\\r'\n\n# Apply Icon Resource Fork\nSetFile -a C \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\"\n\n# Package it\nSetFile -a B \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
