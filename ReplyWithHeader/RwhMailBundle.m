@@ -126,6 +126,7 @@
     dispatch_once(&onceToken, ^{
         logo = [[NSImage alloc]
                 initByReferencingFile:[[self bundle] pathForImageResource:@"ReplyWithHeader"]];
+        [logo setSize:NSMakeSize(128, 128)];
     });
     return logo;
 }
