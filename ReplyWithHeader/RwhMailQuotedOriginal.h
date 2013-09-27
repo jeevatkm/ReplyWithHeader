@@ -52,6 +52,6 @@
 
 - (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
-- (void)insertRwhMailHeader:(RwhMailHeaderString *)rwhMailHeader mailMessageType:(int)messageType;
+- (void)insertMailHeader:(RwhMailHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
 
 @end

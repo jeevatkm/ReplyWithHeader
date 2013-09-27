@@ -39,8 +39,9 @@
 #import "NSMutableAttributedString+RwhMailBundle.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 
-@interface RwhMailHeaderString (PrivateMethods)
+@interface RwhMailHeaderString (RwhNoImplementation)
 - (id)originalMessageHeaders;
+- (NSFont *)userDefaultMessageFont;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
@@ -67,10 +68,14 @@
     if (self = [super init]) {
         [self init];
         
-        headerString = [[[mailMessage originalMessageHeaders] attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+        headerString = [[[mailMessage originalMessageHeaders]
+                            attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+        userDefaultFont = [mailMessage userDefaultMessageFont];
         
-        RWH_LOG(@"Original mail string from backend: %@", mailHeaderString);
+        RWH_LOG(@"Original mail string from backend: %@, and Defaut user font name: %@",
+                mailHeaderString, [userDefaultFont fontName]);
         
+        // let's things going
         [self fixHeaderString];
         [self findOutHeaderItemCount];
         [self suppressImplicateHeaderLabels];
@@ -99,8 +104,15 @@
     [headerString addAttribute:@"NSColor" value:color range:range];    
 }
 
-- (void)applyBoldFontTraits {
+- (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled {
     RWH_LOG();
+    
+    if (!isHeaderTypograbhyEnabled) {
+        [headerString
+            addAttribute:@"NSFont"
+            value:userDefaultFont
+            range:NSMakeRange(0, [headerString length])];
+    }
     
     // setup a regular expression to find a word followed by a colon and then space
     // should get the first item (e.g. "From:").
