@@ -40,6 +40,7 @@
     NSMutableAttributedString *headerString;
     int headerItemCount;
     BOOL isSuppressLabelsFound;
+    NSFont *userDefaultFont;
 }
 
 @property (weak, readonly) NSString *stringValue;
@@ -47,7 +48,7 @@
 - (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
 - (void)applyHeaderTypography;
-- (void)applyBoldFontTraits;
+- (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled;
 - (void)applyHeaderLabelOptions;
 - (WebArchive *)getWebArchive;
 - (int)getHeaderItemCount;

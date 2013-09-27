@@ -34,12 +34,7 @@
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"
 
-@interface RwhMailBundle (PrivateMethods)
-+ (void)assignRwhMailDefaultValues;
-+ (void)smoothValueTransToNewRwhMailPrefUI;
-+ (void)addRwhMailMessageMethodsToComposeBackEnd;
-+ (void)addRwhMailPreferencesToNSPreferences;
-
+@interface RwhMailBundle (RwhNoImplementation)
 + (void)registerBundle;
 @end
 

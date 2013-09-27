@@ -32,7 +32,7 @@
 #import "RwhMailConstants.h"
 #import "RwhMailQuotedOriginal.h"
 
-@interface RwhMailMessage (PrivateMethods)
+@interface RwhMailMessage (RwhNoImplementation)
 - (id)type;
 @end
 
@@ -41,10 +41,13 @@
 - (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
     RWH_LOG();
     
-    //if we sizzled, this should be fine... (because this would be calling the original implementation)
+    // calling the original implementation
     [self rwhContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
-	if ([RwhMailBundle isEnabled]) {
+    // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
+    int msgCompose = [self type];
+    
+	if (([RwhMailBundle isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3)) {
         // Initailzing the quoted text from the original email
         RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithMailMessage:self];
         
@@ -52,9 +55,9 @@
         RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithMailMessage:self];
         
         //insert the new header text
-        [quotedText insertRwhMailHeader:newheaderString mailMessageType:[self type]];
+        [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];
         
-        // Once release it
+        // once done recycle it
         [newheaderString release];
         [quotedText release];
     }

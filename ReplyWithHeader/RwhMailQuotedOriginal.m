@@ -37,7 +37,7 @@
 #import "RwhMailConstants.h"
 #import "WebKit/DOMHTMLBRElement.h"
 
-@interface RwhMailQuotedOriginal (PrivateMethods)
+@interface RwhMailQuotedOriginal (RwhNoImplementation)
 - (id)htmlDocument;
 - (DOMDocumentFragment *)createDocumentFragmentWithMarkupString: (NSString *)str;
 - (id)descendantsWithClassName:(NSString *)str;
@@ -153,22 +153,25 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 }
 
-- (void)insertRwhMailHeader:(RwhMailHeaderString *)mailHeader mailMessageType:(int)messageType {
-    
-    RWH_LOG(@"Composing message type is %d", messageType);
+- (void)insertMailHeader:(RwhMailHeaderString *)mailHeader msgComposeType:(int)composeType {    
+    RWH_LOG(@"Composing message type is %d", composeType);
     
     // global
     if (GET_DEFAULT_BOOL(RwhMailHeaderOptionModeEnabled)) {
         [mailHeader applyHeaderLabelOptions];
-    }        
-    
-    if (GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled) && isHTMLMail) {
-        [mailHeader applyHeaderTypography];
-        [mailHeader applyBoldFontTraits];
     }
-  
+    
+    BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled);
+    if (isHeaderTypograbhyEnabled && isHTMLMail) {
+        [mailHeader applyHeaderTypography];
+    }
+    
+    if (isHTMLMail) {
+        [mailHeader applyBoldFontTraits:isHeaderTypograbhyEnabled];
+    }
+    
     // specifics
-    BOOL manageForwardHeader = GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled);    
+    BOOL manageForwardHeader = GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
@@ -179,7 +182,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         [self applyEntourage2004Support:headerFragment];
     }
     
-    if (messageType == 1 || messageType == 2) {
+    if (composeType == 1 || composeType == 2) {
         if ( isHTMLMail ) {
             [self processHTMLMail:headerFragment newLineFragment:newLineFragment];
         }
@@ -187,7 +190,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
             [self processPlainMail:headerFragment newLineFragment:newLineFragment];
         }
     }
-    else if (manageForwardHeader && messageType == 3) {
+    else if (manageForwardHeader && composeType == 3) {
         int hCount = [mailHeader getHeaderItemCount];
         for (int i=0; i<=hCount; i++) {
             [originalEmail removeChild:[originalEmail firstChild]];
