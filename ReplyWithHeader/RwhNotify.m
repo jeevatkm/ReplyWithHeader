@@ -36,7 +36,7 @@
 
 @implementation RwhNotify
 
-- (void)performVersionAvailabilty:(NSDictionary *)jsonDic {
+- (void)performVersionAvailabiltyCheck:(NSDictionary *)jsonDic {
     NSDictionary *latest = [[jsonDic objectForKey:@"releases"] objectForKey:@"latest"];
     NSString *currentVersion = [RwhMailBundle bundleVersionString];
     NSString *serverVersion = [latest objectForKey:@"shortVersion"];
@@ -95,7 +95,7 @@
             NSLog(@"RWH JSON parsing error for new version availabilty check. Description [%@] and Failure Reason [%@]", [error localizedDescription], [error localizedFailureReason]);
         }
         else {
-            [self performVersionAvailabilty:jsonDic];        
+            [self performVersionAvailabiltyCheck:jsonDic];        
         }
     }
     
