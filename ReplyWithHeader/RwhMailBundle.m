@@ -33,6 +33,7 @@
 #import "RwhMailPreferencesModule.h"
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"
+#import "RwhNotify.h"
 
 @interface RwhMailBundle (RwhNoImplementation)
 + (void)registerBundle;
@@ -80,6 +81,14 @@
     if (![self isEnabled]) {
         NSLog(@"RWH mail bundle is disabled in mail preferences");
     }
+    
+    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {
+        RwhNotify *notifier = [[RwhNotify alloc] init];
+        
+        [notifier checkNewVersion];
+        
+        [notifier release];
+    }
 }
 
 + (BOOL)isEnabled {
@@ -126,6 +135,12 @@
     return logo;
 }
 
++(void)init {
+    NSLog(@"EXP I have reached here");
+    
+    
+}
+
 
 #pragma mark MVMailBundle class methods
 
@@ -162,6 +177,10 @@
     
     if (!GET_DEFAULT(RwhMailHeaderOptionModeEnabled)) {
         SET_DEFAULT_BOOL(YES, RwhMailHeaderOptionModeEnabled);
+    }
+    
+    if (!GET_DEFAULT(RwhMailNotifyPluginNewVersion)) {
+        SET_DEFAULT_BOOL(YES, RwhMailNotifyPluginNewVersion);
     }
     
     if (!GET_DEFAULT(RwhMailHeaderFontName)) {

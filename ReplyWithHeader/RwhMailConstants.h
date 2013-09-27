@@ -37,6 +37,7 @@
 #define RwhMailBundleVersionKey @"CFBundleVersion"
 #define RwhMailBundleShortVersionKey @"CFBundleShortVersionString"
 #define RwhMailCopyRightKey @"NSHumanReadableCopyright"
+#define RwhMailAppCastURLKey @"RwhAppCastURL"
 
 #define RwhMailBundleEnabled @"RwhMailBundleEnabled"
 #define RwhMailForwardHeaderEnabled @"RwhForwardHeaderEnabled"
@@ -55,6 +56,8 @@
 // Mode Values (1=Apple Mail, 2=Outlook Mail)
 #define RwhMailHeaderLabelMode @"RwhHeaderLabelMode"
 #define RwhMailHeaderOrderMode @"RwhHeaderOrderMode"
+
+#define RwhMailNotifyPluginNewVersion @"RwhNotifyPluginNewVersion"
 
 #define RwhMailPreferencesNibName @"RwhMailPreferencesPanel"
 

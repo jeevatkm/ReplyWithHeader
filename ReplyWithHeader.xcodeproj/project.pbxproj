@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131C191F17F6050D0053C587 /* RwhNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C191E17F6050D0053C587 /* RwhNotify.m */; };
+		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
 		133A917F17E9745A00E3CC62 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 133A916C17E9745A00E3CC62 /* LICENSE */; };
 		133A918017E9745A00E3CC62 /* RwhMailHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* RwhMailHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* RwhMailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* RwhMailQuotedOriginal.m */; };
@@ -41,6 +43,11 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		131C191D17F6050C0053C587 /* RwhNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhNotify.h; sourceTree = "<group>"; };
+		131C191E17F6050D0053C587 /* RwhNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhNotify.m; sourceTree = "<group>"; };
+		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
+		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
+		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
 		133A916B17E9745A00E3CC62 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		133A916C17E9745A00E3CC62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* RwhMailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailHeaderString.h; sourceTree = "<group>"; };
@@ -90,6 +97,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		131C192117F6277D0053C587 /* Sparkle */ = {
+			isa = PBXGroup;
+			children = (
+				131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */,
+				131C192217F627B70053C587 /* SUStandardVersionComparator.h */,
+				131C192317F627B70053C587 /* SUStandardVersionComparator.m */,
+			);
+			name = Sparkle;
+			sourceTree = "<group>";
+		};
 		133A916917E9745A00E3CC62 /* ReplyWithHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +132,7 @@
 		133A918A17E974CE00E3CC62 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				131C192117F6277D0053C587 /* Sparkle */,
 				13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */,
 				133A918B17E974DF00E3CC62 /* AppKit */,
 			);
@@ -147,6 +165,8 @@
 				133A917917E9745A00E3CC62 /* RwhMailPreferences.m */,
 				133A917A17E9745A00E3CC62 /* RwhMailPreferencesModule.h */,
 				133A917B17E9745A00E3CC62 /* RwhMailPreferencesModule.m */,
+				131C191D17F6050C0053C587 /* RwhNotify.h */,
+				131C191E17F6050D0053C587 /* RwhNotify.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -287,6 +307,8 @@
 				13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */,
 				13423DAD17EDAE8100623E45 /* NSObject+RwhMailBundle.m in Sources */,
 				1376067D17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m in Sources */,
+				131C191F17F6050D0053C587 /* RwhNotify.m in Sources */,
+				131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

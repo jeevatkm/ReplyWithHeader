@@ -726,7 +726,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<string key="NSFrame">{{14, 10}, {478, 22}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="404746024"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="246514639">
@@ -865,16 +865,16 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														<object class="NSButton" id="457589332">
 															<reference key="NSNextResponder" ref="366299508"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{106, 144}, {299, 18}}</string>
+															<string key="NSFrame">{{140, 134}, {243, 18}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1036833351"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSButtonCell" key="NSCell" id="25830435">
-																<int key="NSCellFlags">-1543503872</int>
+																<int key="NSCellFlags">-2080374784</int>
 																<int key="NSCellFlags2">262144</int>
-																<string key="NSContents">Notify me, once new version available (Upcoming...)</string>
+																<string key="NSContents">Notify me, once new version available</string>
 																<reference key="NSSupport" ref="26"/>
 																<string key="NSCellIdentifier">_NS:9</string>
 																<reference key="NSControlView" ref="457589332"/>
@@ -1136,6 +1136,22 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">342</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_RwhMailNotifyNewVersion</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="457589332"/>
+					</object>
+					<int key="connectionID">345</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">notifyNewVersionPressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="457589332"/>
+					</object>
+					<int key="connectionID">346</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.RwhMailBundleEnabled</string>
 						<reference key="source" ref="253931335"/>
@@ -1298,6 +1314,22 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<int key="connectionID">340</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.RwhNotifyPluginNewVersion</string>
+						<reference key="source" ref="457589332"/>
+						<reference key="destination" ref="943210722"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="457589332"/>
+							<reference key="NSDestination" ref="943210722"/>
+							<string key="NSLabel">value: values.RwhNotifyPluginNewVersion</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.RwhNotifyPluginNewVersion</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">344</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1855,7 +1887,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">342</int>
+			<int key="maxID">346</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1882,6 +1914,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="className">RwhMailPreferencesModule</string>
 					<string key="superclassName">NSPreferencesModule</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="notifyNewVersionPressed:">id</string>
 						<string key="openFeedback:">id</string>
 						<string key="openSupport:">id</string>
 						<string key="openWebsite:">id</string>
@@ -1891,6 +1924,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="rwhSelectFontPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="notifyNewVersionPressed:">
+							<string key="name">notifyNewVersionPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openFeedback:">
 							<string key="name">openFeedback:</string>
 							<string key="candidateClassName">id</string>
@@ -1931,6 +1968,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="_RwhMailHeaderLabelMode">NSMatrix</string>
 						<string key="_RwhMailHeaderOptionModeEnabled">NSButton</string>
 						<string key="_RwhMailHeaderOrderMode">NSMatrix</string>
+						<string key="_RwhMailNotifyNewVersion">NSButton</string>
 						<string key="_RwhMailSelectFont">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1973,6 +2011,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="IBToOneOutletInfo" key="_RwhMailHeaderOrderMode">
 							<string key="name">_RwhMailHeaderOrderMode</string>
 							<string key="candidateClassName">NSMatrix</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_RwhMailNotifyNewVersion">
+							<string key="name">_RwhMailNotifyNewVersion</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_RwhMailSelectFont">
 							<string key="name">_RwhMailSelectFont</string>
