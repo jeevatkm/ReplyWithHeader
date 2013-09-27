@@ -39,6 +39,7 @@
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openFeedback:(id)sender;
 - (IBAction)openSupport:(id)sender;
+- (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
 @implementation RwhMailPreferencesModule
@@ -50,6 +51,7 @@
     [_RwhForwardHeaderEnabled setEnabled:state];
     [_RwhMailHeaderOptionModeEnabled setEnabled:state];
     [_RwhEntourage2004SupportEnabled setEnabled:state];
+    [_RwhMailNotifyNewVersion setEnabled:state];
     
     [self toggleRwhHeaderTypograpghyOptions:state];
     [self toggleRwhHeaderLabelOptions:state];
@@ -122,23 +124,52 @@
 // Open Feedback email
 - (IBAction)openFeedback:(id)sender {
     
-    NSAlert *infoAlertBox = [[NSAlert alloc] init];
+    NSAlert *infoAlert = [[NSAlert alloc] init];
     
-    [infoAlertBox setAlertStyle:NSInformationalAlertStyle];
-    [infoAlertBox setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
-    [infoAlertBox setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];    
-    [infoAlertBox setIcon:[RwhMailBundle bundleLogo]];
+    [infoAlert setAlertStyle:NSInformationalAlertStyle];
+    [infoAlert setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
+    [infoAlert setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];    
+    [infoAlert setIcon:[RwhMailBundle bundleLogo]];
+    [[[infoAlert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
     
-    [infoAlertBox runModal];
+    [infoAlert runModal];
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
     
-    [infoAlertBox release];
+    [infoAlert release];
 }
 
 // Open support page
 - (IBAction)openSupport:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
+}
+
+- (IBAction)notifyNewVersionPressed:(id)sender {
+    
+    if (![sender state]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        
+        [alert setIcon:[RwhMailBundle bundleLogo]];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert setMessageText:@"Are you sure you want to disable it?"];
+        [alert setInformativeText:@"Missing opportunity of new version release notification."];
+        
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:@"Disable"];
+        
+        NSArray *buttons = [alert buttons];
+        // note: rightmost button is index 0
+        [[buttons objectAtIndex:1] setKeyEquivalent:@"\033"];
+        [[buttons objectAtIndex:0] setKeyEquivalent:@"\r"];
+        
+        if ([alert runModal] != NSAlertSecondButtonReturn) {
+            SET_DEFAULT_BOOL(YES, RwhMailNotifyPluginNewVersion);
+            
+            [_RwhMailNotifyNewVersion setState:YES];
+        }
+        
+        [alert release];
+    }    
 }
 
 
@@ -166,7 +197,7 @@
 }
 
 - (BOOL)isResizable {
-	return YES;
+	return NO;
 }
 
 @end
