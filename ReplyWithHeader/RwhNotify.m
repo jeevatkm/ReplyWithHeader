@@ -42,9 +42,9 @@
     NSString *serverVersion = [latest objectForKey:@"shortVersion"];
     
     NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
-    RWH_LOG(@"Current Version is %@, Latest version is %@ and comparison result %ld", currentVersion, serverVersion, result);
-    
-    if (result == NSOrderedAscending) {
+    if (result == NSOrderedAscending) {        
+        NSLog(@"RWH current version is %@, latest version is %@ and comparison result %ld", currentVersion, serverVersion, result);
+        
         NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [RwhMailBundle bundleName], [latest objectForKey:@"version"]];
         
         NSString *infoText = [NSString stringWithFormat:@"%@; published on %@.", [latest objectForKey:@"title"], [latest objectForKey:@"pubDate"]];

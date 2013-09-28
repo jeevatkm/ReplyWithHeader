@@ -116,18 +116,19 @@
     
     // setup a regular expression to find a word followed by a colon and then space
     // should get the first item (e.g. "From:").
-    NSError *error = NULL;
+    NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange fromLabelMatchRange = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    NSRange fromLabelRange = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
     
-    RWH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelMatchRange));
+    RWH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelRange));
     
-    [headerString applyFontTraits:NSBoldFontMask range:fromLabelMatchRange];
+    [headerString applyFontTraits:NSBoldFontMask range:fromLabelRange];
     
     //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
     regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches = [regex matchesInString:[headerString string] options:0 range:NSMakeRange(0,[headerString length])];
+    NSArray *matches = [regex matchesInString:[headerString string]
+                                      options:0 range:NSMakeRange(0,[headerString length])];
     
     for (NSTextCheckingResult *match in matches) {
         NSRange matchRange = [match range];
@@ -138,7 +139,8 @@
 - (WebArchive *)getWebArchive {
     RWH_LOG(@"Mail string before web archiving it: %@", mailHeaderString);
     
-    WebArchive *arch = [headerString webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
+    WebArchive *arch = [headerString
+                        webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
       return arch;
 }
 
@@ -177,9 +179,10 @@
 
 // Workaround to get header item count
 - (void)findOutHeaderItemCount {
-    NSError *error = NULL;
+    NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches = [regex matchesInString:[headerString string] options:0 range:NSMakeRange(0,[headerString length])];
+    NSArray *matches = [regex matchesInString:[headerString string]
+                                      options:0 range:NSMakeRange(0,[headerString length])];
     
     headerItemCount = headerItemCount + [matches count];
 }
@@ -187,9 +190,13 @@
 - (void)fixHeaderString {
     RWH_LOG();
     
-    [headerString removeAttribute:@"NSFont" range:NSMakeRange(0,[headerString length])];
-    [headerString removeAttribute:@"NSColor" range:NSMakeRange(0,[headerString length])];
-    [headerString removeAttribute:@"NSParagraphStyle" range:NSMakeRange(0,[headerString length])];
+    NSRange range;
+    range.location = 0;
+    range.length = [headerString length];
+    
+    [headerString removeAttribute:@"NSFont" range:range];
+    [headerString removeAttribute:@"NSColor" range:range];
+    [headerString removeAttribute:@"NSParagraphStyle" range:range];
     
     [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:headerString];
     [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];    
@@ -198,12 +205,12 @@
 - (void)suppressImplicateHeaderLabels {
     RWH_LOG();
     
-    NSError *error = NULL;
+    NSError *error = nil;
     NSRegularExpression *replyToRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
-    NSRange replyLabelMatch = [replyToRegex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    NSRange replyToMatch = [replyToRegex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
     
-    if ( replyLabelMatch.location == NSNotFound ) {
+    if ( replyToMatch.location == NSNotFound ) {
         RWH_LOG(@"Reply To label doesn't found");
         
         isSuppressLabelsFound = NO;
@@ -212,8 +219,8 @@
         isSuppressLabelsFound = YES;
         
         NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
-        [headerString replaceCharactersInRange:NSMakeRange(replyLabelMatch.location, ([headerString length] - replyLabelMatch.location))
-                     withAttributedString:replaceString];
+        [headerString
+            replaceCharactersInRange:NSMakeRange(replyToMatch.location, ([headerString length] - replyToMatch.location)) withAttributedString:replaceString];
     }
 }
 
@@ -247,16 +254,18 @@
     [headerString replaceCharactersInRange:dRange withString:@"Sent: "];
     
     // <email-id>, into ;
-    NSError *error = NULL;
+    NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\s<([A-Z][A-Z0-9]*)[^>]*>,?)" options: NSRegularExpressionCaseInsensitive error:&error];
     
     NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];    
-    NSRange range = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    NSRange range = [regex rangeOfFirstMatchInString:[headerString string]
+                                             options:0 range:NSMakeRange(0, [headerString length])];
     
     while (range.length != 0) {        
         [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
         
-        range = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+        range = [regex rangeOfFirstMatchInString:[headerString string]
+                                         options:0 range:NSMakeRange(0, [headerString length])];
     }
     
     // double quoutes into empty
@@ -271,14 +280,12 @@
 - (void)applyHeaderLabelOptions {
     
     int headerOrderMode = GET_DEFAULT_INT(RwhMailHeaderOrderMode);
-    RWH_LOG(@"Mail Header Order mode: %d", headerOrderMode);
+    int headerLabelMode = GET_DEFAULT_INT(RwhMailHeaderLabelMode);
+    RWH_LOG(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
     
     if (headerOrderMode == 2) {    
         [self applyHeaderOrderChange];
-    }    
-    
-    int headerLabelMode = GET_DEFAULT_INT(RwhMailHeaderLabelMode);
-    RWH_LOG(@"Mail Header Label mode: %d", headerLabelMode);
+    }
     
     if (headerLabelMode == 2) {
         [self applyHeaderLabelChange];

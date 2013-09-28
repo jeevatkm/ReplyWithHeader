@@ -118,7 +118,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         numGrandChildCount = [[originalEmail firstChild] childElementCount];
     }
     
-    RWH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n",numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
+    RWH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n", numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
     
     if ( numGrandChildCount == 0 ) {
         [originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
@@ -288,7 +288,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     //setup a regular expression to find a colon followed by some space and a new line -
     // the first one should be the original line...
-    NSError *error = NULL;
+    NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@":\\s*(\\n|\\r)" options: NSRegularExpressionCaseInsensitive error:&error];
     
     NSRange textRange = [regex rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];

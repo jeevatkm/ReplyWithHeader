@@ -82,12 +82,14 @@
         NSLog(@"RWH mail bundle is disabled in mail preferences");
     }
     
-    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {
-        RwhNotify *notifier = [[RwhNotify alloc] init];
-        
-        [notifier checkNewVersion];
-        
-        [notifier release];
+    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {        
+        double delayInSeconds = 30.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            RwhNotify *notifier = [[RwhNotify alloc] init];
+            [notifier checkNewVersion];            
+            [notifier release];
+        });
     }
 }
 
@@ -133,12 +135,6 @@
         [logo setSize:NSMakeSize(128, 128)];
     });
     return logo;
-}
-
-+(void)init {
-    NSLog(@"EXP I have reached here");
-    
-    
 }
 
 
