@@ -141,7 +141,7 @@
     
     WebArchive *arch = [headerString
                         webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
-      return arch;
+    return arch;
 }
 
 - (int)getHeaderItemCount {
