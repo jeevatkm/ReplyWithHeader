@@ -23,6 +23,7 @@
 		13423DAD17EDAE8100623E45 /* NSObject+RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */; };
 		13575F7617EB82690047BF62 /* RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13575F7417EB82690047BF62 /* RwhMailBundle.m */; };
 		13716B0F17F4003B0092DEDD /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 13716B0E17F4003B0092DEDD /* ReplyWithHeader.icns */; };
+		1371DCC817F853F800320B54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371DCC717F853F800320B54 /* Localizable.strings */; };
 		1376067D17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */; };
 		1381100617EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */; };
 		13B6E5D717F6F41E00878012 /* RwhMailHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* RwhMailHeadersEditor.m */; };
@@ -49,7 +50,6 @@
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
-		133A916B17E9745A00E3CC62 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		133A916C17E9745A00E3CC62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* RwhMailHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailHeaderString.h; sourceTree = "<group>"; };
 		133A916E17E9745A00E3CC62 /* RwhMailHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailHeaderString.m; sourceTree = "<group>"; };
@@ -73,6 +73,18 @@
 		13575F7917EB90650047BF62 /* RwhMailMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailMacros.h; sourceTree = "<group>"; };
 		13575F7A17EB90650047BF62 /* RwhMailConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailConstants.h; sourceTree = "<group>"; };
 		13716B0E17F4003B0092DEDD /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
+		1371DCC717F853F800320B54 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		1371DCC917F8558C00320B54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCA17F856D500320B54 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCB17F856EC00320B54 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCC17F856F400320B54 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCD17F856FA00320B54 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCE17F8570200320B54 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCCF17F8570E00320B54 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCD217F8582E00320B54 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCD317F8589600320B54 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCD417F858AA00320B54 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1371DCD517F8599400320B54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1376067B17F0BC2800BDEB41 /* NSMutableAttributedString+RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+RwhMailBundle.h"; sourceTree = "<group>"; };
 		1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+RwhMailBundle.m"; sourceTree = "<group>"; };
 		1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
@@ -128,6 +140,7 @@
 				13575F7717EB83160047BF62 /* RwhMailBundle-Info.plist */,
 				133A916A17E9745A00E3CC62 /* InfoPlist.strings */,
 				1381100517EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib */,
+				1371DCC717F853F800320B54 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -259,6 +272,18 @@
 				French,
 				German,
 				en,
+				fr,
+				es,
+				ja,
+				de,
+				it,
+				pt,
+				ru,
+				"zh-Hans",
+				"zh-Hant",
+				zh,
+				nl,
+				sv,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -277,6 +302,7 @@
 				133A917F17E9745A00E3CC62 /* LICENSE in Resources */,
 				1381100617EC25EF0067B6A4 /* RwhMailPreferencesPanel.xib in Resources */,
 				13716B0F17F4003B0092DEDD /* ReplyWithHeader.icns in Resources */,
+				1371DCC817F853F800320B54 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +350,17 @@
 		133A916A17E9745A00E3CC62 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				133A916B17E9745A00E3CC62 /* English */,
+				1371DCC917F8558C00320B54 /* fr */,
+				1371DCCA17F856D500320B54 /* es */,
+				1371DCCB17F856EC00320B54 /* ja */,
+				1371DCCC17F856F400320B54 /* de */,
+				1371DCCD17F856FA00320B54 /* it */,
+				1371DCCE17F8570200320B54 /* pt */,
+				1371DCCF17F8570E00320B54 /* ru */,
+				1371DCD217F8582E00320B54 /* zh */,
+				1371DCD317F8589600320B54 /* nl */,
+				1371DCD417F858AA00320B54 /* sv */,
+				1371DCD517F8599400320B54 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
