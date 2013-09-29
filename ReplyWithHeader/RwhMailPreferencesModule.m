@@ -52,6 +52,7 @@
     [_RwhMailHeaderOptionModeEnabled setEnabled:state];
     [_RwhEntourage2004SupportEnabled setEnabled:state];
     [_RwhMailNotifyNewVersion setEnabled:state];
+    [_RwhMailSubjectPrefixTextEnabled setEnabled:state];
     
     [self toggleRwhHeaderTypograpghyOptions:state];
     [self toggleRwhHeaderLabelOptions:state];

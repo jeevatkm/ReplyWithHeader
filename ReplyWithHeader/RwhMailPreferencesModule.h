@@ -45,6 +45,7 @@
     IBOutlet NSButton *_RwhMailSelectFont;
     IBOutlet NSButton *_RwhMailHeaderOptionModeEnabled;
     IBOutlet NSButton *_RwhMailNotifyNewVersion;
+    IBOutlet NSButton *_RwhMailSubjectPrefixTextEnabled;
     IBOutlet NSImageView *_RwhMailBundleLogo;
     IBOutlet NSTextField *_RwhMailHeaderFontNameAndSize;
     IBOutlet NSColorWell *_RwhMailColorWell;

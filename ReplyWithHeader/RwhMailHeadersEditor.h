@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,38 +22,18 @@
  * THE SOFTWARE.
  */
 
-#import "RwhMailBundle.h"
-#import "RwhMailPreferences.h"
-#import "RwhMailPreferencesModule.h"
+//
+//  RwhMailHeadersEditor.h
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 9/28/13.
+//
+//
 
-@interface RwhMailPreferences (RwhNoImplementation)
-- (void)addPreferenceNamed:(NSString *)panelName owner:(id)instance;
-@end
+#import <Foundation/Foundation.h>
 
-@implementation RwhMailPreferences
+@interface RwhMailHeadersEditor : NSObject 
 
-#pragma mark Swizzled class methods
-
-//see http://nohejl.name/2011/07/21/mail-preferences-modules-in-mac-os-x-10-7/
-// for more info about why this is needed
-+ (id)rwhSharedPreferences {
-    RWH_LOG();
-    
-    static BOOL added = NO;
-    
-    //we don't have the NSPreferences class, so get it by name during runtime
-    id mailPreferences = [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
-    
-    if ((mailPreferences != nil) && !added) {
-        added = YES;
-        
-        [[NSClassFromString(@"NSPreferences") rwhSharedPreferences]
-         addPreferenceNamed:[RwhMailBundle preferencesPanelName]
-         owner:[RwhMailPreferencesModule sharedInstance]
-         ];
-    }
-    
-    return [NSClassFromString(@"NSPreferences") rwhSharedPreferences];
-}
+- (void)rwhLoadHeadersFromBackEnd:(id)arg1;
 
 @end

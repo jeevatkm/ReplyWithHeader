@@ -34,6 +34,7 @@
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"
 #import "RwhNotify.h"
+#import "RwhMailHeadersEditor.h"
 
 @interface RwhMailBundle (RwhNoImplementation)
 + (void)registerBundle;
@@ -69,10 +70,10 @@
     // for smooth upgrade to new UI
     [self smoothValueTransToNewRwhMailPrefUI];
     
-    // add the RwhMailMessage methods to the ComposeBackEnd class
+    // Swizzling of Mail.app Classes
     [self addRwhMailMessageMethodsToComposeBackEnd];
-    
-    [self addRwhMailPreferencesToNSPreferences];
+    [self addRwhMailPreferencesMethodsToNSPreferences];    
+    [self addRwhMailHeaderEditorMethodsToHeadersEditor];
     
     // RWH Bundle registered successfully
     NSLog(@"RWH %@ mail bundle registered", [self bundleVersionString]);
@@ -202,6 +203,10 @@
     if (!GET_DEFAULT(RwhMailHeaderOrderMode)) {
         SET_DEFAULT_INT(1, RwhMailHeaderOrderMode);
     }
+    
+    if (!GET_DEFAULT(RwhMailSubjectPrefixTextEnabled)) {
+        SET_DEFAULT_BOOL(YES, RwhMailSubjectPrefixTextEnabled);
+    }
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {
@@ -247,8 +252,6 @@
 + (void)addRwhMailMessageMethodsToComposeBackEnd {
     [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
-    // now switch the _continueToSetupContentsForView method in the ComposeBackEnd implementation
-    // so that the newly added rwhContinueToSetupContentsForView method is called instead...
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
      meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
@@ -256,14 +259,24 @@
      ];
 }
 
-+ (void)addRwhMailPreferencesToNSPreferences {
++ (void)addRwhMailHeaderEditorMethodsToHeadersEditor {
+    [RwhMailHeadersEditor rwhAddMethodsToClass:NSClassFromString(@"HeadersEditor")];
+    
+    [NSClassFromString(@"HeadersEditor")
+     rwhSwizzle:@selector(loadHeadersFromBackEnd:)
+     meth:@selector(rwhLoadHeadersFromBackEnd:)
+     classMeth:NO // it is an implementation method
+     ];
+}
+
++ (void)addRwhMailPreferencesMethodsToNSPreferences {
     [RwhMailPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
     
     [NSClassFromString(@"NSPreferences")
      rwhSwizzle:@selector(sharedPreferences)
      meth:@selector(rwhSharedPreferences)
-     classMeth:YES
-     ];
+     classMeth:YES // it is an implementation method
+     ];  
 }
 
 @end
