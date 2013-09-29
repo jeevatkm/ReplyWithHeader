@@ -25,7 +25,6 @@
 		1371DD1517F864FE00320B54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD0217F864FE00320B54 /* InfoPlist.strings */; };
 		1371DD1617F864FE00320B54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD0517F864FE00320B54 /* Localizable.strings */; };
 		1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */; };
-		1371DD1917F864FE00320B54 /* RwhMailBundle-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD1117F864FE00320B54 /* RwhMailBundle-Info.plist */; };
 		1371DD1A17F864FE00320B54 /* RwhMailPreferencesPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD1217F864FE00320B54 /* RwhMailPreferencesPanel.xib */; };
 		1376067D17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */; };
 		13B6E5D717F6F41E00878012 /* RwhMailHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* RwhMailHeadersEditor.m */; };
@@ -307,7 +306,6 @@
 				1371DD1517F864FE00320B54 /* InfoPlist.strings in Resources */,
 				1371DD1617F864FE00320B54 /* Localizable.strings in Resources */,
 				1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */,
-				1371DD1917F864FE00320B54 /* RwhMailBundle-Info.plist in Resources */,
 				1371DD1A17F864FE00320B54 /* RwhMailPreferencesPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,7 +393,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader/RwhMailBundle_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "ReplyWithHeader/RwhMailBundle-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/Resources/RwhMailBundle-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
@@ -421,7 +419,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReplyWithHeader/RwhMailBundle_Prefix.pch;
 				GENERATE_PKGINFO_FILE = NO;
-				INFOPLIST_FILE = "ReplyWithHeader/RwhMailBundle-Info.plist";
+				INFOPLIST_FILE = "ReplyWithHeader/Resources/RwhMailBundle-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Mail/Bundles";
 				LIBRARY_STYLE = "";
 				MACH_O_TYPE = mh_bundle;

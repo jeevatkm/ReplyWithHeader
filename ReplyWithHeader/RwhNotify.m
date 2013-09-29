@@ -43,7 +43,7 @@
     
     NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
     if (result == NSOrderedAscending) {        
-        NSLog(@"RWH current version is %@, latest version is %@ and comparison result %ld", currentVersion, serverVersion, result);
+        NSLog(@"RWH current version is %@, latest version is %@ and comparison result %d", currentVersion, serverVersion, (int)result);
         
         NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [RwhMailBundle bundleName], [latest objectForKey:@"version"]];
         
