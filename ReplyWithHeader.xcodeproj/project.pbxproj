@@ -101,6 +101,16 @@
 		138ACE1017F8A4A100E1B6BC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/RwhMailPreferencesPanel.strings; sourceTree = "<group>"; };
 		138ACE1117F8A4A100E1B6BC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/RwhMailPreferencesPanel.strings; sourceTree = "<group>"; };
 		138ACE1217F8A4B600E1B6BC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RwhMailPreferencesPanel.strings; sourceTree = "<group>"; };
+		138ACE1317F8A7EB00E1B6BC /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1417F8A8AB00E1B6BC /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1517F8A8AE00E1B6BC /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1617F8A8B000E1B6BC /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1717F8A8B300E1B6BC /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1817F8A8B500E1B6BC /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1917F8A8B800E1B6BC /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1A17F8A8BB00E1B6BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1B17F8A8BD00E1B6BC /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
+		138ACE1C17F8A8C000E1B6BC /* zh */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh; path = zh.lproj/RwhMailPreferencesPanel.xib; sourceTree = "<group>"; };
 		13B6E5D517F6F41E00878012 /* RwhMailHeadersEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailHeadersEditor.h; sourceTree = "<group>"; };
 		13B6E5D617F6F41E00878012 /* RwhMailHeadersEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailHeadersEditor.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -252,7 +262,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "ReplyWithHeader" */;
 			buildPhases = (
-				1371DD2417F88D2A00320B54 /* Localization */,
+				1371DD2417F88D2A00320B54 /* User Interface Localization */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -327,7 +337,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1371DD2417F88D2A00320B54 /* Localization */ = {
+		1371DD2417F88D2A00320B54 /* User Interface Localization */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -345,7 +355,7 @@
 				"$(SRCROOT)/ReplyWithHeader/Resources/sv.lproj/RwhMailPreferencesPanel.strings",
 				"$(SRCROOT)/ReplyWithHeader/Resources/zh.lproj/RwhMailPreferencesPanel.strings",
 			);
-			name = Localization;
+			name = "User Interface Localization";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/ReplyWithHeader/Resources/en.lproj/RwhMailPreferencesPanel.strings",
 				"$(DERIVED_FILE_DIR)/ReplyWithHeader/Resources/de.lproj/RwhMailPreferencesPanel.xib",
@@ -361,7 +371,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo -n \"Localizing Xib\"\n##\n# Localization Settings\n##\nsrc_locale=\"en\"\ntarget_locales=\"de es fr it ja nl pt ru sv zh\"\nxib_file=\"RwhMailPreferencesPanel.xib\"\nstrings_file=\"RwhMailPreferencesPanel.strings\"\nresources_path=${SRCROOT}/ReplyWithHeader/Resources\n\n# Extract source locale strings (use this to check if you added new strings to your xibs)\necho -n \"Updating \"$src_locale\" strings file... \"\nibtool --generate-strings-file $resources_path/$src_locale.lproj/$strings_file $resources_path/$src_locale.lproj/$xib_file\necho \"done\"\n# Generate localized interfaces\nfor locale in $target_locales ; do\necho -n \"Generating \"$locale\" interface... \"\nif [ -d \"$resources_path/$locale.lproj\" ] ; then\nif [ -f \"$resources_path/$locale.lproj/$strings_file\" ] ; then\nibtool --strings-file $resources_path/$locale.lproj/$strings_file --write $resources_path/$locale.lproj/$xib_file $resources_path/$src_locale.lproj/$xib_file\necho \"done\"\nelse\necho \"strings file \"$resources_path\"/\"$locale.lproj\"/\"$strings_file\" not found in locale dir \"$resources_path\"/\"$locale\".lproj - skipping \"$locale\" locale\"\nfi\nelse\necho \"locale dir \"$resources_path\"/\"$locale\".lproj not found - skipping \"$locale\" locale\"\nfi\ndone\n##\n# end of script\n##";
+			shellScript = "echo \"Localizing Xib file\"\n##\n# Localization Settings\n##\nsrc_locale=\"en\"\ntarget_locales=\"de es fr it ja nl pt ru sv zh\"\nxib_file=\"RwhMailPreferencesPanel.xib\"\nstrings_file=\"RwhMailPreferencesPanel.strings\"\nresources_path=${SRCROOT}/ReplyWithHeader/Resources\n\n# Cleanup auto generated xib for fresh build\necho \"Starting cleaning up...\"\nfor locale in $target_locales ; do\n    if [ -f \"$resources_path/$locale.lproj/$xib_file\" ] ; then\n        echo -n \"Cleaning up \"$locale\" interface... \"\n        rm -f $resources_path/$locale.lproj/$xib_file\n        echo \"done\"\n    fi\ndone\n\nsleep 5\n\n# Extract source locale strings (use this to check if you added new strings to your xibs)\necho -n \"Updating \"$src_locale\" strings file... \"\nibtool --generate-strings-file $resources_path/$src_locale.lproj/$strings_file $resources_path/$src_locale.lproj/$xib_file\necho \"done\"\n# Generate localized interfaces\nfor locale in $target_locales ; do\n    echo -n \"Generating \"$locale\" interface... \"\n    if [ -d \"$resources_path/$locale.lproj\" ] ; then\n        if [ -f \"$resources_path/$locale.lproj/$strings_file\" ] ; then\n            ibtool --strings-file $resources_path/$locale.lproj/$strings_file --write $resources_path/$locale.lproj/$xib_file $resources_path/$src_locale.lproj/$xib_file\n        echo \"done\"\n        else\n            echo \"strings file \"$resources_path\"/\"$locale.lproj\"/\"$strings_file\" not found in locale dir \"$resources_path\"/\"$locale\".lproj - skipping \"$locale\" locale\"\n        fi\n    else\n    echo \"locale dir \"$resources_path\"/\"$locale\".lproj not found - skipping \"$locale\" locale\"\n    fi\ndone\n##\n# end of script\n##";
 		};
 		4D5FEE9312723CCE00A945C5 /* Bundle Packing */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -432,6 +442,16 @@
 			isa = PBXVariantGroup;
 			children = (
 				1371DD1C17F882B400320B54 /* en */,
+				138ACE1317F8A7EB00E1B6BC /* fr */,
+				138ACE1417F8A8AB00E1B6BC /* es */,
+				138ACE1517F8A8AE00E1B6BC /* de */,
+				138ACE1617F8A8B000E1B6BC /* nl */,
+				138ACE1717F8A8B300E1B6BC /* ja */,
+				138ACE1817F8A8B500E1B6BC /* it */,
+				138ACE1917F8A8B800E1B6BC /* sv */,
+				138ACE1A17F8A8BB00E1B6BC /* ru */,
+				138ACE1B17F8A8BD00E1B6BC /* pt */,
+				138ACE1C17F8A8C000E1B6BC /* zh */,
 			);
 			name = RwhMailPreferencesPanel.xib;
 			sourceTree = "<group>";
