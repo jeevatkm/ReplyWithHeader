@@ -34,8 +34,6 @@
 //  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "RwhMailHeaderString.h"
-#import "RwhMailConstants.h"
-#import "RwhMailMacros.h"
 #import "NSMutableAttributedString+RwhMailBundle.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 

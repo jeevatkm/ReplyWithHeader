@@ -70,7 +70,6 @@
 		13575F7317EB825B0047BF62 /* RwhMailBundle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle_Prefix.pch; sourceTree = "<group>"; };
 		13575F7417EB82690047BF62 /* RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailBundle.m; sourceTree = "<group>"; };
 		13575F7517EB82690047BF62 /* RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailBundle.h; sourceTree = "<group>"; };
-		13575F7917EB90650047BF62 /* RwhMailMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailMacros.h; sourceTree = "<group>"; };
 		13575F7A17EB90650047BF62 /* RwhMailConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RwhMailConstants.h; sourceTree = "<group>"; };
 		1371DD0617F864FE00320B54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		133A918B17E974DF00E3CC62 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
+				133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */,
 				13A25F4017F9B00D002394DF /* NSPreferences.h */,
 				13A25F4117F9B00D002394DF /* NSPreferencesModule-Protocol.h */,
 				133A917117E9745A00E3CC62 /* NSPreferencesModule.h */,
@@ -184,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				1376067E17F0C43200BDEB41 /* Category */,
-				13575F7917EB90650047BF62 /* RwhMailMacros.h */,
 				13575F7A17EB90650047BF62 /* RwhMailConstants.h */,
 				13575F7417EB82690047BF62 /* RwhMailBundle.m */,
 				13575F7517EB82690047BF62 /* RwhMailBundle.h */,
@@ -225,7 +224,6 @@
 				13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */,
 				1376067B17F0BC2800BDEB41 /* NSMutableAttributedString+RwhMailBundle.h */,
 				1376067C17F0BC2900BDEB41 /* NSMutableAttributedString+RwhMailBundle.m */,
-				133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */,
 				13A25F4217F9B0C7002394DF /* NSPreferences+MailHeader.h */,
 				13A25F4317F9B0C7002394DF /* NSPreferences+MailHeader.m */,
 			);

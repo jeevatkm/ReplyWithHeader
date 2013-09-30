@@ -27,8 +27,6 @@
 #import <objc/objc-runtime.h>
 
 #import "RwhMailBundle.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
 #import "MailHeaderPreferences.h"
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"

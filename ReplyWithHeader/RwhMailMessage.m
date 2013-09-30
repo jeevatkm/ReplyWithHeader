@@ -28,8 +28,6 @@
 
 #import "RwhMailBundle.h"
 #import "RwhMailMessage.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
 #import "RwhMailQuotedOriginal.h"
 
 @interface RwhMailMessage (RwhNoImplementation)

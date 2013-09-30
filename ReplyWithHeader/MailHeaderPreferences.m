@@ -28,8 +28,6 @@
 
 #import "RwhMailBundle.h"
 #import "MailHeaderPreferences.h"
-#import "RwhMailConstants.h"
-#import "RwhMailMacros.h"
 
 @interface MailHeaderPreferences (PrivateMethods)
 - (IBAction)rwhMailBundlePressed:(id)sender;
