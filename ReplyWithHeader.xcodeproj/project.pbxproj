@@ -339,7 +339,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1371DD2417F88D2A00320B54 /* User Interface Localization */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -369,7 +369,7 @@
 				"$(DERIVED_FILE_DIR)/ReplyWithHeader/Resources/sv.lproj/RwhMailPreferencesPanel.xib",
 				"$(DERIVED_FILE_DIR)/ReplyWithHeader/Resources/zh.lproj/RwhMailPreferencesPanel.xib",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "echo \"Localizing Xib file\"\n##\n# Localization Settings\n##\nsrc_locale=\"en\"\ntarget_locales=\"de es fr it ja nl pt ru sv zh\"\nxib_file=\"RwhMailPreferencesPanel.xib\"\nstrings_file=\"RwhMailPreferencesPanel.strings\"\nresources_path=${SRCROOT}/ReplyWithHeader/Resources\n\n# Cleanup auto generated xib for fresh build\necho \"Starting cleaning up...\"\nfor locale in $target_locales ; do\n    if [ -f \"$resources_path/$locale.lproj/$xib_file\" ] ; then\n        echo -n \"Cleaning up \"$locale\" interface... \"\n        rm -f $resources_path/$locale.lproj/$xib_file\n        echo \"done\"\n    fi\ndone\n\nsleep 5\n\n# Extract source locale strings (use this to check if you added new strings to your xibs)\necho -n \"Updating \"$src_locale\" strings file... \"\nibtool --generate-strings-file $resources_path/$src_locale.lproj/$strings_file $resources_path/$src_locale.lproj/$xib_file\necho \"done\"\n# Generate localized interfaces\nfor locale in $target_locales ; do\n    echo -n \"Generating \"$locale\" interface... \"\n    if [ -d \"$resources_path/$locale.lproj\" ] ; then\n        if [ -f \"$resources_path/$locale.lproj/$strings_file\" ] ; then\n            ibtool --strings-file $resources_path/$locale.lproj/$strings_file --write $resources_path/$locale.lproj/$xib_file $resources_path/$src_locale.lproj/$xib_file\n        echo \"done\"\n        else\n            echo \"strings file \"$resources_path\"/\"$locale.lproj\"/\"$strings_file\" not found in locale dir \"$resources_path\"/\"$locale\".lproj - skipping \"$locale\" locale\"\n        fi\n    else\n    echo \"locale dir \"$resources_path\"/\"$locale\".lproj not found - skipping \"$locale\" locale\"\n    fi\ndone\n##\n# end of script\n##";
 		};
