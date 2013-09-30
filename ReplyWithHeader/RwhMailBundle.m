@@ -29,12 +29,12 @@
 #import "RwhMailBundle.h"
 #import "RwhMailMacros.h"
 #import "RwhMailConstants.h"
-#import "RwhMailPreferences.h"
-#import "RwhMailPreferencesModule.h"
+#import "MailHeaderPreferences.h"
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"
 #import "RwhNotify.h"
 #import "RwhMailHeadersEditor.h"
+#import "NSPreferences+MailHeader.h"
 
 @interface RwhMailBundle (RwhNoImplementation)
 + (void)registerBundle;
@@ -147,7 +147,7 @@
 }
 
 + (NSString*)preferencesOwnerClassName {
-    return NSStringFromClass([RwhMailPreferencesModule class]);
+    return NSStringFromClass([MailHeaderPreferences class]);
 }
 
 + (NSString*)preferencesPanelName {
@@ -255,7 +255,7 @@
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
      meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
-     classMeth:NO // it is an implementation method
+     classMeth:NO
      ];
 }
 
@@ -265,18 +265,38 @@
     [NSClassFromString(@"HeadersEditor")
      rwhSwizzle:@selector(loadHeadersFromBackEnd:)
      meth:@selector(rwhLoadHeadersFromBackEnd:)
-     classMeth:NO // it is an implementation method
+     classMeth:NO
      ];
 }
 
 + (void)addRwhMailPreferencesMethodsToNSPreferences {
-    [RwhMailPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
     
-    [NSClassFromString(@"NSPreferences")
-     rwhSwizzle:@selector(sharedPreferences)
-     meth:@selector(rwhSharedPreferences)
-     classMeth:YES // it is an implementation method
-     ];  
+    Class nsPref = NSClassFromString(@"NSPreferences");    
+    if (nsPref) {
+        [nsPref
+         rwhSwizzle:@selector(sharedPreferences)
+         meth:@selector(MHSharedPreferences)
+         classMeth:YES
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(windowWillResize:toSize:)
+         meth:@selector(MHWindowWillResize:toSize:)
+         classMeth:NO
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(toolbarItemClicked:)
+         meth:@selector(MHToolbarItemClicked:)
+         classMeth:NO
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(showPreferencesPanelForOwner:)
+         meth:@selector(MHShowPreferencesPanelForOwner:)
+         classMeth:NO
+         ];
+    }
 }
 
 @end

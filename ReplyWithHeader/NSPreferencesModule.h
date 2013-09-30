@@ -4,9 +4,7 @@
  *     class-dump is Copyright (C) 1997-1998, 2000-2001, 2004-2009 by Steve Nygard.
  */
 
-@protocol NSPreferencesModule <NSObject>
-    // the definition for NSPreferencesModule
-@end
+#import "NSPreferencesModule-Protocol.h"
 
 @class NSBox;
 

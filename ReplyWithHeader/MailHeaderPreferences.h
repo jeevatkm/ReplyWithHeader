@@ -29,15 +29,15 @@
 
 /*!
  * @class
- * The <code>RwhMailPreferencesModule</code> class is the subclass of
+ * The <code>MailHeaderPreferences</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
  * specific to the RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  *
- * RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
+ * MailHeaderPreferences Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface RwhMailPreferencesModule : NSPreferencesModule {
+@interface MailHeaderPreferences : NSPreferencesModule {
     IBOutlet NSButton *_RwhMailBundleEnabled;
     IBOutlet NSButton *_RwhForwardHeaderEnabled;
     IBOutlet NSButton *_RwhHeaderTypographyEnabled;

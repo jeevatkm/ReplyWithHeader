@@ -27,11 +27,11 @@
 // RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
 
 #import "RwhMailBundle.h"
-#import "RwhMailPreferencesModule.h"
+#import "MailHeaderPreferences.h"
 #import "RwhMailConstants.h"
 #import "RwhMailMacros.h"
 
-@interface RwhMailPreferencesModule (PrivateMethods)
+@interface MailHeaderPreferences (PrivateMethods)
 - (IBAction)rwhMailBundlePressed:(id)sender;
 - (IBAction)rwhHeaderTypographyPressed:(id)sender;
 - (IBAction)rwhSelectFontPressed:(id)sender;
@@ -42,7 +42,7 @@
 - (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
-@implementation RwhMailPreferencesModule
+@implementation MailHeaderPreferences
 
 #pragma mark Class private methods
 
