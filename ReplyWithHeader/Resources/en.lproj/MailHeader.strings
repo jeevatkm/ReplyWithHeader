@@ -1,0 +1,16 @@
+{
+    /* Plugin Info */
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "© 2013 Jeevanandam M. (jeevatkm), All rights reserved.";    
+    
+    /* Message Strings */
+    "STRING_SUBJECT" = "Subject: ";
+    "STRING_DATE" = "Date: ";
+    "STRING_REPLY_TO" = "Reply-To: ";
+    "STRING_SENT" = "Sent: ";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "Download";
+	"BUTTON_RELEASE_NOTES" = "Release Notes";
+	"BUTTON_LATER" = "Later";
+}

@@ -42,9 +42,10 @@
 + (NSString *)bundleNameAndVersion;
 + (NSString *)bundleName;
 + (NSString *)bundleVersionString;
-+ (NSString *)bundleShortName;
 + (NSString *)bundleCopyright;
 + (NSImage *)bundleLogo;
++ (NSString *)localizedString:(NSString *)key;
++ (NSString *)localeLanguageCode;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

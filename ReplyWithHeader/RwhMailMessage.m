@@ -26,7 +26,6 @@
 
 // RwhMailMessage Class completely rewritten by Jeevanandam M. on Sep 23, 2013
 
-#import "RwhMailBundle.h"
 #import "RwhMailMessage.h"
 #import "RwhMailQuotedOriginal.h"
 

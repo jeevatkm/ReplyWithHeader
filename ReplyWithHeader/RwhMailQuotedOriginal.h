@@ -30,7 +30,7 @@
 //
 //  Created by Jason Schroth on 8/16/12.
 //
-//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
+//  RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "WebKit/DOMDocumentFragment.h"
 #import "WebKit/DOMHTMLDivElement.h"

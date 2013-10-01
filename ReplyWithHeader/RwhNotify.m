@@ -32,7 +32,6 @@
 
 #import "RwhNotify.h"
 #import "RwhMailBundle.h"
-#import "RwhMailConstants.h"
 
 @implementation RwhNotify
 
@@ -56,9 +55,9 @@
         [alert setMessageText:message];
         [alert setInformativeText:infoText];
         
-        [alert addButtonWithTitle:@"Download"];
-        [alert addButtonWithTitle:@"Release Notes"];
-        [alert addButtonWithTitle:@"Later"];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_DOWNLOAD")];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_RELEASE_NOTES")];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_LATER")];
         
         [[[alert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
         
