@@ -34,8 +34,6 @@
 //  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "RwhMailHeaderString.h"
-#import "RwhMailConstants.h"
-#import "RwhMailMacros.h"
 #import "NSMutableAttributedString+RwhMailBundle.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 
@@ -73,7 +71,7 @@
         userDefaultFont = [mailMessage userDefaultMessageFont];
         
         RWH_LOG(@"Original mail string from backend: %@, and Defaut user font name: %@",
-                mailHeaderString, [userDefaultFont fontName]);
+                headerString, [userDefaultFont fontName]);
         
         // let's things going
         [self fixHeaderString];
@@ -116,7 +114,7 @@
     
     // setup a regular expression to find a word followed by a colon and then space
     // should get the first item (e.g. "From:").
-    NSError *error = nil;
+    NSError * __autoreleasing error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     
     NSRange fromLabelRange = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
@@ -137,7 +135,7 @@
 }
 
 - (WebArchive *)getWebArchive {
-    RWH_LOG(@"Mail string before web archiving it: %@", mailHeaderString);
+    RWH_LOG(@"Mail string before web archiving it: %@", headerString);
     
     WebArchive *arch = [headerString
                         webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
@@ -162,10 +160,12 @@
 
 - (void)dealloc {
     headerString = nil;
-    headerItemCount=nil;
+    headerItemCount = nil;
+    isSuppressLabelsFound = nil;
     
     free(headerString);
     free(headerItemCount);
+    free(isSuppressLabelsFound);
     
     [super dealloc];
 }
@@ -175,11 +175,13 @@
 
 - (void)initVars {
     headerItemCount = 1;
+    
+    isSuppressLabelsFound = NO;
 }
 
 // Workaround to get header item count
 - (void)findOutHeaderItemCount {
-    NSError *error = nil;
+    NSError * __autoreleasing error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches = [regex matchesInString:[headerString string]
                                       options:0 range:NSMakeRange(0,[headerString length])];
@@ -205,28 +207,20 @@
 - (void)suppressImplicateHeaderLabels {
     RWH_LOG();
     
-    NSError *error = nil;
-    NSRegularExpression *replyToRegex = [NSRegularExpression regularExpressionWithPattern:@"\\Reply-To:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    
-    NSRange replyToMatch = [replyToRegex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
-    
-    if ( replyToMatch.location == NSNotFound ) {
-        RWH_LOG(@"Reply To label doesn't found");
-        
-        isSuppressLabelsFound = NO;
-    }
-    else {
+    NSRange range = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_REPLY_TO")];    
+    if (range.location != NSNotFound) {
         isSuppressLabelsFound = YES;
         
         NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
         [headerString
-            replaceCharactersInRange:NSMakeRange(replyToMatch.location, ([headerString length] - replyToMatch.location)) withAttributedString:replaceString];
+         replaceCharactersInRange:NSMakeRange(range.location, ([headerString length] - range.location)) withAttributedString:replaceString];
     }
 }
 
-- (void)applyHeaderOrderChange {
-    NSRange subjectRange = [[headerString string] rangeOfString:@"Subject: "];
-    NSRange dateRange = [[headerString string] rangeOfString:@"Date: "];
+- (void)applyHeaderOrderChange {    
+    // Subject: and Date: sequence change
+    NSRange subjectRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_SUBJECT")];
+    NSRange dateRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
     
     NSRange subCntRange;
     subCntRange.location = subjectRange.location;
@@ -250,30 +244,29 @@
 
 - (void)applyHeaderLabelChange {
     // Date: into Sent:
-    NSRange dRange = [[headerString string] rangeOfString:@"Date: "];
-    [headerString replaceCharactersInRange:dRange withString:@"Sent: "];
+    NSRange dRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
+    [headerString replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
     
     // <email-id>, into ;
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\s<([A-Z][A-Z0-9]*)[^>]*>,?)" options: NSRegularExpressionCaseInsensitive error:&error];
+    NSError * __autoreleasing error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\s<([A-Z][A-Z0-9]*)[^>]*>,?)" options:NSRegularExpressionCaseInsensitive error:&error];
     
-    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];    
+    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];
     NSRange range = [regex rangeOfFirstMatchInString:[headerString string]
-                                             options:0 range:NSMakeRange(0, [headerString length])];
+                                             options:0 range:NSMakeRange(0, headerString.length)];
     
-    while (range.length != 0) {        
+    while (range.length != 0) {
         [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
-        
         range = [regex rangeOfFirstMatchInString:[headerString string]
-                                         options:0 range:NSMakeRange(0, [headerString length])];
+                                         options:0 range:NSMakeRange(0, headerString.length)];
     }
     
     // double quoutes into empty
-    NSRange qtRange = [[headerString string] rangeOfString:@"\""];
-    while (qtRange.length != 0) {
-        [headerString replaceCharactersInRange:qtRange withString:@""];
-        qtRange = [[headerString string] rangeOfString:@"\""];
-    }    
+    range = [[headerString string] rangeOfString:@"\""];
+    while (range.length != 0) {
+        [headerString replaceCharactersInRange:range withString:@""];
+        range = [[headerString string] rangeOfString:@"\""];
+    }
 }
 
 // For now it does outlook mail label ordering

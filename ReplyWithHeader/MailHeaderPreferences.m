@@ -24,14 +24,11 @@
  * THE SOFTWARE.
  */
 
-// RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
+// MailHeaderPreferences Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
 
-#import "RwhMailBundle.h"
-#import "RwhMailPreferencesModule.h"
-#import "RwhMailConstants.h"
-#import "RwhMailMacros.h"
+#import "MailHeaderPreferences.h"
 
-@interface RwhMailPreferencesModule (PrivateMethods)
+@interface MailHeaderPreferences (PrivateMethods)
 - (IBAction)rwhMailBundlePressed:(id)sender;
 - (IBAction)rwhHeaderTypographyPressed:(id)sender;
 - (IBAction)rwhSelectFontPressed:(id)sender;
@@ -42,7 +39,7 @@
 - (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
-@implementation RwhMailPreferencesModule
+@implementation MailHeaderPreferences
 
 #pragma mark Class private methods
 
@@ -117,12 +114,10 @@
     [_RwhMailHeaderFontNameAndSize setStringValue:fontDescription];
 }
 
-// Open website page
 - (IBAction)openWebsite:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader"]];
 }
 
-// Open Feedback email
 - (IBAction)openFeedback:(id)sender {
     
     NSAlert *infoAlert = [[NSAlert alloc] init];
@@ -140,7 +135,6 @@
     [infoAlert release];
 }
 
-// Open support page
 - (IBAction)openSupport:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
 }

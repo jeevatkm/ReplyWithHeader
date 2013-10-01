@@ -4,7 +4,8 @@
 
 #ifdef __OBJC__
 #  import <Cocoa/Cocoa.h>
-#
+#  import "RwhMailConstants.h"
+#  import "RwhMailBundle.h"
 
 #  ifdef RWH_DEBUG
 #    define RWH_LOG(fmt, ...) NSLog((@"RWH:: %s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
@@ -13,3 +14,19 @@
 #  endif
 
 #endif
+
+#define GET_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
+#define SET_USER_DEFAULT(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
+
+#define GET_DEFAULT_DATA(k) [[NSUserDefaults standardUserDefaults] dataForKey: k]
+#define GET_DEFAULT_VALUE(k) [[NSUserDefaults standardUserDefaults] valueForKey: k]
+
+#define REMOVE_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
+
+#define GET_DEFAULT_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
+#define SET_DEFAULT_BOOL(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
+
+#define GET_DEFAULT_INT(k) [[NSUserDefaults standardUserDefaults] integerForKey: k]
+#define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
+
+#define MHLocalizedString(key) [RwhMailBundle localizedString:(key)]

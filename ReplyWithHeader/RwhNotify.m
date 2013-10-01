@@ -32,7 +32,6 @@
 
 #import "RwhNotify.h"
 #import "RwhMailBundle.h"
-#import "RwhMailConstants.h"
 
 @implementation RwhNotify
 
@@ -43,7 +42,7 @@
     
     NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
     if (result == NSOrderedAscending) {        
-        NSLog(@"RWH current version is %@, latest version is %@ and comparison result %ld", currentVersion, serverVersion, result);
+        NSLog(@"RWH current version is %@, latest version is %@ and comparison result %d", currentVersion, serverVersion, (int)result);
         
         NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [RwhMailBundle bundleName], [latest objectForKey:@"version"]];
         
@@ -56,9 +55,9 @@
         [alert setMessageText:message];
         [alert setInformativeText:infoText];
         
-        [alert addButtonWithTitle:@"Download"];
-        [alert addButtonWithTitle:@"Release Notes"];
-        [alert addButtonWithTitle:@"Later"];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_DOWNLOAD")];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_RELEASE_NOTES")];
+        [alert addButtonWithTitle:MHLocalizedString(@"BUTTON_LATER")];
         
         [[[alert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
         

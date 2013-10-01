@@ -2,8 +2,8 @@ RWH Quoting reply/forward headers of email in Apple Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
 
-* [Plugin Homepage - Detailed Information][2]
-* [Latest Release Download from MacUpdate.com][5]
+* [Plugin Homepage][2]
+* [Latest Release - Download from MacUpdate.com][5]
 * [Issue Tracker](#issue-tracker)
 * [Author](#author)
 * [Credits](#credits)
@@ -36,7 +36,7 @@ Steps to Installation ReplyWithHeader
 
 1. Quit Mail.app
 2. Download and unzip the attachment in `~/Library/Mail/Bundles` (create the directory if missing)
-   Unzipping will return `ReplyWithHeaders.mailbundle` - copy this to `~/Library/Mail/Bundles`
+   Unzipping will return `ReplyWithHeader.mailbundle` - copy this to `~/Library/Mail/Bundles`
 3. In the terminal
 <pre><code>defaults write com.apple.mail EnableBundles -bool true</pre></code>
 
@@ -51,8 +51,8 @@ Steps to Installation ReplyWithHeader
    This will restrict your information to Mail.app messages
 
 3. In the console, if all goes well, you should see
-<pre><code>RWH &lt;version number> mail bundle registered
-RWH &lt;version number> Oh it's a wonderful life</pre></code>
+<pre><code>RWH &lt;version number> plugin loaded
+RWH &lt;version number> Wow! it's a wonderful life</pre></code>
 
 [1]: http://myjeeva.com
 [2]: http://myjeeva.com/replywithheader

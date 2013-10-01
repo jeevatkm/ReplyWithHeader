@@ -31,8 +31,6 @@
 //
 
 #import "RwhMailHeadersEditor.h"
-#import "RwhMailConstants.h"
-#import "RwhMailMacros.h"
 
 @interface RwhMailHeadersEditor (RwhNoImplementation)
 - (void)_subjectChanged;

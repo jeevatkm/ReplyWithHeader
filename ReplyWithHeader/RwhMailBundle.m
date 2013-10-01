@@ -22,19 +22,19 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ *
+ * RwhMailBundle Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
 
 #import <objc/objc-runtime.h>
 
 #import "RwhMailBundle.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
-#import "RwhMailPreferences.h"
-#import "RwhMailPreferencesModule.h"
+#import "MailHeaderPreferences.h"
 #import "RwhMailMessage.h"
 #import "NSObject+RwhMailBundle.h"
 #import "RwhNotify.h"
 #import "RwhMailHeadersEditor.h"
+#import "NSPreferences+MailHeader.h"
 
 @interface RwhMailBundle (RwhNoImplementation)
 + (void)registerBundle;
@@ -43,56 +43,6 @@
 @implementation RwhMailBundle
 
 #pragma mark Class public methods
-
-+ (void)initialize {
-    [super initialize];
-    
-    // Make sure the initializer is only run once.
-    // Usually is run, for every class inheriting from RwhMailBundle.
-    if (self != [RwhMailBundle class])
-        return;
-    
-    Class mvMailBundleClass = NSClassFromString(@"MVMailBundle");
-    // If this class is not available that means Mail.app
-    // doesn't allow bundles anymore. Fingers crossed that this never happens!
-    if (!mvMailBundleClass) {
-        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer and relax !");
-        
-        return;
-    }
-    
-    // Registering RWH mail bundle
-    [mvMailBundleClass registerBundle];
-    
-    // assigning default value if not present
-    [self assignRwhMailDefaultValues];
-    
-    // for smooth upgrade to new UI
-    [self smoothValueTransToNewRwhMailPrefUI];
-    
-    // Swizzling of Mail.app Classes
-    [self addRwhMailMessageMethodsToComposeBackEnd];
-    [self addRwhMailPreferencesMethodsToNSPreferences];    
-    [self addRwhMailHeaderEditorMethodsToHeadersEditor];
-    
-    // RWH Bundle registered successfully
-    NSLog(@"RWH %@ mail bundle registered", [self bundleVersionString]);
-    NSLog(@"RWH %@ Oh it's a wonderful life", [self bundleVersionString]);
-    
-    if (![self isEnabled]) {
-        NSLog(@"RWH mail bundle is disabled in mail preferences");
-    }
-    
-    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {        
-        double delayInSeconds = 30.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            RwhNotify *notifier = [[RwhNotify alloc] init];
-            [notifier checkNewVersion];            
-            [notifier release];
-        });
-    }
-}
 
 + (BOOL)isEnabled {
     return GET_DEFAULT_BOOL(RwhMailBundleEnabled);
@@ -108,7 +58,7 @@
 }
 
 + (NSString *)bundleNameAndVersion {
-    return [NSMutableString stringWithFormat:@"%@ %@", [self bundleName], [self bundleVersionString]];
+    return [NSMutableString stringWithFormat:@"%@ v%@", [self bundleName], [self bundleVersionString]];
 }
 
 + (NSString *)bundleName {
@@ -119,12 +69,8 @@
     return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleShortVersionKey];
 }
 
-+ (NSString *)bundleShortName {
-    return RwhMailBundleShortName;
-}
-
 + (NSString *)bundleCopyright {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailCopyRightKey];
+    return MHLocalizedString(@"COPYRIGHT");
 }
 
 + (NSImage *)bundleLogo {
@@ -138,75 +84,47 @@
     return logo;
 }
 
-
-#pragma mark MVMailBundle class methods
-
-+ (BOOL)hasPreferencesPanel {
-    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
-    return YES;
++ (NSString *)localizedString:(NSString *)key {
+    NSBundle *mhBundle = [RwhMailBundle bundle];
+    NSString *localString = NSLocalizedStringFromTableInBundle(key, @"MailHeader", mhBundle, nil);
+    
+    if(![localString isEqualToString:key])
+        return localString;
+    
+    NSBundle *englishLanguage = [NSBundle
+                                 bundleWithPath:[mhBundle
+                                                 pathForResource:@"en" ofType:@"lproj" inDirectory:@"MailHeader"]];
+    return [englishLanguage localizedStringForKey:key value:@"" table:@"MailHeader"];
 }
 
-+ (NSString*)preferencesOwnerClassName {
-    return NSStringFromClass([RwhMailPreferencesModule class]);
++ (NSString *)localeLanguageCode {
+    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+    
+    RWH_LOG(@"Current Locale language code is %@", languageCode);
+    return languageCode;
 }
-
-+ (NSString*)preferencesPanelName {
-    return [self bundleShortName];
-}
-
-
-#pragma mark Class private methods
 
 + (void)assignRwhMailDefaultValues {
     RWH_LOG();
     
-    if (!GET_DEFAULT(RwhMailBundleEnabled)) {
-        SET_DEFAULT_BOOL(YES, RwhMailBundleEnabled);
-    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithBool:YES], RwhMailBundleEnabled,
+                          [NSNumber numberWithBool:YES], RwhMailForwardHeaderEnabled,
+                          [NSNumber numberWithBool:YES], RwhMailHeaderTypographyEnabled,
+                          [NSNumber numberWithBool:YES], RwhMailHeaderOptionModeEnabled,
+                          [NSNumber numberWithBool:YES], RwhMailNotifyPluginNewVersion,
+                          RwhMailDefaultHeaderFontName, RwhMailHeaderFontName,
+                          RwhMailDefaultHeaderFontSize, RwhMailHeaderFontSize,
+                          [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderColor,
+                          [NSNumber numberWithBool:NO], RwhMailEntourage2004SupportEnabled,
+                          [NSNumber numberWithBool:YES], RwhMailSubjectPrefixTextEnabled,
+                          [NSNumber numberWithInt:1], RwhMailHeaderLabelMode,
+                          [NSNumber numberWithInt:1], RwhMailHeaderOrderMode,
+                          nil
+                          ];
     
-    if (!GET_DEFAULT(RwhMailForwardHeaderEnabled)) {
-        SET_DEFAULT_BOOL(YES, RwhMailForwardHeaderEnabled);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderTypographyEnabled)) {
-        SET_DEFAULT_BOOL(YES, RwhMailHeaderTypographyEnabled);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderOptionModeEnabled)) {
-        SET_DEFAULT_BOOL(YES, RwhMailHeaderOptionModeEnabled);
-    }
-    
-    if (!GET_DEFAULT(RwhMailNotifyPluginNewVersion)) {
-        SET_DEFAULT_BOOL(YES, RwhMailNotifyPluginNewVersion);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderFontName)) {
-        SET_USER_DEFAULT(RwhMailDefaultHeaderFontName , RwhMailHeaderFontName);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderFontSize)) {
-        SET_USER_DEFAULT(RwhMailDefaultHeaderFontSize , RwhMailHeaderFontSize);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderColor)) {
-        SET_USER_DEFAULT([NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderColor);
-    }
-    
-    if (!GET_DEFAULT(RwhMailEntourage2004SupportEnabled)) {
-        SET_DEFAULT_BOOL(NO, RwhMailEntourage2004SupportEnabled);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderLabelMode)) {
-        SET_DEFAULT_INT(1, RwhMailHeaderLabelMode);
-    }
-    
-    if (!GET_DEFAULT(RwhMailHeaderOrderMode)) {
-        SET_DEFAULT_INT(1, RwhMailHeaderOrderMode);
-    }
-    
-    if (!GET_DEFAULT(RwhMailSubjectPrefixTextEnabled)) {
-        SET_DEFAULT_BOOL(YES, RwhMailSubjectPrefixTextEnabled);
-    }
+    // set defaults
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 }
 
 + (void)smoothValueTransToNewRwhMailPrefUI {
@@ -243,9 +161,9 @@
         REMOVE_DEFAULT(@"RwhForwardHeaderText");
     }
     
-    if (GET_DEFAULT(@"RwhReplyHeaderText")) {        
+    if (GET_DEFAULT(@"RwhReplyHeaderText")) {
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
-    }    
+    }
     // [end]
 }
 
@@ -255,7 +173,7 @@
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
      meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
-     classMeth:NO // it is an implementation method
+     classMeth:NO
      ];
 }
 
@@ -265,18 +183,104 @@
     [NSClassFromString(@"HeadersEditor")
      rwhSwizzle:@selector(loadHeadersFromBackEnd:)
      meth:@selector(rwhLoadHeadersFromBackEnd:)
-     classMeth:NO // it is an implementation method
+     classMeth:NO
      ];
 }
 
 + (void)addRwhMailPreferencesMethodsToNSPreferences {
-    [RwhMailPreferences rwhAddMethodsToClass:NSClassFromString(@"NSPreferences")];
+    Class nsPref = NSClassFromString(@"NSPreferences");
+    if (nsPref) {
+        [nsPref
+         rwhSwizzle:@selector(sharedPreferences)
+         meth:@selector(MHSharedPreferences)
+         classMeth:YES
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(windowWillResize:toSize:)
+         meth:@selector(MHWindowWillResize:toSize:)
+         classMeth:NO
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(toolbarItemClicked:)
+         meth:@selector(MHToolbarItemClicked:)
+         classMeth:NO
+         ];
+        
+        [nsPref
+         rwhSwizzle:@selector(showPreferencesPanelForOwner:)
+         meth:@selector(MHShowPreferencesPanelForOwner:)
+         classMeth:NO
+         ];
+    }
+}
+
+
+#pragma mark MVMailBundle class methods
+
++ (BOOL)hasPreferencesPanel {
+    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
+    return YES;
+}
+
++ (NSString*)preferencesOwnerClassName {
+    return NSStringFromClass([MailHeaderPreferences class]);
+}
+
++ (NSString*)preferencesPanelName {
+    return MHLocalizedString(@"MAIL_HEADER_PREFERENCES");
+}
+
+
+#pragma mark MVMailBundle initialize
+
++ (void)initialize {    
+    // Make sure the initializer is only run once.
+    // Usually is run, for every class inheriting from RwhMailBundle.
+    if (self != [RwhMailBundle class])
+        return;
     
-    [NSClassFromString(@"NSPreferences")
-     rwhSwizzle:@selector(sharedPreferences)
-     meth:@selector(rwhSharedPreferences)
-     classMeth:YES // it is an implementation method
-     ];  
+    Class mvMailBundleClass = NSClassFromString(@"MVMailBundle");
+    // If this class is not available that means Mail.app
+    // doesn't allow bundles anymore. Fingers crossed that this never happens!
+    if (!mvMailBundleClass) {
+        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer and relax !");
+        
+        return;
+    }
+    
+    // Registering plugin in Mail.app
+    [mvMailBundleClass registerBundle];
+    
+    // assigning default value if not present
+    [self assignRwhMailDefaultValues];
+    
+    // for smooth upgrade to new UI
+    [self smoothValueTransToNewRwhMailPrefUI];
+    
+    // Swizzling of Mail.app Classes
+    [self addRwhMailMessageMethodsToComposeBackEnd];
+    [self addRwhMailPreferencesMethodsToNSPreferences];
+    [self addRwhMailHeaderEditorMethodsToHeadersEditor];
+    
+    // RWH Bundle registered successfully
+    NSLog(@"RWH %@ plugin loaded", [self bundleVersionString]);
+    NSLog(@"RWH %@ Wow! it's a wonderful life", [self bundleVersionString]);
+    
+    if (![self isEnabled]) {
+        NSLog(@"RWH plugin is disabled in preferences");
+    }
+    
+    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {
+        double delayInSeconds = 45.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            RwhNotify *notifier = [[RwhNotify alloc] init];
+            [notifier checkNewVersion];
+            [notifier release];
+        });
+    }
 }
 
 @end

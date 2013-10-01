@@ -1,2 +1,14 @@
 *~
 build/
+ReplyWithHeader/Resources/de.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/es.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/fr.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/it.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/ja.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/nl.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/pt.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/ru.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/sv.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader/Resources/zh.lproj/RwhMailPreferencesPanel.xib
+ReplyWithHeader.xcodeproj/project.xcworkspace/
+ReplyWithHeader.xcodeproj/xcuserdata/

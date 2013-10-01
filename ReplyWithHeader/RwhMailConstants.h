@@ -33,7 +33,6 @@
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
 #define RwhMailBundleNameKey @"CFBundleName"
-#define RwhMailBundleShortName @"RWH"
 #define RwhMailBundleVersionKey @"CFBundleVersion"
 #define RwhMailBundleShortVersionKey @"CFBundleShortVersionString"
 #define RwhMailCopyRightKey @"NSHumanReadableCopyright"

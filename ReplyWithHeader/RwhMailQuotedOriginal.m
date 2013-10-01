@@ -33,8 +33,6 @@
 //  RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "RwhMailQuotedOriginal.h"
-#import "RwhMailMacros.h"
-#import "RwhMailConstants.h"
 #import "WebKit/DOMHTMLBRElement.h"
 
 @interface RwhMailQuotedOriginal (RwhNoImplementation)
