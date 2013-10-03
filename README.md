@@ -1,6 +1,6 @@
-RWH Quoting reply/forward headers of email in Apple Mail.app
-------------------------------------------
-[ReplyWithHeader][2] mail bundle enables Apple Mail application to represent reply message headers like forwarding.
+Quoting reply and forward headers of email in Mail.app
+------------------------------------------------------
+[ReplyWithHeader][2] mail plugin enables Apple Mail.app to represent reply and forward headers meaningful and blends with corporate world email communication.
 
 * [Plugin Homepage][2]
 * [Latest Release - Download from MacUpdate.com][5]
@@ -14,11 +14,11 @@ RWH Quoting reply/forward headers of email in Apple Mail.app
 
 Issue Tracker
 -------------
-Please submit any bugs or annoyances on the [Issues][3]
+Please submit any bugs or annoyances [here][3]
 
 Author
 ------
-Jeevanandam M. - jeeva@myjeeva.com ([myjeeva.com][1])
+Jeevanandam M. (jeeva@myjeeva.com)
 
 Credits
 -------
