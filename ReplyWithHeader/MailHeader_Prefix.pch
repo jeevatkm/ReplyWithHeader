@@ -4,7 +4,7 @@
 
 #ifdef __OBJC__
 #  import <Cocoa/Cocoa.h>
-#  import "RwhMailConstants.h"
+#  import "MHConstants.h"
 #  import "RwhMailBundle.h"
 
 #  ifdef RWH_DEBUG

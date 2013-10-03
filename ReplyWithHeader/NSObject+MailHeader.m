@@ -23,16 +23,16 @@
  */
 
 //
-//  NSObject+RwhMailSwizzle.m
+//  NSObject+MailHeader.m
 //  ReplyWithHeader
 //
 //  Created by Jeevanandam M. on 9/21/13.
 //
 //
 
-#import "NSObject+RwhMailBundle.h"
+#import "NSObject+MailHeader.h"
 
-@implementation NSObject (RwhMailBundle)
+@implementation NSObject (MailHeader)
 
 #pragma mark Class methods
 

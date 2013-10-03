@@ -25,7 +25,7 @@
  */
 
 //
-//  RwhConstants.h
+//  MHConstants.h
 //  RwhMailBundle
 //
 //  Created by Jeevanandam M. on 9/18/13.

@@ -23,7 +23,7 @@
  */
 
 //
-//  NSObject+RwhMailSwizzle.h
+//  NSObject+MailHeader.h
 //  ReplyWithHeader
 //
 //  Created by Jeevanandam M. on 9/21/13.
@@ -33,7 +33,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/objc-runtime.h>
 
-@interface NSObject (RwhMailBundle)
+@interface NSObject (MailHeader)
 
 + (void)rwhAddMethodsToClass:(Class)cls;
 + (void)rwhAddMethods:(Method *)m numMethods:(unsigned int)cnt toClass:(Class *)c origClass:(Class *) cls;

@@ -36,7 +36,7 @@
 		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<object class="NSCustomObject" id="1001">
-				<string key="NSClassName">MailHeaderPreferences</string>
+				<string key="NSClassName">MHPreferences</string>
 			</object>
 			<object class="NSCustomObject" id="1003">
 				<string key="NSClassName">FirstResponder</string>
@@ -98,12 +98,13 @@
 										<string key="NSFrame">{{11, 10}, {566, 399}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="366299508"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<array class="NSMutableArray" key="NSTabViewItems">
 											<object class="NSTabViewItem" id="116127141">
 												<string key="NSIdentifier">1</string>
 												<object class="NSView" key="NSView" id="1018010683">
-													<reference key="NSNextResponder" ref="404746024"/>
+													<nil key="NSNextResponder"/>
 													<int key="NSvFlags">256</int>
 													<array class="NSMutableArray" key="NSSubviews">
 														<object class="NSButton" id="149260813">
@@ -111,7 +112,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{15, 51}, {476, 18}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1012690996"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -138,7 +138,7 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 17}, {518, 28}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
+															<reference key="NSNextKeyView" ref="404746024"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="502270534">
@@ -178,7 +178,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 310}, {518, 14}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="437544001"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -199,7 +198,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{19, 256}, {513, 14}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="937842585"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -220,7 +218,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{15, 330}, {516, 18}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="228598641"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -247,7 +244,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{15, 276}, {516, 18}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="211974489"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -274,7 +270,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{26, 235}, {94, 17}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="605683583"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -299,7 +294,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{26, 208}, {94, 17}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="740322338"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -323,7 +317,6 @@
 															</set>
 															<string key="NSFrame">{{125, 208}, {44, 19}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="144896113"/>
 															<string key="NSReuseIdentifierKey">_NS:1116</string>
 															<bool key="NSEnabled">YES</bool>
@@ -339,7 +332,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{122, 233}, {189, 17}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="609156550"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -365,7 +357,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{316, 233}, {149, 19}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="548579340"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -390,7 +381,6 @@
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{80, 146}, {346, 23}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="457066237"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -499,7 +489,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{15, 172}, {516, 18}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="403424771"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -526,7 +515,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{80, 123}, {346, 19}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="151045516"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -627,7 +615,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{15, 88}, {516, 18}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="149260813"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -651,8 +638,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														</object>
 													</array>
 													<string key="NSFrame">{{10, 33}, {546, 353}}</string>
-													<reference key="NSSuperview" ref="404746024"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="482978685"/>
 													<string key="NSReuseIdentifierKey">_NS:11</string>
 												</object>
@@ -663,7 +648,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 											<object class="NSTabViewItem" id="154104247">
 												<string key="NSIdentifier">2</string>
 												<object class="NSView" key="NSView" id="366299508">
-													<nil key="NSNextResponder"/>
+													<reference key="NSNextResponder" ref="404746024"/>
 													<int key="NSvFlags">256</int>
 													<array class="NSMutableArray" key="NSSubviews">
 														<object class="NSTextField" id="967849403">
@@ -671,6 +656,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">292</int>
 															<string key="NSFrame">{{220, 271}, {207, 30}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="242185699"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -691,6 +677,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{220, 312}, {206, 17}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="967849403"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -715,6 +702,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">12</int>
 															<string key="NSFrame">{{17, 107}, {512, 5}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="423127670"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<string key="NSOffsets">{0, 0}</string>
@@ -744,6 +732,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 17}, {518, 22}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="404746024"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -768,6 +757,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 52}, {518, 22}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="565416653"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -788,6 +778,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 87}, {518, 14}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="367019079"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
@@ -808,6 +799,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{218, 238}, {110, 17}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="44954233"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -832,6 +824,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{93, 238}, {110, 17}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="570039492"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -856,6 +849,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{343, 238}, {110, 17}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="457589332"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -880,6 +874,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{81, 169}, {419, 18}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="1036833351"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -914,6 +909,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															</set>
 															<string key="NSFrame">{{130, 267}, {84, 76}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
+															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="243147089"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
@@ -931,6 +927,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														</object>
 													</array>
 													<string key="NSFrame">{{10, 33}, {546, 353}}</string>
+													<reference key="NSSuperview" ref="404746024"/>
+													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="41714434"/>
 													<string key="NSReuseIdentifierKey">_NS:28</string>
 												</object>
@@ -939,13 +937,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 												<reference key="NSTabView" ref="404746024"/>
 											</object>
 										</array>
-										<reference key="NSSelectedTabViewItem" ref="116127141"/>
+										<reference key="NSSelectedTabViewItem" ref="154104247"/>
 										<reference key="NSFont" ref="563141123"/>
 										<int key="NSTvFlags">0</int>
 										<bool key="NSAllowTruncatedLabels">YES</bool>
 										<bool key="NSDrawsBackground">YES</bool>
 										<array class="NSMutableArray" key="NSSubviews">
-											<reference ref="1018010683"/>
+											<reference ref="366299508"/>
 										</array>
 									</object>
 								</array>
@@ -1001,30 +999,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">175</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhEntourage2004SupportEnabled</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="149260813"/>
-					</object>
-					<int key="connectionID">177</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailBundleEnabled</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="253931335"/>
-					</object>
-					<int key="connectionID">178</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhForwardHeaderEnabled</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="482978685"/>
-					</object>
-					<int key="connectionID">179</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">rwhSelectFontPressed:</string>
 						<reference key="source" ref="1001"/>
@@ -1041,38 +1015,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">269</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailHeaderFontNameAndSize</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="605683583"/>
-					</object>
-					<int key="connectionID">279</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhHeaderTypographyEnabled</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="437544001"/>
-					</object>
-					<int key="connectionID">282</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailSelectFont</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="609156550"/>
-					</object>
-					<int key="connectionID">283</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailColorWell</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="740322338"/>
-					</object>
-					<int key="connectionID">284</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">rwhHeaderTypographyPressed:</string>
 						<reference key="source" ref="1001"/>
@@ -1087,22 +1029,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="144896113"/>
 					</object>
 					<int key="connectionID">298</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailHeaderOrderMode</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="403424771"/>
-					</object>
-					<int key="connectionID">311</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailHeaderLabelMode</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="457066237"/>
-					</object>
-					<int key="connectionID">312</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1129,36 +1055,116 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">338</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailHeaderOptionModeEnabled</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="144896113"/>
-					</object>
-					<int key="connectionID">341</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailBundleLogo</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="41714434"/>
-					</object>
-					<int key="connectionID">342</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_RwhMailNotifyNewVersion</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="457589332"/>
-					</object>
-					<int key="connectionID">345</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">notifyNewVersionPressed:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="457589332"/>
 					</object>
 					<int key="connectionID">346</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHBundleEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="253931335"/>
+					</object>
+					<int key="connectionID">354</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderLabelMode</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="457066237"/>
+					</object>
+					<int key="connectionID">355</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderOrderMode</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="403424771"/>
+					</object>
+					<int key="connectionID">356</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHSubjectPrefixTextEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="151045516"/>
+					</object>
+					<int key="connectionID">357</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHBundleLogo</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="41714434"/>
+					</object>
+					<int key="connectionID">358</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHNotifyNewVersion</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="457589332"/>
+					</object>
+					<int key="connectionID">359</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="740322338"/>
+					</object>
+					<int key="connectionID">360</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHEntourage2004SupportEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="149260813"/>
+					</object>
+					<int key="connectionID">361</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHForwardHeaderEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="482978685"/>
+					</object>
+					<int key="connectionID">362</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderInfoFontAndSize</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="605683583"/>
+					</object>
+					<int key="connectionID">363</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderOptionEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="144896113"/>
+					</object>
+					<int key="connectionID">364</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderTypographyEnabled</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="437544001"/>
+					</object>
+					<int key="connectionID">365</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHSelectFont</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="609156550"/>
+					</object>
+					<int key="connectionID">366</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1912,12 +1918,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">353</int>
+			<int key="maxID">366</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">MailHeaderPreferences</string>
+					<string key="className">MHPreferences</string>
 					<string key="superclassName">NSPreferencesModule</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="notifyNewVersionPressed:">id</string>
@@ -1964,77 +1970,77 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_RwhEntourage2004SupportEnabled">NSButton</string>
-						<string key="_RwhForwardHeaderEnabled">NSButton</string>
-						<string key="_RwhHeaderTypographyEnabled">NSButton</string>
-						<string key="_RwhMailBundleEnabled">NSButton</string>
-						<string key="_RwhMailBundleLogo">NSImageView</string>
-						<string key="_RwhMailColorWell">NSColorWell</string>
-						<string key="_RwhMailHeaderFontNameAndSize">NSTextField</string>
-						<string key="_RwhMailHeaderLabelMode">NSMatrix</string>
-						<string key="_RwhMailHeaderOptionModeEnabled">NSButton</string>
-						<string key="_RwhMailHeaderOrderMode">NSMatrix</string>
-						<string key="_RwhMailNotifyNewVersion">NSButton</string>
-						<string key="_RwhMailSelectFont">NSButton</string>
-						<string key="_RwhMailSubjectPrefixTextEnabled">NSButton</string>
+						<string key="_MHBundleEnabled">NSButton</string>
+						<string key="_MHBundleLogo">NSImageView</string>
+						<string key="_MHColorWell">NSColorWell</string>
+						<string key="_MHEntourage2004SupportEnabled">NSButton</string>
+						<string key="_MHForwardHeaderEnabled">NSButton</string>
+						<string key="_MHHeaderInfoFontAndSize">NSTextField</string>
+						<string key="_MHHeaderLabelMode">NSMatrix</string>
+						<string key="_MHHeaderOptionEnabled">NSButton</string>
+						<string key="_MHHeaderOrderMode">NSMatrix</string>
+						<string key="_MHHeaderTypographyEnabled">NSButton</string>
+						<string key="_MHNotifyNewVersion">NSButton</string>
+						<string key="_MHSelectFont">NSButton</string>
+						<string key="_MHSubjectPrefixTextEnabled">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_RwhEntourage2004SupportEnabled">
-							<string key="name">_RwhEntourage2004SupportEnabled</string>
+						<object class="IBToOneOutletInfo" key="_MHBundleEnabled">
+							<string key="name">_MHBundleEnabled</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhForwardHeaderEnabled">
-							<string key="name">_RwhForwardHeaderEnabled</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_RwhHeaderTypographyEnabled">
-							<string key="name">_RwhHeaderTypographyEnabled</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailBundleEnabled">
-							<string key="name">_RwhMailBundleEnabled</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailBundleLogo">
-							<string key="name">_RwhMailBundleLogo</string>
+						<object class="IBToOneOutletInfo" key="_MHBundleLogo">
+							<string key="name">_MHBundleLogo</string>
 							<string key="candidateClassName">NSImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailColorWell">
-							<string key="name">_RwhMailColorWell</string>
+						<object class="IBToOneOutletInfo" key="_MHColorWell">
+							<string key="name">_MHColorWell</string>
 							<string key="candidateClassName">NSColorWell</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailHeaderFontNameAndSize">
-							<string key="name">_RwhMailHeaderFontNameAndSize</string>
+						<object class="IBToOneOutletInfo" key="_MHEntourage2004SupportEnabled">
+							<string key="name">_MHEntourage2004SupportEnabled</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_MHForwardHeaderEnabled">
+							<string key="name">_MHForwardHeaderEnabled</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_MHHeaderInfoFontAndSize">
+							<string key="name">_MHHeaderInfoFontAndSize</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailHeaderLabelMode">
-							<string key="name">_RwhMailHeaderLabelMode</string>
+						<object class="IBToOneOutletInfo" key="_MHHeaderLabelMode">
+							<string key="name">_MHHeaderLabelMode</string>
 							<string key="candidateClassName">NSMatrix</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailHeaderOptionModeEnabled">
-							<string key="name">_RwhMailHeaderOptionModeEnabled</string>
+						<object class="IBToOneOutletInfo" key="_MHHeaderOptionEnabled">
+							<string key="name">_MHHeaderOptionEnabled</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailHeaderOrderMode">
-							<string key="name">_RwhMailHeaderOrderMode</string>
+						<object class="IBToOneOutletInfo" key="_MHHeaderOrderMode">
+							<string key="name">_MHHeaderOrderMode</string>
 							<string key="candidateClassName">NSMatrix</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailNotifyNewVersion">
-							<string key="name">_RwhMailNotifyNewVersion</string>
+						<object class="IBToOneOutletInfo" key="_MHHeaderTypographyEnabled">
+							<string key="name">_MHHeaderTypographyEnabled</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailSelectFont">
-							<string key="name">_RwhMailSelectFont</string>
+						<object class="IBToOneOutletInfo" key="_MHNotifyNewVersion">
+							<string key="name">_MHNotifyNewVersion</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_RwhMailSubjectPrefixTextEnabled">
-							<string key="name">_RwhMailSubjectPrefixTextEnabled</string>
+						<object class="IBToOneOutletInfo" key="_MHSelectFont">
+							<string key="name">_MHSelectFont</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_MHSubjectPrefixTextEnabled">
+							<string key="name">_MHSubjectPrefixTextEnabled</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MailHeaderPreferences.h</string>
+						<string key="minorKey">./Classes/MHPreferences.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
