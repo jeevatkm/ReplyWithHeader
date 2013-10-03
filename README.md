@@ -1,6 +1,6 @@
 Quoting reply and forward headers of email in Mail.app
 ------------------------------------------------------
-[ReplyWithHeader][2] mail plugin enables Apple Mail.app to represent reply and forward headers meaningful and blends with corporate world email communication.
+[ReplyWithHeader][2] plugin enables Apple Mail.app to represent meaningful reply and forward headers  and blends with corporate world email communication.
 
 * [Plugin Homepage][2]
 * [Latest Release - Download from MacUpdate.com][5]
