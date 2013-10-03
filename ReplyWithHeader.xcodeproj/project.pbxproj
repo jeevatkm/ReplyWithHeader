@@ -14,7 +14,6 @@
 		133A918117E9745A00E3CC62 /* RwhMailQuotedOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* RwhMailQuotedOriginal.m */; };
 		133A918417E9745A00E3CC62 /* RwhMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* RwhMailMessage.m */; };
 		133A918617E9745A00E3CC62 /* MailHeaderPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* MailHeaderPreferences.m */; };
-		13423DA617EDACF700623E45 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133A919417E9785C00E3CC62 /* CoreData.framework */; };
 		13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
@@ -63,7 +62,6 @@
 		133A917717E9745A00E3CC62 /* RwhMailMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RwhMailMessage.m; sourceTree = "<group>"; };
 		133A917A17E9745A00E3CC62 /* MailHeaderPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeaderPreferences.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* MailHeaderPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeaderPreferences.m; sourceTree = "<group>"; };
-		133A919417E9785C00E3CC62 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MailAttributedStringToHTML.h"; sourceTree = "<group>"; };
 		13423DAB17EDAE8100623E45 /* NSObject+RwhMailBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RwhMailBundle.m"; sourceTree = "<group>"; };
 		13423DAC17EDAE8100623E45 /* NSObject+RwhMailBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RwhMailBundle.h"; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13423DA617EDACF700623E45 /* CoreData.framework in Frameworks */,
 				13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */,
 				13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */,
 				13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */,
@@ -231,7 +228,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				133A919417E9785C00E3CC62 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				4D5FF0A9127255C500A945C5 /* WebKit.framework */,

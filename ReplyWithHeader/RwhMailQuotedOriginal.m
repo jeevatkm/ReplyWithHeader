@@ -70,15 +70,14 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     //initialze the value with a mutable copy of the attributed string
     if ( self = [super init] ) {
 		//set the class document variable
-        document = [mailMessage document];
-        
+        document = [mailMessage document];        
         RWH_LOG(@"Mail Document: %@", document);
         
         //now initialize the other vars
         [self initVars];
         
         //if there is not a child in the original email, it must be plain text
-        if ([originalEmail firstChild]==NULL || !isHTMLMail) {            
+        if ([originalEmail firstChild] == nil || !isHTMLMail) {
             //prep the plain text
             [self prepareQuotedPlainText];
         }
@@ -88,7 +87,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         if ( dhc.length > 1) {
-            RWH_LOG(@"EXP initWithMailMessage before %@", [originalEmail innerHTML]);
+            //NSLog(@"EXP initWithMailMessage before %@", [originalEmail innerHTML]);
             
             if (isHTMLMail) {
                 [self removeOriginalHeaderPrefix];
@@ -190,8 +189,15 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
     else if (manageForwardHeader && composeType == 3) {
         int hCount = [mailHeader getHeaderItemCount];
+        BOOL delPath = [[[originalEmail firstChild] nodeName] isEqualToString:@"BLOCKQUOTE"];
+        DOMNode *blockQuote = [[originalEmail childNodes] item:0];
         for (int i=0; i<=hCount; i++) {
-            [originalEmail removeChild:[originalEmail firstChild]];
+            if (delPath) {
+                [[originalEmail firstChild] removeChild:[blockQuote firstChild]];
+            }
+            else {
+                [originalEmail removeChild:[originalEmail firstChild]];                
+            }
         }
         
         if ( isHTMLMail ) {
@@ -241,7 +247,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     for (int i=0; i<dhc.length; i++) {
         DOMNode *node = [dhc item:i];        
-        NSRange range = [[[node firstChild] stringValue] rangeOfString:@"wrote:"];
+        NSRange range = [[[node firstChild] stringValue]
+                            rangeOfString:MHLocalizedString(@"STRING_WROTE")];
         
         if (range.length != 0) {
             [[node firstChild] setTextContent:@""];
@@ -261,14 +268,14 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         
         // if signature at top, item==3 else item==1
         [originalEmail removeChild:[dhc item:textNodeLocation]];
-        
-        //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
-        for (int i=0; i<[originalEmail childElementCount]; i++) {
-            if( [[[[originalEmail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {
-                //this is the quoted text
-                textNodeLocation=i;
-                break;
-            }
+    }
+    
+    //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
+    for (int i=0; i<[originalEmail childElementCount]; i++) {
+        if( [[[[originalEmail childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] ) {
+            //this is the quoted text
+            textNodeLocation=i;
+            break;
         }
     }
     
@@ -310,10 +317,10 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         [originalEmail removeChild:[originalEmail firstChild]];
         
         RWH_LOG(@"Removed BR element, only %d children left",[originalEmail childElementCount]);
-    }    
+    }
 }
 
-- (void)prepareQuotedPlainText {    
+- (void)prepareQuotedPlainText {
     originalEmail=[[[document htmlDocument]
                         descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     

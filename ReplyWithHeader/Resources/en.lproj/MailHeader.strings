@@ -8,6 +8,7 @@
     "STRING_DATE" = "Date: ";
     "STRING_REPLY_TO" = "Reply-To: ";
     "STRING_SENT" = "Sent: ";
+    "STRING_WROTE" = "wrote:";
     
     /* Button Strings */
 	"BUTTON_DOWNLOAD" = "Download";
