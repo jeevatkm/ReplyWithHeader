@@ -24,32 +24,32 @@
  * THE SOFTWARE.
  */
 
-// RwhMailMessage Class completely rewritten by Jeevanandam M. on Sep 23, 2013
+// MHMessage Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013
 
-#import "RwhMailMessage.h"
-#import "RwhMailQuotedOriginal.h"
+#import "MHMessage.h"
+#import "MHQuotedMailOriginal.h"
 
-@interface RwhMailMessage (RwhNoImplementation)
+@interface MHMessage (MHNoImplementation)
 - (id)type;
 @end
 
-@implementation RwhMailMessage
+@implementation MHMessage
 
-- (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
+- (void)MHContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
     RWH_LOG();
     
     // calling the original implementation
-    [self rwhContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
+    [self MHContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];
     
 	if (([RwhMailBundle isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3)) {
         // Initailzing the quoted text from the original email
-        RwhMailQuotedOriginal *quotedText = [[RwhMailQuotedOriginal alloc] initWithMailMessage:self];
+        MHQuotedMailOriginal *quotedText = [[MHQuotedMailOriginal alloc] initWithMailMessage:self];
         
         // Create the header string element from the original email
-        RwhMailHeaderString *newheaderString = [[RwhMailHeaderString alloc] initWithMailMessage:self];
+        MHHeaderString *newheaderString = [[MHHeaderString alloc] initWithMailMessage:self];
         
         //insert the new header text
         [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];

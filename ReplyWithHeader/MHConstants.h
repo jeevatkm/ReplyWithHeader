@@ -32,34 +32,34 @@
 //
 // Added for best practice #11 (https://github.com/jeevatkm/ReplyWithHeaders/issues/11)
 
-#define RwhMailBundleNameKey @"CFBundleName"
-#define RwhMailBundleVersionKey @"CFBundleVersion"
-#define RwhMailBundleShortVersionKey @"CFBundleShortVersionString"
-#define RwhMailCopyRightKey @"NSHumanReadableCopyright"
-#define RwhMailAppCastURLKey @"RwhAppCastURL"
+#define MHBundleNameKey @"CFBundleName"
+#define MHBundleVersionKey @"CFBundleVersion"
+#define MHBundleShortVersionKey @"CFBundleShortVersionString"
+#define MHCopyRightKey @"NSHumanReadableCopyright"
+#define MHAppCastURLKey @"RwhAppCastURL"
 
-#define RwhMailBundleEnabled @"RwhMailBundleEnabled"
-#define RwhMailForwardHeaderEnabled @"RwhForwardHeaderEnabled"
-#define RwhMailHeaderTypographyEnabled @"RwhHeaderTypographyEnabled"
-#define RwhMailHeaderOptionModeEnabled @"RwhHeaderLabelOptionEnabled"
-#define RwhMailEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
-#define RwhMailDefaultReplyHeaderText @"<br />---------- Original Message ----------<br />"
-#define RwhMailDefaultForwardHeaderText @"---------- Forwarded Message ----------<br />"
-#define RwhMailHeaderBorderText @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
-#define RwhMailDefaultHeaderFontName @"Tahoma"
-#define RwhMailDefaultHeaderFontSize @"13"
-#define RwhMailHeaderFontName @"RwhHeaderFontName"
-#define RwhMailHeaderFontSize @"RwhHeaderFontSize"
-#define RwhMailHeaderColor @"RwhHeaderColor"
+#define MHBundleEnabled @"RwhMailBundleEnabled"
+#define MHForwardHeaderEnabled @"RwhForwardHeaderEnabled"
+#define MHTypographyEnabled @"RwhHeaderTypographyEnabled"
+#define MHHeaderOptionEnabled @"RwhHeaderLabelOptionEnabled"
+#define MHEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
+#define MHDefaulReplyHeaderBorder @"<br />---------- Original Message ----------<br />"
+#define MHDefaultForwardHeaderBorder @"---------- Forwarded Message ----------<br />"
+#define MHHeaderBorder @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
+#define MHDefaultHeaderFontName @"Tahoma"
+#define MHDefaultHeaderFontSize @"13"
+#define MHHeaderFontName @"RwhHeaderFontName"
+#define MHHeaderFontSize @"RwhHeaderFontSize"
+#define MHHeaderColor @"RwhHeaderColor"
 
 // Mode Values (1=Apple Mail, 2=Outlook Mail)
-#define RwhMailHeaderLabelMode @"RwhHeaderLabelMode"
-#define RwhMailHeaderOrderMode @"RwhHeaderOrderMode"
+#define MHHeaderLabelMode @"RwhHeaderLabelMode"
+#define MHHeaderOrderMode @"RwhHeaderOrderMode"
 
-#define RwhMailNotifyPluginNewVersion @"RwhNotifyPluginNewVersion"
-#define RwhMailSubjectPrefixTextEnabled @"RwhSubjectPrefixTextEnabled"
+#define MHPluginNotifyNewVersion @"RwhNotifyPluginNewVersion"
+#define MHSubjectPrefixTextEnabled @"RwhSubjectPrefixTextEnabled"
 
-#define RwhMailPreferencesNibName @"RwhMailPreferencesPanel"
+#define MHPreferencesNibName @"MHPreferencesView"
 
 
 

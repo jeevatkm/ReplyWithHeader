@@ -26,16 +26,16 @@
 
 
 //
-//  MailHeaderString.h
+//  MHHeaderString.h
 //  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/15/12.
 //
-//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
+//  MHHeaderString Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "WebKit/WebArchive.h"
 
-@interface RwhMailHeaderString : NSObject {
+@interface MHHeaderString : NSObject {
     @private
     NSMutableAttributedString *headerString;
     int headerItemCount;

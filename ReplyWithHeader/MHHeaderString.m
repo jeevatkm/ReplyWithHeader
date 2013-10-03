@@ -26,24 +26,24 @@
 
 
 //
-//  MailHeaderString.m
+//  MHHeaderString.m
 //  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/15/12.
 //
-//  RwhMailHeaderString Class completely rewritten by Jeevanandam M. on Sep 22, 2013
+//  MHHeaderString Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
-#import "RwhMailHeaderString.h"
-#import "NSMutableAttributedString+RwhMailBundle.h"
+#import "MHHeaderString.h"
+#import "NSMutableAttributedString+MailHeader.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 
-@interface RwhMailHeaderString (RwhNoImplementation)
+@interface MHHeaderString (MHNoImplementation)
 - (id)originalMessageHeaders;
 - (NSFont *)userDefaultMessageFont;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
-@implementation RwhMailHeaderString
+@implementation MHHeaderString
 
 #pragma mark Class public methods
 
@@ -54,7 +54,7 @@
         [self initVars];
     }
     else {
-        RWH_LOG(@"MailHeaderString: Init failed");
+        RWH_LOG(@"MHHeaderString: Init failed");
     }
     return self;
 }
@@ -79,7 +79,7 @@
         [self suppressImplicateHeaderLabels];
     }
     else {
-        RWH_LOG(@"MailHeaderString: Init initWithMailMessage failed");
+        RWH_LOG(@"MHHeaderString: Init initWithMailMessage failed");
     }
     
     return self;
@@ -92,11 +92,11 @@
     range.location = 0;
     range.length = [headerString length];
     
-    NSString *fontString = GET_DEFAULT_VALUE(RwhMailHeaderFontName);
-    NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
+    NSString *fontString = GET_DEFAULT_VALUE(MHHeaderFontName);
+    NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
     
-    NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(RwhMailHeaderColor)];
+    NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
     
     [headerString addAttribute:@"NSFont" value:font range:range];
     [headerString addAttribute:@"NSColor" value:color range:range];    
@@ -272,8 +272,8 @@
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions {
     
-    int headerOrderMode = GET_DEFAULT_INT(RwhMailHeaderOrderMode);
-    int headerLabelMode = GET_DEFAULT_INT(RwhMailHeaderLabelMode);
+    int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
+    int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
     RWH_LOG(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
     
     if (headerOrderMode == 2) {    

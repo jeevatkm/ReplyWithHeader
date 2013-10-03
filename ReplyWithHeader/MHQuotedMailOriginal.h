@@ -25,12 +25,12 @@
  */
 
 //
-//  MailQuotedOriginal.h
+//  MHQuotedMailOriginal.h
 //  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/16/12.
 //
-//  RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 22, 2013
+//  MHQuotedMailOriginal Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
 #import "WebKit/DOMDocumentFragment.h"
 #import "WebKit/DOMHTMLDivElement.h"
@@ -38,9 +38,9 @@
 #import "WebKit/DOMNodeList.h"
 #import "WebKit/DOMElement.h"
 
-#import "RwhMailHeaderString.h"
+#import "MHHeaderString.h"
 
-@interface RwhMailQuotedOriginal : NSObject {
+@interface MHQuotedMailOriginal : NSObject {
 @private
     id document;
     DOMDocumentFragment *headerBorder;
@@ -52,6 +52,6 @@
 
 - (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
-- (void)insertMailHeader:(RwhMailHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
+- (void)insertMailHeader:(MHHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
 
 @end

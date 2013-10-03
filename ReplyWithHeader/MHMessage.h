@@ -25,7 +25,7 @@
  */
 
 
-@interface RwhMailMessage : NSObject
+@interface MHMessage : NSObject
 
 #pragma mark Implementation methods
 /*! @group implementation methods */
@@ -37,6 +37,6 @@
  * @param arg2
  *   I am not sure what this arg is but it is required by ComposeBackEnd _continueToSetupContentsForView method
  */
-- (void)rwhContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
+- (void)MHContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
 
 @end

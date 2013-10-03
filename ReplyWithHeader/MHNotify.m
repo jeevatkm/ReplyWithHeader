@@ -23,17 +23,17 @@
  */
 
 //
-//  RwhNotify.m
+//  MHNotify.m
 //  ReplyWithHeader
 //
 //  Created by Jeevanandam M. on 9/27/13.
 //
 //
 
-#import "RwhNotify.h"
+#import "MHNotify.h"
 #import "RwhMailBundle.h"
 
-@implementation RwhNotify
+@implementation MHNotify
 
 - (void)performVersionAvailabiltyCheck:(NSDictionary *)jsonDic {
     NSDictionary *latest = [[jsonDic objectForKey:@"releases"] objectForKey:@"latest"];
@@ -104,7 +104,7 @@
 
 - (id)init {    
     if (self = [super init]) {
-        appCastUrl = [[[RwhMailBundle bundle] infoDictionary] objectForKey:RwhMailAppCastURLKey];
+        appCastUrl = [[[RwhMailBundle bundle] infoDictionary] objectForKey:MHAppCastURLKey];
         
         comparator = [SUStandardVersionComparator defaultComparator];
     }

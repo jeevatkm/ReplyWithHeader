@@ -31,7 +31,7 @@
 //
 
 #import "NSPreferences+MailHeader.h"
-#import "MailHeaderPreferences.h"
+#import "MHPreferences.h"
 #import "RwhMailBundle.h"
 
 @implementation NSPreferences (MailHeader)
@@ -48,7 +48,7 @@
         return preferences;
     
     // Check modules, if MailHeaderPreferences is not yet in there.
-    NSPreferencesModule *mailHeaderPreferences = [MailHeaderPreferences sharedInstance];
+    NSPreferencesModule *mailHeaderPreferences = [MHPreferences sharedInstance];
     NSString *preferencesName = [RwhMailBundle preferencesPanelName];
     [preferences addPreferenceNamed:preferencesName owner:mailHeaderPreferences];
     added = YES;

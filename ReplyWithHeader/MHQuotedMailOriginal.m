@@ -25,17 +25,17 @@
  */
 
 
-//  MailQuotedOriginal.m
+//  MHQuotedMailOriginal.m
 //  RwhMailBundle
 //
 //  Created by Jason Schroth on 8/16/12.
 //
-//  RwhMailQuotedOriginal Class completely rewritten by Jeevanandam M. on Sep 22, 2013
+//  MHQuotedMailOriginal Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
-#import "RwhMailQuotedOriginal.h"
+#import "MHQuotedMailOriginal.h"
 #import "WebKit/DOMHTMLBRElement.h"
 
-@interface RwhMailQuotedOriginal (RwhNoImplementation)
+@interface MHQuotedMailOriginal (MHNoImplementation)
 - (id)htmlDocument;
 - (DOMDocumentFragment *)createDocumentFragmentWithMarkupString: (NSString *)str;
 - (id)descendantsWithClassName:(NSString *)str;
@@ -52,7 +52,7 @@ NSString *ApplePlainTextBody = @"ApplePlainTextBody";
 NSString *AppleOriginalContents = @"AppleOriginalContents";
 NSString *AppleMailSignature = @"AppleMailSignature";
 
-@implementation RwhMailQuotedOriginal
+@implementation MHQuotedMailOriginal
 
 #pragma mark Class public methods
 
@@ -61,7 +61,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         //good stuff...
     }
     else {
-        RWH_LOG(@"RwhMailQuotedOriginal: Init failed");
+        RWH_LOG(@"MHQuotedMailOriginal: Init failed");
     }
     return self;
 }
@@ -100,7 +100,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
         }
     }
     else {
-        RWH_LOG(@"RwhMailQuotedOriginal: initWithMailMessage failed");
+        RWH_LOG(@"MHQuotedMailOriginal: initWithMailMessage failed");
     }
     
     return self;
@@ -150,15 +150,15 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 }
 
-- (void)insertMailHeader:(RwhMailHeaderString *)mailHeader msgComposeType:(int)composeType {    
+- (void)insertMailHeader:(MHHeaderString *)mailHeader msgComposeType:(int)composeType {    
     RWH_LOG(@"Composing message type is %d", composeType);
     
     // global
-    if (GET_DEFAULT_BOOL(RwhMailHeaderOptionModeEnabled)) {
+    if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled)) {
         [mailHeader applyHeaderLabelOptions];
     }
     
-    BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(RwhMailHeaderTypographyEnabled);
+    BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(MHTypographyEnabled);
     if (isHeaderTypograbhyEnabled && isHTMLMail) {
         [mailHeader applyHeaderTypography];
     }
@@ -168,14 +168,14 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
     
     // specifics
-    BOOL manageForwardHeader = GET_DEFAULT_BOOL(RwhMailForwardHeaderEnabled);
+    BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
     RWH_LOG(@"Newly processed RWH header: %@", [mailHeader stringValue]);
     
     // Entourage 2004 text size transformations
-    if (GET_DEFAULT_BOOL(RwhMailEntourage2004SupportEnabled)) {
+    if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled)) {
         [self applyEntourage2004Support:headerFragment];
     }
     
@@ -232,7 +232,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     
     RWH_LOG(@"Composing mail isHTMLMail %d", isHTMLMail);
     
-    NSString *borderString = (isHTMLMail) ? RwhMailHeaderBorderText : RwhMailDefaultReplyHeaderText;
+    NSString *borderString = (isHTMLMail) ? MHHeaderBorder : MHDefaulReplyHeaderBorder;
     
     RWH_LOG(@"initVars Header border text: %@", borderString);
     

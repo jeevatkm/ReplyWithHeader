@@ -23,7 +23,7 @@
  */
 
 //
-//  RwhMailHeadersEditor.h
+//  MHHeadersEditor.h
 //  ReplyWithHeader
 //
 //  Created by Jeevanandam M. on 9/28/13.
@@ -32,8 +32,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RwhMailHeadersEditor : NSObject 
+@interface MHHeadersEditor : NSObject 
 
-- (void)rwhLoadHeadersFromBackEnd:(id)arg1;
+- (void)MHLoadHeadersFromBackEnd:(id)arg1;
 
 @end

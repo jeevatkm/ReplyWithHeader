@@ -23,28 +23,28 @@
  */
 
 //
-//  RwhMailHeadersEditor.m
+//  MHHeadersEditor.m
 //  ReplyWithHeader
 //
 //  Created by Jeevanandam M. on 9/28/13.
 //
 //
 
-#import "RwhMailHeadersEditor.h"
+#import "MHHeadersEditor.h"
 
-@interface RwhMailHeadersEditor (RwhNoImplementation)
+@interface MHHeadersEditor (MHNoImplementation)
 - (void)_subjectChanged;
 @end
 
-@implementation RwhMailHeadersEditor
+@implementation MHHeadersEditor
 
-- (void)rwhLoadHeadersFromBackEnd:(id)arg1 {
+- (void)MHLoadHeadersFromBackEnd:(id)arg1 {
     RWH_LOG();
     
     // calling original implementation
-    [self rwhLoadHeadersFromBackEnd:arg1];
+    [self MHLoadHeadersFromBackEnd:arg1];
     
-    if (GET_DEFAULT_BOOL(RwhMailSubjectPrefixTextEnabled)) {
+    if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled)) {
         NSMutableString *subjectText = [[(NSTextField *)[self valueForKey:@"_subjectField"] stringValue] mutableCopy];
         
         NSRange range = [subjectText rangeOfString:@"Re: "];

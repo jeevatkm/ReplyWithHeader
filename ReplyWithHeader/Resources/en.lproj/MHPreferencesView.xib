@@ -733,7 +733,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<string key="NSFrame">{{14, 17}, {518, 22}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="404746024"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="246514639">
@@ -991,44 +991,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">rwhMailBundlePressed:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="253931335"/>
-					</object>
-					<int key="connectionID">175</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">rwhSelectFontPressed:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="609156550"/>
-					</object>
-					<int key="connectionID">268</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">_preferencesView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="144494481"/>
 					</object>
 					<int key="connectionID">269</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">rwhHeaderTypographyPressed:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="437544001"/>
-					</object>
-					<int key="connectionID">285</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">rwhHeaderLabelModePressed:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="144896113"/>
-					</object>
-					<int key="connectionID">298</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1167,6 +1135,38 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">366</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">SelectFontButtonPressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="609156550"/>
+					</object>
+					<int key="connectionID">367</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">MailHeaderBundlePressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="253931335"/>
+					</object>
+					<int key="connectionID">368</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">HeaderTypographyPressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="437544001"/>
+					</object>
+					<int key="connectionID">369</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">HeaderLabelModePressed:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="144896113"/>
+					</object>
+					<int key="connectionID">370</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.RwhMailBundleEnabled</string>
 						<reference key="source" ref="253931335"/>
@@ -1300,35 +1300,35 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: rwhCopyright</string>
+						<string key="label">value: Copyright</string>
 						<reference key="source" ref="967849403"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="967849403"/>
 							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">value: rwhCopyright</string>
+							<string key="NSLabel">value: Copyright</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">rwhCopyright</string>
+							<string key="NSKeyPath">Copyright</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">339</int>
+					<int key="connectionID">373</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: rwhNameAndVersion</string>
+						<string key="label">value: NameAndVersion</string>
 						<reference key="source" ref="243147089"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="243147089"/>
 							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">value: rwhNameAndVersion</string>
+							<string key="NSLabel">value: NameAndVersion</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">rwhNameAndVersion</string>
+							<string key="NSKeyPath">NameAndVersion</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">340</int>
+					<int key="connectionID">372</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1918,7 +1918,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">366</int>
+			<int key="maxID">373</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1926,16 +1926,32 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="className">MHPreferences</string>
 					<string key="superclassName">NSPreferencesModule</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="HeaderLabelModePressed:">id</string>
+						<string key="HeaderTypographyPressed:">id</string>
+						<string key="MailHeaderBundlePressed:">id</string>
+						<string key="SelectFontButtonPressed:">id</string>
 						<string key="notifyNewVersionPressed:">id</string>
 						<string key="openFeedback:">id</string>
 						<string key="openSupport:">id</string>
 						<string key="openWebsite:">id</string>
-						<string key="rwhHeaderLabelModePressed:">id</string>
-						<string key="rwhHeaderTypographyPressed:">id</string>
-						<string key="rwhMailBundlePressed:">id</string>
-						<string key="rwhSelectFontPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="HeaderLabelModePressed:">
+							<string key="name">HeaderLabelModePressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="HeaderTypographyPressed:">
+							<string key="name">HeaderTypographyPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="MailHeaderBundlePressed:">
+							<string key="name">MailHeaderBundlePressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="SelectFontButtonPressed:">
+							<string key="name">SelectFontButtonPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="notifyNewVersionPressed:">
 							<string key="name">notifyNewVersionPressed:</string>
 							<string key="candidateClassName">id</string>
@@ -1950,22 +1966,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="IBActionInfo" key="openWebsite:">
 							<string key="name">openWebsite:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rwhHeaderLabelModePressed:">
-							<string key="name">rwhHeaderLabelModePressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rwhHeaderTypographyPressed:">
-							<string key="name">rwhHeaderTypographyPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rwhMailBundlePressed:">
-							<string key="name">rwhMailBundlePressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rwhSelectFontPressed:">
-							<string key="name">rwhSelectFontPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

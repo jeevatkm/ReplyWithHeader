@@ -29,31 +29,31 @@
 
 /*!
  * @class
- * The <code>MailHeaderPreferences</code> class is the subclass of
+ * The <code>MHPreferences</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
  * specific to the RwhMailBundle plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  *
- * MailHeaderPreferences Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
+ * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MailHeaderPreferences : NSPreferencesModule {
-    IBOutlet NSButton *_RwhMailBundleEnabled;
-    IBOutlet NSButton *_RwhForwardHeaderEnabled;
-    IBOutlet NSButton *_RwhHeaderTypographyEnabled;
-    IBOutlet NSButton *_RwhEntourage2004SupportEnabled;
-    IBOutlet NSButton *_RwhMailSelectFont;
-    IBOutlet NSButton *_RwhMailHeaderOptionModeEnabled;
-    IBOutlet NSButton *_RwhMailNotifyNewVersion;
-    IBOutlet NSButton *_RwhMailSubjectPrefixTextEnabled;
-    IBOutlet NSImageView *_RwhMailBundleLogo;
-    IBOutlet NSTextField *_RwhMailHeaderFontNameAndSize;
-    IBOutlet NSColorWell *_RwhMailColorWell;
-    IBOutlet NSMatrix *_RwhMailHeaderOrderMode;
-    IBOutlet NSMatrix *_RwhMailHeaderLabelMode;
+@interface MHPreferences : NSPreferencesModule {
+    IBOutlet NSButton *_MHBundleEnabled;
+    IBOutlet NSButton *_MHForwardHeaderEnabled;
+    IBOutlet NSButton *_MHHeaderTypographyEnabled;
+    IBOutlet NSButton *_MHEntourage2004SupportEnabled;
+    IBOutlet NSButton *_MHSelectFont;
+    IBOutlet NSButton *_MHHeaderOptionEnabled;
+    IBOutlet NSButton *_MHNotifyNewVersion;
+    IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
+    IBOutlet NSImageView *_MHBundleLogo;
+    IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
+    IBOutlet NSColorWell *_MHColorWell;
+    IBOutlet NSMatrix *_MHHeaderOrderMode;
+    IBOutlet NSMatrix *_MHHeaderLabelMode;
 }
 
-@property(weak, readonly) NSString *rwhNameAndVersion, *rwhCopyright;
+@property(weak, readonly) NSString *NameAndVersion, *Copyright;
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */

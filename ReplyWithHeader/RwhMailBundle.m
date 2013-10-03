@@ -29,14 +29,14 @@
 #import <objc/objc-runtime.h>
 
 #import "RwhMailBundle.h"
-#import "MailHeaderPreferences.h"
-#import "RwhMailMessage.h"
-#import "NSObject+RwhMailBundle.h"
-#import "RwhNotify.h"
-#import "RwhMailHeadersEditor.h"
+#import "MHPreferences.h"
+#import "MHMessage.h"
+#import "NSObject+MailHeader.h"
+#import "MHNotify.h"
+#import "MHHeadersEditor.h"
 #import "NSPreferences+MailHeader.h"
 
-@interface RwhMailBundle (RwhNoImplementation)
+@interface RwhMailBundle (MHNoImplementation)
 + (void)registerBundle;
 @end
 
@@ -45,7 +45,7 @@
 #pragma mark Class public methods
 
 + (BOOL)isEnabled {
-    return GET_DEFAULT_BOOL(RwhMailBundleEnabled);
+    return GET_DEFAULT_BOOL(MHBundleEnabled);
 }
 
 + (NSBundle *)bundle {
@@ -62,11 +62,11 @@
 }
 
 + (NSString *)bundleName {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleNameKey];
+    return [[[self bundle] infoDictionary] objectForKey:MHBundleNameKey];
 }
 
 + (NSString *)bundleVersionString {
-    return [[[self bundle] infoDictionary] objectForKey:RwhMailBundleShortVersionKey];
+    return [[[self bundle] infoDictionary] objectForKey:MHBundleShortVersionKey];
 }
 
 + (NSString *)bundleCopyright {
@@ -108,18 +108,18 @@
     RWH_LOG();
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [NSNumber numberWithBool:YES], RwhMailBundleEnabled,
-                          [NSNumber numberWithBool:YES], RwhMailForwardHeaderEnabled,
-                          [NSNumber numberWithBool:YES], RwhMailHeaderTypographyEnabled,
-                          [NSNumber numberWithBool:YES], RwhMailHeaderOptionModeEnabled,
-                          [NSNumber numberWithBool:YES], RwhMailNotifyPluginNewVersion,
-                          RwhMailDefaultHeaderFontName, RwhMailHeaderFontName,
-                          RwhMailDefaultHeaderFontSize, RwhMailHeaderFontSize,
-                          [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], RwhMailHeaderColor,
-                          [NSNumber numberWithBool:NO], RwhMailEntourage2004SupportEnabled,
-                          [NSNumber numberWithBool:YES], RwhMailSubjectPrefixTextEnabled,
-                          [NSNumber numberWithInt:1], RwhMailHeaderLabelMode,
-                          [NSNumber numberWithInt:1], RwhMailHeaderOrderMode,
+                          [NSNumber numberWithBool:YES], MHBundleEnabled,
+                          [NSNumber numberWithBool:YES], MHForwardHeaderEnabled,
+                          [NSNumber numberWithBool:YES], MHTypographyEnabled,
+                          [NSNumber numberWithBool:YES], MHHeaderOptionEnabled,
+                          [NSNumber numberWithBool:YES], MHPluginNotifyNewVersion,
+                          MHDefaultHeaderFontName, MHHeaderFontName,
+                          MHDefaultHeaderFontSize, MHHeaderFontSize,
+                          [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
+                          [NSNumber numberWithBool:NO], MHEntourage2004SupportEnabled,
+                          [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
+                          [NSNumber numberWithInt:1], MHHeaderLabelMode,
+                          [NSNumber numberWithInt:1], MHHeaderOrderMode,
                           nil
                           ];
     
@@ -131,19 +131,19 @@
     RWH_LOG();
     
     if (GET_DEFAULT_BOOL(@"enableBundle")) {
-        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"enableBundle"), RwhMailBundleEnabled);
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"enableBundle"), MHBundleEnabled);
         
         REMOVE_DEFAULT(@"enableBundle");
     }
     
     if (GET_DEFAULT_BOOL(@"replaceForward")) {
-        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"replaceForward"), RwhMailForwardHeaderEnabled);
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"replaceForward"), MHForwardHeaderEnabled);
         
         REMOVE_DEFAULT(@"replaceForward");
     }
     
     if (GET_DEFAULT_BOOL(@"entourage2004Support")) {
-        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), RwhMailEntourage2004SupportEnabled);
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), MHEntourage2004SupportEnabled);
         
         REMOVE_DEFAULT(@"entourage2004Support");
     }
@@ -168,21 +168,21 @@
 }
 
 + (void)addRwhMailMessageMethodsToComposeBackEnd {
-    [RwhMailMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
+    [MHMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
     
     [NSClassFromString(@"ComposeBackEnd")
      rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-     meth:@selector(rwhContinueToSetupContentsForView:withParsedMessages:)
+     meth:@selector(MHContinueToSetupContentsForView:withParsedMessages:)
      classMeth:NO
      ];
 }
 
 + (void)addRwhMailHeaderEditorMethodsToHeadersEditor {
-    [RwhMailHeadersEditor rwhAddMethodsToClass:NSClassFromString(@"HeadersEditor")];
+    [MHHeadersEditor rwhAddMethodsToClass:NSClassFromString(@"HeadersEditor")];
     
     [NSClassFromString(@"HeadersEditor")
      rwhSwizzle:@selector(loadHeadersFromBackEnd:)
-     meth:@selector(rwhLoadHeadersFromBackEnd:)
+     meth:@selector(MHLoadHeadersFromBackEnd:)
      classMeth:NO
      ];
 }
@@ -225,7 +225,7 @@
 }
 
 + (NSString*)preferencesOwnerClassName {
-    return NSStringFromClass([MailHeaderPreferences class]);
+    return NSStringFromClass([MHPreferences class]);
 }
 
 + (NSString*)preferencesPanelName {
@@ -272,11 +272,11 @@
         NSLog(@"RWH plugin is disabled in preferences");
     }
     
-    if (GET_DEFAULT_BOOL(RwhMailNotifyPluginNewVersion)) {
+    if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion)) {
         double delayInSeconds = 45.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            RwhNotify *notifier = [[RwhNotify alloc] init];
+            MHNotify *notifier = [[MHNotify alloc] init];
             [notifier checkNewVersion];
             [notifier release];
         });

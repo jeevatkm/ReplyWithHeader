@@ -24,64 +24,64 @@
  * THE SOFTWARE.
  */
 
-// MailHeaderPreferences Class completely rewritten by Jeevanandam M. on Sep 23, 2013 
+// MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
 
-#import "MailHeaderPreferences.h"
+#import "MHPreferences.h"
 
-@interface MailHeaderPreferences (PrivateMethods)
-- (IBAction)rwhMailBundlePressed:(id)sender;
-- (IBAction)rwhHeaderTypographyPressed:(id)sender;
-- (IBAction)rwhSelectFontPressed:(id)sender;
-- (IBAction)rwhHeaderLabelModePressed:(id)sender;
+@interface MHPreferences (PrivateMethods)
+- (IBAction)MailHeaderBundlePressed:(id)sender;
+- (IBAction)HeaderTypographyPressed:(id)sender;
+- (IBAction)SelectFontButtonPressed:(id)sender;
+- (IBAction)HeaderLabelModePressed:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openFeedback:(id)sender;
 - (IBAction)openSupport:(id)sender;
 - (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
-@implementation MailHeaderPreferences
+@implementation MHPreferences
 
 #pragma mark Class private methods
 
 - (void)toggleRwhPreferencesOptions:(BOOL *)state {    
-    [_RwhHeaderTypographyEnabled setEnabled:state];    
-    [_RwhForwardHeaderEnabled setEnabled:state];
-    [_RwhMailHeaderOptionModeEnabled setEnabled:state];
-    [_RwhEntourage2004SupportEnabled setEnabled:state];
-    [_RwhMailNotifyNewVersion setEnabled:state];
-    [_RwhMailSubjectPrefixTextEnabled setEnabled:state];
+    [_MHHeaderTypographyEnabled setEnabled:state];    
+    [_MHForwardHeaderEnabled setEnabled:state];
+    [_MHHeaderOptionEnabled setEnabled:state];
+    [_MHEntourage2004SupportEnabled setEnabled:state];
+    [_MHNotifyNewVersion setEnabled:state];
+    [_MHSubjectPrefixTextEnabled setEnabled:state];
     
     [self toggleRwhHeaderTypograpghyOptions:state];
     [self toggleRwhHeaderLabelOptions:state];
 }
 
 - (void)toggleRwhHeaderLabelOptions:(BOOL *)state {
-    [_RwhMailHeaderOrderMode setEnabled:state];
-    [_RwhMailHeaderLabelMode setEnabled:state];
+    [_MHHeaderOrderMode setEnabled:state];
+    [_MHHeaderLabelMode setEnabled:state];
 }
 
 - (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state {
-    [_RwhMailSelectFont setEnabled:state];
-    [_RwhMailColorWell setEnabled:state];
+    [_MHSelectFont setEnabled:state];
+    [_MHColorWell setEnabled:state];
 }
 
-- (NSString *)rwhNameAndVersion {
+- (NSString *)NameAndVersion {
     return [RwhMailBundle bundleNameAndVersion];
 }
 
-- (NSString *)rwhCopyright {
+- (NSString *)Copyright {
     return [RwhMailBundle bundleCopyright];
 }
 
-- (IBAction)rwhMailBundlePressed:(id)sender {
+- (IBAction)MailHeaderBundlePressed:(id)sender {
     [self toggleRwhPreferencesOptions:[sender state]];
 }
 
-- (IBAction)rwhHeaderTypographyPressed:(id)sender {
+- (IBAction)HeaderTypographyPressed:(id)sender {
     [self toggleRwhHeaderTypograpghyOptions:[sender state]];
 }
 
-- (IBAction)rwhSelectFontPressed:(id)sender {
+- (IBAction)SelectFontButtonPressed:(id)sender {
     RWH_LOG();
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
@@ -89,29 +89,29 @@
     [fontManager setTarget:self];
     [fontManager orderFrontFontPanel:self];
     
-    NSString *font = GET_DEFAULT_VALUE(RwhMailHeaderFontName);
-    NSString *fontSize = GET_DEFAULT_VALUE(RwhMailHeaderFontSize);
+    NSString *font = GET_DEFAULT_VALUE(MHHeaderFontName);
+    NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     
     [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (IBAction)rwhHeaderLabelModePressed:(id)sender {
+- (IBAction)HeaderLabelModePressed:(id)sender {
     [self toggleRwhHeaderLabelOptions:[sender state]];
 }
 
 - (void)changeFont:(id)sender {
     RWH_LOG();
     
-    NSFont *oldFont = _RwhMailHeaderFontNameAndSize.font;
+    NSFont *oldFont = _MHHeaderInfoFontAndSize.font;
     NSFont *font = [sender convertFont:oldFont];
     NSString *fontSize = [NSString stringWithFormat: @"%.0f", font.pointSize];
     
     NSString *fontDescription = [NSString stringWithFormat: @"%@ %.0f", font.fontName, font.pointSize];
     
-    SET_USER_DEFAULT(font.fontName, RwhMailHeaderFontName);
-    SET_USER_DEFAULT(fontSize, RwhMailHeaderFontSize);
+    SET_USER_DEFAULT(font.fontName, MHHeaderFontName);
+    SET_USER_DEFAULT(fontSize, MHHeaderFontSize);
     
-    [_RwhMailHeaderFontNameAndSize setStringValue:fontDescription];
+    [_MHHeaderInfoFontAndSize setStringValue:fontDescription];
 }
 
 - (IBAction)openWebsite:(id)sender {
@@ -158,9 +158,9 @@
         [[buttons objectAtIndex:0] setKeyEquivalent:@"\r"];
         
         if ([alert runModal] != NSAlertSecondButtonReturn) {
-            SET_DEFAULT_BOOL(YES, RwhMailNotifyPluginNewVersion);
+            SET_DEFAULT_BOOL(YES, MHPluginNotifyNewVersion);
             
-            [_RwhMailNotifyNewVersion setState:YES];
+            [_MHNotifyNewVersion setState:YES];
         }
         
         [alert release];
@@ -175,16 +175,16 @@
     
     [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
     
-    [_RwhMailHeaderFontNameAndSize
+    [_MHHeaderInfoFontAndSize
      setStringValue:[NSString stringWithFormat:@"%@ %@",
-                     GET_DEFAULT_VALUE(RwhMailHeaderFontName),
-                     GET_DEFAULT_VALUE(RwhMailHeaderFontSize)]];
+                     GET_DEFAULT_VALUE(MHHeaderFontName),
+                     GET_DEFAULT_VALUE(MHHeaderFontSize)]];
     
-    [_RwhMailBundleLogo setImage:[RwhMailBundle bundleLogo]];
+    [_MHBundleLogo setImage:[RwhMailBundle bundleLogo]];
 }
 
 - (NSString*)preferencesNibName {
-    return RwhMailPreferencesNibName;
+    return MHPreferencesNibName;
 }
 
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName {    
