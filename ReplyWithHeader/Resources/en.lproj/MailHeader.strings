@@ -1,5 +1,6 @@
 {
     /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
     "COPYRIGHT" = "© 2013 Jeevanandam M. (jeevatkm), All rights reserved.";    
     
@@ -9,6 +10,10 @@
     "STRING_REPLY_TO" = "Reply-To: ";
     "STRING_SENT" = "Sent: ";
     "STRING_WROTE" = "wrote:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";
     
     /* Button Strings */
 	"BUTTON_DOWNLOAD" = "Download";

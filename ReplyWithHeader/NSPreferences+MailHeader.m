@@ -36,7 +36,31 @@
 
 @implementation NSPreferences (MailHeader)
 
-+ (id)MHSharedPreferences {
+- (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window
+{
+    NSRect frame = [window frame];
+    float width = 0.0f;
+	NSArray *subviews = [[[[[window toolbar]
+                            valueForKey:@"_toolbarView"] subviews] objectAtIndex:0] subviews];
+    for (NSView *view in subviews)
+    {
+        width += view.frame.size.width;
+	}
+    // Add padding to fit them all.
+    width += 10;
+    
+    return NSMakeSize(width > frame.size.width ? width : frame.size.width, frame.size.height);
+}
+
+- (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window
+{
+    NSRect frame = [window frame];
+    frame.size = [self sizeForWindowShowingAllToolbarItems:window];
+    [window setFrame:frame display:YES animate:YES];
+}
+
++ (id)MHSharedPreferences
+{
 	static BOOL added = NO;
 	
 	id preferences = [self MHSharedPreferences];
@@ -65,39 +89,19 @@
     return preferences;
 }
 
-
-- (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window {
-    NSRect frame = [window frame];
-    float width = 0.0f;
-	NSArray *subviews = [[[[[window toolbar]
-                            valueForKey:@"_toolbarView"] subviews] objectAtIndex:0] subviews];
-    for (NSView *view in subviews) {
-        width += view.frame.size.width;
-	}
-    // Add padding to fit them all.
-    width += 10;
-    
-    return NSMakeSize(width > frame.size.width ? width : frame.size.width, frame.size.height);
-}
-
-- (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize {
+- (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize
+{
     return [self sizeForWindowShowingAllToolbarItems:window];
 }
 
-- (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window {
-    NSRect frame = [window frame];
-    frame.size = [self sizeForWindowShowingAllToolbarItems:window];
-    [window setFrame:frame display:YES];
-}
-
-- (void)MHToolbarItemClicked:(id)toolbarItem {
-    // Resize the window, otherwise it would make it small
-    // again.
+- (void)MHToolbarItemClicked:(id)toolbarItem
+{
     [self MHToolbarItemClicked:toolbarItem];
     [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
 }
 
-- (void)MHShowPreferencesPanelForOwner:(id)owner {
+- (void)MHShowPreferencesPanelForOwner:(id)owner
+{
     [self MHShowPreferencesPanelForOwner:owner];
     [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
 }

@@ -43,7 +43,8 @@
 
 #pragma mark Class private methods
 
-- (void)toggleRwhPreferencesOptions:(BOOL *)state {    
+- (void)toggleRwhPreferencesOptions:(BOOL *)state
+{
     [_MHHeaderTypographyEnabled setEnabled:state];    
     [_MHForwardHeaderEnabled setEnabled:state];
     [_MHHeaderOptionEnabled setEnabled:state];
@@ -55,33 +56,40 @@
     [self toggleRwhHeaderLabelOptions:state];
 }
 
-- (void)toggleRwhHeaderLabelOptions:(BOOL *)state {
+- (void)toggleRwhHeaderLabelOptions:(BOOL *)state
+{
     [_MHHeaderOrderMode setEnabled:state];
     [_MHHeaderLabelMode setEnabled:state];
 }
 
-- (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state {
+- (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state
+{
     [_MHSelectFont setEnabled:state];
     [_MHColorWell setEnabled:state];
 }
 
-- (NSString *)NameAndVersion {
+- (NSString *)NameAndVersion
+{
     return [RwhMailBundle bundleNameAndVersion];
 }
 
-- (NSString *)Copyright {
+- (NSString *)Copyright
+{
     return [RwhMailBundle bundleCopyright];
 }
 
-- (IBAction)MailHeaderBundlePressed:(id)sender {
+- (IBAction)MailHeaderBundlePressed:(id)sender
+{
     [self toggleRwhPreferencesOptions:[sender state]];
 }
 
-- (IBAction)HeaderTypographyPressed:(id)sender {
+- (IBAction)HeaderTypographyPressed:(id)sender
+{
     [self toggleRwhHeaderTypograpghyOptions:[sender state]];
 }
 
-- (IBAction)SelectFontButtonPressed:(id)sender {
+- (IBAction)SelectFontButtonPressed:(id)sender
+{
     RWH_LOG();
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
@@ -95,11 +103,13 @@
     [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (IBAction)HeaderLabelModePressed:(id)sender {
+- (IBAction)HeaderLabelModePressed:(id)sender
+{
     [self toggleRwhHeaderLabelOptions:[sender state]];
 }
 
-- (void)changeFont:(id)sender {
+- (void)changeFont:(id)sender
+{
     RWH_LOG();
     
     NSFont *oldFont = _MHHeaderInfoFontAndSize.font;
@@ -114,11 +124,13 @@
     [_MHHeaderInfoFontAndSize setStringValue:fontDescription];
 }
 
-- (IBAction)openWebsite:(id)sender {
+- (IBAction)openWebsite:(id)sender
+{
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader"]];
 }
 
-- (IBAction)openFeedback:(id)sender {
+- (IBAction)openFeedback:(id)sender
+{
     
     NSAlert *infoAlert = [[NSAlert alloc] init];
     
@@ -135,13 +147,16 @@
     [infoAlert release];
 }
 
-- (IBAction)openSupport:(id)sender {
+- (IBAction)openSupport:(id)sender
+{
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
 }
 
-- (IBAction)notifyNewVersionPressed:(id)sender {
+- (IBAction)notifyNewVersionPressed:(id)sender
+{
     
-    if (![sender state]) {
+    if (![sender state])
+    {
         NSAlert *alert = [[NSAlert alloc] init];
         
         [alert setIcon:[RwhMailBundle bundleLogo]];
@@ -157,7 +172,8 @@
         [[buttons objectAtIndex:1] setKeyEquivalent:@"\033"];
         [[buttons objectAtIndex:0] setKeyEquivalent:@"\r"];
         
-        if ([alert runModal] != NSAlertSecondButtonReturn) {
+        if ([alert runModal] != NSAlertSecondButtonReturn)
+        {
             SET_DEFAULT_BOOL(YES, MHPluginNotifyNewVersion);
             
             [_MHNotifyNewVersion setState:YES];
@@ -170,7 +186,8 @@
 
 #pragma mark NSPreferencesModule instance methods
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     RWH_LOG();
     
     [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
@@ -179,19 +196,20 @@
      setStringValue:[NSString stringWithFormat:@"%@ %@",
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
-    
-    [_MHBundleLogo setImage:[RwhMailBundle bundleLogo]];
 }
 
-- (NSString*)preferencesNibName {
+- (NSString*)preferencesNibName
+{
     return MHPreferencesNibName;
 }
 
-- (NSImage *)imageForPreferenceNamed:(NSString *)aName {    
+- (NSImage *)imageForPreferenceNamed:(NSString *)aName
+{
 	return [RwhMailBundle bundleLogo];
 }
 
-- (BOOL)isResizable {
+- (BOOL)isResizable
+{
 	return NO;
 }
 

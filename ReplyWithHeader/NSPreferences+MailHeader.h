@@ -37,28 +37,18 @@
 + (id)MHSharedPreferences;
 
 /**
- Is called when the preference pane is first shown, or the user
+ Called when the preference pane is first shown, or the user
  resizes the preference pane.
- If a user resizes the preference pane, the original method is invoked.
- If the preference is first shown, it calulcates the size needed to fit
- all toolbar items using -[NSPreferences(MailHeader) sizeForWindowShowingAllToolbarItems:]
- and returns that value, so the window is correctly resized.
  */
 - (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize;
 
 /**
- Is called whenever the user clicks on a toolbar item.
- This also resizes the window, which is why internally
- -[NSPreferences(MailHeader) resizeWindowToShowAllToolbarItems:]
- is called, to force the window to resize again to fit all toolbar items.
+ Called whenever the user clicks on a toolbar item.
  */
 - (void)MHToolbarItemClicked:(id)toolbarItem;
 
 /**
- Is called whenever the preference pane is displayed.
- This also resizes the window, which is why internally
- -[NSPreferences(MailHeader) resizeWindowToShowAllToolbarItems:]
- is called, to force the window to resize again to fit all toolbar items.
+ Called whenever the preference pane is displayed.
  */
 - (void)MHShowPreferencesPanelForOwner:(id)owner;
 

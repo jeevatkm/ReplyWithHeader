@@ -31,17 +31,18 @@
 //
 
 #import "MHNotify.h"
-#import "RwhMailBundle.h"
 
 @implementation MHNotify
 
-- (void)performVersionAvailabiltyCheck:(NSDictionary *)jsonDic {
+- (void)performVersionAvailabiltyCheck:(NSDictionary *)jsonDic
+{
     NSDictionary *latest = [[jsonDic objectForKey:@"releases"] objectForKey:@"latest"];
     NSString *currentVersion = [RwhMailBundle bundleVersionString];
-    NSString *serverVersion = [latest objectForKey:@"shortVersion"];
+    NSString *serverVersion = [latest objectForKey:@"shortVersion"];    
     
     NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
-    if (result == NSOrderedAscending) {        
+    if (result == NSOrderedAscending)
+    {
         NSLog(@"RWH current version is %@, latest version is %@ and comparison result %d", currentVersion, serverVersion, (int)result);
         
         NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [RwhMailBundle bundleName], [latest objectForKey:@"version"]];
@@ -62,38 +63,47 @@
         [[[alert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
         
         int response = [alert runModal];
-        if (response == NSAlertFirstButtonReturn) {
+        if (response == NSAlertFirstButtonReturn)
+        {
             [[NSWorkspace sharedWorkspace]
              openURL:[NSURL URLWithString:[latest objectForKey:@"downloadLink"]]];
         }
-        else if (response == NSAlertSecondButtonReturn) {
+        else if (response == NSAlertSecondButtonReturn)
+        {
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#release-notes"]];
         }
-        else if (response == NSAlertThirdButtonReturn) {
+        else if (response == NSAlertThirdButtonReturn)
+        {
             RWH_LOG(@"Later button is pressed, nothing to do!");
         }
         
         [alert release];
     }
-    else {
+    else
+    {
         RWH_LOG(@"Same/Higher version present, just ignore it.");
     }
 }
 
-- (void)checkNewVersion {
+- (void)checkNewVersion
+{
     NSData *changeLogData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:appCastUrl]];
     
-    if (changeLogData == nil) {
+    if (changeLogData == nil)
+    {
         NSLog(@"RWH new version availabilty check failed. May be internet connection unavailable.");
     }
-    else {
+    else
+    {
         NSError *error = nil;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:changeLogData options:NSJSONReadingMutableContainers error:&error];
         
-        if (error) {
+        if (error)
+        {
             NSLog(@"RWH JSON parsing error for new version availabilty check. Description [%@] and Failure Reason [%@]", [error localizedDescription], [error localizedFailureReason]);
         }
-        else {
+        else
+        {
             [self performVersionAvailabiltyCheck:jsonDic];        
         }
     }
@@ -102,16 +112,26 @@
 }
 
 
-- (id)init {    
-    if (self = [super init]) {
+- (id)init
+{
+    if (self = [super init])
+    {
         appCastUrl = [[[RwhMailBundle bundle] infoDictionary] objectForKey:MHAppCastURLKey];
         
         comparator = [SUStandardVersionComparator defaultComparator];
     }
-    else {
+    else
+    {
         RWH_LOG(@"RwhNotify initialize failed");
     }    
     return self;
+}
+
+- (void)dealloc
+{
+    [appCastUrl release];
+    [comparator release];    
+    [super dealloc];
 }
 
 @end

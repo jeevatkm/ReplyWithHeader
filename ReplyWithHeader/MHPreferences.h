@@ -37,7 +37,8 @@
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MHPreferences : NSPreferencesModule {
+@interface MHPreferences : NSPreferencesModule
+{
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
     IBOutlet NSButton *_MHHeaderTypographyEnabled;
@@ -46,7 +47,6 @@
     IBOutlet NSButton *_MHHeaderOptionEnabled;
     IBOutlet NSButton *_MHNotifyNewVersion;
     IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
-    IBOutlet NSImageView *_MHBundleLogo;
     IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
     IBOutlet NSColorWell *_MHColorWell;
     IBOutlet NSMatrix *_MHHeaderOrderMode;
@@ -57,13 +57,6 @@
 
 #pragma mark NSPreferencesModule instance methods
 /*! @group NSPreferencesModule instance methods */
-
-/*!
- * Returns the name of the nib file containing the RwhMailBundle preferences
- * panel.
- * @result
- *   <code>RwhMailPreferencesPanel</code>.
- */
 - (void)awakeFromNib;
 - (NSString*)preferencesNibName;
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName;

@@ -34,7 +34,8 @@
 
 #import "SUStandardVersionComparator.h"
 
-@interface MHNotify : NSObject {
+@interface MHNotify : NSObject
+{
 	NSString *appCastUrl;
     SUStandardVersionComparator *comparator;
 }

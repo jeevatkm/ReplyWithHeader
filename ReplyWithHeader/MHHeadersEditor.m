@@ -38,23 +38,27 @@
 
 @implementation MHHeadersEditor
 
-- (void)MHLoadHeadersFromBackEnd:(id)arg1 {
+- (void)MHLoadHeadersFromBackEnd:(id)arg1
+{
     RWH_LOG();
     
     // calling original implementation
     [self MHLoadHeadersFromBackEnd:arg1];
     
-    if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled)) {
+    if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled))
+    {
         NSMutableString *subjectText = [[(NSTextField *)[self valueForKey:@"_subjectField"] stringValue] mutableCopy];
         
-        NSRange range = [subjectText rangeOfString:@"Re: "];
-        if (range.location != NSNotFound) {
-            [subjectText replaceCharactersInRange:range withString:@"RE: "];
+        NSRange range = [subjectText rangeOfString:MHLocalizedString(@"STRING_SEARCH_PREFIX_SUBJECT_REPLY")];
+        if (range.location != NSNotFound)
+        {
+            [subjectText replaceCharactersInRange:range withString:MHLocalizedString(@"STRING_REPLACE_PREFIX_SUBJECT_REPLY")];
         }
         
-        range = [subjectText rangeOfString:@"Fwd: "];
-        if (range.location != NSNotFound) {
-            [subjectText replaceCharactersInRange:range withString:@"FW: "];
+        range = [subjectText rangeOfString:MHLocalizedString(@"STRING_SEARCH_PREFIX_SUBJECT_FWD")];
+        if (range.location != NSNotFound)
+        {
+            [subjectText replaceCharactersInRange:range withString:MHLocalizedString(@"STRING_REPLACE_PREFIX_SUBJECT_FWD")];
         }
         
         [self willChangeValueForKey:@"_subjectField"];

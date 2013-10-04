@@ -137,6 +137,7 @@
 		133A918A17E974CE00E3CC62 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				1396366517FEB5D400A7D712 /* Foundation */,
 				1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */,
 				131C192117F6277D0053C587 /* Sparkle */,
 				133A918B17E974DF00E3CC62 /* AppKit */,
@@ -147,7 +148,6 @@
 		133A918B17E974DF00E3CC62 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
-				133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */,
 				13A25F4017F9B00D002394DF /* NSPreferences.h */,
 				13A25F4117F9B00D002394DF /* NSPreferencesModule-Protocol.h */,
 				133A917117E9745A00E3CC62 /* NSPreferencesModule.h */,
@@ -202,6 +202,14 @@
 				13A25F4317F9B0C7002394DF /* NSPreferences+MailHeader.m */,
 			);
 			name = Category;
+			sourceTree = "<group>";
+		};
+		1396366517FEB5D400A7D712 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */,
+			);
+			name = Foundation;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
