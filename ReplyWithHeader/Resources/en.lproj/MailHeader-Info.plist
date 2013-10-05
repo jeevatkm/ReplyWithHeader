@@ -63,7 +63,7 @@
 		<string>225E0A48-2CDB-44A6-8D99-A9BB8AF6BA04</string>
 		<string>B3F3FC72-315D-4323-BE85-7AB76090224D</string>
 	</array>
-	<key>RwhAppCastURL</key>
+	<key>MHAppCastURL</key>
 	<string>http://myjeeva.com/replywithheader.json</string>
 </dict>
 </plist>
