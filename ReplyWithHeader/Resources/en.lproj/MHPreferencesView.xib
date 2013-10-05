@@ -140,7 +140,7 @@
 															<string key="NSFrame">{{31, 17}, {501, 28}}</string>
 															<reference key="NSSuperview" ref="1018010683"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="404746024"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="502270534">
@@ -755,7 +755,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 															<int key="NSvFlags">268</int>
 															<string key="NSFrame">{{14, 17}, {518, 22}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
-															<reference key="NSNextKeyView" ref="404746024"/>
+															<reference key="NSNextKeyView"/>
 															<string key="NSReuseIdentifierKey">_NS:1535</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTextFieldCell" key="NSCell" id="246514639">
@@ -1177,79 +1177,79 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhMailBundleEnabled</string>
+						<string key="label">value: values.MailHeaderBundleEnabled</string>
 						<reference key="source" ref="253931335"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="253931335"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhMailBundleEnabled</string>
+							<string key="NSLabel">value: values.MailHeaderBundleEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhMailBundleEnabled</string>
+							<string key="NSKeyPath">values.MailHeaderBundleEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">199</int>
+					<int key="connectionID">375</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhEntourage2004SupportEnabled</string>
+						<string key="label">value: values.MHEntourage2004SupportEnabled</string>
 						<reference key="source" ref="149260813"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="149260813"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhEntourage2004SupportEnabled</string>
+							<string key="NSLabel">value: values.MHEntourage2004SupportEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhEntourage2004SupportEnabled</string>
+							<string key="NSKeyPath">values.MHEntourage2004SupportEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">198</int>
+					<int key="connectionID">383</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhForwardHeaderEnabled</string>
+						<string key="label">value: values.MHForwardHeaderEnabled</string>
 						<reference key="source" ref="482978685"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="482978685"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhForwardHeaderEnabled</string>
+							<string key="NSLabel">value: values.MHForwardHeaderEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhForwardHeaderEnabled</string>
+							<string key="NSKeyPath">values.MHForwardHeaderEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">200</int>
+					<int key="connectionID">376</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhHeaderTypographyEnabled</string>
+						<string key="label">value: values.MHHeaderTypographyEnabled</string>
 						<reference key="source" ref="437544001"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="437544001"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhHeaderTypographyEnabled</string>
+							<string key="NSLabel">value: values.MHHeaderTypographyEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhHeaderTypographyEnabled</string>
+							<string key="NSKeyPath">values.MHHeaderTypographyEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">281</int>
+					<int key="connectionID">377</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhMailHeaderColor</string>
+						<string key="label">value: values.MHMailHeaderColor</string>
 						<reference key="source" ref="740322338"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="740322338"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhMailHeaderColor</string>
+							<string key="NSLabel">value: values.MHMailHeaderColor</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhMailHeaderColor</string>
+							<string key="NSKeyPath">values.MHMailHeaderColor</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSValueTransformerName</string>
 								<string key="NS.object.0">NSUnarchiveFromData</string>
@@ -1257,55 +1257,55 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">289</int>
+					<int key="connectionID">378</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectedTag: values.RwhHeaderOrderMode</string>
+						<string key="label">selectedTag: values.MHHeaderOrderMode</string>
 						<reference key="source" ref="403424771"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="403424771"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">selectedTag: values.RwhHeaderOrderMode</string>
+							<string key="NSLabel">selectedTag: values.MHHeaderOrderMode</string>
 							<string key="NSBinding">selectedTag</string>
-							<string key="NSKeyPath">values.RwhHeaderOrderMode</string>
+							<string key="NSKeyPath">values.MHHeaderOrderMode</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">308</int>
+					<int key="connectionID">380</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhHeaderLabelOptionEnabled</string>
+						<string key="label">value: values.MHHeaderLabelOptionEnabled</string>
 						<reference key="source" ref="144896113"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="144896113"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhHeaderLabelOptionEnabled</string>
+							<string key="NSLabel">value: values.MHHeaderLabelOptionEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhHeaderLabelOptionEnabled</string>
+							<string key="NSKeyPath">values.MHHeaderLabelOptionEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">314</int>
+					<int key="connectionID">379</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">selectedTag: values.RwhHeaderLabelMode</string>
+						<string key="label">selectedTag: values.MHHeaderLabelMode</string>
 						<reference key="source" ref="457066237"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="457066237"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">selectedTag: values.RwhHeaderLabelMode</string>
+							<string key="NSLabel">selectedTag: values.MHHeaderLabelMode</string>
 							<string key="NSBinding">selectedTag</string>
-							<string key="NSKeyPath">values.RwhHeaderLabelMode</string>
+							<string key="NSKeyPath">values.MHHeaderLabelMode</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">310</int>
+					<int key="connectionID">381</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1341,35 +1341,35 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhNotifyPluginNewVersion</string>
+						<string key="label">value: values.MHNotifyPluginNewVersion</string>
 						<reference key="source" ref="457589332"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="457589332"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhNotifyPluginNewVersion</string>
+							<string key="NSLabel">value: values.MHNotifyPluginNewVersion</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhNotifyPluginNewVersion</string>
+							<string key="NSKeyPath">values.MHNotifyPluginNewVersion</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">344</int>
+					<int key="connectionID">384</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.RwhSubjectPrefixTextEnabled</string>
+						<string key="label">value: values.MHSubjectPrefixTextEnabled</string>
 						<reference key="source" ref="151045516"/>
 						<reference key="destination" ref="943210722"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="151045516"/>
 							<reference key="NSDestination" ref="943210722"/>
-							<string key="NSLabel">value: values.RwhSubjectPrefixTextEnabled</string>
+							<string key="NSLabel">value: values.MHSubjectPrefixTextEnabled</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.RwhSubjectPrefixTextEnabled</string>
+							<string key="NSKeyPath">values.MHSubjectPrefixTextEnabled</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">350</int>
+					<int key="connectionID">382</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1927,7 +1927,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">373</int>
+			<int key="maxID">384</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

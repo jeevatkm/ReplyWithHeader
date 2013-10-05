@@ -26,7 +26,7 @@
 
 //
 //  MHQuotedMailOriginal.h
-//  RwhMailBundle
+//  MailHeader
 //
 //  Created by Jason Schroth on 8/16/12.
 //

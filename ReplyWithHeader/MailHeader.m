@@ -23,12 +23,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * RwhMailBundle Class completely rewritten by Jeevanandam M. on Sep 21, 2013
+ * MailHeader Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
 
 #import <objc/objc-runtime.h>
 
-#import "RwhMailBundle.h"
+#import "MailHeader.h"
 #import "MHPreferences.h"
 #import "MHMessage.h"
 #import "NSObject+MailHeader.h"
@@ -36,44 +36,51 @@
 #import "MHHeadersEditor.h"
 #import "NSPreferences+MailHeader.h"
 
-@interface RwhMailBundle (MHNoImplementation)
+@interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
 @end
 
-@implementation RwhMailBundle
+@implementation MailHeader
 
 #pragma mark Class public methods
 
-+ (BOOL)isEnabled {
++ (BOOL)isEnabled
+{
     return GET_DEFAULT_BOOL(MHBundleEnabled);
 }
 
-+ (NSBundle *)bundle {
++ (NSBundle *)bundle
+{
     static NSBundle *bundle;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        bundle = [NSBundle bundleForClass:[RwhMailBundle class]];
+        bundle = [NSBundle bundleForClass:[MailHeader class]];
     });
     return bundle;
 }
 
-+ (NSString *)bundleNameAndVersion {
++ (NSString *)bundleNameAndVersion
+{
     return [NSMutableString stringWithFormat:@"%@ v%@", [self bundleName], [self bundleVersionString]];
 }
 
-+ (NSString *)bundleName {
++ (NSString *)bundleName
+{
     return [[[self bundle] infoDictionary] objectForKey:MHBundleNameKey];
 }
 
-+ (NSString *)bundleVersionString {
++ (NSString *)bundleVersionString
+{
     return [[[self bundle] infoDictionary] objectForKey:MHBundleShortVersionKey];
 }
 
-+ (NSString *)bundleCopyright {
++ (NSString *)bundleCopyright
+{
     return MHLocalizedString(@"COPYRIGHT");
 }
 
-+ (NSImage *)bundleLogo {
++ (NSImage *)bundleLogo
+{
     static NSImage *logo;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -84,8 +91,9 @@
     return logo;
 }
 
-+ (NSString *)localizedString:(NSString *)key {
-    NSBundle *mhBundle = [RwhMailBundle bundle];
++ (NSString *)localizedString:(NSString *)key
+{
+    NSBundle *mhBundle = [MailHeader bundle];
     NSString *localString = NSLocalizedStringFromTableInBundle(key, @"MailHeader", mhBundle, nil);
     
     if(![localString isEqualToString:key])
@@ -97,15 +105,17 @@
     return [englishLanguage localizedStringForKey:key value:@"" table:@"MailHeader"];
 }
 
-+ (NSString *)localeLanguageCode {
++ (NSString *)localeLanguageCode
+{
     NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     
-    RWH_LOG(@"Current Locale language code is %@", languageCode);
+    MH_LOG(@"Current Locale language code is %@", languageCode);
     return languageCode;
 }
 
-+ (void)assignRwhMailDefaultValues {
-    RWH_LOG();
++ (void)assignRwhMailDefaultValues
+{
+    MH_LOG();
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithBool:YES], MHBundleEnabled,
@@ -127,69 +137,84 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 }
 
-+ (void)smoothValueTransToNewRwhMailPrefUI {
-    RWH_LOG();
++ (void)smoothValueTransToNewRwhMailPrefUI
+{
+    MH_LOG();
     
-    if (GET_DEFAULT_BOOL(@"enableBundle")) {
+    if (GET_DEFAULT_BOOL(@"enableBundle"))
+    {
         SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"enableBundle"), MHBundleEnabled);
         
         REMOVE_DEFAULT(@"enableBundle");
     }
     
-    if (GET_DEFAULT_BOOL(@"replaceForward")) {
+    if (GET_DEFAULT_BOOL(@"replaceForward"))
+    {
         SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"replaceForward"), MHForwardHeaderEnabled);
         
         REMOVE_DEFAULT(@"replaceForward");
     }
     
-    if (GET_DEFAULT_BOOL(@"entourage2004Support")) {
+    if (GET_DEFAULT_BOOL(@"entourage2004Support"))
+    {
         SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), MHEntourage2004SupportEnabled);
         
         REMOVE_DEFAULT(@"entourage2004Support");
     }
     
-    if (GET_DEFAULT(@"headerText")) {
+    if (GET_DEFAULT(@"headerText"))
+    {
         REMOVE_DEFAULT(@"headerText");
     }
     
-    if (GET_DEFAULT(@"forwardHeader")) {
+    if (GET_DEFAULT(@"forwardHeader"))
+    {
         REMOVE_DEFAULT(@"forwardHeader");
     }
     
     // [start] for issue #17
-    if (GET_DEFAULT(@"RwhForwardHeaderText")) {
+    if (GET_DEFAULT(@"RwhForwardHeaderText"))
+    {
         REMOVE_DEFAULT(@"RwhForwardHeaderText");
     }
     
-    if (GET_DEFAULT(@"RwhReplyHeaderText")) {
+    if (GET_DEFAULT(@"RwhReplyHeaderText"))
+    {
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
     }
     // [end]
 }
 
-+ (void)addRwhMailMessageMethodsToComposeBackEnd {
-    [MHMessage rwhAddMethodsToClass:NSClassFromString(@"ComposeBackEnd")];
++ (void)addMailHeaderHooks
+{
+    Class composeBackEnd = NSClassFromString(@"ComposeBackEnd");
+    if (composeBackEnd)
+    {
+        [MHMessage rwhAddMethodsToClass:composeBackEnd];
+        
+        [composeBackEnd
+         rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
+         meth:@selector(MHContinueToSetupContentsForView:withParsedMessages:)
+         classMeth:NO
+         ];
+    }    
     
-    [NSClassFromString(@"ComposeBackEnd")
-     rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-     meth:@selector(MHContinueToSetupContentsForView:withParsedMessages:)
-     classMeth:NO
-     ];
-}
-
-+ (void)addRwhMailHeaderEditorMethodsToHeadersEditor {
-    [MHHeadersEditor rwhAddMethodsToClass:NSClassFromString(@"HeadersEditor")];
+    Class headerEditor = NSClassFromString(@"HeadersEditor");
+    if (headerEditor)
+    {
+        [MHHeadersEditor rwhAddMethodsToClass:headerEditor];
+        
+        [headerEditor
+         rwhSwizzle:@selector(loadHeadersFromBackEnd:)
+         meth:@selector(MHLoadHeadersFromBackEnd:)
+         classMeth:NO
+         ];
+    }
     
-    [NSClassFromString(@"HeadersEditor")
-     rwhSwizzle:@selector(loadHeadersFromBackEnd:)
-     meth:@selector(MHLoadHeadersFromBackEnd:)
-     classMeth:NO
-     ];
-}
-
-+ (void)addRwhMailPreferencesMethodsToNSPreferences {
+    
     Class nsPref = NSClassFromString(@"NSPreferences");
-    if (nsPref) {
+    if (nsPref)
+    {
         [nsPref
          rwhSwizzle:@selector(sharedPreferences)
          meth:@selector(MHSharedPreferences)
@@ -219,26 +244,30 @@
 
 #pragma mark MVMailBundle class methods
 
-+ (BOOL)hasPreferencesPanel {
++ (BOOL)hasPreferencesPanel
+{
     // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
     return YES;
 }
 
-+ (NSString*)preferencesOwnerClassName {
++ (NSString*)preferencesOwnerClassName
+{
     return NSStringFromClass([MHPreferences class]);
 }
 
-+ (NSString*)preferencesPanelName {
++ (NSString*)preferencesPanelName
+{
     return MHLocalizedString(@"MAIL_HEADER_PREFERENCES");
 }
 
 
 #pragma mark MVMailBundle initialize
 
-+ (void)initialize {    
++ (void)initialize
+{
     // Make sure the initializer is only run once.
-    // Usually is run, for every class inheriting from RwhMailBundle.
-    if (self != [RwhMailBundle class])
+    // Usually is run, for every class inheriting from MailHeader.
+    if (self != [MailHeader class])
         return;
     
     Class mvMailBundleClass = NSClassFromString(@"MVMailBundle");
@@ -259,20 +288,20 @@
     // for smooth upgrade to new UI
     [self smoothValueTransToNewRwhMailPrefUI];
     
-    // Swizzling of Mail.app Classes
-    [self addRwhMailMessageMethodsToComposeBackEnd];
-    [self addRwhMailPreferencesMethodsToNSPreferences];
-    [self addRwhMailHeaderEditorMethodsToHeadersEditor];
+    // Add hooks into Mail.app Classes
+    [self addMailHeaderHooks];
     
     // RWH Bundle registered successfully
     NSLog(@"RWH %@ plugin loaded", [self bundleVersionString]);
     NSLog(@"RWH %@ Wow! it's a wonderful life", [self bundleVersionString]);
     
-    if (![self isEnabled]) {
+    if (![self isEnabled])
+    {
         NSLog(@"RWH plugin is disabled in preferences");
     }
     
-    if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion)) {
+    if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))
+    {
         double delayInSeconds = 45.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

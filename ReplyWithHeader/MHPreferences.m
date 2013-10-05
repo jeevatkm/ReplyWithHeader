@@ -70,12 +70,12 @@
 
 - (NSString *)NameAndVersion
 {
-    return [RwhMailBundle bundleNameAndVersion];
+    return [MailHeader bundleNameAndVersion];
 }
 
 - (NSString *)Copyright
 {
-    return [RwhMailBundle bundleCopyright];
+    return [MailHeader bundleCopyright];
 }
 
 - (IBAction)MailHeaderBundlePressed:(id)sender
@@ -90,7 +90,7 @@
 
 - (IBAction)SelectFontButtonPressed:(id)sender
 {
-    RWH_LOG();
+    MH_LOG();
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     [fontManager setDelegate:self];
@@ -110,7 +110,7 @@
 
 - (void)changeFont:(id)sender
 {
-    RWH_LOG();
+    MH_LOG();
     
     NSFont *oldFont = _MHHeaderInfoFontAndSize.font;
     NSFont *font = [sender convertFont:oldFont];
@@ -135,9 +135,9 @@
     NSAlert *infoAlert = [[NSAlert alloc] init];
     
     [infoAlert setAlertStyle:NSInformationalAlertStyle];
-    [infoAlert setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [RwhMailBundle bundleNameAndVersion]]];
+    [infoAlert setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [MailHeader bundleNameAndVersion]]];
     [infoAlert setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];    
-    [infoAlert setIcon:[RwhMailBundle bundleLogo]];
+    [infoAlert setIcon:[MailHeader bundleLogo]];
     [[[infoAlert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
     
     [infoAlert runModal];
@@ -159,7 +159,7 @@
     {
         NSAlert *alert = [[NSAlert alloc] init];
         
-        [alert setIcon:[RwhMailBundle bundleLogo]];
+        [alert setIcon:[MailHeader bundleLogo]];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert setMessageText:@"Are you sure you want to disable it?"];
         [alert setInformativeText:@"Missing opportunity of new version release notification."];
@@ -188,9 +188,9 @@
 
 - (void)awakeFromNib
 {
-    RWH_LOG();
+    MH_LOG();
     
-    [self toggleRwhPreferencesOptions:[RwhMailBundle isEnabled]];
+    [self toggleRwhPreferencesOptions:[MailHeader isEnabled]];
     
     [_MHHeaderInfoFontAndSize
      setStringValue:[NSString stringWithFormat:@"%@ %@",
@@ -205,7 +205,7 @@
 
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName
 {
-	return [RwhMailBundle bundleLogo];
+	return [MailHeader bundleLogo];
 }
 
 - (BOOL)isResizable

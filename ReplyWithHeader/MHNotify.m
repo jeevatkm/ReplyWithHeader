@@ -37,7 +37,7 @@
 - (void)performVersionAvailabiltyCheck:(NSDictionary *)jsonDic
 {
     NSDictionary *latest = [[jsonDic objectForKey:@"releases"] objectForKey:@"latest"];
-    NSString *currentVersion = [RwhMailBundle bundleVersionString];
+    NSString *currentVersion = [MailHeader bundleVersionString];
     NSString *serverVersion = [latest objectForKey:@"shortVersion"];    
     
     NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
@@ -45,13 +45,13 @@
     {
         NSLog(@"RWH current version is %@, latest version is %@ and comparison result %d", currentVersion, serverVersion, (int)result);
         
-        NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [RwhMailBundle bundleName], [latest objectForKey:@"version"]];
+        NSString *message = [NSString stringWithFormat:@"%@ %@ new version available!", [MailHeader bundleName], [latest objectForKey:@"version"]];
         
         NSString *infoText = [NSString stringWithFormat:@"%@; published on %@.", [latest objectForKey:@"title"], [latest objectForKey:@"pubDate"]];
         
         NSAlert *alert = [[NSAlert alloc] init];
         
-        [alert setIcon:[RwhMailBundle bundleLogo]];
+        [alert setIcon:[MailHeader bundleLogo]];
         [alert setAlertStyle:NSInformationalAlertStyle];
         [alert setMessageText:message];
         [alert setInformativeText:infoText];
@@ -74,14 +74,14 @@
         }
         else if (response == NSAlertThirdButtonReturn)
         {
-            RWH_LOG(@"Later button is pressed, nothing to do!");
+            MH_LOG(@"Later button is pressed, nothing to do!");
         }
         
         [alert release];
     }
     else
     {
-        RWH_LOG(@"Same/Higher version present, just ignore it.");
+        MH_LOG(@"Same/Higher version present, just ignore it.");
     }
 }
 
@@ -116,13 +116,13 @@
 {
     if (self = [super init])
     {
-        appCastUrl = [[[RwhMailBundle bundle] infoDictionary] objectForKey:MHAppCastURLKey];
+        appCastUrl = [[[MailHeader bundle] infoDictionary] objectForKey:MHAppCastURLKey];
         
         comparator = [SUStandardVersionComparator defaultComparator];
     }
     else
     {
-        RWH_LOG(@"RwhNotify initialize failed");
+        MH_LOG(@"RwhNotify initialize failed");
     }    
     return self;
 }

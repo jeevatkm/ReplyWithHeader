@@ -38,7 +38,7 @@
 
 + (void)rwhAddMethodsToClass:(Class)cls {
     
-    RWH_LOG(@"%@", cls);
+    MH_LOG(@"%@", cls);
     
     unsigned int numMeths = 0;
     Method* meths = class_copyMethodList(object_getClass([self class]), &numMeths);
@@ -69,10 +69,10 @@
         BOOL result = class_addMethod(*c, method_getName(m[i]), method_getImplementation(m[i]),method_getTypeEncoding(m[i]));
         
         if( !result )  {
-            RWH_LOG(@"rwhAddMethods: could not add %s to %@",sel_getName(method_getName(m[i])),*cls);
+            MH_LOG(@"rwhAddMethods: could not add %s to %@",sel_getName(method_getName(m[i])),*cls);
         }
         else {
-            RWH_LOG(@"rwhAddMethods: added %s to %@",sel_getName(method_getName(m[i])),*cls);
+            MH_LOG(@"rwhAddMethods: added %s to %@",sel_getName(method_getName(m[i])),*cls);
         }
     }
     
@@ -85,7 +85,7 @@
     Method newMeth = (cls?class_getClassMethod([self class], newSel):class_getInstanceMethod([self class], newSel));
     
     //log the swizzle for debugging...
-    RWH_LOG(@"%s (%p), %s (%p), %s",sel_getName(origSel), method_getImplementation(origMeth),
+    MH_LOG(@"%s (%p), %s (%p), %s",sel_getName(origSel), method_getImplementation(origMeth),
             sel_getName(newSel), method_getImplementation(newMeth),(cls ? "YES" : "NO"));
     
     //this is how we swizzle

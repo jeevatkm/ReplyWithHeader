@@ -31,7 +31,7 @@
  * @class
  * The <code>MHPreferences</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
- * specific to the RwhMailBundle plugin.
+ * specific to the MailHeader plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  *

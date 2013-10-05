@@ -1,16 +1,16 @@
 //
-// Prefix header for all source files of the 'RwhMailBundle' target in the 'RwhMailBundle' project
+// Prefix header for all source files of the 'MailHeader' target in the 'MailHeader' project
 //
 
 #ifdef __OBJC__
 #  import <Cocoa/Cocoa.h>
 #  import "MHConstants.h"
-#  import "RwhMailBundle.h"
+#  import "MailHeader.h"
 
-#  ifdef RWH_DEBUG
-#    define RWH_LOG(fmt, ...) NSLog((@"RWH:: %s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
+#  ifdef MH_DEBUG
+#    define MH_LOG(fmt, ...) NSLog((@"RWH:: %s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
 #  else
-#    define RWH_LOG(...)
+#    define MH_LOG(...)
 #  endif
 
 #endif
@@ -29,4 +29,4 @@
 #define GET_DEFAULT_INT(k) [[NSUserDefaults standardUserDefaults] integerForKey: k]
 #define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
 
-#define MHLocalizedString(key) [RwhMailBundle localizedString:(key)]
+#define MHLocalizedString(key) [MailHeader localizedString:(key)]

@@ -26,15 +26,15 @@
 
 /*!
  * @class
- * The <code>RwhMailBundle</code> class is the subclass of
+ * The <code>MailHeader</code> class is the subclass of
  * <code>MVMailBundle</code> that provides the plugin entrypoint for the
- * RwhMailBundle plugin.
+ * MailHeader plugin.
  * @version \@(#) $Id$
  * @updated $Date$
  *
- * RwhMailBundle Class completely rewritten by Jeevanandam M. on Sep 21, 2013
+ * MailHeader Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
-@interface RwhMailBundle : NSObject {
+@interface MailHeader : NSObject {
 }
 
 + (BOOL)isEnabled;

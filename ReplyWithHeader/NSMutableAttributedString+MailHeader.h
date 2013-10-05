@@ -32,7 +32,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSMutableAttributedString (RwhMailBundle)
+@interface NSMutableAttributedString (MailHeader)
 
 + (void)trimLeadingWhitespaceAndNewLine:(NSMutableAttributedString *)attString;
 + (void)trimTrailingWhitespaceAndNewLine:(NSMutableAttributedString *)attString;

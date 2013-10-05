@@ -27,7 +27,7 @@
 
 //
 //  MHHeaderString.h
-//  RwhMailBundle
+//  MailHeader
 //
 //  Created by Jason Schroth on 8/15/12.
 //

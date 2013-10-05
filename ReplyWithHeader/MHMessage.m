@@ -35,8 +35,9 @@
 
 @implementation MHMessage
 
-- (void)MHContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2 {
-    RWH_LOG();
+- (void)MHContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2
+{
+    MH_LOG();
     
     // calling the original implementation
     [self MHContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
@@ -44,7 +45,8 @@
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];
     
-	if (([RwhMailBundle isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3)) {
+	if (([MailHeader isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3))
+    {
         // Initailzing the quoted text from the original email
         MHQuotedMailOriginal *quotedText = [[MHQuotedMailOriginal alloc] initWithMailMessage:self];
         

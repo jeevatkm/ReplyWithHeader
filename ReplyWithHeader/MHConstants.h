@@ -26,7 +26,7 @@
 
 //
 //  MHConstants.h
-//  RwhMailBundle
+//  MailHeader
 //
 //  Created by Jeevanandam M. on 9/18/13.
 //
@@ -36,28 +36,28 @@
 #define MHBundleVersionKey @"CFBundleVersion"
 #define MHBundleShortVersionKey @"CFBundleShortVersionString"
 #define MHCopyRightKey @"NSHumanReadableCopyright"
-#define MHAppCastURLKey @"RwhAppCastURL"
+#define MHAppCastURLKey @"MHAppCastURL"
 
-#define MHBundleEnabled @"RwhMailBundleEnabled"
-#define MHForwardHeaderEnabled @"RwhForwardHeaderEnabled"
-#define MHTypographyEnabled @"RwhHeaderTypographyEnabled"
-#define MHHeaderOptionEnabled @"RwhHeaderLabelOptionEnabled"
-#define MHEntourage2004SupportEnabled @"RwhEntourage2004SupportEnabled"
+#define MHBundleEnabled @"MailHeaderBundleEnabled"
+#define MHForwardHeaderEnabled @"MHForwardHeaderEnabled"
+#define MHTypographyEnabled @"MHHeaderTypographyEnabled"
+#define MHHeaderOptionEnabled @"MHHeaderLabelOptionEnabled"
+#define MHEntourage2004SupportEnabled @"MHEntourage2004SupportEnabled"
 #define MHDefaulReplyHeaderBorder @"<br />---------- Original Message ----------<br />"
 #define MHDefaultForwardHeaderBorder @"---------- Forwarded Message ----------<br />"
 #define MHHeaderBorder @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
 #define MHDefaultHeaderFontName @"Tahoma"
 #define MHDefaultHeaderFontSize @"13"
-#define MHHeaderFontName @"RwhHeaderFontName"
-#define MHHeaderFontSize @"RwhHeaderFontSize"
-#define MHHeaderColor @"RwhHeaderColor"
+#define MHHeaderFontName @"MHHeaderFontName"
+#define MHHeaderFontSize @"MHHeaderFontSize"
+#define MHHeaderColor @"MHHeaderColor"
 
 // Mode Values (1=Apple Mail, 2=Outlook Mail)
-#define MHHeaderLabelMode @"RwhHeaderLabelMode"
-#define MHHeaderOrderMode @"RwhHeaderOrderMode"
+#define MHHeaderLabelMode @"MHHeaderLabelMode"
+#define MHHeaderOrderMode @"MHHeaderOrderMode"
 
-#define MHPluginNotifyNewVersion @"RwhNotifyPluginNewVersion"
-#define MHSubjectPrefixTextEnabled @"RwhSubjectPrefixTextEnabled"
+#define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
+#define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
 
 #define MHPreferencesNibName @"MHPreferencesView"
 

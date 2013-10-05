@@ -40,7 +40,7 @@
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1
 {
-    RWH_LOG();
+    MH_LOG();
     
     // calling original implementation
     [self MHLoadHeadersFromBackEnd:arg1];
