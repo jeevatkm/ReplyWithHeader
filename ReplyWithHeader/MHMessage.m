@@ -35,12 +35,12 @@
 
 @implementation MHMessage
 
-- (void)MHContinueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2
+- (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2
 {
     MH_LOG();
     
     // calling the original implementation
-    [self MHContinueToSetupContentsForView: arg1 withParsedMessages: arg2];
+    [self MH_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];

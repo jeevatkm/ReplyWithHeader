@@ -29,12 +29,9 @@
 #import <objc/objc-runtime.h>
 
 #import "MailHeader.h"
-#import "MHPreferences.h"
-#import "MHMessage.h"
-#import "NSObject+MailHeader.h"
 #import "MHNotify.h"
-#import "MHHeadersEditor.h"
-#import "NSPreferences+MailHeader.h"
+#import "MHCodeInjector.h"
+#import "MHPreferences.h"
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -113,7 +110,7 @@
     return languageCode;
 }
 
-+ (void)assignRwhMailDefaultValues
++ (void)assignUserDefaults
 {
     MH_LOG();
     
@@ -137,7 +134,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 }
 
-+ (void)smoothValueTransToNewRwhMailPrefUI
++ (void)smoothValueTransToNewMailPrefUI
 {
     MH_LOG();
     
@@ -185,62 +182,6 @@
     // [end]
 }
 
-+ (void)addMailHeaderHooks
-{
-    Class composeBackEnd = NSClassFromString(@"ComposeBackEnd");
-    if (composeBackEnd)
-    {
-        [MHMessage rwhAddMethodsToClass:composeBackEnd];
-        
-        [composeBackEnd
-         rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-         meth:@selector(MHContinueToSetupContentsForView:withParsedMessages:)
-         classMeth:NO
-         ];
-    }    
-    
-    Class headerEditor = NSClassFromString(@"HeadersEditor");
-    if (headerEditor)
-    {
-        [MHHeadersEditor rwhAddMethodsToClass:headerEditor];
-        
-        [headerEditor
-         rwhSwizzle:@selector(loadHeadersFromBackEnd:)
-         meth:@selector(MHLoadHeadersFromBackEnd:)
-         classMeth:NO
-         ];
-    }
-    
-    
-    Class nsPref = NSClassFromString(@"NSPreferences");
-    if (nsPref)
-    {
-        [nsPref
-         rwhSwizzle:@selector(sharedPreferences)
-         meth:@selector(MHSharedPreferences)
-         classMeth:YES
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(windowWillResize:toSize:)
-         meth:@selector(MHWindowWillResize:toSize:)
-         classMeth:NO
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(toolbarItemClicked:)
-         meth:@selector(MHToolbarItemClicked:)
-         classMeth:NO
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(showPreferencesPanelForOwner:)
-         meth:@selector(MHShowPreferencesPanelForOwner:)
-         classMeth:NO
-         ];
-    }
-}
-
 
 #pragma mark MVMailBundle class methods
 
@@ -283,13 +224,13 @@
     [mvMailBundleClass registerBundle];
     
     // assigning default value if not present
-    [self assignRwhMailDefaultValues];
+    [self assignUserDefaults];
     
-    // for smooth upgrade to new UI
-    [self smoothValueTransToNewRwhMailPrefUI];
+    // for smooth upgrade to new User Interface
+    [self smoothValueTransToNewMailPrefUI];
     
     // Add hooks into Mail.app Classes
-    [self addMailHeaderHooks];
+    [MHCodeInjector injectMailHeaderCode];
     
     // RWH Bundle registered successfully
     NSLog(@"RWH %@ plugin loaded", [self bundleVersionString]);

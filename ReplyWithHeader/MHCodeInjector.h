@@ -23,20 +23,17 @@
  */
 
 //
-//  NSObject+MailHeader.h
+//  MHCodeInjector.h
 //  ReplyWithHeader
 //
-//  Created by Jeevanandam M. on 9/21/13.
+//  Created by Jeevanandam M. on 10/6/13.
 //
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/objc-runtime.h>
 
-@interface NSObject (MailHeader)
+@interface MHCodeInjector : NSObject
 
-+ (void)rwhAddMethodsToClass:(Class)cls;
-+ (void)rwhAddMethods:(Method *)m numMethods:(unsigned int)cnt toClass:(Class *)c origClass:(Class *) cls;
-+ (void)rwhSwizzle:(SEL)origSel meth:(SEL)newSel classMeth:(BOOL)cls;
++ (void)injectMailHeaderCode;
 
 @end
