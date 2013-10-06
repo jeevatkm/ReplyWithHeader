@@ -29,9 +29,9 @@
 #import <objc/objc-runtime.h>
 
 #import "MailHeader.h"
-#import "MHNotify.h"
 #import "MHCodeInjector.h"
 #import "MHPreferences.h"
+#import "MHUpdater.h"
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -56,6 +56,11 @@
     return bundle;
 }
 
++ (NSString *)bundleIdentifier
+{
+    return [[[self bundle] infoDictionary] objectForKey:MHBundleIdentifier];
+}
+
 + (NSString *)bundleNameAndVersion
 {
     return [NSMutableString stringWithFormat:@"%@ v%@", [self bundleName], [self bundleVersionString]];
@@ -63,7 +68,7 @@
 
 + (NSString *)bundleName
 {
-    return [[[self bundle] infoDictionary] objectForKey:MHBundleNameKey];
+    return MHLocalizedString(@"PLUGIN_NAME");
 }
 
 + (NSString *)bundleVersionString
@@ -108,6 +113,17 @@
     
     MH_LOG(@"Current Locale language code is %@", languageCode);
     return languageCode;
+}
+
++ (BOOL)isBackgroundApplication
+{
+	ProcessSerialNumber PSN;
+	GetCurrentProcess(&PSN);
+	CFDictionaryRef processInfo = ProcessInformationCopyDictionary(&PSN, kProcessDictionaryIncludeAllInformationMask);
+	BOOL isElement = [[(NSDictionary *)processInfo objectForKey:@"LSUIElement"] boolValue];
+	if (processInfo)
+		CFRelease(processInfo);
+	return isElement;
 }
 
 + (void)assignUserDefaults
@@ -243,12 +259,12 @@
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))
     {
-        double delayInSeconds = 45.0;
+        double delayInSeconds = 30.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            MHNotify *notifier = [[MHNotify alloc] init];
-            [notifier checkNewVersion];
-            [notifier release];
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){            
+            MHUpdater *updater = [[MHUpdater alloc] init];
+            if ([updater isUpdateAvailable])
+                [updater showUpdateAlert];
         });
     }
 }

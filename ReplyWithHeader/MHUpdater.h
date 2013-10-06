@@ -23,24 +23,25 @@
  */
 
 //
-//  MHNotify.h
+//  MHUpdater.h
 //  ReplyWithHeader
 //
-//  Created by Jeevanandam M. on 9/27/13.
+//  Created by Jeevanandam M. on 10/6/13.
 //
 //
 
 #import <Foundation/Foundation.h>
 
-#import "SUStandardVersionComparator.h"
+@class  MHUpdateAlert, SUStandardVersionComparator;
 
-@interface MHNotify : NSObject
-{
-	NSString *appCastUrl;
+@interface MHUpdater : NSObject {
+    MHUpdateAlert *_alert;
     SUStandardVersionComparator *comparator;
+    NSDictionary *jsonDic;
 }
 
+- (void)showUpdateAlert;
+- (BOOL)isUpdateAvailable;
 - (id)init;
-- (void)checkNewVersion;
 
 @end

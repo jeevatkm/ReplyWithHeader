@@ -35,6 +35,7 @@
 #define MHBundleNameKey @"CFBundleName"
 #define MHBundleVersionKey @"CFBundleVersion"
 #define MHBundleShortVersionKey @"CFBundleShortVersionString"
+#define MHBundleIdentifier @"CFBundleIdentifier"
 #define MHCopyRightKey @"NSHumanReadableCopyright"
 #define MHAppCastURLKey @"MHAppCastURL"
 

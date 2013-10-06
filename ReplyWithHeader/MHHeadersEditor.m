@@ -67,6 +67,8 @@
         
         // cascading subject text change
         [self _subjectChanged];
+        
+        [subjectText release];
     }    
 }
 

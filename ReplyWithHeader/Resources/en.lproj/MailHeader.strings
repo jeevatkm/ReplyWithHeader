@@ -13,7 +13,10 @@
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
-    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@ Plugin Update";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "A new version of %@ is available!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ is now available--you have %@. Would you like to download it now?";
     
     /* Button Strings */
 	"BUTTON_DOWNLOAD" = "Download";

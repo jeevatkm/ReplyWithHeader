@@ -32,8 +32,15 @@
 //
 //  MHQuotedMailOriginal Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
-#import "MHQuotedMailOriginal.h"
 #import "WebKit/DOMHTMLBRElement.h"
+#import "WebKit/DOMDocumentFragment.h"
+#import "WebKit/DOMHTMLDivElement.h"
+#import "WebKit/DOMHTMLDocument.h"
+#import "WebKit/DOMNodeList.h"
+#import "WebKit/DOMElement.h"
+
+#import "MHQuotedMailOriginal.h"
+#import "MHHeaderString.h"
 
 @interface MHQuotedMailOriginal (MHNoImplementation)
 - (id)htmlDocument;

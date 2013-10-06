@@ -34,18 +34,20 @@
  *
  * MailHeader Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
-@interface MailHeader : NSObject {
-}
+
+@interface MailHeader : NSObject
 
 + (BOOL)isEnabled;
 + (NSBundle *)bundle;
 + (NSString *)bundleNameAndVersion;
 + (NSString *)bundleName;
 + (NSString *)bundleVersionString;
++ (NSString *)bundleIdentifier;
 + (NSString *)bundleCopyright;
 + (NSImage *)bundleLogo;
 + (NSString *)localizedString:(NSString *)key;
 + (NSString *)localeLanguageCode;
++ (BOOL)isBackgroundApplication;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

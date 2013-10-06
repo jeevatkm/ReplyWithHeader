@@ -28,6 +28,7 @@
 
 #import "MHMessage.h"
 #import "MHQuotedMailOriginal.h"
+#import "MHHeaderString.h"
 
 @interface MHMessage (MHNoImplementation)
 - (id)type;

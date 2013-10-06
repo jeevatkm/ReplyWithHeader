@@ -29,14 +29,14 @@
 #import "MHPreferences.h"
 
 @interface MHPreferences (PrivateMethods)
-- (IBAction)MailHeaderBundlePressed:(id)sender;
-- (IBAction)HeaderTypographyPressed:(id)sender;
-- (IBAction)SelectFontButtonPressed:(id)sender;
-- (IBAction)HeaderLabelModePressed:(id)sender;
-- (IBAction)openWebsite:(id)sender;
-- (IBAction)openFeedback:(id)sender;
-- (IBAction)openSupport:(id)sender;
-- (IBAction)notifyNewVersionPressed:(id)sender;
+    - (IBAction)MailHeaderBundlePressed:(id)sender;
+    - (IBAction)HeaderTypographyPressed:(id)sender;
+    - (IBAction)SelectFontButtonPressed:(id)sender;
+    - (IBAction)HeaderLabelModePressed:(id)sender;
+    - (IBAction)openWebsite:(id)sender;
+    - (IBAction)openFeedback:(id)sender;
+    - (IBAction)openSupport:(id)sender;
+    - (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
 @implementation MHPreferences
