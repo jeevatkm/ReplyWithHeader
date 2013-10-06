@@ -29,12 +29,9 @@
 #import <objc/objc-runtime.h>
 
 #import "MailHeader.h"
+#import "MHCodeInjector.h"
 #import "MHPreferences.h"
-#import "MHMessage.h"
-#import "NSObject+MailHeader.h"
-#import "MHNotify.h"
-#import "MHHeadersEditor.h"
-#import "NSPreferences+MailHeader.h"
+#import "MHUpdater.h"
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -59,6 +56,11 @@
     return bundle;
 }
 
++ (NSString *)bundleIdentifier
+{
+    return [[[self bundle] infoDictionary] objectForKey:MHBundleIdentifier];
+}
+
 + (NSString *)bundleNameAndVersion
 {
     return [NSMutableString stringWithFormat:@"%@ v%@", [self bundleName], [self bundleVersionString]];
@@ -66,7 +68,7 @@
 
 + (NSString *)bundleName
 {
-    return [[[self bundle] infoDictionary] objectForKey:MHBundleNameKey];
+    return MHLocalizedString(@"PLUGIN_NAME");
 }
 
 + (NSString *)bundleVersionString
@@ -113,7 +115,18 @@
     return languageCode;
 }
 
-+ (void)assignRwhMailDefaultValues
++ (BOOL)isBackgroundApplication
+{
+	ProcessSerialNumber PSN;
+	GetCurrentProcess(&PSN);
+	CFDictionaryRef processInfo = ProcessInformationCopyDictionary(&PSN, kProcessDictionaryIncludeAllInformationMask);
+	BOOL isElement = [[(NSDictionary *)processInfo objectForKey:@"LSUIElement"] boolValue];
+	if (processInfo)
+		CFRelease(processInfo);
+	return isElement;
+}
+
++ (void)assignUserDefaults
 {
     MH_LOG();
     
@@ -137,7 +150,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 }
 
-+ (void)smoothValueTransToNewRwhMailPrefUI
++ (void)smoothValueTransToNewMailPrefUI
 {
     MH_LOG();
     
@@ -185,62 +198,6 @@
     // [end]
 }
 
-+ (void)addMailHeaderHooks
-{
-    Class composeBackEnd = NSClassFromString(@"ComposeBackEnd");
-    if (composeBackEnd)
-    {
-        [MHMessage rwhAddMethodsToClass:composeBackEnd];
-        
-        [composeBackEnd
-         rwhSwizzle:@selector(_continueToSetupContentsForView:withParsedMessages:)
-         meth:@selector(MHContinueToSetupContentsForView:withParsedMessages:)
-         classMeth:NO
-         ];
-    }    
-    
-    Class headerEditor = NSClassFromString(@"HeadersEditor");
-    if (headerEditor)
-    {
-        [MHHeadersEditor rwhAddMethodsToClass:headerEditor];
-        
-        [headerEditor
-         rwhSwizzle:@selector(loadHeadersFromBackEnd:)
-         meth:@selector(MHLoadHeadersFromBackEnd:)
-         classMeth:NO
-         ];
-    }
-    
-    
-    Class nsPref = NSClassFromString(@"NSPreferences");
-    if (nsPref)
-    {
-        [nsPref
-         rwhSwizzle:@selector(sharedPreferences)
-         meth:@selector(MHSharedPreferences)
-         classMeth:YES
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(windowWillResize:toSize:)
-         meth:@selector(MHWindowWillResize:toSize:)
-         classMeth:NO
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(toolbarItemClicked:)
-         meth:@selector(MHToolbarItemClicked:)
-         classMeth:NO
-         ];
-        
-        [nsPref
-         rwhSwizzle:@selector(showPreferencesPanelForOwner:)
-         meth:@selector(MHShowPreferencesPanelForOwner:)
-         classMeth:NO
-         ];
-    }
-}
-
 
 #pragma mark MVMailBundle class methods
 
@@ -283,13 +240,13 @@
     [mvMailBundleClass registerBundle];
     
     // assigning default value if not present
-    [self assignRwhMailDefaultValues];
+    [self assignUserDefaults];
     
-    // for smooth upgrade to new UI
-    [self smoothValueTransToNewRwhMailPrefUI];
+    // for smooth upgrade to new User Interface
+    [self smoothValueTransToNewMailPrefUI];
     
     // Add hooks into Mail.app Classes
-    [self addMailHeaderHooks];
+    [MHCodeInjector injectMailHeaderCode];
     
     // RWH Bundle registered successfully
     NSLog(@"RWH %@ plugin loaded", [self bundleVersionString]);
@@ -302,12 +259,12 @@
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))
     {
-        double delayInSeconds = 45.0;
+        double delayInSeconds = 30.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            MHNotify *notifier = [[MHNotify alloc] init];
-            [notifier checkNewVersion];
-            [notifier release];
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){            
+            MHUpdater *updater = [[MHUpdater alloc] init];
+            if ([updater isUpdateAvailable])
+                [updater showUpdateAlert];
         });
     }
 }

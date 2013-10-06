@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,27 +23,29 @@
  */
 
 //
-//  MHQuotedMailOriginal.h
-//  MailHeader
+//  MHUpdateAlert.h
+//  ReplyWithHeader
 //
-//  Created by Jason Schroth on 8/16/12.
+//  Created by Jeevanandam M. on 10/6/13.
 //
-//  MHQuotedMailOriginal Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
+//
 
-@class MHHeaderString, DOMDocumentFragment, DOMHTMLDivElement, DOMNodeList;
+#import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
-@interface MHQuotedMailOriginal : NSObject {
-@private
-    id document;
-    DOMDocumentFragment *headerBorder;
-    BOOL isHTMLMail;
-    DOMHTMLDivElement *originalEmail;
-    int textNodeLocation; //which
-    DOMNodeList *dhc; //document header children
+@interface MHUpdateAlert : NSWindowController {
+    BOOL webViewFinishedLoading;
+    NSString *versionDesc;
+    NSString *releaseNotes;
+    NSString *downloadLink;
+    
+    IBOutlet WebView *_releaseNotesView;
+    IBOutlet NSTextField *_subTitle;
+    IBOutlet NSTextField *_versionDesc;
+    IBOutlet NSButton *_downloadButton;
+    IBOutlet NSButton *_laterButton;
 }
 
-- (id)init;
-- (id)initWithMailMessage:(id)mailMessage;
-- (void)insertMailHeader:(MHHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
+- (id)initWithData:(NSString *)desc releaseNotes:(NSString *)notes donwloadLink:(NSString *)urlString;
 
 @end

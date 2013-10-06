@@ -23,24 +23,17 @@
  */
 
 //
-//  MHNotify.h
+//  MHCodeInjector.h
 //  ReplyWithHeader
 //
-//  Created by Jeevanandam M. on 9/27/13.
+//  Created by Jeevanandam M. on 10/6/13.
 //
 //
 
 #import <Foundation/Foundation.h>
 
-#import "SUStandardVersionComparator.h"
+@interface MHCodeInjector : NSObject
 
-@interface MHNotify : NSObject
-{
-	NSString *appCastUrl;
-    SUStandardVersionComparator *comparator;
-}
-
-- (id)init;
-- (void)checkNewVersion;
++ (void)injectMailHeaderCode;
 
 @end
