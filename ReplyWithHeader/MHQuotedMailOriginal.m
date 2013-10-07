@@ -105,9 +105,7 @@ NSString *AppleMailSignature = @"AppleMailSignature";
             [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
         }
         else
-        {
-            //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:newLineFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-            
+        {            
             [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
             
             [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];

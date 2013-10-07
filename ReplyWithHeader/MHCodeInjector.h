@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @interface MHCodeInjector : NSObject
 
 + (void)injectMailHeaderCode;

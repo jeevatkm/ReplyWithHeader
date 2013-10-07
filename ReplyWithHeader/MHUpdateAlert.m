@@ -30,6 +30,8 @@
 //
 //
 
+#import <WebKit/WebKit.h>
+
 #import "MHUpdateAlert.h"
 
 @interface MHUpdateAlert ()
@@ -83,6 +85,7 @@
     [_releaseNotesView setUIDelegate:self];
     [_releaseNotesView setEditingDelegate:self];
     
+    [_laterButton setKeyEquivalent:@"\033"];
     [_downloadButton setKeyEquivalent:@"\r"];
 }
 

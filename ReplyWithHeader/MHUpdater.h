@@ -30,8 +30,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @class  MHUpdateAlert, SUStandardVersionComparator;
 
 @interface MHUpdater : NSObject {

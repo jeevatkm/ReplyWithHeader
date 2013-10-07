@@ -30,8 +30,7 @@
 //
 //
 
-#import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+@class  WebView;
 
 @interface MHUpdateAlert : NSWindowController {
     BOOL webViewFinishedLoading;
