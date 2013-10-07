@@ -38,7 +38,7 @@
 
 - (void)showUpdateAlert
 {
-    [_alert showWindow:self];
+    [NSApp runModalForWindow:[_alert window]];
 }
 
 - (BOOL)isUpdateAvailable

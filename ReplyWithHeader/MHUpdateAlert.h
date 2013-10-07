@@ -33,7 +33,6 @@
 @class  WebView;
 
 @interface MHUpdateAlert : NSWindowController {
-    BOOL webViewFinishedLoading;
     NSString *versionDesc;
     NSString *releaseNotes;
     NSString *downloadLink;

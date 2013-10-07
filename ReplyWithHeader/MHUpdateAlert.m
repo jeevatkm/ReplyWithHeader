@@ -43,12 +43,14 @@
 
 - (IBAction)downloadButtonClicked:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:downloadLink]];    
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:downloadLink]];
+    [NSApp stopModal];
     [self close];
 }
 
 - (IBAction)laterButtonClicked:(id)sender
 {
+    [NSApp stopModal];
     [self close];
 }
 
@@ -71,9 +73,6 @@
 
 - (void)awakeFromNib
 {
-    if( [MailHeader isBackgroundApplication] )
-		[[self window] setLevel:NSFloatingWindowLevel];
-    
     [[self window] setShowsResizeIndicator: NO];
     [[self window] center];
     
@@ -98,7 +97,6 @@
         releaseNotes = [notes mutableCopy];
         downloadLink = [urlString mutableCopy];
         
-        webViewFinishedLoading = NO;
         [self setShouldCascadeWindows:NO];
         [WebView MIMETypesShownAsHTML];
     }
@@ -107,11 +105,11 @@
 
 #pragma Mark WebView Delegates
 
+// necessary to prevent weird scroll bar artifacting
 - (void)webView:(WebView *)sender didFinishLoadForFrame:frame
 {
     if ([frame parentFrame] == nil) {
-        webViewFinishedLoading = YES;
-		[sender display]; // necessary to prevent weird scroll bar artifacting
+		[sender display]; 
     }
 }
 
