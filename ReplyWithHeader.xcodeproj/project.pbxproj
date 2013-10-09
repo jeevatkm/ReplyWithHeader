@@ -31,21 +31,7 @@
 		13AD486D18018D4600473407 /* MHUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486C18018D4600473407 /* MHUpdater.m */; };
 		13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */; };
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
-		31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		31AF6C991482DD1E00C8ACEB /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "~/Library/Mail/Bundles";
-			dstSubfolderSpec = 0;
-			files = (
-				31AF6C9B1482DD4F00C8ACEB /* ReplyWithHeader.mailbundle in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -272,8 +258,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				4D5FEE9312723CCE00A945C5 /* Bundle Packing */,
-				31AF6C991482DD1E00C8ACEB /* CopyFiles */,
+				4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */,
 			);
 			buildRules = (
 			);
@@ -344,7 +329,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D5FEE9312723CCE00A945C5 /* Bundle Packing */ = {
+		4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -352,12 +337,12 @@
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(WRAPPER_NAME)",
 			);
-			name = "Bundle Packing";
+			name = "Bundle Packing and Deploy Local";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#tar cvfz ReplyWithHeaders.tgz  ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\n\n# Apply Resource Fork to bundle\n#Rez -append ${SOURCE_ROOT}/ReplyWithHeader/Resources/Icon.rsrc -o ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}/$'Icon\\r'\n\n# Apply Icon Resource Fork\n#SetFile -a C \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\"\n\n# Package it\nSetFile -a B \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.${WRAPPER_EXTENSION}\"";
+			shellScript = "# Applying bundle icon\nPackage/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\ncp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}";
 		};
 /* End PBXShellScriptBuildPhase section */
 

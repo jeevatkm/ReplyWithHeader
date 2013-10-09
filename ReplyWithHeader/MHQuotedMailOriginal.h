@@ -44,7 +44,6 @@
     DOMNodeList *dhc; //document header children
 }
 
-- (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
 - (void)insertMailHeader:(MHHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
 

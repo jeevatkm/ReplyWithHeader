@@ -84,7 +84,10 @@
             comparator = [SUStandardVersionComparator defaultComparator];
             
             NSError * __autoreleasing error = nil;
-            jsonDic = [NSJSONSerialization JSONObjectWithData:appCastData options:NSJSONReadingMutableContainers error:&error];
+            jsonDic = [NSJSONSerialization
+                       JSONObjectWithData:appCastData
+                       options:NSJSONReadingMutableContainers
+                       error:&error];
             
             if (error)
             {
@@ -105,8 +108,11 @@
 
 - (void)dealloc
 {
-    [comparator release];
-    [jsonDic release];
+    if (comparator)
+        [comparator release];
+    
+    if (jsonDic)
+        [jsonDic release];
     
     if (_alert)
         [_alert release];

@@ -40,12 +40,11 @@
     NSMutableAttributedString *headerString;
     int headerItemCount;
     BOOL isSuppressLabelsFound;
-    NSFont *userDefaultFont;
+    NSFont *defaultFont;
 }
 
 @property (weak, readonly) NSString *stringValue;
 
-- (id)init;
 - (id)initWithMailMessage:(id)mailMessage;
 - (void)applyHeaderTypography;
 - (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled;

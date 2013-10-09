@@ -162,7 +162,7 @@
         [alert setIcon:[MailHeader bundleLogo]];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert setMessageText:@"Are you sure you want to disable it?"];
-        [alert setInformativeText:@"Missing opportunity of new version release notification."];
+        [alert setInformativeText:@"Missing a opportunity of new version release notification."];
         
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"Disable"];

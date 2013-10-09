@@ -24,7 +24,6 @@
  * THE SOFTWARE.
  */
 
-
 //
 //  MHHeaderString.m
 //  MailHeader
@@ -43,6 +42,13 @@
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
+#pragma mark Constants and global variables
+
+NSString *FROM_LABEL_REGEX_STRING = @"\\w+:\\s";
+NSString *HEADER_LABEL_REGEX_STRING = @"(\\n|\\r)[\\w\\-\\s]+:\\s";
+NSString *QUOTED_EMAIL_REGEX_STRING = @"(\\s<([a-zA-Z][a-zA-Z0-9]*)[^>]*>,?)";
+NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
+
 @implementation MHHeaderString
 
 #pragma mark Class instance methods
@@ -53,11 +59,11 @@
 
     NSRange range;
     range.location = 0;
-    range.length = [headerString length];
+    range.length = headerString.length;
     
     NSString *fontString = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
-    NSFont *font = [NSFont fontWithName:fontString size:[fontSize floatValue]];
+    NSFont *font = [NSFont fontWithName:fontString size:fontSize.floatValue];
     
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
     
@@ -73,30 +79,40 @@
     {
         [headerString
             addAttribute:@"NSFont"
-            value:userDefaultFont
-            range:NSMakeRange(0, [headerString length])];
+            value:defaultFont
+            range:NSMakeRange(0, headerString.length)];
     }
     
     // setup a regular expression to find a word followed by a colon and then space
     // should get the first item (e.g. "From:").
     NSError * __autoreleasing error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\w+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:FROM_LABEL_REGEX_STRING
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];
     
-    NSRange fromLabelRange = [regex rangeOfFirstMatchInString:[headerString string] options:0 range:NSMakeRange(0, [headerString length])];
+    NSRange fromLabelRange = [regex
+                              rangeOfFirstMatchInString:headerString.string
+                              options:0
+                              range:NSMakeRange(0, headerString.length)];
     
     MH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelRange));
     
     [headerString applyFontTraits:NSBoldFontMask range:fromLabelRange];
     
-    //new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches = [regex matchesInString:[headerString string]
-                                      options:0 range:NSMakeRange(0,[headerString length])];
+    // new regex and for loop to process the rest of the attribute names (e.g. Subject:, To:, Cc:, etc.)
+    regex = [NSRegularExpression
+             regularExpressionWithPattern:HEADER_LABEL_REGEX_STRING
+             options:NSRegularExpressionCaseInsensitive
+             error:&error];
+    NSArray *matches = [regex
+                        matchesInString:headerString.string
+                        options:0
+                        range:NSMakeRange(0, headerString.length)];
     
     for (NSTextCheckingResult *match in matches)
     {
-        NSRange matchRange = [match range];
-        [headerString applyFontTraits:NSBoldFontMask range:matchRange];
+        [headerString applyFontTraits:NSBoldFontMask range:[match range]];
     }
 }
 
@@ -105,7 +121,8 @@
     MH_LOG(@"Mail string before web archiving it: %@", headerString);
     
     WebArchive *arch = [headerString
-                        webArchiveForRange:NSMakeRange(0,[headerString length]) fixUpNewlines:YES];
+                        webArchiveForRange:NSMakeRange(0, headerString.length)
+                        fixUpNewlines:YES];
     return arch;
 }
 
@@ -125,7 +142,7 @@
 
 - (NSString *)stringValue
 {
-    return [headerString string];
+    return headerString.string;
 }
 
 - (void)dealloc
@@ -141,36 +158,17 @@
     [super dealloc];
 }
 
-- (id)init
-{
-    if (self = [super init])
-    {
-        // postive lines go here
-        
-        [self initVars];
-    }
-    else
-    {
-        MH_LOG(@"MHHeaderString: Init failed");
-    }
-    return self;
-}
-
 - (id)initWithMailMessage:(id)mailMessage
 {
     MH_LOG();
     
-    //initialze the value with a mutable copy of the attributed string
     if (self = [super init])
     {
         [self init];
         
+        //initialze the value with a mutable copy of the attributed string
         headerString = [[[mailMessage originalMessageHeaders]
                          attributedStringShowingHeaderDetailLevel:1] mutableCopy];
-        userDefaultFont = [mailMessage userDefaultMessageFont];
-        
-        MH_LOG(@"Original mail string from backend: %@, and Defaut user font name: %@",
-               headerString, [userDefaultFont fontName]);
         
         // let's things going
         [self fixHeaderString];
@@ -193,17 +191,24 @@
     headerItemCount = 1;
     
     isSuppressLabelsFound = NO;
+    
+    defaultFont = [NSFont fontWithName:@"Helvetica" size:13];
 }
 
 // Workaround to get header item count
 - (void)findOutHeaderItemCount
 {
     NSError * __autoreleasing error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\n|\\r)[\\w\\-\\s]+:\\s" options: NSRegularExpressionCaseInsensitive error:&error];
-    NSArray *matches = [regex matchesInString:[headerString string]
-                                      options:0 range:NSMakeRange(0,[headerString length])];
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:HEADER_LABEL_REGEX_STRING
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];
+    NSArray *matches = [regex
+                        matchesInString:headerString.string
+                        options:0
+                        range:NSMakeRange(0, headerString.length)];
     
-    headerItemCount = headerItemCount + [matches count];
+    headerItemCount += matches.count;
 }
 
 - (void)fixHeaderString {
@@ -211,7 +216,7 @@
     
     NSRange range;
     range.location = 0;
-    range.length = [headerString length];
+    range.length = headerString.length;
     
     [headerString removeAttribute:@"NSFont" range:range];
     [headerString removeAttribute:@"NSColor" range:range];
@@ -225,22 +230,23 @@
 {
     MH_LOG();
     
-    NSRange range = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_REPLY_TO")];    
+    NSRange range = [headerString.string
+                     rangeOfString:MHLocalizedString(@"STRING_REPLY_TO")];
     if (range.location != NSNotFound)
     {
         isSuppressLabelsFound = YES;
         
         NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
         [headerString
-         replaceCharactersInRange:NSMakeRange(range.location, ([headerString length] - range.location)) withAttributedString:replaceString];
+         replaceCharactersInRange:NSMakeRange(range.location, (headerString.length - range.location)) withAttributedString:replaceString];
     }
 }
 
 - (void)applyHeaderOrderChange
 {
     // Subject: and Date: sequence change
-    NSRange subjectRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_SUBJECT")];
-    NSRange dateRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
+    NSRange subjectRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_SUBJECT")];
+    NSRange dateRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
     
     NSRange subCntRange;
     subCntRange.location = subjectRange.location;
@@ -249,7 +255,7 @@
     
     NSAttributedString *last = [headerString
                                 attributedSubstringFromRange:NSMakeRange(headerString.length - 1, 1)];
-    if (![[last string] isEqualToString:@"\n"])
+    if (![last.string isEqualToString:@"\n"])
     {
         NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
         [headerString appendAttributedString:newLine];
@@ -259,37 +265,84 @@
     [headerString appendAttributedString:subAttStr];
     
     // removal of old Subject:
-    NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
+    NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:@""] autorelease];
     [headerString replaceCharactersInRange:subCntRange withAttributedString:replaceString];    
 }
 
 - (void)applyHeaderLabelChange
 {
     // Date: into Sent:
-    NSRange dRange = [[headerString string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
+    NSRange dRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
     [headerString replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
     
     // <email-id>, into ;
     NSError * __autoreleasing error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\s<([A-Z][A-Z0-9]*)[^>]*>,?)" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:QUOTED_EMAIL_REGEX_STRING
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];
+    NSRange range = [regex
+                     rangeOfFirstMatchInString:headerString.string
+                     options:0
+                     range:NSMakeRange(0, headerString.length)];
     
-    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];
-    NSRange range = [regex rangeOfFirstMatchInString:[headerString string]
-                                             options:0 range:NSMakeRange(0, headerString.length)];
+    // captureing from email id for mailto:
+    NSString *emailId = [headerString.string substringWithRange:range];
+    // handling of mailto: for From: tag
+    NSMutableAttributedString *fromMailId = [[[NSMutableAttributedString alloc]
+                                              initWithString:emailId] autorelease];
+    [fromMailId replaceCharactersInRange:NSMakeRange(0, 2) withString:@" [mailto:"];
+    [fromMailId replaceCharactersInRange:NSMakeRange(fromMailId.length - 1, 1) withString:@"]"];
     
+    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];        
     while (range.length != 0)
     {
         [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
-        range = [regex rangeOfFirstMatchInString:[headerString string]
-                                         options:0 range:NSMakeRange(0, headerString.length)];
+        range = [regex
+                 rangeOfFirstMatchInString:headerString.string
+                 options:0
+                 range:NSMakeRange(0, headerString.length)];
     }
     
     // double quoutes into empty
-    range = [[headerString string] rangeOfString:@"\""];
+    range = [headerString.string rangeOfString:@"\""];
     while (range.length != 0)
     {
         [headerString replaceCharactersInRange:range withString:@""];
-        range = [[headerString string] rangeOfString:@"\""];
+        range = [headerString.string rangeOfString:@"\""];
+    }
+    
+    // Insertion of from email id
+    range = [headerString.string
+             rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
+    [headerString
+     insertAttributedString:[fromMailId
+                             attributedSubstringFromRange:NSMakeRange(0, fromMailId.length)]
+     atIndex:(range.location - 1)];
+    
+    // Perfection of semi-colon (;) handling stage 1
+    regex = [NSRegularExpression
+             regularExpressionWithPattern:SEMICOLON_NEWLINE_REGEX_STRING
+             options:NSRegularExpressionCaseInsensitive
+             error:&error];
+    range = [regex
+             rangeOfFirstMatchInString:headerString.string
+             options:0
+             range:NSMakeRange(0, headerString.length)];
+    while (range.length != 0)
+    {
+        [headerString replaceCharactersInRange:range withString:@"\n"];
+        range = [regex
+                 rangeOfFirstMatchInString:headerString.string
+                 options:0
+                 range:NSMakeRange(0, headerString.length)];
+    }
+    
+    // Perfection of semi-colon (;) handling stage 2
+    NSString *last = [headerString.string substringWithRange:NSMakeRange(headerString.length - 1, 1)];
+    if ([last isEqualToString:@";"])
+    {
+        [headerString replaceCharactersInRange:NSMakeRange(headerString.length - 1, 1) withString:@""];
     }
 }
 

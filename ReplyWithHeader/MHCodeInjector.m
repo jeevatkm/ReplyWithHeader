@@ -56,20 +56,25 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
     {
         [headerEditor jrlp_addMethodsFromClass:NSClassFromString(@"MHHeadersEditor") error:&error];
         
-        [headerEditor jrlp_swizzleMethod:@selector(loadHeadersFromBackEnd:) withMethod:@selector(MHLoadHeadersFromBackEnd:) error:&error];
+        [headerEditor jrlp_swizzleMethod:@selector(loadHeadersFromBackEnd:)
+                              withMethod:@selector(MHLoadHeadersFromBackEnd:) error:&error];
     }
     
     
     Class nsPref = NSClassFromString(@"NSPreferences");
     if (nsPref)
     {
-        [nsPref jrlp_swizzleClassMethod:@selector(sharedPreferences) withClassMethod:@selector(MHSharedPreferences) error:&error];
+        [nsPref jrlp_swizzleClassMethod:@selector(sharedPreferences)
+                        withClassMethod:@selector(MHSharedPreferences) error:&error];
         
-        [nsPref jrlp_swizzleMethod:@selector(windowWillResize:toSize:) withMethod:@selector(MHWindowWillResize:toSize:) error:&error];
+        [nsPref jrlp_swizzleMethod:@selector(windowWillResize:toSize:)
+                        withMethod:@selector(MHWindowWillResize:toSize:) error:&error];
         
-        [nsPref jrlp_swizzleMethod:@selector(toolbarItemClicked:) withMethod:@selector(MHToolbarItemClicked:) error:&error];
+        [nsPref jrlp_swizzleMethod:@selector(toolbarItemClicked:)
+                        withMethod:@selector(MHToolbarItemClicked:) error:&error];
         
-        [nsPref jrlp_swizzleMethod:@selector(showPreferencesPanelForOwner:) withMethod:@selector(MHShowPreferencesPanelForOwner:) error:&error];
+        [nsPref jrlp_swizzleMethod:@selector(showPreferencesPanelForOwner:)
+                        withMethod:@selector(MHShowPreferencesPanelForOwner:) error:&error];
     }
 }
 

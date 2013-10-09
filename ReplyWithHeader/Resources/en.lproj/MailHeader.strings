@@ -2,7 +2,7 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "© 2013 Jeevanandam M. (jeevatkm), All rights reserved.";    
+    "COPYRIGHT" = "© 2013 Jeevanandam M., All rights reserved.";    
     
     /* Message Strings */
     "STRING_SUBJECT" = "Subject: ";

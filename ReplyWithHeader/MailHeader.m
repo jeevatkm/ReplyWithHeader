@@ -26,8 +26,6 @@
  * MailHeader Class completely rewritten by Jeevanandam M. on Sep 21, 2013
  */
 
-#import <objc/objc-runtime.h>
-
 #import "MailHeader.h"
 #import "MHCodeInjector.h"
 #import "MHPreferences.h"
@@ -130,8 +128,8 @@
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
                           [NSNumber numberWithBool:NO], MHEntourage2004SupportEnabled,
                           [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
-                          [NSNumber numberWithInt:1], MHHeaderLabelMode,
-                          [NSNumber numberWithInt:1], MHHeaderOrderMode,
+                          [NSNumber numberWithInt:2], MHHeaderLabelMode,
+                          [NSNumber numberWithInt:2], MHHeaderOrderMode,
                           nil
                           ];
     
@@ -228,18 +226,18 @@
     // Registering plugin in Mail.app
     [mvMailBundleClass registerBundle];
     
-    // assigning default value if not present
+    // Assigning default value if not present
     [self assignUserDefaults];
     
-    // for smooth upgrade to new User Interface
+    // For smooth upgrade to new User Interface
     [self smoothValueTransToNewMailPrefUI];
     
     // Add hooks into Mail.app Classes
     [MHCodeInjector injectMailHeaderCode];
     
-    // RWH Bundle registered successfully
-    NSLog(@"RWH %@ plugin loaded", [self bundleVersionString]);
-    NSLog(@"RWH %@ Wow! it's a wonderful life", [self bundleVersionString]);
+    // Bundle registered successfully
+    NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
+    NSLog(@"%@ Wow! it's a wonderful life", [self bundleNameAndVersion]);
     
     if (![self isEnabled])
     {

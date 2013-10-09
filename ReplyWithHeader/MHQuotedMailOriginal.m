@@ -58,6 +58,7 @@
 NSString *ApplePlainTextBody = @"ApplePlainTextBody";
 NSString *AppleOriginalContents = @"AppleOriginalContents";
 NSString *AppleMailSignature = @"AppleMailSignature";
+NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 @implementation MHQuotedMailOriginal
 
@@ -65,16 +66,15 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 
 - (void)processHTMLMail:(DOMDocumentFragment *)headerFragment newLineFragment:(DOMDocumentFragment *)newLineFragment
 {
-    //depending on the options selected to increase quote level or whatever, a reply might not have a grandchild from the first child
-    //so we need to account for that... man this gets complicated... so if it is a textnode, there are no children... :(
-    //so account for that too
+    // depending on the options selected to increase quote level or whatever,
+    // a reply might not have a grandchild from the first child
+    // so we need to account for that... man this gets complicated...
+    // so if it is a textnode, there are no children... :( so account for that too
     int numGrandChildCount = 0;
     if ( ![ [[originalEmail firstChild] nodeName] isEqualToString:@"#text"] )
     {
         numGrandChildCount = [[originalEmail firstChild] childElementCount];
     }
-    
-    MH_LOG(@"Num of grand children %d=(Type %d) %@\n%@\n", numgrandchild, [[originalEmail firstChild] nodeType], [originalEmail firstChild], [[originalEmail firstChild] nodeName]);
     
     if ( numGrandChildCount == 0 )
     {
@@ -84,11 +84,14 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
     else
     {
-        [[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
+        [[originalEmail firstChild]
+            insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
         
-        [[originalEmail firstChild] insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
+        [[originalEmail firstChild]
+            insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
         
-        [[originalEmail firstChild] insertBefore:headerBorder refChild: [[originalEmail firstChild] firstChild]];
+        [[originalEmail firstChild]
+            insertBefore:headerBorder refChild: [[originalEmail firstChild] firstChild]];
     }
 }
 
@@ -96,8 +99,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 {
     if ( textNodeLocation > 0 )
     {
-        //check if this is plain text by seeing if textNodeLocation points to a br element...
-        //  if not, include in blockquote
+        // check if this is plain text by seeing if textNodeLocation points to a br element...
+        // if not, include in blockquote
         if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
         {
             [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
@@ -186,22 +189,8 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     }
 }
 
-- (id)init
-{
-    if (self = [super init])
-    {
-        //good stuff...
-    }
-    else
-    {
-        MH_LOG(@"MHQuotedMailOriginal: Init failed");
-    }
-    return self;
-}
-
 - (id)initWithMailMessage:(id)mailMessage
 {
-    //initialze the value with a mutable copy of the attributed string
     if ( self = [super init] ) {
 		//set the class document variable
         document = [mailMessage document];
@@ -257,14 +246,12 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL)
     {
         isHTMLMail = YES;
-        
         originalEmail=[[[document htmlDocument]
                         descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
     }
     else
     {
-        isHTMLMail = NO;
-        
+        isHTMLMail = NO;        
         originalEmail=[[[document htmlDocument]
                         descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     }
@@ -332,41 +319,39 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 - (void)removeOriginalHeaderPrefix
 {
     
-    //Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
+    // Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
     // on those messages that arrive after mail.app is opened - so we'll just keep removing items
     // from the beginnning until we find the element that has the "wrote:" text in it.
-    
-    //unfortunately, there is no containsString routine so we have to do it by using a range.
-    // this method is documented at http://mobiledevelopertips.com/cocoa/nsrange-and-nsstring-objects.html
-    
-    //setup a regular expression to find a colon followed by some space and a new line -
+    // setup a regular expression to find a colon followed by some space and a new line -
     // the first one should be the original line...
     NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@":\\s*(\\n|\\r)" options: NSRegularExpressionCaseInsensitive error:&error];
-    
-    NSRange textRange = [regex rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:WROTE_TEXT_REGEX_STRING
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];    
+    NSRange textRange = [regex
+                         rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                         options:0
+                         range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
     
     //keep removing items until we find the "wrote:" text...
     while ( textRange.location == NSNotFound )
-    {
-        MH_LOG(@"Range is: %@", NSStringFromRange(textRange));
-        MH_LOG(@"Length: %ld Text: %@",[[[originalEmail firstChild] stringValue] length],[[originalEmail firstChild] stringValue]);
-        
+    {        
         [originalEmail removeChild:[dhc item:0]];
-        textRange = [regex rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue] options:0 range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+        textRange = [regex
+                     rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                     options:0
+                     range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
     }
     
     //remove the line with the "wrote:" text
     [originalEmail removeChild:[dhc item:0]];
     
-    //remove the first new line element to shorten the distance between the new email and quoted text
+    // remove the first new line element to shorten the distance between the new email and quoted text
     // this is required in order to get the header inside the quoted text line
     if ([[[originalEmail firstChild] nodeName] isEqualToString:@"BR"])
-    {
-        
+    {   
         [originalEmail removeChild:[originalEmail firstChild]];
-        
-        MH_LOG(@"Removed BR element, only %d children left",[originalEmail childElementCount]);
     }
 }
 
@@ -381,8 +366,6 @@ NSString *AppleMailSignature = @"AppleMailSignature";
     {
         int itemNum = 2;
         
-        //DOMNode *mailNode = [[originalEmail children] item:itemNum];
-        
         //check that the second child isn't a break element and if so, go to the child 3
         if ( [[[[originalEmail children] item:itemNum] outerHTML] isEqualToString:@"<br>"] )
         {
@@ -395,9 +378,9 @@ NSString *AppleMailSignature = @"AppleMailSignature";
 
 - (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment
 {   
-    //kind of silly, but this code is required so that the adulation appears correctly in Entourage 2004
-    //2004 would interpret the paragraph tag and ignore the specified style information creating large spaces
-    //between line items
+    // kind of silly, but this code is required so that the adulation appears correctly
+    // in Entourage 2004 would interpret the paragraph tag and ignore
+    // the specified style information creating large spaces between line items
     DOMNodeList *fragmentNodes = [[headerFragment firstChild] childNodes];
     
     for (int i=0; i< fragmentNodes.length;i++)
