@@ -118,7 +118,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 - (void)insertMailHeader:(MHHeaderString *)mailHeader msgComposeType:(int)composeType
 {
-    MH_LOG(@"Composing message type is %d", composeType);
+    MHLog(@"Composing message type is %d", composeType);
     
     // global
     if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
@@ -142,7 +142,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
-    MH_LOG(@"Newly processed RWH header: %@", [mailHeader stringValue]);
+    MHLog(@"Newly processed RWH header: %@", [mailHeader stringValue]);
     
     // Entourage 2004 text size transformations
     if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled))
@@ -194,7 +194,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     if ( self = [super init] ) {
 		//set the class document variable
         document = [mailMessage document];
-        MH_LOG(@"Mail Document: %@", document);
+        MHLog(@"Mail Document: %@", document);
         
         //now initialize the other vars
         [self initVars];
@@ -211,9 +211,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         if ( dhc.length > 1)
-        {
-            //NSLog(@"EXP initWithMailMessage before %@", [originalEmail innerHTML]);
-            
+        {   
             if (isHTMLMail)
             {
                 [self removeOriginalHeaderPrefix];
@@ -222,13 +220,11 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
             {
                 [self removeOriginalPlainTextHeaderPrefix];
             }
-            
-            MH_LOG(@"EXP initWithMailMessage after %@", [originalEmail innerHTML]);
         }
     }
     else
     {
-        MH_LOG(@"MHQuotedMailOriginal: initWithMailMessage failed");
+        MHLog(@"MHQuotedMailOriginal: initWithMailMessage failed");
     }
     
     return self;
@@ -256,11 +252,11 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
                         descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     }
     
-    MH_LOG(@"Composing mail isHTMLMail %d", isHTMLMail);
+    MHLog(@"Composing mail isHTMLMail %d", isHTMLMail);
     
     NSString *borderString = (isHTMLMail) ? MHHeaderBorder : MHDefaulReplyHeaderBorder;
     
-    MH_LOG(@"initVars Header border text: %@", borderString);
+    MHLog(@"initVars Header border text: %@", borderString);
     
     // now initialze header border string into html form
     headerBorder = [self createDocumentFragment:borderString];
@@ -313,7 +309,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         }
     }
     
-    MH_LOG(@"New header location for Plain Text mail is %d", textNodeLocation);
+    MHLog(@"New header location for Plain Text mail is %d", textNodeLocation);
 }
 
 - (void)removeOriginalHeaderPrefix
@@ -360,7 +356,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     originalEmail=[[[document htmlDocument]
                         descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     
-    MH_LOG(@"Original plain email: %@", originalEmail);
+    MHLog(@"Original plain email: %@", originalEmail);
     
     if ( [[originalEmail idName] isEqualToString:AppleMailSignature] )
     {
@@ -385,11 +381,11 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     
     for (int i=0; i< fragmentNodes.length;i++)
     {
-        MH_LOG(@"Frag node %d: (Type %d) %@ %@ %@",i, [[fragnodes item:i] nodeType], [fragnodes item:i], [[fragnodes item:i] nodeName],[[fragnodes item:i] nodeValue]);
-         
+        MHLog(@"Frag node %d: (Type %d) %@ %@ %@",i, [[fragmentNodes item:i] nodeType], [fragmentNodes item:i], [[fragmentNodes item:i] nodeName],[[fragmentNodes item:i] nodeValue]);
+        
         if ( [[fragmentNodes item:i] nodeType] == 1 )
         {
-            MH_LOG(@"Outer HTML %@",[[fragnodes item:i] outerHTML]);
+            MHLog(@"Outer HTML %@",[[fragmentNodes item:i] outerHTML]);
             
             if ( [[[fragmentNodes item:i] nodeName] isEqualToString:@"FONT"] )
             {
@@ -402,13 +398,13 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
                     if ( [testString isEqualToString:@"size"] )
                     {
                         oldSize = [tagComponents objectAtIndex:j];
-                        MH_LOG(@"sizeString : %@",oldSize);
+                        MHLog(@"sizeString : %@",oldSize);
                     }
                 }
                 oldSize = [@" " stringByAppendingString:oldSize];
-                MH_LOG(@"newsizetext : %@",fontTag);
+                MHLog(@"newsizetext : %@",fontTag);
                 NSString *newTag = [fontTag stringByReplacingOccurrencesOfString:oldSize withString:@""];
-                MH_LOG(@"newString : %@",newTag);
+                MHLog(@"newString : %@",newTag);
                 [[fragmentNodes item:i] setOuterHTML:newTag];
             }
         }

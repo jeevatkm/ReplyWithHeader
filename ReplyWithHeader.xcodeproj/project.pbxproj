@@ -23,6 +23,7 @@
 		1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1372350D17FD8316007E7B71 /* MHPreferencesView.xib */; };
 		1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */; };
 		13882A25180722A3004BCC6D /* MHUpdateAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13882A27180722A3004BCC6D /* MHUpdateAlert.xib */; };
+		13882A2B18072C7D004BCC6D /* MLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 13882A2A18072C7D004BCC6D /* MLog.m */; };
 		13A25F4417F9B0C7002394DF /* NSPreferences+MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A25F4317F9B0C7002394DF /* NSPreferences+MailHeader.m */; };
 		13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A25F4617F9CE90002394DF /* Entitlements.plist */; };
 		13AD485D1801561500473407 /* JRLPSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD485C1801561500473407 /* JRLPSwizzle.m */; };
@@ -69,6 +70,8 @@
 		1372351F17FD8F5E007E7B71 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
 		1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeader_Prefix.pch; sourceTree = "<group>"; };
 		13882A26180722A3004BCC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
+		13882A2918072C7D004BCC6D /* MLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLog.h; sourceTree = "<group>"; };
+		13882A2A18072C7D004BCC6D /* MLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLog.m; sourceTree = "<group>"; };
 		13A25F4017F9B00D002394DF /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		13A25F4117F9B00D002394DF /* NSPreferencesModule-Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferencesModule-Protocol.h"; sourceTree = "<group>"; };
 		13A25F4217F9B0C7002394DF /* NSPreferences+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferences+MailHeader.h"; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		133A918A17E974CE00E3CC62 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				13882A2818072C62004BCC6D /* MLog */,
 				13AD485E1801561B00473407 /* Swizzle */,
 				1396366517FEB5D400A7D712 /* Foundation */,
 				1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */,
@@ -200,6 +204,15 @@
 				13A25F4317F9B0C7002394DF /* NSPreferences+MailHeader.m */,
 			);
 			name = Category;
+			sourceTree = "<group>";
+		};
+		13882A2818072C62004BCC6D /* MLog */ = {
+			isa = PBXGroup;
+			children = (
+				13882A2918072C7D004BCC6D /* MLog.h */,
+				13882A2A18072C7D004BCC6D /* MLog.m */,
+			);
+			name = MLog;
 			sourceTree = "<group>";
 		};
 		1396366517FEB5D400A7D712 /* Foundation */ = {
@@ -380,6 +393,7 @@
 				13AD48611801575600473407 /* MHCodeInjector.m in Sources */,
 				13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */,
 				13AD486D18018D4600473407 /* MHUpdater.m in Sources */,
+				13882A2B18072C7D004BCC6D /* MLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

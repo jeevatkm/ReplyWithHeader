@@ -109,14 +109,12 @@
 {
     NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     
-    MH_LOG(@"Current Locale language code is %@", languageCode);
+    MHLog(@"Current Locale language code is %@", languageCode);
     return languageCode;
 }
 
 + (void)assignUserDefaults
 {
-    MH_LOG();
-    
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithBool:YES], MHBundleEnabled,
                           [NSNumber numberWithBool:YES], MHForwardHeaderEnabled,
@@ -138,9 +136,7 @@
 }
 
 + (void)smoothValueTransToNewMailPrefUI
-{
-    MH_LOG();
-    
+{   
     if (GET_DEFAULT_BOOL(@"enableBundle"))
     {
         SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"enableBundle"), MHBundleEnabled);
@@ -218,7 +214,7 @@
     // If this class is not available that means Mail.app
     // doesn't allow bundles anymore. Fingers crossed that this never happens!
     if (!mvMailBundleClass) {
-        NSLog(@"Mail.app doesn't support bundles anymore, So have a Beer and relax !");
+        NSLog(@"Mail.app doesn't support bundles anymore, so have a beer and relax !");
         
         return;
     }
@@ -237,11 +233,10 @@
     
     // Bundle registered successfully
     NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
-    NSLog(@"%@ Wow! it's a wonderful life", [self bundleNameAndVersion]);
     
     if (![self isEnabled])
     {
-        NSLog(@"RWH plugin is disabled in preferences");
+        NSLog(@"%@ plugin is disabled in preferences", [self bundleName]);
     }
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))

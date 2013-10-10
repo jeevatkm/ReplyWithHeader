@@ -33,7 +33,7 @@
 //
 //  MHHeaderString Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
-#import "WebKit/WebArchive.h"
+@class WebArchive;
 
 @interface MHHeaderString : NSObject {
     @private

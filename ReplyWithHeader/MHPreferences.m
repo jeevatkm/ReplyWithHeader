@@ -90,8 +90,6 @@
 
 - (IBAction)SelectFontButtonPressed:(id)sender
 {
-    MH_LOG();
-    
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     [fontManager setDelegate:self];
     [fontManager setTarget:self];
@@ -110,8 +108,6 @@
 
 - (void)changeFont:(id)sender
 {
-    MH_LOG();
-    
     NSFont *oldFont = _MHHeaderInfoFontAndSize.font;
     NSFont *font = [sender convertFont:oldFont];
     NSString *fontSize = [NSString stringWithFormat: @"%.0f", font.pointSize];
@@ -144,7 +140,7 @@
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
     
-    [infoAlert release];
+    CLEAN(infoAlert);
 }
 
 - (IBAction)openSupport:(id)sender
@@ -179,7 +175,7 @@
             [_MHNotifyNewVersion setState:YES];
         }
         
-        [alert release];
+        CLEAN(alert);
     }    
 }
 
@@ -187,9 +183,7 @@
 #pragma mark NSPreferencesModule instance methods
 
 - (void)awakeFromNib
-{
-    MH_LOG();
-    
+{   
     [self toggleRwhPreferencesOptions:[MailHeader isEnabled]];
     
     [_MHHeaderInfoFontAndSize

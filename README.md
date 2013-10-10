@@ -3,11 +3,11 @@ Quoting reply and forward headers of email in Mail.app
 [ReplyWithHeader][2] plugin enables Apple Mail.app to represent meaningful reply and forward headers  and blends with corporate world email communication.
 
 * [Plugin Homepage][2]
-* [Latest Release - Download from MacUpdate.com][5]
+* [Download Latest Release - MacUpdate.com][5]
 * [Issue Tracker](#issue-tracker)
 * [Author](#author)
 * [Credits](#credits)
-* [License](#license)
+* [License][4]
 * [Steps to Installation ReplyWithHeader](#steps-to-installation-replywithheader)
 
 * * *
@@ -24,10 +24,6 @@ Credits
 -------
 * Jason Schroth (jschroth) extended his helping hands towards maintaining [ReplyWithHeader][2] mail bundle from Aug 9th, 2012 to Sep 16, 2013
 * Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth).
-
-License
--------
-See [LICENSE][4]
 
 * * *
 
@@ -51,11 +47,10 @@ Steps to Installation ReplyWithHeader
    This will restrict your information to Mail.app messages
 
 3. In the console, if all goes well, you should see
-<pre><code>RWH &lt;version number> plugin loaded
-RWH &lt;version number> Wow! it's a wonderful life</pre></code>
+<pre><code>ReplyWithHeader &lt;version number> plugin loaded</pre></code>
 
 [1]: http://myjeeva.com
 [2]: http://myjeeva.com/replywithheader
 [3]: https://github.com/jeevatkm/ReplyWithHeaders/issues
-[4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/ReplyWithHeader/LICENSE
+[4]: https://github.com/jeevatkm/ReplyWithHeaders/blob/master/ReplyWithHeader/LICENSE.txt
 [5]: https://www.macupdate.com/app/mac/49256/replywithheader

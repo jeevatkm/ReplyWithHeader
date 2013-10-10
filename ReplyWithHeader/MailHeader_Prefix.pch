@@ -7,14 +7,10 @@
 #  import <Foundation/Foundation.h>
 #  import "MHConstants.h"
 #  import "MailHeader.h"
-
-#  ifdef MH_DEBUG
-#    define MH_LOG(fmt, ...) NSLog((@"RWH:: %s [line %d] (%p) " fmt), __func__, __LINE__, self, ##__VA_ARGS__);
-#  else
-#    define MH_LOG(...)
-#  endif
-
+#  import "MLog.h"
 #endif
+
+# define MHLog(s,...) [MLog logFile:__FILE__ lineNumber:__LINE__ format:(s),##__VA_ARGS__]
 
 #define GET_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
 #define SET_USER_DEFAULT(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
@@ -31,3 +27,5 @@
 #define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
 
 #define MHLocalizedString(key) [MailHeader localizedString:(key)]
+
+#define CLEAN(o) {[o release]; o = nil;}

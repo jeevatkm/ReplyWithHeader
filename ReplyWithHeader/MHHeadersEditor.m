@@ -39,9 +39,7 @@
 @implementation MHHeadersEditor
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1
-{
-    MH_LOG();
-    
+{    
     // calling original implementation
     [self MHLoadHeadersFromBackEnd:arg1];
     
@@ -68,7 +66,7 @@
         // cascading subject text change
         [self _subjectChanged];
         
-        [subjectText release];
+        CLEAN(subjectText);
     }    
 }
 

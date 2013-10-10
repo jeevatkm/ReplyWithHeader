@@ -32,6 +32,8 @@
 //
 //  MHHeaderString Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
 
+#import <WebKit/WebArchive.h>
+
 #import "MHHeaderString.h"
 #import "NSMutableAttributedString+MailHeader.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
@@ -55,8 +57,6 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)applyHeaderTypography
 {
-    MH_LOG();
-
     NSRange range;
     range.location = 0;
     range.length = headerString.length;
@@ -73,8 +73,6 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled
 {
-    MH_LOG();
-    
     if (!isHeaderTypograbhyEnabled)
     {
         [headerString
@@ -96,7 +94,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
                               options:0
                               range:NSMakeRange(0, headerString.length)];
     
-    MH_LOG(@"Match Range is: %@", NSStringFromRange(fromLabelRange));
+    MHLog(@"Match Range is: %@", NSStringFromRange(fromLabelRange));
     
     [headerString applyFontTraits:NSBoldFontMask range:fromLabelRange];
     
@@ -118,7 +116,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (WebArchive *)getWebArchive
 {
-    MH_LOG(@"Mail string before web archiving it: %@", headerString);
+    MHLog(@"Mail string before web archiving it: %@", headerString);
     
     WebArchive *arch = [headerString
                         webArchiveForRange:NSMakeRange(0, headerString.length)
@@ -128,14 +126,14 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (int)getHeaderItemCount
 {
-    MH_LOG(@"Mail header count is %d", headerItemCount);
+    MHLog(@"Mail header count is %d", headerItemCount);
     
     return headerItemCount;
 }
 
 - (BOOL)isSuppressLabelsFound
 {
-    MH_LOG(@"Suppress Labels found: %@", isSuppressLabelsFound);
+    MHLog(@"Suppress Labels found: %@", isSuppressLabelsFound);
     
     return isSuppressLabelsFound;
 }
@@ -160,8 +158,6 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (id)initWithMailMessage:(id)mailMessage
 {
-    MH_LOG();
-    
     if (self = [super init])
     {
         [self init];
@@ -177,7 +173,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     }
     else
     {
-        MH_LOG(@"MHHeaderString: Init initWithMailMessage failed");
+        MHLog(@"MHHeaderString: Init initWithMailMessage failed");
     }
     
     return self;
@@ -211,9 +207,8 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     headerItemCount += matches.count;
 }
 
-- (void)fixHeaderString {
-    MH_LOG();
-    
+- (void)fixHeaderString
+{
     NSRange range;
     range.location = 0;
     range.length = headerString.length;
@@ -228,8 +223,6 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)suppressImplicateHeaderLabels
 {
-    MH_LOG();
-    
     NSRange range = [headerString.string
                      rangeOfString:MHLocalizedString(@"STRING_REPLY_TO")];
     if (range.location != NSNotFound)
@@ -352,7 +345,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     
     int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
     int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
-    MH_LOG(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
+    MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
     
     if (headerOrderMode == 2)
     {

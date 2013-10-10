@@ -91,16 +91,16 @@
             
             if (error)
             {
-                MH_LOG(@"RWH JSON parsing error for new version availabilty check. Failure Reason [%@]", [error localizedDescription]);
+                MHLog(@"RWH JSON parsing error for new version availabilty check. Failure Reason [%@]", [error localizedDescription]);
                 jsonDic = nil;
             }
         }
         else
         {
-            MH_LOG(@"RWH new version availabilty check failed. May be internet connection unavailable.");
+            MHLog(@"RWH new version availabilty check failed. May be internet connection unavailable.");
         }
         
-        [appCastData release];
+        CLEAN(appCastData);
     }
     
     return self;
@@ -108,14 +108,9 @@
 
 - (void)dealloc
 {
-    if (comparator)
-        [comparator release];
-    
-    if (jsonDic)
-        [jsonDic release];
-    
-    if (_alert)
-        [_alert release];
+    if (comparator) CLEAN(comparator);
+    if (jsonDic) CLEAN(jsonDic);    
+    if (_alert) CLEAN(_alert);
     
     [super dealloc];
 }
