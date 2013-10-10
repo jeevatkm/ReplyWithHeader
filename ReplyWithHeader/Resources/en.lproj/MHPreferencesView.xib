@@ -59,7 +59,7 @@
 									<object class="NSButton" id="253931335">
 										<reference key="NSNextResponder" ref="795536607"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{16, 411}, {521, 18}}</string>
+										<string key="NSFrame">{{16, 411}, {556, 18}}</string>
 										<reference key="NSSuperview" ref="795536607"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="404746024"/>
@@ -68,7 +68,7 @@
 										<object class="NSButtonCell" key="NSCell" id="770500333">
 											<int key="NSCellFlags">-2080374784</int>
 											<int key="NSCellFlags2">268435456</int>
-											<string key="NSContents">Enable RWH</string>
+											<string key="NSContents">Enable</string>
 											<object class="NSFont" key="NSSupport" id="563141123">
 												<string key="NSName">LucidaGrande</string>
 												<double key="NSSize">13</double>
@@ -146,7 +146,7 @@
 															<object class="NSTextFieldCell" key="NSCell" id="502270534">
 																<int key="NSCellFlags">67108864</int>
 																<int key="NSCellFlags2">205520896</int>
-																<string key="NSContents">Applied typography fix to support message consistent appearance, while message is received in Entourage 2004.</string>
+																<string key="NSContents">Applied typography fix to support message consistent appearance, while message is received in Entourage 2004 [this option might affect appearance in latest mail clients].</string>
 																<object class="NSFont" key="NSSupport" id="26">
 																	<string key="NSName">LucidaGrande</string>
 																	<double key="NSSize">11</double>
@@ -889,7 +889,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 														<object class="NSButton" id="457589332">
 															<reference key="NSNextResponder" ref="366299508"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{81, 169}, {419, 18}}</string>
+															<string key="NSFrame">{{157, 150}, {231, 18}}</string>
 															<reference key="NSSuperview" ref="366299508"/>
 															<reference key="NSNextKeyView" ref="1036833351"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>

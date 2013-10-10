@@ -26,6 +26,8 @@
 	<string>3.7</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>MHAppCastURL</key>
+	<string>http://myjeeva.com/replywithheader.json</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2013 Jeevanandam M., All rights reserved.</string>
 	<key>NSPrincipalClass</key>
@@ -63,7 +65,5 @@
 		<string>225E0A48-2CDB-44A6-8D99-A9BB8AF6BA04</string>
 		<string>B3F3FC72-315D-4323-BE85-7AB76090224D</string>
 	</array>
-	<key>MHAppCastURL</key>
-	<string>http://myjeeva.com/replywithheader.json</string>
 </dict>
 </plist>
