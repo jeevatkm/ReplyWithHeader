@@ -259,6 +259,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */,
+				1325DBD2180559E5002FEE12 /* DMG Installer Creation */,
 			);
 			buildRules = (
 			);
@@ -329,6 +330,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1325DBD2180559E5002FEE12 /* DMG Installer Creation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(WRAPPER_NAME)",
+			);
+			name = "DMG Installer Creation";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# creating DMG\nPackage/create-dmg.sh";
+		};
 		4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,7 +358,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Applying bundle icon\nPackage/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\ncp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}";
+			shellScript = "# Applying bundle icon\nseticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\nrm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\ncp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}";
 		};
 /* End PBXShellScriptBuildPhase section */
 
