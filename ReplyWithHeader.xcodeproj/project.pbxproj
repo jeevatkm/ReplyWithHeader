@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
-		133A917F17E9745A00E3CC62 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 133A916C17E9745A00E3CC62 /* LICENSE */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */; };
 		133A918417E9745A00E3CC62 /* MHMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* MHMessage.m */; };
@@ -24,6 +23,7 @@
 		1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */; };
 		13882A25180722A3004BCC6D /* MHUpdateAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13882A27180722A3004BCC6D /* MHUpdateAlert.xib */; };
 		13882A2B18072C7D004BCC6D /* MLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 13882A2A18072C7D004BCC6D /* MLog.m */; };
+		13882A3018073509004BCC6D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13882A2F18073509004BCC6D /* LICENSE.txt */; };
 		13A25F4417F9B0C7002394DF /* NSPreferences+MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A25F4317F9B0C7002394DF /* NSPreferences+MailHeader.m */; };
 		13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A25F4617F9CE90002394DF /* Entitlements.plist */; };
 		13AD485D1801561500473407 /* JRLPSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD485C1801561500473407 /* JRLPSwizzle.m */; };
@@ -39,7 +39,6 @@
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
-		133A916C17E9745A00E3CC62 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* MHHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHHeaderString.h; sourceTree = "<group>"; };
 		133A916E17E9745A00E3CC62 /* MHHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHHeaderString.m; sourceTree = "<group>"; };
 		133A916F17E9745A00E3CC62 /* MHQuotedMailOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHQuotedMailOriginal.h; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		13882A26180722A3004BCC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
 		13882A2918072C7D004BCC6D /* MLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLog.h; sourceTree = "<group>"; };
 		13882A2A18072C7D004BCC6D /* MLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLog.m; sourceTree = "<group>"; };
+		13882A2F18073509004BCC6D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		13A25F4017F9B00D002394DF /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		13A25F4117F9B00D002394DF /* NSPreferencesModule-Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferencesModule-Protocol.h"; sourceTree = "<group>"; };
 		13A25F4217F9B0C7002394DF /* NSPreferences+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferences+MailHeader.h"; sourceTree = "<group>"; };
@@ -124,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				1371DD0117F864FE00320B54 /* Resources */,
-				133A916C17E9745A00E3CC62 /* LICENSE */,
 				133A918C17E9751A00E3CC62 /* Classes */,
 				133A918A17E974CE00E3CC62 /* Other Sources */,
 			);
@@ -184,6 +183,7 @@
 		1371DD0117F864FE00320B54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				13882A2F18073509004BCC6D /* LICENSE.txt */,
 				13882A27180722A3004BCC6D /* MHUpdateAlert.xib */,
 				1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */,
 				1372351017FD8C6B007E7B71 /* MailHeader-Info.plist */,
@@ -330,13 +330,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				133A917F17E9745A00E3CC62 /* LICENSE in Resources */,
 				1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */,
 				13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */,
 				1365843917FAC12700E8C57D /* MailHeader.strings in Resources */,
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
 				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A25180722A3004BCC6D /* MHUpdateAlert.xib in Resources */,
+				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
