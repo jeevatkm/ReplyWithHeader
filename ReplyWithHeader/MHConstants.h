@@ -62,5 +62,7 @@
 
 #define MHPreferencesNibName @"MHPreferencesView"
 
+#define MHLogEnabled @"MHDebugLog"
+
 
 

@@ -128,6 +128,7 @@
                           [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
+                          [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];
     
@@ -233,6 +234,9 @@
     
     // Bundle registered successfully
     NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
+    
+    // Logger
+    [MLog setLogOn:GET_DEFAULT_BOOL(MHLogEnabled)];
     
     if (![self isEnabled])
     {

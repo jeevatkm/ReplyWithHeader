@@ -10,17 +10,16 @@ static BOOL __MLogOn = NO;
 
 @implementation MLog
 
-+ (void) initialize {
-	//char * env = getenv("MLogOn");
-    char * env = getenv("MHLog_ON"); // correction for env variable for plugin
+/*+ (void) initialize {
+	char * env = getenv("MLogOn");
 	
 	if (strcmp(env == NULL ? "" : env, "NO") != 0)
 		__MLogOn = YES;
-}
+}*/
 
 
 + (void) logFile: (char *) sourceFile lineNumber: (int) lineNumber format: (NSString *) format, ...; {
-	
+
     if (__MLogOn == NO)
 		return;
     
