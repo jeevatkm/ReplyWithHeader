@@ -40,7 +40,7 @@ echo -e "Cleaning up files"
 find ${MH_SOURCE_DIR} -name '*.DS_Store' -type f -delete
 
 echo -e "Creating Read/Write DMG"
-hdiutil create -srcfolder "${MH_SOURCE_DIR}" -volname "${MH_DMG_VOLUME_NAME}" -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size ${MH_DMG_SIZE}k "${MH_PACKAGE_TEMP_DIR}/${MH_DMG_TEMP_NAME}"
+hdiutil create -srcfolder "${MH_SOURCE_DIR}" -volname "${MH_DMG_VOLUME_NAME}-${MH_BUILD_VERSION}" -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDRW -size ${MH_DMG_SIZE}k "${MH_PACKAGE_TEMP_DIR}/${MH_DMG_TEMP_NAME}"
 
 echo -e "Mounting ${MH_DMG_TEMP_NAME} dmg file"
 device=$(hdiutil attach -readwrite -noverify -noautoopen "${MH_PACKAGE_TEMP_DIR}/${MH_DMG_TEMP_NAME}" | egrep '^/dev/' | sed 1q | awk '{print $1}')
