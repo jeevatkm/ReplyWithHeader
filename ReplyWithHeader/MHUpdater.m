@@ -108,10 +108,9 @@
 
 - (void)dealloc
 {
-    if (comparator) CLEAN(comparator);
-    if (jsonDic) CLEAN(jsonDic);    
-    if (_alert) CLEAN(_alert);
-    
+    CLEAN(comparator);
+    CLEAN(jsonDic);    
+    CLEAN(_alert);    
     [super dealloc];
 }
 

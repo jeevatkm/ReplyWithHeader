@@ -93,9 +93,9 @@
     self = [super init];
     if (self)
     {
-        versionDesc = [desc mutableCopy];
-        releaseNotes = [notes mutableCopy];
-        downloadLink = [urlString mutableCopy];
+        versionDesc = [desc copy];
+        releaseNotes = [notes copy];
+        downloadLink = [urlString copy];
         
         [self setShouldCascadeWindows:NO];
         [WebView MIMETypesShownAsHTML];
@@ -108,7 +108,8 @@
 // necessary to prevent weird scroll bar artifacting
 - (void)webView:(WebView *)sender didFinishLoadForFrame:frame
 {
-    if ([frame parentFrame] == nil) {
+    if ([frame parentFrame] == nil)
+    {
 		[sender display]; 
     }
 }

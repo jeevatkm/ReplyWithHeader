@@ -68,7 +68,7 @@
 		1372351E17FD8F5B007E7B71 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
 		1372351F17FD8F5E007E7B71 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
 		1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeader_Prefix.pch; sourceTree = "<group>"; };
-		13882A26180722A3004BCC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
+		13882A26180722A3004BCC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
 		13882A2918072C7D004BCC6D /* MLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLog.h; sourceTree = "<group>"; };
 		13882A2A18072C7D004BCC6D /* MLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLog.m; sourceTree = "<group>"; };
 		13882A2F18073509004BCC6D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -360,7 +360,7 @@
 		};
 		4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (

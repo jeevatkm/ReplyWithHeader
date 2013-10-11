@@ -28,4 +28,4 @@
 
 #define MHLocalizedString(key) [MailHeader localizedString:(key)]
 
-#define CLEAN(o) {[o release]; o = nil;}
+#define CLEAN(o) { if(o) { [o release]; o = nil; } }

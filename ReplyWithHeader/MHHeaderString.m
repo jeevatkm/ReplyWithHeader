@@ -248,7 +248,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     
     NSAttributedString *last = [headerString
                                 attributedSubstringFromRange:NSMakeRange(headerString.length - 1, 1)];
-    if (![last.string isEqualToString:@"\n"])
+    if (![[last string] isEqualToString:@"\n"])
     {
         NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
         [headerString appendAttributedString:newLine];
