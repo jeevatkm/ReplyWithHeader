@@ -1,0 +1,31 @@
+//
+// Prefix header for all source files of the 'MailHeader' target in the 'MailHeader' project
+//
+
+#ifdef __OBJC__
+#  import <Cocoa/Cocoa.h>
+#  import <Foundation/Foundation.h>
+#  import "MHConstants.h"
+#  import "MailHeader.h"
+#  import "MLog.h"
+#endif
+
+# define MHLog(s,...) [MLog logFile:__FILE__ lineNumber:__LINE__ format:(s),##__VA_ARGS__]
+
+#define GET_DEFAULT(k) [[NSUserDefaults standardUserDefaults] objectForKey: k]
+#define SET_USER_DEFAULT(o,k) [[NSUserDefaults standardUserDefaults] setObject: o forKey: k]
+
+#define GET_DEFAULT_DATA(k) [[NSUserDefaults standardUserDefaults] dataForKey: k]
+#define GET_DEFAULT_VALUE(k) [[NSUserDefaults standardUserDefaults] valueForKey: k]
+
+#define REMOVE_DEFAULT(k) [[NSUserDefaults standardUserDefaults] removeObjectForKey: k]
+
+#define GET_DEFAULT_BOOL(k) [[NSUserDefaults standardUserDefaults] boolForKey: k]
+#define SET_DEFAULT_BOOL(b,k) SET_USER_DEFAULT( [NSNumber numberWithBool: b], k )
+
+#define GET_DEFAULT_INT(k) [[NSUserDefaults standardUserDefaults] integerForKey: k]
+#define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
+
+#define MHLocalizedString(key) [MailHeader localizedString:(key)]
+
+#define CLEAN(o) { if(o) { [o release]; o = nil; } }
