@@ -38,7 +38,7 @@ chk_res=$(defaults read com.apple.mail EnableBundles)
 if [[ ${chk_res} -ne "1" ]]; then
 	echo "Plugin support not enabled in Mail.app, let's enable it"
 	defaults write com.apple.mail EnableBundles -bool true
-	defaults write com.apple.mail BundleCompatibilityVersion $PLUGIN_COMPAT
+	#defaults write com.apple.mail BundleCompatibilityVersion $PLUGIN_COMPAT
 	echo "Plugin support is now enabled in Mail.app"
 else
 	echo "Plugin support already enabled in Mail.app, no action required."
