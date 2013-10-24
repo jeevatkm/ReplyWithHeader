@@ -15,7 +15,7 @@ Quoting reply and forward headers of email in Mail.app
 How to Install
 --------------
 
-1. Double click `Install-or-Upgrade.command` in downloaded DMG
+1. Double click `Install-or-Upgrade.command` in downloaded Zip
 
 2. Restart Mail.app
 
