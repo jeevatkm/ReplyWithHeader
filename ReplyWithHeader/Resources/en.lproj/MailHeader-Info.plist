@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.7</string>
+	<string>4.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3.7</string>
+	<string>4.0</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>MHAppCastURL</key>
@@ -34,6 +34,16 @@
 	<string>MailHeader</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
+		<string>0941BB9F-231F-452D-A26F-47A43863C991</string>
+		<string>04D6EC0A-52FF-4BBE-9896-C0B5FB851BBA</string>
+		<string>72F55B63-35E4-4323-8CA7-104774A0DE95</string>
+		<string>CCF9E57F-98D8-4C64-82D1-5863A8F1C29C</string>
+		<string>4C90A872-9452-46B9-8229-A7B8A8E90C46</string>
+		<string>8683C61F-0A65-4118-A1A2-D000E7331AF2</string>
+		<string>BAF70BEF-2B7A-43CF-8C78-E5AE56543A4F</string>
+		<string>FAFAC824-B040-4302-938C-D3EBF2ED2DD6</string>
+		<string>B9F62389-216B-4459-9F0C-2E379DB461C6</string>
+		<string>5C1C2B58-ADCC-4202-8BE9-3185EA50FE57</string>
 		<string>2B98D2DD-000B-4521-83EB-7BFCB9B161C8</string>
 		<string>DAFFB2B4-77BC-4C25-8CE1-2405E652D54B</string>
 		<string>2183B2CD-BEDF-4AA6-AC18-A1BBED2E3354</string>

@@ -371,7 +371,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\nrm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\ncp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}";
+			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\n/bin/rm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}\n\n# Installer\nMH_BUILD_VERSION=$(defaults read ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Info CFBundleVersion)\n\n/bin/rm -rf '/tmp/MailHeader/*'\n/bin/mkdir -p '/tmp/MailHeader/pkg'\n\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} /tmp/MailHeader/pkg\n\npkgbuild --root \"/tmp/MailHeader/pkg\" \\\n--scripts \"${SRCROOT}/Package/Scripts\" \\\n--identifier \"com.myjeeva.mac.install.ReplyWithHeader\" \\\n--version \"${MH_BUILD_VERSION}\" \\\n--install-location \"${HOME}/Library/Mail/Bundles\" \\\n--ownership recommended \\\n\"${BUILT_PRODUCTS_DIR}/ReplyWithHeader.pkg\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

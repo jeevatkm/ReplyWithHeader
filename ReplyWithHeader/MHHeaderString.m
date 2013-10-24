@@ -266,7 +266,11 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 {
     // Date: into Sent:
     NSRange dRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
-    [headerString replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
+    
+    if (dRange.location != NSNotFound) {
+        [headerString replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
+    }
+    
     
     // <email-id>, into ;
     NSError * __autoreleasing error = nil;
@@ -277,66 +281,68 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSRange range = [regex
                      rangeOfFirstMatchInString:headerString.string
                      options:0
+                     range:NSMakeRange(0, headerString.length)];    
+    
+    if (range.location != NSNotFound) {
+        // captureing from email id for mailto:
+        NSString *emailId = [headerString.string substringWithRange:range];
+        // handling of mailto: for From: tag
+        NSMutableAttributedString *fromMailId = [[[NSMutableAttributedString alloc]
+                                                  initWithString:emailId] autorelease];
+        [fromMailId replaceCharactersInRange:NSMakeRange(0, 2) withString:@" [mailto:"];
+        [fromMailId replaceCharactersInRange:NSMakeRange(fromMailId.length - 1, 1) withString:@"]"];
+        
+        NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];
+        while (range.length != 0)
+        {
+            [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
+            range = [regex
+                     rangeOfFirstMatchInString:headerString.string
+                     options:0
                      range:NSMakeRange(0, headerString.length)];
-    
-    // captureing from email id for mailto:
-    NSString *emailId = [headerString.string substringWithRange:range];
-    // handling of mailto: for From: tag
-    NSMutableAttributedString *fromMailId = [[[NSMutableAttributedString alloc]
-                                              initWithString:emailId] autorelease];
-    [fromMailId replaceCharactersInRange:NSMakeRange(0, 2) withString:@" [mailto:"];
-    [fromMailId replaceCharactersInRange:NSMakeRange(fromMailId.length - 1, 1) withString:@"]"];
-    
-    NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];        
-    while (range.length != 0)
-    {
-        [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];
-        range = [regex
-                 rangeOfFirstMatchInString:headerString.string
-                 options:0
-                 range:NSMakeRange(0, headerString.length)];
-    }
-    
-    // double quoutes into empty
-    range = [headerString.string rangeOfString:@"\""];
-    while (range.length != 0)
-    {
-        [headerString replaceCharactersInRange:range withString:@""];
+        }
+        
+        // double quoutes into empty
         range = [headerString.string rangeOfString:@"\""];
-    }
-    
-    // Insertion of from email id
-    range = [headerString.string
-             rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
-    [headerString
-     insertAttributedString:[fromMailId
-                             attributedSubstringFromRange:NSMakeRange(0, fromMailId.length)]
-     atIndex:(range.location - 1)];
-    
-    // Perfection of semi-colon (;) handling stage 1
-    regex = [NSRegularExpression
-             regularExpressionWithPattern:SEMICOLON_NEWLINE_REGEX_STRING
-             options:NSRegularExpressionCaseInsensitive
-             error:&error];
-    range = [regex
-             rangeOfFirstMatchInString:headerString.string
-             options:0
-             range:NSMakeRange(0, headerString.length)];
-    while (range.length != 0)
-    {
-        [headerString replaceCharactersInRange:range withString:@"\n"];
+        while (range.length != 0)
+        {
+            [headerString replaceCharactersInRange:range withString:@""];
+            range = [headerString.string rangeOfString:@"\""];
+        }
+        
+        // Insertion of from email id
+        range = [headerString.string
+                 rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
+        [headerString
+         insertAttributedString:[fromMailId
+                                 attributedSubstringFromRange:NSMakeRange(0, fromMailId.length)]
+         atIndex:(range.location - 1)];
+        
+        // Perfection of semi-colon (;) handling stage 1
+        regex = [NSRegularExpression
+                 regularExpressionWithPattern:SEMICOLON_NEWLINE_REGEX_STRING
+                 options:NSRegularExpressionCaseInsensitive
+                 error:&error];
         range = [regex
                  rangeOfFirstMatchInString:headerString.string
                  options:0
                  range:NSMakeRange(0, headerString.length)];
-    }
-    
-    // Perfection of semi-colon (;) handling stage 2
-    NSString *last = [headerString.string substringWithRange:NSMakeRange(headerString.length - 1, 1)];
-    if ([last isEqualToString:@";"])
-    {
-        [headerString replaceCharactersInRange:NSMakeRange(headerString.length - 1, 1) withString:@""];
-    }
+        while (range.length != 0)
+        {
+            [headerString replaceCharactersInRange:range withString:@"\n"];
+            range = [regex
+                     rangeOfFirstMatchInString:headerString.string
+                     options:0
+                     range:NSMakeRange(0, headerString.length)];
+        }
+        
+        // Perfection of semi-colon (;) handling stage 2
+        NSString *last = [headerString.string substringWithRange:NSMakeRange(headerString.length - 1, 1)];
+        if ([last isEqualToString:@";"])
+        {
+            [headerString replaceCharactersInRange:NSMakeRange(headerString.length - 1, 1) withString:@""];
+        }
+    }    
 }
 
 // For now it does outlook mail label ordering
