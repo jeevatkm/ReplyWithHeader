@@ -32,7 +32,7 @@ else
 fi
 
 CURRENT_DIR=`dirname "$0"`
-cp -r "${CURRENT_DIR}/.HiddenFiles/ReplyWithHeader.mailbundle" ${mh_install_path}
+cp -r "${CURRENT_DIR}/ReplyWithHeader.mailbundle" ${mh_install_path}
 
 chk_res=$(defaults read com.apple.mail EnableBundles)
 if [[ ${chk_res} -ne "1" ]]; then
