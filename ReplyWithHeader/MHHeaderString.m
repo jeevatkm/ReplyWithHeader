@@ -63,16 +63,10 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
     
-    NSLog(@"Font %@ Color %@", [font fontName], color);
-    
-    NSLog(@"Before applyHeaderTypography: headerString=> %@", headerString);
-    
     [headerString addAttribute:NSFontAttributeName
                          value:font range:NSMakeRange(0, [headerString length])];
     [headerString addAttribute:NSForegroundColorAttributeName
                          value:color range:NSMakeRange(0, [headerString length])];
-    
-    NSLog(@"After applyHeaderTypography: headerString=> %@", headerString);
 }
 
 - (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled
@@ -214,13 +208,9 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     range.location = 0;
     range.length = [headerString length];
     
-    NSLog(@"Before cleaning up: headerString=> %@", headerString);
-    
     [headerString removeAttribute:NSFontAttributeName range:range];
     [headerString removeAttribute:NSForegroundColorAttributeName range:range];
     [headerString removeAttribute:NSParagraphStyleAttributeName range:range];
-    
-    NSLog(@"After cleaning up: headerString=> %@", headerString);
     
     [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:headerString];
     [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];    

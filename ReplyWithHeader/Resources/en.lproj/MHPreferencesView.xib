@@ -48,13 +48,13 @@
                                 </connections>
                             </button>
                             <tabView initialItem="130" id="129">
-                                <rect key="frame" x="11" y="10" width="566" height="399"/>
+                                <rect key="frame" x="11" y="9" width="566" height="407"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Manage Headers" identifier="1" id="130">
                                         <view key="view" id="133">
-                                            <rect key="frame" x="10" y="33" width="546" height="353"/>
+                                            <rect key="frame" x="10" y="33" width="546" height="361"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button id="16">
@@ -79,7 +79,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" id="205">
-                                                    <rect key="frame" x="31" y="310" width="501" height="14"/>
+                                                    <rect key="frame" x="31" y="322" width="501" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Applied customization and manages Forward header." id="206">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -88,7 +88,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" id="207">
-                                                    <rect key="frame" x="31" y="256" width="501" height="14"/>
+                                                    <rect key="frame" x="31" y="271" width="501" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Applied font, size, and color to Reply &amp; Forward headers." id="208">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -97,7 +97,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button id="114">
-                                                    <rect key="frame" x="15" y="330" width="516" height="18"/>
+                                                    <rect key="frame" x="15" y="342" width="516" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="check" title="Manage forward header" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="115">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -108,7 +108,7 @@
                                                     </connections>
                                                 </button>
                                                 <button id="203">
-                                                    <rect key="frame" x="15" y="276" width="516" height="18"/>
+                                                    <rect key="frame" x="15" y="291" width="516" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="check" title="Apply typography to headers" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="204">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -120,7 +120,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField verticalHuggingPriority="750" id="209">
-                                                    <rect key="frame" x="26" y="235" width="94" height="17"/>
+                                                    <rect key="frame" x="26" y="250" width="94" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Font:" id="210">
                                                         <font key="font" metaFont="cellTitle"/>
@@ -129,7 +129,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" id="213">
-                                                    <rect key="frame" x="26" y="208" width="94" height="17"/>
+                                                    <rect key="frame" x="26" y="223" width="94" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Color:" id="214">
                                                         <font key="font" metaFont="cellTitle"/>
@@ -138,7 +138,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <colorWell id="215">
-                                                    <rect key="frame" x="125" y="208" width="44" height="19"/>
+                                                    <rect key="frame" x="125" y="223" width="44" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
@@ -150,7 +150,7 @@
                                                     </connections>
                                                 </colorWell>
                                                 <textField verticalHuggingPriority="750" id="216">
-                                                    <rect key="frame" x="122" y="233" width="189" height="17"/>
+                                                    <rect key="frame" x="122" y="248" width="189" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Font Name and Size" allowsEditingTextAttributes="YES" id="217">
                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -159,7 +159,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" id="222">
-                                                    <rect key="frame" x="316" y="233" width="149" height="19"/>
+                                                    <rect key="frame" x="316" y="248" width="149" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="roundRect" title="Select Font &amp; Size" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="223">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -170,7 +170,7 @@
                                                     </connections>
                                                 </button>
                                                 <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="255">
-                                                    <rect key="frame" x="80" y="146" width="346" height="23"/>
+                                                    <rect key="frame" x="80" y="165" width="346" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="cellSize" width="171" height="23"/>
@@ -198,7 +198,7 @@
                                                     </connections>
                                                 </matrix>
                                                 <button id="266">
-                                                    <rect key="frame" x="15" y="172" width="516" height="18"/>
+                                                    <rect key="frame" x="15" y="191" width="516" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="check" title="Header label options [Apple Mail or Outlook Mail]" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="267">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -210,7 +210,7 @@
                                                     </connections>
                                                 </button>
                                                 <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="302">
-                                                    <rect key="frame" x="80" y="123" width="346" height="19"/>
+                                                    <rect key="frame" x="80" y="142" width="346" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     <size key="cellSize" width="171" height="19"/>
@@ -238,7 +238,7 @@
                                                     </connections>
                                                 </matrix>
                                                 <button id="347">
-                                                    <rect key="frame" x="15" y="88" width="516" height="18"/>
+                                                    <rect key="frame" x="15" y="111" width="516" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="check" title="Manage email subject prefix [Re: =>RE: and Fwd: =>FW:]" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="348">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -248,16 +248,27 @@
                                                         <binding destination="80" name="value" keyPath="values.MHSubjectPrefixTextEnabled" id="382"/>
                                                     </connections>
                                                 </button>
+                                                <button id="3x5-oa-h0B">
+                                                    <rect key="frame" x="15" y="82" width="516" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Remove signature for reply &amp; forward" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="JNF-bm-LVL">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <binding destination="80" name="value" keyPath="values.MHRemoveSignatureEnabled" id="RtI-Hc-LYI"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="About" identifier="2" id="131">
                                         <view key="view" id="132">
-                                            <rect key="frame" x="10" y="33" width="546" height="353"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <rect key="frame" x="10" y="33" width="546" height="361"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField verticalHuggingPriority="750" id="315">
-                                                    <rect key="frame" x="220" y="271" width="207" height="30"/>
+                                                    <rect key="frame" x="220" y="279" width="207" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="copyright" id="335">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -269,7 +280,7 @@
                                                     </connections>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" id="316">
-                                                    <rect key="frame" x="220" y="312" width="206" height="17"/>
+                                                    <rect key="frame" x="220" y="320" width="206" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ReplyWithHeader" id="334">
                                                         <font key="font" metaFont="systemBold"/>
@@ -317,7 +328,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" id="321">
-                                                    <rect key="frame" x="218" y="238" width="110" height="17"/>
+                                                    <rect key="frame" x="218" y="246" width="110" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="roundRect" title="Feedback" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="330">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -328,7 +339,7 @@
                                                     </connections>
                                                 </button>
                                                 <button verticalHuggingPriority="750" id="322">
-                                                    <rect key="frame" x="93" y="238" width="110" height="17"/>
+                                                    <rect key="frame" x="93" y="246" width="110" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="roundRect" title="Website" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="329">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -339,7 +350,7 @@
                                                     </connections>
                                                 </button>
                                                 <button verticalHuggingPriority="750" id="323">
-                                                    <rect key="frame" x="343" y="238" width="110" height="17"/>
+                                                    <rect key="frame" x="343" y="246" width="110" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="roundRect" title="Support" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="328">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -350,7 +361,7 @@
                                                     </connections>
                                                 </button>
                                                 <button id="324">
-                                                    <rect key="frame" x="157" y="150" width="231" height="18"/>
+                                                    <rect key="frame" x="157" y="158" width="231" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="check" title="Notify me, once new version available" bezelStyle="regularSquare" imagePosition="left" alignment="justified" controlSize="mini" state="on" inset="2" id="327">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -362,7 +373,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView id="325">
-                                                    <rect key="frame" x="129" y="267" width="85" height="76"/>
+                                                    <rect key="frame" x="129" y="275" width="85" height="76"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ReplyWithHeader" id="326"/>
                                                 </imageView>

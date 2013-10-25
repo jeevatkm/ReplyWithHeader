@@ -129,7 +129,6 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(MHTypographyEnabled);
     if (isHeaderTypograbhyEnabled && isHTMLMail)
     {
-        NSLog(@"Calling applyHeaderTypography %@, isHTMLMail %@", isHeaderTypograbhyEnabled ? @"YES" : @"NO", isHTMLMail ? @"YES" : @"NO");
         [mailHeader applyHeaderTypography];
     }
     
@@ -197,6 +196,21 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         document = [mailMessage document];
         MHLog(@"Mail Document: %@", document);
         
+        // for #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
+        if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
+        {
+            DOMElement *signatureElement = [[document htmlDocument] getElementById:AppleMailSignature];
+            if (signatureElement)
+            {
+                @try {
+                    [[[document htmlDocument] body] removeChild:signatureElement];
+                }
+                @catch (NSException *exception) {
+                    MHLog([exception description]);
+                }
+            }
+        }
+        
         //now initialize the other vars
         [self initVars];
         
@@ -253,7 +267,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
                         descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
     }
     
-    MHLog(@"Composing mail isHTMLMail %d", isHTMLMail);
+    MHLog(@"Composing mail isHTMLMail %@", (isHTMLMail ? @"YES" : @"NO"));
     
     NSString *borderString = (isHTMLMail) ? MHHeaderBorder : MHDefaulReplyHeaderBorder;
     
