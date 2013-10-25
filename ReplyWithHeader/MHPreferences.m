@@ -190,6 +190,17 @@
      setStringValue:[NSString stringWithFormat:@"%@ %@",
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
+    
+    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
+    if ( ![MailHeader isLocaleSupported] ) {
+        [self toggleRwhHeaderLabelOptions:FALSE];
+        [_MHHeaderOptionEnabled setEnabled:FALSE];
+        
+        NSString *toolTip = @"Currently this feature is supported in english(en) locale only.";
+        [_MHHeaderOptionEnabled setToolTip:toolTip];
+        [_MHHeaderLabelMode setToolTip:toolTip];
+        [_MHHeaderOrderMode setToolTip:toolTip];
+    }
 }
 
 - (NSString*)preferencesNibName

@@ -57,18 +57,22 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)applyHeaderTypography
 {
-    NSRange range;
-    range.location = 0;
-    range.length = headerString.length;
-    
     NSString *fontString = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:fontSize.floatValue];
     
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
     
-    [headerString addAttribute:@"NSFont" value:font range:range];
-    [headerString addAttribute:@"NSColor" value:color range:range];    
+    NSLog(@"Font %@ Color %@", [font fontName], color);
+    
+    NSLog(@"Before applyHeaderTypography: headerString=> %@", headerString);
+    
+    [headerString addAttribute:NSFontAttributeName
+                         value:font range:NSMakeRange(0, [headerString length])];
+    [headerString addAttribute:NSForegroundColorAttributeName
+                         value:color range:NSMakeRange(0, [headerString length])];
+    
+    NSLog(@"After applyHeaderTypography: headerString=> %@", headerString);
 }
 
 - (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled
@@ -76,9 +80,9 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     if (!isHeaderTypograbhyEnabled)
     {
         [headerString
-            addAttribute:@"NSFont"
-            value:defaultFont
-            range:NSMakeRange(0, headerString.length)];
+            addAttribute:NSFontAttributeName
+            value:[NSFont fontWithName:@"Helvetica" size:13.0]
+            range:NSMakeRange(0, [headerString length])];
     }
     
     // setup a regular expression to find a word followed by a colon and then space
@@ -92,7 +96,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSRange fromLabelRange = [regex
                               rangeOfFirstMatchInString:headerString.string
                               options:0
-                              range:NSMakeRange(0, headerString.length)];
+                              range:NSMakeRange(0, [headerString length])];
     
     MHLog(@"Match Range is: %@", NSStringFromRange(fromLabelRange));
     
@@ -106,7 +110,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSArray *matches = [regex
                         matchesInString:headerString.string
                         options:0
-                        range:NSMakeRange(0, headerString.length)];
+                        range:NSMakeRange(0, [headerString length])];
     
     for (NSTextCheckingResult *match in matches)
     {
@@ -119,7 +123,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     MHLog(@"Mail string before web archiving it: %@", headerString);
     
     WebArchive *arch = [headerString
-                        webArchiveForRange:NSMakeRange(0, headerString.length)
+                        webArchiveForRange:NSMakeRange(0, [headerString length])
                         fixUpNewlines:YES];
     return arch;
 }
@@ -185,10 +189,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 - (void)initVars
 {
     headerItemCount = 1;
-    
     isSuppressLabelsFound = NO;
-    
-    defaultFont = [NSFont fontWithName:@"Helvetica" size:13];
 }
 
 // Workaround to get header item count
@@ -202,7 +203,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSArray *matches = [regex
                         matchesInString:headerString.string
                         options:0
-                        range:NSMakeRange(0, headerString.length)];
+                        range:NSMakeRange(0, [headerString length])];
     
     headerItemCount += matches.count;
 }
@@ -211,11 +212,15 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 {
     NSRange range;
     range.location = 0;
-    range.length = headerString.length;
+    range.length = [headerString length];
     
-    [headerString removeAttribute:@"NSFont" range:range];
-    [headerString removeAttribute:@"NSColor" range:range];
-    [headerString removeAttribute:@"NSParagraphStyle" range:range];
+    NSLog(@"Before cleaning up: headerString=> %@", headerString);
+    
+    [headerString removeAttribute:NSFontAttributeName range:range];
+    [headerString removeAttribute:NSForegroundColorAttributeName range:range];
+    [headerString removeAttribute:NSParagraphStyleAttributeName range:range];
+    
+    NSLog(@"After cleaning up: headerString=> %@", headerString);
     
     [NSMutableAttributedString trimLeadingWhitespaceAndNewLine:headerString];
     [NSMutableAttributedString trimTrailingWhitespaceAndNewLine:headerString];    
@@ -231,7 +236,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
         
         NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
         [headerString
-         replaceCharactersInRange:NSMakeRange(range.location, (headerString.length - range.location)) withAttributedString:replaceString];
+         replaceCharactersInRange:NSMakeRange(range.location, ([headerString length] - range.location)) withAttributedString:replaceString];
     }
 }
 
@@ -241,25 +246,27 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSRange subjectRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_SUBJECT")];
     NSRange dateRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
     
-    NSRange subCntRange;
-    subCntRange.location = subjectRange.location;
-    subCntRange.length = dateRange.location - subjectRange.location;
-    NSAttributedString *subAttStr = [headerString attributedSubstringFromRange:subCntRange];
-    
-    NSAttributedString *last = [headerString
-                                attributedSubstringFromRange:NSMakeRange(headerString.length - 1, 1)];
-    if (![[last string] isEqualToString:@"\n"])
-    {
-        NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
-        [headerString appendAttributedString:newLine];
+    if (subjectRange.location != NSNotFound && dateRange.location != NSNotFound) {
+        NSRange subCntRange;
+        subCntRange.location = subjectRange.location;
+        subCntRange.length = dateRange.location - subjectRange.location;
+        NSAttributedString *subAttStr = [headerString attributedSubstringFromRange:subCntRange];
+        
+        NSAttributedString *last = [headerString
+                                    attributedSubstringFromRange:NSMakeRange([headerString length] - 1, 1)];
+        if (![[last string] isEqualToString:@"\n"])
+        {
+            NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+            [headerString appendAttributedString:newLine];
+        }
+        
+        // Subject: relocation
+        [headerString appendAttributedString:subAttStr];
+        
+        // removal of old Subject:
+        NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+        [headerString replaceCharactersInRange:subCntRange withAttributedString:replaceString];
     }
-    
-    // Subject: relocation
-    [headerString appendAttributedString:subAttStr];
-    
-    // removal of old Subject:
-    NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:@""] autorelease];
-    [headerString replaceCharactersInRange:subCntRange withAttributedString:replaceString];    
 }
 
 - (void)applyHeaderLabelChange
@@ -281,7 +288,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSRange range = [regex
                      rangeOfFirstMatchInString:headerString.string
                      options:0
-                     range:NSMakeRange(0, headerString.length)];    
+                     range:NSMakeRange(0, [headerString length])];    
     
     if (range.location != NSNotFound) {
         // captureing from email id for mailto:
@@ -299,7 +306,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
             range = [regex
                      rangeOfFirstMatchInString:headerString.string
                      options:0
-                     range:NSMakeRange(0, headerString.length)];
+                     range:NSMakeRange(0, [headerString length])];
         }
         
         // double quoutes into empty
@@ -326,21 +333,21 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
         range = [regex
                  rangeOfFirstMatchInString:headerString.string
                  options:0
-                 range:NSMakeRange(0, headerString.length)];
+                 range:NSMakeRange(0, [headerString length])];
         while (range.length != 0)
         {
             [headerString replaceCharactersInRange:range withString:@"\n"];
             range = [regex
                      rangeOfFirstMatchInString:headerString.string
                      options:0
-                     range:NSMakeRange(0, headerString.length)];
+                     range:NSMakeRange(0, [headerString length])];
         }
         
         // Perfection of semi-colon (;) handling stage 2
-        NSString *last = [headerString.string substringWithRange:NSMakeRange(headerString.length - 1, 1)];
+        NSString *last = [headerString.string substringWithRange:NSMakeRange([headerString length] - 1, 1)];
         if ([last isEqualToString:@";"])
         {
-            [headerString replaceCharactersInRange:NSMakeRange(headerString.length - 1, 1) withString:@""];
+            [headerString replaceCharactersInRange:NSMakeRange([headerString length] - 1, 1) withString:@""];
         }
     }    
 }
@@ -348,19 +355,17 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
-    
-    int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
-    int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
-    MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
-    
-    if (headerOrderMode == 2)
-    {
-        [self applyHeaderOrderChange];
-    }
-    
-    if (headerLabelMode == 2)
-    {
-        [self applyHeaderLabelChange];
+    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
+    if ( [MailHeader isLocaleSupported] ) {
+        int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
+        int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
+        MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
+        
+        if (headerOrderMode == 2)
+            [self applyHeaderOrderChange];
+        
+        if (headerLabelMode == 2)
+            [self applyHeaderLabelChange];
     }
 }
 

@@ -38,6 +38,7 @@
 @interface MailHeader : NSObject
 
 + (BOOL)isEnabled;
++ (BOOL)isLocaleSupported;
 + (NSBundle *)bundle;
 + (NSString *)bundleNameAndVersion;
 + (NSString *)bundleName;

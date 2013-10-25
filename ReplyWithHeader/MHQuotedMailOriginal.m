@@ -129,6 +129,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(MHTypographyEnabled);
     if (isHeaderTypograbhyEnabled && isHTMLMail)
     {
+        NSLog(@"Calling applyHeaderTypography %@, isHTMLMail %@", isHeaderTypograbhyEnabled ? @"YES" : @"NO", isHTMLMail ? @"YES" : @"NO");
         [mailHeader applyHeaderTypography];
     }
     

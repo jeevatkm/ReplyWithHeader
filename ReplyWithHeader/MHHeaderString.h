@@ -40,7 +40,6 @@
     NSMutableAttributedString *headerString;
     int headerItemCount;
     BOOL isSuppressLabelsFound;
-    NSFont *defaultFont;
 }
 
 @property (weak, readonly) NSString *stringValue;
