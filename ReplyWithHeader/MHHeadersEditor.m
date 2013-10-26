@@ -65,8 +65,6 @@
         
         // cascading subject text change
         [self _subjectChanged];
-        
-        CLEAN(subjectText);
     }    
 }
 

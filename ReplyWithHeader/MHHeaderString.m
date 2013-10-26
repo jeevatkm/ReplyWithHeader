@@ -141,28 +141,15 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     return headerString.string;
 }
 
-- (void)dealloc
-{
-    headerString = nil;
-    headerItemCount = nil;
-    isSuppressLabelsFound = nil;
-    
-    free(headerString);
-    free(headerItemCount);
-    free(isSuppressLabelsFound);
-    
-    [super dealloc];
-}
-
 - (id)initWithMailMessage:(id)mailMessage
 {
     if (self = [super init])
     {
-        [self init];
+        if (!(self = [self init])) return nil;
         
         //initialze the value with a mutable copy of the attributed string
         headerString = [[[mailMessage originalMessageHeaders]
-                         attributedStringShowingHeaderDetailLevel:1] mutableCopy];
+                         attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]] mutableCopy];
         
         // let's things going
         [self fixHeaderString];
@@ -224,7 +211,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     {
         isSuppressLabelsFound = YES;
         
-        NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]] autorelease];
+        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@""]];
         [headerString
          replaceCharactersInRange:NSMakeRange(range.location, ([headerString length] - range.location)) withAttributedString:replaceString];
     }
@@ -246,7 +233,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
                                     attributedSubstringFromRange:NSMakeRange([headerString length] - 1, 1)];
         if (![[last string] isEqualToString:@"\n"])
         {
-            NSAttributedString *newLine = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+            NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
             [headerString appendAttributedString:newLine];
         }
         
@@ -254,7 +241,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
         [headerString appendAttributedString:subAttStr];
         
         // removal of old Subject:
-        NSAttributedString *replaceString = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+        NSAttributedString *replaceString = [[NSAttributedString alloc] initWithString:@""];
         [headerString replaceCharactersInRange:subCntRange withAttributedString:replaceString];
     }
 }
@@ -284,12 +271,12 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
         // captureing from email id for mailto:
         NSString *emailId = [headerString.string substringWithRange:range];
         // handling of mailto: for From: tag
-        NSMutableAttributedString *fromMailId = [[[NSMutableAttributedString alloc]
-                                                  initWithString:emailId] autorelease];
+        NSMutableAttributedString *fromMailId = [[NSMutableAttributedString alloc]
+                                                  initWithString:emailId];
         [fromMailId replaceCharactersInRange:NSMakeRange(0, 2) withString:@" [mailto:"];
         [fromMailId replaceCharactersInRange:NSMakeRange(fromMailId.length - 1, 1) withString:@"]"];
         
-        NSAttributedString *emlRplStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]] autorelease];
+        NSAttributedString *emlRplStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@";"]];
         while (range.length != 0)
         {
             [headerString replaceCharactersInRange:range withAttributedString:emlRplStr];

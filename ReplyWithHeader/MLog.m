@@ -40,8 +40,6 @@ static BOOL __MLogOn = NO;
 	// NSLog handles synchronization issues
 	NSLog(@"%s: %d %@", [[file lastPathComponent] UTF8String], lineNumber, print);
 	
-	[print release];
-	[file  release];
 	
 	return;
 }

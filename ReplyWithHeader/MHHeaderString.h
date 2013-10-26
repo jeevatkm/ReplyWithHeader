@@ -51,6 +51,5 @@
 - (WebArchive *)getWebArchive;
 - (int)getHeaderItemCount;
 - (BOOL)isSuppressLabelsFound;
-- (void)dealloc;
 
 @end

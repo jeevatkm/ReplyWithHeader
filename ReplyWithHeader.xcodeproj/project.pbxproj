@@ -442,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -460,6 +461,7 @@
 					dynamic_lookup,
 				);
 				PRODUCT_NAME = ReplyWithHeader;
+				SDKROOT = macosx;
 				STRIP_STYLE = "non-global";
 				WRAPPER_EXTENSION = mailbundle;
 				ZERO_LINK = YES;
@@ -470,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -487,6 +490,7 @@
 					dynamic_lookup,
 				);
 				PRODUCT_NAME = ReplyWithHeader;
+				SDKROOT = macosx;
 				STRIP_STYLE = "non-global";
 				WRAPPER_EXTENSION = mailbundle;
 			};

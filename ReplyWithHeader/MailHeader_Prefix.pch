@@ -27,5 +27,3 @@
 #define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
 
 #define MHLocalizedString(key) [MailHeader localizedString:(key)]
-
-#define CLEAN(o) { if(o) { [o release]; o = nil; } }

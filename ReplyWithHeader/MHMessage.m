@@ -31,7 +31,7 @@
 #import "MHHeaderString.h"
 
 @interface MHMessage (MHNoImplementation)
-- (id)type;
+- (int)type;
 @end
 
 @implementation MHMessage
@@ -56,10 +56,6 @@
         
         //insert the new header text
         [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];
-        
-        // once done recycle it
-        CLEAN(newheaderString);
-        CLEAN(quotedText);
     }
 }
 

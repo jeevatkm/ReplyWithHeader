@@ -139,8 +139,6 @@
     [infoAlert runModal];
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
-    
-    CLEAN(infoAlert);
 }
 
 - (IBAction)openSupport:(id)sender
@@ -174,8 +172,6 @@
             
             [_MHNotifyNewVersion setState:YES];
         }
-        
-        CLEAN(alert);
     }    
 }
 
