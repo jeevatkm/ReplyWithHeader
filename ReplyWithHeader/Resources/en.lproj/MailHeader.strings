@@ -5,8 +5,11 @@
     "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., All rights reserved.";    
     
     /* Message Strings */
+    "STRING_FROM" = "From: ";
     "STRING_SUBJECT" = "Subject: ";
     "STRING_DATE" = "Date: ";
+    "STRING_TO" = "To: ";
+    "STRING_CC" = "Cc: ";
     "STRING_REPLY_TO" = "Reply-To: ";
     "STRING_SENT" = "Sent: ";
     "STRING_WROTE" = "wrote:";

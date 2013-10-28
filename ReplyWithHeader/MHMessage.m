@@ -32,6 +32,8 @@
 
 @interface MHMessage (MHNoImplementation)
 - (int)type;
+- (id)originalMessageHeaders;
+- (id)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
 @implementation MHMessage
@@ -53,6 +55,12 @@
         
         // Create the header string element from the original email
         MHHeaderString *newheaderString = [[MHHeaderString alloc] initWithMailMessage:self];
+        
+        //NSAttributedString *header = [[self originalMessageHeaders] attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
+        
+        //MHHeaderString *newheaderStringTry = [[MHHeaderString alloc] initWithString:header];
+        
+        //NSLog(@"Just %@", newheaderStringTry);
         
         //insert the new header text
         [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];

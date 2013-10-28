@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130D5CF7181D958600E691FA /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 130D5CF6181D958600E691FA /* Config.plist */; };
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		130D5CF6181D958600E691FA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
@@ -57,16 +59,6 @@
 		1372350E17FD8316007E7B71 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHPreferencesView.xib; sourceTree = "<group>"; };
 		1372351117FD8C6B007E7B71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/MailHeader-Info.plist"; sourceTree = "<group>"; };
 		1372351417FD8F3D007E7B71 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351617FD8F45007E7B71 /* zh */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351717FD8F47007E7B71 /* pt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351817FD8F4C007E7B71 /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351917FD8F4F007E7B71 /* sv */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351A17FD8F52007E7B71 /* it */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351B17FD8F54007E7B71 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351C17FD8F57007E7B71 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351D17FD8F59007E7B71 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351E17FD8F5B007E7B71 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
-		1372351F17FD8F5E007E7B71 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
 		1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeader_Prefix.pch; sourceTree = "<group>"; };
 		13882A26180722A3004BCC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
 		13882A2918072C7D004BCC6D /* MLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLog.h; sourceTree = "<group>"; };
@@ -191,6 +183,7 @@
 				1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */,
 				13A25F4617F9CE90002394DF /* Entitlements.plist */,
 				1365843B17FAC12700E8C57D /* MailHeader.strings */,
+				130D5CF6181D958600E691FA /* Config.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -333,6 +326,7 @@
 				13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */,
 				1365843917FAC12700E8C57D /* MailHeader.strings in Resources */,
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
+				130D5CF7181D958600E691FA /* Config.plist in Resources */,
 				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A25180722A3004BCC6D /* MHUpdateAlert.xib in Resources */,
 				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
@@ -412,16 +406,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				1372351417FD8F3D007E7B71 /* en */,
-				1372351617FD8F45007E7B71 /* zh */,
-				1372351717FD8F47007E7B71 /* pt */,
-				1372351817FD8F4C007E7B71 /* ru */,
-				1372351917FD8F4F007E7B71 /* sv */,
-				1372351A17FD8F52007E7B71 /* it */,
-				1372351B17FD8F54007E7B71 /* ja */,
-				1372351C17FD8F57007E7B71 /* nl */,
-				1372351D17FD8F59007E7B71 /* de */,
-				1372351E17FD8F5B007E7B71 /* es */,
-				1372351F17FD8F5E007E7B71 /* fr */,
 			);
 			name = MHPreferencesView.strings;
 			sourceTree = "<group>";
@@ -504,6 +488,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/en.lproj/MailHeader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx10.7;
@@ -517,6 +502,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/en.lproj/MailHeader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx10.7;
 			};

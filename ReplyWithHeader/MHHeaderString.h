@@ -36,14 +36,16 @@
 @class WebArchive;
 
 @interface MHHeaderString : NSObject {
-    @private
     NSMutableAttributedString *headerString;
     int headerItemCount;
     BOOL isSuppressLabelsFound;
+    
+    NSMutableArray *messageAttribution;
 }
 
 @property (weak, readonly) NSString *stringValue;
 
+- (id)initWithString:(NSAttributedString *)header;
 - (id)initWithMailMessage:(id)mailMessage;
 - (void)applyHeaderTypography;
 - (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled;

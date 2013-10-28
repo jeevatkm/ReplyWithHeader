@@ -48,7 +48,7 @@
 
 NSString *FROM_LABEL_REGEX_STRING = @"\\w+:\\s";
 NSString *HEADER_LABEL_REGEX_STRING = @"(\\n|\\r)[\\w\\-\\s]+:\\s";
-NSString *QUOTED_EMAIL_REGEX_STRING = @"(\\s<([a-zA-Z][a-zA-Z0-9]*)[^>]*>,?)";
+NSString *QUOTED_EMAIL_REGEX_STRING = @"(\\s<([a-zA-Z][a-zA-Z0-9]*)[^>]*>,?)"; //\s<([a-zA-Z0-9_@\.\-]*)>,?
 NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 @implementation MHHeaderString
@@ -139,6 +139,109 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 - (NSString *)stringValue
 {
     return headerString.string;
+}
+
+- (id)initWithString:(NSAttributedString *)header
+{
+    if (self = [super init])
+    {
+        NSArray *headers = [[header string]
+                            componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        
+        NSLog(@"Original values %@", headers);
+        NSLog(@"Original values count %lu", (unsigned long)[headers count]);
+        
+        NSArray *allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders"];
+        messageAttribution = [[NSMutableArray alloc] init];
+        
+        for (NSString *str in allowedHeaders)
+        {
+            for (int i=0; i<[headers count]; i++)
+            {
+                NSString *row = [headers objectAtIndex:i];
+                if ([row hasPrefix:str]) {
+                    [messageAttribution addObject:[row mutableCopy]];
+                    break;
+                }
+            }
+        }
+        
+        // reordering and labeling
+        NSError * __autoreleasing error = nil;
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:@"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?"
+                                      options:NSRegularExpressionCaseInsensitive
+                                      error:&error];
+        
+        int subjectIndex = 1; // default position
+        NSString *fromMailId;
+        for (int i=0; i<[messageAttribution count]; i++)
+        {
+            NSMutableString *row = [messageAttribution objectAtIndex:i];
+            
+            if ([row hasPrefix:MHLocalizedString(@"STRING_FROM")]) {
+                NSArray *matches = [regex
+                                 matchesInString:row
+                                 options:0
+                                 range:NSMakeRange(0, [row length])];
+                
+                for (NSTextCheckingResult *match in matches)
+                {                    
+                    fromMailId = [row substringWithRange:[match rangeAtIndex:1]];
+                    NSLog(@"From Email id %@", fromMailId);
+                    
+                    [row replaceCharactersInRange:[match range] withString:[NSString stringWithFormat:@" %@%@%@", @"[mailto:", fromMailId, @"]"]];
+                }
+            }
+            
+            if ([row hasPrefix:MHLocalizedString(@"STRING_SUBJECT")]) {
+                subjectIndex = i;
+            }
+            
+            if ([row hasPrefix:MHLocalizedString(@"STRING_DATE")]) {
+                NSRange dRange = [row rangeOfString:MHLocalizedString(@"STRING_DATE")];
+                
+                if (dRange.location != NSNotFound) {
+                    [row replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
+                }
+            }
+            
+            NSRange range = [regex rangeOfFirstMatchInString:row options:0
+                                                       range:NSMakeRange(0, [row length])];
+            while (range.location != NSNotFound)
+            {
+                [row replaceCharactersInRange:range withString:@";"];
+                range = [regex rangeOfFirstMatchInString:row options:0
+                                                   range:NSMakeRange(0, [row length])];
+            }            
+            
+            // double quoutes into empty
+            range = [row rangeOfString:@"\""];
+            while (range.location != NSNotFound)
+            {
+                [row replaceCharactersInRange:range withString:@""];
+                range = [row rangeOfString:@"\""];
+            }
+        }
+        
+        NSMutableString *subject = [[messageAttribution objectAtIndex:subjectIndex] mutableCopy];
+        [messageAttribution removeObjectAtIndex:subjectIndex];
+        [messageAttribution addObject:subject];
+        
+        
+        NSLog(@"After process Original values %@", messageAttribution);
+        
+        /*for (int i=0; i<[headers count]; i++)
+        {
+            NSString *str = [messageAttribution objectAtIndex:i];
+            if ( str == (id)[NSNull null] || [str length] == 0 )
+                [messageAttribution removeObject:str];
+        }*/
+        
+        
+    }
+
+    return self;
 }
 
 - (id)initWithMailMessage:(id)mailMessage

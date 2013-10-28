@@ -131,6 +131,18 @@
     return languageCode;
 }
 
++ (id)getConfigValue:(NSString *)key
+{
+    static NSDictionary *configDictionary;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *filePath = [[MailHeader bundle] pathForResource:@"Config" ofType:@"plist"];
+        configDictionary = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+    });
+    
+    return [configDictionary objectForKey:key];    
+}
+
 + (void)assignUserDefaults
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
