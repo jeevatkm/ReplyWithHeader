@@ -109,7 +109,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         }
         else
         {            
-            //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
             
             [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
         }
@@ -126,23 +126,15 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         [mailHeader applyHeaderLabelOptions];
     }
     
-    BOOL isHeaderTypograbhyEnabled = GET_DEFAULT_BOOL(MHTypographyEnabled);
-    if (isHeaderTypograbhyEnabled && isHTMLMail)
-    {
-        [mailHeader applyHeaderTypography];
-    }
-    
     if (isHTMLMail)
     {
-        [mailHeader applyBoldFontTraits:isHeaderTypograbhyEnabled];
+        [mailHeader applyHeaderTypography];
     }
     
     // specifics
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
-    
-    MHLog(@"Newly processed RWH header: %@", [mailHeader stringValue]);
     
     // Entourage 2004 text size transformations
     if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled))
@@ -191,12 +183,12 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 - (id)initWithMailMessage:(id)mailMessage
 {
-    if ( self = [super init] ) {
-		//set the class document variable
+    if ( self = [super init] )
+    {
         document = [mailMessage document];
-        MHLog(@"Mail Document: %@", document);
         
-        NSLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
+        MHLog(@"Mail Document: %@", document);
+        MHLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
         
         // for #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
         if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
@@ -230,18 +222,10 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         if ( dhc.length > 1)
         {   
             if (isHTMLMail)
-            {
                 [self removeOriginalHeaderPrefix];
-            }
             else
-            {
                 [self removeOriginalPlainTextHeaderPrefix];
-            }
         }
-    }
-    else
-    {
-        MHLog(@"MHQuotedMailOriginal: initWithMailMessage failed");
     }
     
     return self;
