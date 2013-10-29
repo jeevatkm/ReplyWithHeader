@@ -40,7 +40,6 @@
     NSMutableAttributedString *headerString;
     int headerItemCount;
     BOOL isSuppressLabelsFound;
-    NSFont *defaultFont;
 }
 
 @property (weak, readonly) NSString *stringValue;
@@ -52,6 +51,5 @@
 - (WebArchive *)getWebArchive;
 - (int)getHeaderItemCount;
 - (BOOL)isSuppressLabelsFound;
-- (void)dealloc;
 
 @end

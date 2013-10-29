@@ -47,6 +47,7 @@
     IBOutlet NSButton *_MHHeaderOptionEnabled;
     IBOutlet NSButton *_MHNotifyNewVersion;
     IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
+    IBOutlet NSButton *_MHRemoveSignatureEnabled;
     IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
     IBOutlet NSColorWell *_MHColorWell;
     IBOutlet NSMatrix *_MHHeaderOrderMode;

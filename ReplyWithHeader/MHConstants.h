@@ -43,6 +43,7 @@
 #define MHForwardHeaderEnabled @"MHForwardHeaderEnabled"
 #define MHTypographyEnabled @"MHHeaderTypographyEnabled"
 #define MHHeaderOptionEnabled @"MHHeaderLabelOptionEnabled"
+#define MHRemoveSignatureEnabled @"MHRemoveSignatureEnabled"
 #define MHEntourage2004SupportEnabled @"MHEntourage2004SupportEnabled"
 #define MHDefaulReplyHeaderBorder @"<br />---------- Original Message ----------<br />"
 #define MHDefaultForwardHeaderBorder @"---------- Forwarded Message ----------<br />"

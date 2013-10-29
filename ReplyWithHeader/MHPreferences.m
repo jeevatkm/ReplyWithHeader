@@ -51,6 +51,7 @@
     [_MHEntourage2004SupportEnabled setEnabled:state];
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
+    [_MHRemoveSignatureEnabled setEnabled:state];
     
     [self toggleRwhHeaderTypograpghyOptions:state];
     [self toggleRwhHeaderLabelOptions:state];
@@ -58,7 +59,10 @@
 
 - (void)toggleRwhHeaderLabelOptions:(BOOL *)state
 {
-    [_MHHeaderOrderMode setEnabled:state];
+    if ([MailHeader isLocaleSupported]) {
+        [_MHHeaderOrderMode setEnabled:state];
+    }
+    
     [_MHHeaderLabelMode setEnabled:state];
 }
 
@@ -139,8 +143,6 @@
     [infoAlert runModal];
     
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
-    
-    CLEAN(infoAlert);
 }
 
 - (IBAction)openSupport:(id)sender
@@ -174,8 +176,6 @@
             
             [_MHNotifyNewVersion setState:YES];
         }
-        
-        CLEAN(alert);
     }    
 }
 
@@ -190,6 +190,18 @@
      setStringValue:[NSString stringWithFormat:@"%@ %@",
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
+    
+    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
+    if ( ![MailHeader isLocaleSupported] ) {
+        //[self toggleRwhHeaderLabelOptions:FALSE];
+        //[_MHHeaderOptionEnabled setEnabled:FALSE];
+        [_MHHeaderOrderMode setEnabled:FALSE];
+        
+        NSString *toolTip = @"Currently this feature is supported in english(en) locale only.";
+        //[_MHHeaderOptionEnabled setToolTip:toolTip];
+        //[_MHHeaderLabelMode setToolTip:toolTip];
+        [_MHHeaderOrderMode setToolTip:toolTip];
+    }
 }
 
 - (NSString*)preferencesNibName

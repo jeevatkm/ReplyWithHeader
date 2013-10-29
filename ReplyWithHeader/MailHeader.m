@@ -44,6 +44,24 @@
     return GET_DEFAULT_BOOL(MHBundleEnabled);
 }
 
++ (BOOL)isLocaleSupported
+{
+    static BOOL supported;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *preferredLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
+        
+        if ( preferredLocale && [preferredLocale isEqualToString:@"en"] ) {
+            supported = TRUE;
+        }
+        else
+        {
+            supported = FALSE;
+        }
+    });
+    return supported;
+}
+
 + (NSBundle *)bundle
 {
     static NSBundle *bundle;
@@ -126,6 +144,7 @@
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
                           [NSNumber numberWithBool:NO], MHEntourage2004SupportEnabled,
                           [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
+                          [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
@@ -241,6 +260,16 @@
     if (![self isEnabled])
     {
         NSLog(@"%@ plugin is disabled in preferences", [self bundleName]);
+    }
+    
+    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
+    if ( ![self isLocaleSupported] )
+    {
+        NSLog(@"%@ - Outlook order mode, currently supported in english locale only.",
+              [self bundleName]);
+        
+        //SET_DEFAULT_INT(1, MHHeaderLabelMode);
+        SET_DEFAULT_INT(1, MHHeaderOrderMode);
     }
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))

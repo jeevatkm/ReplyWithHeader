@@ -99,19 +99,9 @@
         {
             MHLog(@"RWH new version availabilty check failed. May be internet connection unavailable.");
         }
-        
-        CLEAN(appCastData);
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    CLEAN(comparator);
-    CLEAN(jsonDic);    
-    CLEAN(_alert);    
-    [super dealloc];
 }
 
 @end
