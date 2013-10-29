@@ -46,7 +46,7 @@
 
 #pragma mark Constants and global variables
 
-NSString *FROM_LABEL_REGEX_STRING = @"\\w+:\\s";
+NSString *MH_LABEL_REGEX_STRING = @"\\w+:\\s";
 NSString *HEADER_LABEL_REGEX_STRING = @"(\\n|\\r)[\\w\\-\\s]+:\\s";
 NSString *QUOTED_EMAIL_REGEX_STRING = @"(\\s<([a-zA-Z][a-zA-Z0-9]*)[^>]*>,?)"; //\s<([a-zA-Z0-9_@\.\-]*)>,?
 NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
@@ -60,8 +60,41 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     NSString *fontString = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:fontSize.floatValue];
-    
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
+    
+    NSError * __autoreleasing error = nil;
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:MH_LABEL_REGEX_STRING
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];
+    
+    if( !GET_DEFAULT_BOOL(MHTypographyEnabled) )
+    {
+        font = [NSFont fontWithName:@"Helvetica" size:13.0];
+    }
+    
+    NSLog(@"before typography change header values %@", messageAttribution);
+    
+    for (int i=0; i<[messageAttribution count]; i++)
+    {
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
+        
+        [row addAttribute:NSFontAttributeName
+                             value:font range:NSMakeRange(0, [row length])];
+        [row addAttribute:NSForegroundColorAttributeName
+                             value:color range:NSMakeRange(0, [row length])];
+        
+        NSRange range = [regex rangeOfFirstMatchInString:[row string]
+                                                 options:0
+                                                   range:NSMakeRange(0, [row length])];
+        if (range.location != NSNotFound)
+        {
+            [row applyFontTraits:NSBoldFontMask range:range];
+        }
+    }
+    
+    NSLog(@"after typography change header values %@", messageAttribution);
+    
     
     [headerString addAttribute:NSFontAttributeName
                          value:font range:NSMakeRange(0, [headerString length])];
@@ -83,7 +116,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
     // should get the first item (e.g. "From:").
     NSError * __autoreleasing error = nil;
     NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:FROM_LABEL_REGEX_STRING
+                                  regularExpressionWithPattern:MH_LABEL_REGEX_STRING
                                   options:NSRegularExpressionCaseInsensitive
                                   error:&error];
     
@@ -116,6 +149,24 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 {
     MHLog(@"Mail string before web archiving it: %@", headerString);
     
+    NSLog(@"before webarch header values %@", messageAttribution);
+    
+    NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
+    for (int i=0; i<[messageAttribution count]; i++)
+    {
+        [finalHeader appendAttributedString:[messageAttribution objectAtIndex:i]];
+        [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    }
+    
+    NSLog(@"final header values %@", messageAttribution);
+    
+    WebArchive *webarch = [finalHeader
+                        webArchiveForRange:NSMakeRange(0, [finalHeader length])
+                        fixUpNewlines:YES];
+    
+    return webarch;
+    
+    
     WebArchive *arch = [headerString
                         webArchiveForRange:NSMakeRange(0, [headerString length])
                         fixUpNewlines:YES];
@@ -126,7 +177,7 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 {
     MHLog(@"Mail header count is %d", headerItemCount);
     
-    return headerItemCount;
+    return (noOfHeaderLabels - 1);
 }
 
 - (BOOL)isSuppressLabelsFound
@@ -248,11 +299,38 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 {
     if (self = [super init])
     {
-        if (!(self = [self init])) return nil;
+        // if (!(self = [self init])) return nil;
         
         //initialze the value with a mutable copy of the attributed string
         headerString = [[[mailMessage originalMessageHeaders]
                          attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]] mutableCopy];
+        
+        // cleanHeaders = [mailMessage valueForKey:@"_cleanHeaders"];
+        
+        NSArray *headers = [[headerString string]
+                            componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        noOfHeaderLabels = [headers count];
+        
+        NSLog(@"Original values %@", headers);
+        NSLog(@"Original values count %lu", noOfHeaderLabels);
+        
+        NSArray *allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders"];
+        messageAttribution = [[NSMutableArray alloc] init];
+        
+        for (NSString *str in allowedHeaders)
+        {
+            for (int i=0; i<[headers count]; i++)
+            {
+                NSString *row = [headers objectAtIndex:i];
+                if ([row hasPrefix:str]) {
+                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:row];
+                    [messageAttribution addObject:attrString];
+                    break;
+                }
+            }
+        }
+        
+        NSLog(@"After initailize header values %@", messageAttribution);
         
         // let's things going
         [self fixHeaderString];
@@ -322,6 +400,22 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)applyHeaderOrderChange
 {
+    // New approach
+    int subjectIndex = 1; // default position
+    for (int i=0; i<[messageAttribution count]; i++)
+    {
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
+        
+        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_SUBJECT")]) {
+            subjectIndex = i;
+            break;
+        }
+    }
+    
+    NSMutableAttributedString *subject = [[messageAttribution objectAtIndex:subjectIndex] mutableCopy];
+    [messageAttribution removeObjectAtIndex:subjectIndex];
+    [messageAttribution addObject:subject];
+    
     // Subject: and Date: sequence change
     NSRange subjectRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_SUBJECT")];
     NSRange dateRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
@@ -351,6 +445,68 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 
 - (void)applyHeaderLabelChange
 {
+    // New Approach
+    NSError * __autoreleasing regError = nil;
+    NSRegularExpression *lblRegex = [NSRegularExpression
+                                  regularExpressionWithPattern:@"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?"
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&regError];
+    NSString *fromMailId;
+    
+    NSLog(@"before label change header values %@", messageAttribution);
+    
+    for (int i=0; i<[messageAttribution count]; i++)
+    {
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
+        
+        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_FROM")]) {
+            NSArray *matches = [lblRegex
+                                matchesInString:[row string]
+                                options:0
+                                range:NSMakeRange(0, [row length])];
+            
+            for (NSTextCheckingResult *match in matches)
+            {
+                fromMailId = [[row string] substringWithRange:[match rangeAtIndex:1]];
+                NSLog(@"From Email id %@", fromMailId);
+                
+                [row replaceCharactersInRange:[match range] withString:[NSString stringWithFormat:@" %@%@%@", @"[mailto:", fromMailId, @"]"]];
+            }
+        }
+        
+        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_DATE")]) {
+            NSRange dRange = [[row string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
+            [row replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
+        }
+        
+        NSRange range = [lblRegex rangeOfFirstMatchInString:[row string] options:0
+                                                   range:NSMakeRange(0, [row length])];
+        while (range.location != NSNotFound)
+        {
+            [row replaceCharactersInRange:range withString:@";"];
+            range = [lblRegex rangeOfFirstMatchInString:[row string] options:0
+                                               range:NSMakeRange(0, [row length])];
+        }
+        
+        // double quoutes into empty
+        range = [[row string] rangeOfString:@"\""];
+        while (range.location != NSNotFound)
+        {
+            [row replaceCharactersInRange:range withString:@""];
+            range = [[row string] rangeOfString:@"\""];
+        }
+        
+        // Perfection of semi-colon (;) handling stage 2
+        NSString *last = [[row string] substringWithRange:NSMakeRange([row length] - 1, 1)];
+        if ([last isEqualToString:@";"])
+        {
+            [row replaceCharactersInRange:NSMakeRange([row length] - 1, 1) withString:@""];
+        }
+    }
+
+    NSLog(@"after label change header values %@", messageAttribution);
+    
+    
     // Date: into Sent:
     NSRange dRange = [headerString.string rangeOfString:MHLocalizedString(@"STRING_DATE")];
     

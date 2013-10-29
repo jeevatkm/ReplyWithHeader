@@ -79,14 +79,13 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     
     if ( numGrandChildCount == 0 )
     {
-        [originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
+        //[originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
         [originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
         [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
     }
     else
     {
-        [[originalEmail firstChild]
-            insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
+        //[[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
         
         [[originalEmail firstChild]
             insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
@@ -104,13 +103,13 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         // if not, include in blockquote
         if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
         {
-            [originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
+            //[originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
             [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
             [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
         }
         else
         {            
-            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            //[[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
             
             [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
         }
@@ -167,7 +166,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         int hCount = [mailHeader getHeaderItemCount];
         BOOL delPath = [[[originalEmail firstChild] nodeName] isEqualToString:@"BLOCKQUOTE"];
         DOMNode *blockQuote = [[originalEmail childNodes] item:0];
-        for (int i=0; i<=hCount; i++)
+        for (int i=0; i<hCount; i++)
         {
             if (delPath)
             {
@@ -196,6 +195,8 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 		//set the class document variable
         document = [mailMessage document];
         MHLog(@"Mail Document: %@", document);
+        
+        NSLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
         
         // for #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
         if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))

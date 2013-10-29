@@ -41,6 +41,8 @@
     BOOL isSuppressLabelsFound;
     
     NSMutableArray *messageAttribution;
+    NSDictionary *cleanHeaders;
+    NSUInteger noOfHeaderLabels;
 }
 
 @property (weak, readonly) NSString *stringValue;

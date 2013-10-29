@@ -43,6 +43,11 @@
     // calling the original implementation
     [self MH_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
+    //id header1 = [self valueForKey:@"_cleanHeaders"];
+    
+    //NSLog(@"header1 type => %@", [header1 class]);
+    //NSLog(@"header1 values => %@", header1);
+    
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];
     
