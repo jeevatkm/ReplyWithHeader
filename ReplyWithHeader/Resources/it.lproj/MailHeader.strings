@@ -1,0 +1,28 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "diritto d'autore © 2013 Jeevanandam M., Tutti i diritti riservati.";
+    
+    /* Message Strings */
+    "STRING_FROM" = "Da: ";
+    "STRING_SUBJECT" = "Oggetto: ";
+    "STRING_DATE" = "Data: ";
+    "STRING_TO" = "A: ";
+    "STRING_CC" = "Cc: ";
+    "STRING_REPLY_TO" = "Rispondi a: ";
+    "STRING_SENT" = "Inviata: ";
+    "STRING_WROTE" = "scritto:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@ Plugin aggiornamento";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "Una nuova versione di %@ è disponibile!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ È ora disponibile - hai %@. Volete scaricare ora?";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "Caricare";
+	"BUTTON_RELEASE_NOTES" = "Note di rilascio";
+	"BUTTON_LATER" = "Più tardi";
+}

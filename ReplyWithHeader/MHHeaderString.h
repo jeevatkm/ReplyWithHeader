@@ -43,10 +43,8 @@
 
 - (id)initWithMailMessage:(id)mailMessage;
 - (void)applyHeaderTypography;
-//- (void)applyBoldFontTraits:(BOOL)isHeaderTypograbhyEnabled;
 - (void)applyHeaderLabelOptions;
 - (WebArchive *)getWebArchive;
-- (int)getHeaderItemCount;
-//- (BOOL)isSuppressLabelsFound;
+- (NSUInteger)getHeaderItemCount;
 
 @end

@@ -155,7 +155,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
     else if (manageForwardHeader && composeType == 3)
     {
-        int hCount = [mailHeader getHeaderItemCount];
+        NSUInteger hCount = [mailHeader getHeaderItemCount];
         BOOL delPath = [[[originalEmail firstChild] nodeName] isEqualToString:@"BLOCKQUOTE"];
         DOMNode *blockQuote = [[originalEmail childNodes] item:0];
         for (int i=0; i<hCount; i++)

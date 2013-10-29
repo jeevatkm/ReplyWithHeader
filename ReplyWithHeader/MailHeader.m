@@ -51,13 +51,12 @@
     dispatch_once(&onceToken, ^{
         NSString *preferredLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
         
-        if ( preferredLocale && [preferredLocale isEqualToString:@"en"] ) {
-            supported = TRUE;
-        }
-        else
-        {
-            supported = FALSE;
-        }
+        // for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
+        NSArray *bundlePreferredLocales = [[self bundle] preferredLocalizations];
+        
+        supported = [bundlePreferredLocales containsObject:preferredLocale];
+        
+        MHLog(@"Language Support:  bundlePreferredLocales %@ result %@", bundlePreferredLocales, supported ? @"YES" : @"NO");
     });
     return supported;
 }

@@ -111,7 +111,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
     return webarch;
 }
 
-- (int)getHeaderItemCount
+- (NSUInteger)getHeaderItemCount
 {
     MHLog(@"Mail header count is %d", noOfHeaderLabels);
     
