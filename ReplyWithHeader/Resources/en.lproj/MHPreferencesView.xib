@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MHPreferences">
@@ -17,6 +17,7 @@
                 <outlet property="_MHHeaderOrderMode" destination="255" id="356"/>
                 <outlet property="_MHHeaderTypographyEnabled" destination="203" id="365"/>
                 <outlet property="_MHNotifyNewVersion" destination="324" id="359"/>
+                <outlet property="_MHRemoveSignatureEnabled" destination="3x5-oa-h0B" id="jpj-o4-8IN"/>
                 <outlet property="_MHSelectFont" destination="222" id="366"/>
                 <outlet property="_MHSubjectPrefixTextEnabled" destination="347" id="357"/>
                 <outlet property="_preferencesView" destination="38" id="269"/>

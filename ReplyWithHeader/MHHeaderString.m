@@ -435,18 +435,19 @@ NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
+    int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
+    int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
+    MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
+    
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
-    if ( [MailHeader isLocaleSupported] ) {
-        int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
-        int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
-        MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
+    if ( [MailHeader isLocaleSupported] ) {       
         
         if (headerOrderMode == 2)
             [self applyHeaderOrderChange];
-        
-        if (headerLabelMode == 2)
-            [self applyHeaderLabelChange];
     }
+    
+    if (headerLabelMode == 2)
+        [self applyHeaderLabelChange];
 }
 
 @end
