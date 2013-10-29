@@ -504,6 +504,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/en.lproj/MailHeader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx10.7;
@@ -517,6 +518,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/en.lproj/MailHeader-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx10.7;
 			};
