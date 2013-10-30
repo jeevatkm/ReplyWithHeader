@@ -16,6 +16,7 @@
                 <outlet property="_MHHeaderOptionEnabled" destination="266" id="364"/>
                 <outlet property="_MHHeaderOrderMode" destination="255" id="356"/>
                 <outlet property="_MHHeaderTypographyEnabled" destination="203" id="365"/>
+                <outlet property="_MHLanguagePopup" destination="4J1-5A-cVL" id="Mt2-Cf-fOa"/>
                 <outlet property="_MHNotifyNewVersion" destination="324" id="359"/>
                 <outlet property="_MHRemoveSignatureEnabled" destination="3x5-oa-h0B" id="jpj-o4-8IN"/>
                 <outlet property="_MHSelectFont" destination="222" id="366"/>
@@ -37,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button id="8">
-                                <rect key="frame" x="16" y="411" width="556" height="18"/>
+                                <rect key="frame" x="16" y="409" width="556" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Enable" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -383,6 +384,15 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
+                            <popUpButton verticalHuggingPriority="750" id="4J1-5A-cVL">
+                                <rect key="frame" x="454" y="405" width="119" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p1h-7F-bMs">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="12" name="LucidaGrande"/>
+                                    <menu key="menu" title="OtherViews" id="al4-kd-5cy"/>
+                                </popUpButtonCell>
+                            </popUpButton>
                         </subviews>
                     </view>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>

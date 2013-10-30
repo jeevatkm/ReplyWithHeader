@@ -253,11 +253,11 @@
     // Registering plugin in Mail.app
     [mvMailBundleClass registerBundle];
     
-    // Assigning default value if not present
-    [self assignUserDefaults];
-    
     // For smooth upgrade to new User Interface
     [self smoothValueTransToNewMailPrefUI];
+    
+    // Assigning default value if not present
+    [self assignUserDefaults];
     
     // Add hooks into Mail.app Classes
     [MHCodeInjector injectMailHeaderCode];

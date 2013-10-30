@@ -32,8 +32,6 @@
 
 @interface MHMailMessage (MHNoImplementation)
 - (int)type;
-- (id)originalMessageHeaders;
-- (id)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
 @implementation MHMailMessage

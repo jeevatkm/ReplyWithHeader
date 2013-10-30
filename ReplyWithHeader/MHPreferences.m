@@ -52,6 +52,7 @@
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
+    [_MHLanguagePopup setEnabled:state];
     
     [self toggleRwhHeaderTypograpghyOptions:state];
     [self toggleRwhHeaderLabelOptions:state];
@@ -147,7 +148,7 @@
 
 - (IBAction)openSupport:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeader/issues"]];
 }
 
 - (IBAction)notifyNewVersionPressed:(id)sender
@@ -160,7 +161,7 @@
         [alert setIcon:[MailHeader bundleLogo]];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert setMessageText:@"Are you sure you want to disable it?"];
-        [alert setInformativeText:@"Missing a opportunity of new version release notification."];
+        [alert setInformativeText:@"Missing an opportunity of new version release notification."];
         
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"Disable"];
@@ -197,11 +198,32 @@
         //[_MHHeaderOptionEnabled setEnabled:FALSE];
         [_MHHeaderOrderMode setEnabled:FALSE];
         
-        NSString *toolTip = @"Currently this feature is supported in english(en) locale only.";
+        NSString *toolTip = @"Currently this feature is not supported in your locale, please inform developer.";
         //[_MHHeaderOptionEnabled setToolTip:toolTip];
         //[_MHHeaderLabelMode setToolTip:toolTip];
         [_MHHeaderOrderMode setToolTip:toolTip];
     }
+    
+    NSArray *localizations = [[MailHeader bundle] localizations];
+    
+    [_MHLanguagePopup removeAllItems];
+    [_MHLanguagePopup addItemWithTitle:@"Default"];
+    [[_MHLanguagePopup menu] addItem:[NSMenuItem separatorItem]];
+    
+    for (NSString *lang in localizations) {
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
+        NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
+        
+        [_MHLanguagePopup addItemWithTitle:name];
+    }
+    
+    [_MHLanguagePopup selectItemAtIndex:0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(languagePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLanguagePopup menu]];
+    
 }
 
 - (NSString*)preferencesNibName
@@ -217,6 +239,16 @@
 - (BOOL)isResizable
 {
 	return NO;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+- (void)languagePopUpSelectionChanged:(NSNotification *)notification {
+    
+    NSLog(@"languagePopUpSelectionChanged _MHLanguagePopup title %@", [[_MHLanguagePopup selectedItem] title]);
 }
 
 @end

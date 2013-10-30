@@ -52,6 +52,7 @@
     IBOutlet NSColorWell *_MHColorWell;
     IBOutlet NSMatrix *_MHHeaderOrderMode;
     IBOutlet NSMatrix *_MHHeaderLabelMode;
+    IBOutlet NSPopUpButton *_MHLanguagePopup;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;
