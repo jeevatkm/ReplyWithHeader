@@ -22,15 +22,15 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ *
+ * for issue #31 https://github.com/jeevatkm/ReplyWithHeader/issues/31
  */
 
 
-@interface MHMessage : NSObject
+@interface MHMailMessage : NSObject
 
-/*!
- * Changes the Contents for view, adding the message headers to Reply and Reply All messages
- * the format of this function is taken from ComposeBackEnd _continueToSetupContentsForView method
- */
 - (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
+- (BOOL)MHokToAddSignatureAutomatically;
+- (BOOL)MHincludeHeaders;
 
 @end

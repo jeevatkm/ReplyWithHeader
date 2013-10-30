@@ -10,7 +10,7 @@
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */; };
-		133A918417E9745A00E3CC62 /* MHMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* MHMessage.m */; };
+		133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* MHMailMessage.m */; };
 		133A918617E9745A00E3CC62 /* MHPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* MHPreferences.m */; };
 		13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
@@ -45,8 +45,8 @@
 		133A916F17E9745A00E3CC62 /* MHQuotedMailOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHQuotedMailOriginal.h; sourceTree = "<group>"; };
 		133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHQuotedMailOriginal.m; sourceTree = "<group>"; };
 		133A917117E9745A00E3CC62 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
-		133A917617E9745A00E3CC62 /* MHMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMessage.h; sourceTree = "<group>"; };
-		133A917717E9745A00E3CC62 /* MHMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMessage.m; sourceTree = "<group>"; };
+		133A917617E9745A00E3CC62 /* MHMailMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMailMessage.h; sourceTree = "<group>"; };
+		133A917717E9745A00E3CC62 /* MHMailMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMailMessage.m; sourceTree = "<group>"; };
 		133A917A17E9745A00E3CC62 /* MHPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPreferences.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* MHPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPreferences.m; sourceTree = "<group>"; };
 		133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MailAttributedStringToHTML.h"; sourceTree = "<group>"; };
@@ -63,13 +63,13 @@
 		13882A2A18072C7D004BCC6D /* MLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLog.m; sourceTree = "<group>"; };
 		13882A2F18073509004BCC6D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		138BAEBB1820218C00738ADB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHUpdateAlert.xib; sourceTree = "<group>"; };
-		138BAEBE182022AA00738ADB /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
+		138BAEBE182022AA00738ADB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
 		138BAEC01820242100738ADB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MailHeader.strings; sourceTree = "<group>"; };
-		138BAEC11820242100738ADB /* de */ = {isa = PBXFileReference; lastKnownFileType = file; name = de; path = de.lproj/Config.plist; sourceTree = "<group>"; };
+		138BAEC11820242100738ADB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/Config.plist; sourceTree = "<group>"; };
 		138BAEC218202A5B00738ADB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MailHeader.strings; sourceTree = "<group>"; };
-		138BAEC318202A5B00738ADB /* es */ = {isa = PBXFileReference; lastKnownFileType = file; name = es; path = es.lproj/Config.plist; sourceTree = "<group>"; };
+		138BAEC318202A5B00738ADB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Config.plist; sourceTree = "<group>"; };
 		138BAEC418202C6C00738ADB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MailHeader.strings; sourceTree = "<group>"; };
-		138BAEC518202C6C00738ADB /* it */ = {isa = PBXFileReference; lastKnownFileType = file; name = it; path = it.lproj/Config.plist; sourceTree = "<group>"; };
+		138BAEC518202C6C00738ADB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = it; path = it.lproj/Config.plist; sourceTree = "<group>"; };
 		13A25F4017F9B00D002394DF /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		13A25F4117F9B00D002394DF /* NSPreferencesModule-Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferencesModule-Protocol.h"; sourceTree = "<group>"; };
 		13A25F4217F9B0C7002394DF /* NSPreferences+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPreferences+MailHeader.h"; sourceTree = "<group>"; };
@@ -162,8 +162,8 @@
 				133A916E17E9745A00E3CC62 /* MHHeaderString.m */,
 				133A916F17E9745A00E3CC62 /* MHQuotedMailOriginal.h */,
 				133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */,
-				133A917617E9745A00E3CC62 /* MHMessage.h */,
-				133A917717E9745A00E3CC62 /* MHMessage.m */,
+				133A917617E9745A00E3CC62 /* MHMailMessage.h */,
+				133A917717E9745A00E3CC62 /* MHMailMessage.m */,
 				133A917A17E9745A00E3CC62 /* MHPreferences.h */,
 				133A917B17E9745A00E3CC62 /* MHPreferences.m */,
 				13B6E5D517F6F41E00878012 /* MHHeadersEditor.h */,
@@ -366,7 +366,7 @@
 			files = (
 				133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */,
 				133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */,
-				133A918417E9745A00E3CC62 /* MHMessage.m in Sources */,
+				133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */,
 				133A918617E9745A00E3CC62 /* MHPreferences.m in Sources */,
 				131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */,
 				13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */,

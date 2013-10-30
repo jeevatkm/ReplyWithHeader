@@ -26,27 +26,21 @@
 
 // MHMessage Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013
 
-#import "MHMessage.h"
+#import "MHMailMessage.h"
 #import "MHQuotedMailOriginal.h"
 #import "MHHeaderString.h"
 
-@interface MHMessage (MHNoImplementation)
+@interface MHMailMessage (MHNoImplementation)
 - (int)type;
 - (id)originalMessageHeaders;
 - (id)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
-@implementation MHMessage
+@implementation MHMailMessage
 
 - (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2
 {
-    // calling the original implementation
     [self MH_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
-    
-    //id header1 = [self valueForKey:@"_cleanHeaders"];
-    
-    //NSLog(@"header1 type => %@", [header1 class]);
-    //NSLog(@"header1 values => %@", header1);
     
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];
@@ -61,15 +55,28 @@
         // Create the header string element from the original email
         MHHeaderString *newheaderString = [[MHHeaderString alloc] initWithMailMessage:self];
         
-        //NSAttributedString *header = [[self originalMessageHeaders] attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
-        
-        //MHHeaderString *newheaderStringTry = [[MHHeaderString alloc] initWithString:header];
-        
-        //NSLog(@"Just %@", newheaderStringTry);
-        
         //insert the new header text
         [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];
     }
+}
+
+// for issue #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
+- (BOOL)MHokToAddSignatureAutomatically
+{
+    [self MHokToAddSignatureAutomatically];
+    
+    return !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled);
+}
+
+// for issue #27 - https://github.com/jeevatkm/ReplyWithHeader/issues/27
+- (BOOL)MHincludeHeaders
+{
+    BOOL include = [self MHincludeHeaders];
+    
+    if(GET_DEFAULT_BOOL(MHForwardHeaderEnabled) && [self type] == 3)
+        include = FALSE;
+    
+    return include;
 }
 
 @end

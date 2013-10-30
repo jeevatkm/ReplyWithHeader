@@ -142,7 +142,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         [self applyEntourage2004Support:headerFragment];
     }
     
-    if (composeType == 1 || composeType == 2)
+    if (composeType == 1 || composeType == 2 || (manageForwardHeader && composeType == 3))
     {
         if ( isHTMLMail )
         {
@@ -153,7 +153,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
             [self processPlainMail:headerFragment newLineFragment:newLineFragment];
         }
     }
-    else if (manageForwardHeader && composeType == 3)
+    /*else if (manageForwardHeader && composeType == 3)
     {
         NSUInteger hCount = [mailHeader getHeaderItemCount];
         BOOL delPath = [[[originalEmail firstChild] nodeName] isEqualToString:@"BLOCKQUOTE"];
@@ -178,7 +178,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         { // Plain text mail compose block
             [self processPlainMail:headerFragment newLineFragment:newLineFragment];
         }
-    }
+    }*/
 }
 
 - (id)initWithMailMessage:(id)mailMessage
@@ -191,7 +191,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         MHLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
         
         // for #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
-        if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
+        /*if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
         {
             DOMElement *signatureElement = [[document htmlDocument] getElementById:AppleMailSignature];
             if (signatureElement)
@@ -203,7 +203,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
                     MHLog([exception description]);
                 }
             }
-        }
+        }*/
         
         //now initialize the other vars
         [self initVars];
