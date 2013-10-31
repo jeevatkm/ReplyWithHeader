@@ -205,25 +205,34 @@
     }
     
     NSArray *localizations = [[MailHeader bundle] localizations];
-    
     [_MHLanguagePopup removeAllItems];
-    [_MHLanguagePopup addItemWithTitle:@"Default"];
-    [[_MHLanguagePopup menu] addItem:[NSMenuItem separatorItem]];
     
-    for (NSString *lang in localizations) {
+    for (NSString *lang in localizations)
+    {
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
         NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
         
-        [_MHLanguagePopup addItemWithTitle:name];
+        NSMenuItem *item = [[NSMenuItem alloc] init];
+        [item setRepresentedObject:lang];
+        [item setTitle:name];
+        
+        [[_MHLanguagePopup menu] addItem:item];
     }
     
-    [_MHLanguagePopup selectItemAtIndex:0];
+    NSString *langCode = GET_DEFAULT(MHBundleHeaderLanguageCode);
+    if (!langCode)
+    {
+        langCode = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+    }
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:langCode];
+    NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:langCode];
+    [_MHLanguagePopup selectItemWithTitle:name];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(languagePopUpSelectionChanged:)
                                                  name:NSMenuDidSendActionNotification
-                                               object:[_MHLanguagePopup menu]];
-    
+                                               object:[_MHLanguagePopup menu]];    
 }
 
 - (NSString*)preferencesNibName
@@ -247,8 +256,11 @@
 }
 
 - (void)languagePopUpSelectionChanged:(NSNotification *)notification {
+    NSMenuItem *selectedItem = [_MHLanguagePopup selectedItem];
     
-    NSLog(@"languagePopUpSelectionChanged _MHLanguagePopup title %@", [[_MHLanguagePopup selectedItem] title]);
+    MHLog(@"Choosen language & code: %@ <==> %@", [selectedItem title], [selectedItem representedObject]);
+    
+    SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
 }
 
 @end

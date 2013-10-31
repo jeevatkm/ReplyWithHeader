@@ -39,6 +39,9 @@
     NSMutableArray *messageAttribution;
     NSDictionary *cleanHeaders;
     NSUInteger noOfHeaderLabels;
+    NSArray *allowedHeaders;
+    NSString *currentLocaleIdentifier;
+    NSString *choosenLocaleIdentifier;
 }
 
 - (id)initWithMailMessage:(id)mailMessage;

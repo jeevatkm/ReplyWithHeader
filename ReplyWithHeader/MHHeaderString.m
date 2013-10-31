@@ -93,6 +93,22 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
     }
 }
 
+// for issue #28 - https://github.com/jeevatkm/ReplyWithHeader/issues/28
+- (void)applyChoosenLanguageLabels
+{
+    NSArray *choosenHeaderLabels = [MailHeader getConfigValue:@"AllowedHeaders"
+                                                 languageCode:GET_DEFAULT(MHBundleHeaderLanguageCode)];
+    MHLog(@"Choosen language header labels %@", choosenHeaderLabels);
+    
+    for (int i=0; i<[messageAttribution count]; i++)
+    {
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
+        NSRange range = [[row string] rangeOfString:[allowedHeaders objectAtIndex:i]];
+        
+        [row replaceCharactersInRange:range withString:[choosenHeaderLabels objectAtIndex:i]];
+    }
+}
+
 - (WebArchive *)getWebArchive
 {
     NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
@@ -121,6 +137,10 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
+    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+        [self applyChoosenLanguageLabels];
+    }
+    
     int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
     int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
     MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
@@ -140,6 +160,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
 {
     if (self = [super init])
     {
+        choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
+        currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        
         NSAttributedString *headerString = [[mailMessage originalMessageHeaders]
                          attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
         
@@ -149,11 +172,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
                             componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
         noOfHeaderLabels = [headers count];
         
-        MHLog(@"Original values %@", headers);
-        MHLog(@"Original values count %lu", noOfHeaderLabels);
+        MHLog(@"Original headers %@", headers);
+        MHLog(@"Original headers count %lu", noOfHeaderLabels);
         
         // for issue #27 - https://github.com/jeevatkm/ReplyWithHeader/issues/27
-        NSArray *allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders"];
+        allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders"];
         messageAttribution = [[NSMutableArray alloc] init];
         
         for (NSString *str in allowedHeaders)
@@ -178,12 +201,19 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
 
 - (void)applyHeaderOrderChange
 {
+    NSString *subjectPrefix = MHLocalizedString(@"STRING_SUBJECT");
+    
+    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+        subjectPrefix = [MailHeader localizedString:@"STRING_SUBJECT"
+                                   localeIdentifier:choosenLocaleIdentifier];
+    }
+    
     int subjectIndex = 1; // default position
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
-        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_SUBJECT")]) {
+        if ([[row string] hasPrefix:subjectPrefix]) {
             subjectIndex = i;
             break;
         }
@@ -203,11 +233,26 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
                                   options:NSRegularExpressionCaseInsensitive
                                   error:&regError];
     
+    NSString *fromPrefix = MHLocalizedString(@"STRING_FROM");
+    NSString *datePrefix = MHLocalizedString(@"STRING_DATE");
+    NSString *dateToBePrefix = MHLocalizedString(@"STRING_SENT");
+    
+    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+        fromPrefix = [MailHeader localizedString:@"STRING_FROM"
+                                localeIdentifier:choosenLocaleIdentifier];
+        
+        datePrefix = [MailHeader localizedString:@"STRING_DATE"
+                                localeIdentifier:choosenLocaleIdentifier];
+        
+        dateToBePrefix = [MailHeader localizedString:@"STRING_SENT"
+                                localeIdentifier:choosenLocaleIdentifier];
+    }
+    
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
-        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_FROM")]) {
+        if ([[row string] hasPrefix:fromPrefix]) {
             NSArray *matches = [lblRegex
                                 matchesInString:[row string]
                                 options:0
@@ -222,12 +267,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
             }
         }
         
-        if ([[row string] hasPrefix:MHLocalizedString(@"STRING_DATE")]) {
-            NSRange dRange = [[row string] rangeOfString:MHLocalizedString(@"STRING_DATE")];
+        if ([[row string] hasPrefix:datePrefix]) {
+            NSRange dRange = [[row string] rangeOfString:datePrefix];
             
             if (dRange.location != NSNotFound)
             {
-                [row replaceCharactersInRange:dRange withString:MHLocalizedString(@"STRING_SENT")];
+                [row replaceCharactersInRange:dRange withString:dateToBePrefix];
             }
         }
         

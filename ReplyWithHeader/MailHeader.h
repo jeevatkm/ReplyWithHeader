@@ -47,8 +47,10 @@
 + (NSString *)bundleCopyright;
 + (NSImage *)bundleLogo;
 + (NSString *)localizedString:(NSString *)key;
++ (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier;
 + (NSString *)localeLanguageCode;
 + (id)getConfigValue:(NSString *)key;
++ (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

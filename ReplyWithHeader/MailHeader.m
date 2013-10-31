@@ -56,7 +56,8 @@
         
         supported = [bundlePreferredLocales containsObject:preferredLocale];
         
-        MHLog(@"Language Support:  bundlePreferredLocales %@ result %@", bundlePreferredLocales, supported ? @"YES" : @"NO");
+        MHLog(@"Language Support:  bundlePreferredLocales %@ result %@",
+              bundlePreferredLocales, supported ? @"YES" : @"NO");
     });
     return supported;
 }
@@ -110,16 +111,25 @@
 
 + (NSString *)localizedString:(NSString *)key
 {
-    NSBundle *mhBundle = [MailHeader bundle];
+    NSBundle *mhBundle = [self bundle];
     NSString *localString = NSLocalizedStringFromTableInBundle(key, @"MailHeader", mhBundle, nil);
     
     if(![localString isEqualToString:key])
         return localString;
     
-    NSBundle *englishLanguage = [NSBundle
-                                 bundleWithPath:[mhBundle
-                                                 pathForResource:@"en" ofType:@"lproj" inDirectory:@"MailHeader"]];
-    return [englishLanguage localizedStringForKey:key value:@"" table:@"MailHeader"];
+    return [self localizedString:key localeIdentifier:@"en"];
+}
+
++ (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier
+{
+    NSString *filePath = [[self bundle] pathForResource:@"MailHeader"
+                                                       ofType:@"strings"
+                                                  inDirectory:@"Resources"
+                                              forLocalization:identifier];
+    
+    NSDictionary *stringDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    return [stringDict objectForKey:key];
 }
 
 + (NSString *)localeLanguageCode
@@ -135,11 +145,18 @@
     static NSDictionary *configDictionary;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *filePath = [[MailHeader bundle] pathForResource:@"Config" ofType:@"plist"];
-        configDictionary = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+        NSString *filePath = [[self bundle] pathForResource:@"Config" ofType:@"plist"];
+        configDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
     });
     
     return [configDictionary objectForKey:key];    
+}
+
++ (id)getConfigValue:(NSString *)key languageCode:(NSString *)identifier
+{
+    NSString *filePath = [[self bundle] pathForResource:@"Config" ofType:@"plist" inDirectory:@"Resources" forLocalization:identifier];
+    NSDictionary *configDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    return [configDictionary objectForKey:key];
 }
 
 + (void)assignUserDefaults
@@ -159,6 +176,7 @@
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
+                          @"en", MHBundleHeaderLanguageCode,
                           nil
                           ];
     
@@ -279,7 +297,6 @@
         NSLog(@"%@ - Outlook order mode, currently supported in english locale only.",
               [self bundleName]);
         
-        //SET_DEFAULT_INT(1, MHHeaderLabelMode);
         SET_DEFAULT_INT(1, MHHeaderOrderMode);
     }
     
