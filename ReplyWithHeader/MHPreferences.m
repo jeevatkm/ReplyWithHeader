@@ -95,15 +95,15 @@
 
 - (IBAction)SelectFontButtonPressed:(id)sender
 {
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    [fontManager setDelegate:self];
-    [fontManager setTarget:self];
-    [fontManager orderFrontFontPanel:self];
-    
     NSString *font = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     
-    [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
+    [[NSFontPanel sharedFontPanel] setDelegate:self];
+    [[NSFontPanel sharedFontPanel] setEnabled:YES];
+    [[NSFontPanel sharedFontPanel] makeKeyAndOrderFront:self];
+
+    [[NSFontPanel sharedFontPanel]
+     setPanelFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
 - (IBAction)HeaderLabelModePressed:(id)sender

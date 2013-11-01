@@ -37,7 +37,7 @@
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MHPreferences : NSPreferencesModule
+@interface MHPreferences : NSPreferencesModule <NSWindowDelegate>
 {
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
