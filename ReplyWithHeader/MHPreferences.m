@@ -29,10 +29,10 @@
 #import "MHPreferences.h"
 
 @interface MHPreferences (PrivateMethods)
-    - (IBAction)MailHeaderBundlePressed:(id)sender;
-    - (IBAction)HeaderTypographyPressed:(id)sender;
-    - (IBAction)SelectFontButtonPressed:(id)sender;
-    - (IBAction)HeaderLabelModePressed:(id)sender;
+    - (IBAction)mailHeaderBundlePressed:(id)sender;
+    - (IBAction)headerTypographyPressed:(id)sender;
+    - (IBAction)selectFontButtonPressed:(id)sender;
+    - (IBAction)headerLabelModePressed:(id)sender;
     - (IBAction)openWebsite:(id)sender;
     - (IBAction)openFeedback:(id)sender;
     - (IBAction)openSupport:(id)sender;
@@ -83,17 +83,17 @@
     return [MailHeader bundleCopyright];
 }
 
-- (IBAction)MailHeaderBundlePressed:(id)sender
+- (IBAction)mailHeaderBundlePressed:(id)sender
 {
     [self toggleRwhPreferencesOptions:[sender state]];
 }
 
-- (IBAction)HeaderTypographyPressed:(id)sender
+- (IBAction)headerTypographyPressed:(id)sender
 {
     [self toggleRwhHeaderTypograpghyOptions:[sender state]];
 }
 
-- (IBAction)SelectFontButtonPressed:(id)sender
+- (IBAction)selectFontButtonPressed:(id)sender
 {
     NSString *font = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
@@ -106,7 +106,7 @@
      setPanelFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (IBAction)HeaderLabelModePressed:(id)sender
+- (IBAction)headerLabelModePressed:(id)sender
 {
     [self toggleRwhHeaderLabelOptions:[sender state]];
 }

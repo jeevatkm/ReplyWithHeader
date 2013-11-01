@@ -65,7 +65,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 #pragma mark Class instance methods
 
-- (void)processHTMLMail:(DOMDocumentFragment *)headerFragment newLineFragment:(DOMDocumentFragment *)newLineFragment
+- (void)processHTMLMail:(DOMDocumentFragment *)headerFragment
 {
     // depending on the options selected to increase quote level or whatever,
     // a reply might not have a grandchild from the first child
@@ -79,14 +79,11 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     
     if ( numGrandChildCount == 0 )
     {
-        //[originalEmail insertBefore:newLineFragment refChild: [originalEmail firstChild]];
         [originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
         [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
     }
     else
     {
-        //[[originalEmail firstChild] insertBefore:newLineFragment refChild: [[originalEmail firstChild] firstChild]];
-        
         [[originalEmail firstChild]
             insertBefore:headerFragment refChild: [[originalEmail firstChild] firstChild]];
         
@@ -95,7 +92,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
 }
 
-- (void)processPlainMail:(DOMDocumentFragment *)headerFragment newLineFragment:(DOMDocumentFragment *)newLineFragment
+- (void)processPlainMail:(DOMDocumentFragment *)headerFragment
 {
     if ( textNodeLocation > 0 )
     {
@@ -103,7 +100,6 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         // if not, include in blockquote
         if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
         {
-            //[originalEmail insertBefore:newLineFragment refChild:[dhc item:textNodeLocation]];
             [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
             [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
         }
@@ -134,7 +130,6 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     // specifics
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
-    DOMDocumentFragment *newLineFragment = [self createDocumentFragment:@"<br />"];
     
     // Entourage 2004 text size transformations
     if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled))
@@ -146,39 +141,13 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     {
         if ( isHTMLMail )
         {
-            [self processHTMLMail:headerFragment newLineFragment:newLineFragment];
+            [self processHTMLMail:headerFragment];
         }
         else
         { // Plain text mail compose block
-            [self processPlainMail:headerFragment newLineFragment:newLineFragment];
+            [self processPlainMail:headerFragment];
         }
     }
-    /*else if (manageForwardHeader && composeType == 3)
-    {
-        NSUInteger hCount = [mailHeader getHeaderItemCount];
-        BOOL delPath = [[[originalEmail firstChild] nodeName] isEqualToString:@"BLOCKQUOTE"];
-        DOMNode *blockQuote = [[originalEmail childNodes] item:0];
-        for (int i=0; i<hCount; i++)
-        {
-            if (delPath)
-            {
-                [[originalEmail firstChild] removeChild:[blockQuote firstChild]];
-            }
-            else
-            {
-                [originalEmail removeChild:[originalEmail firstChild]];                
-            }
-        }
-        
-        if ( isHTMLMail )
-        {
-            [self processHTMLMail:headerFragment newLineFragment:newLineFragment];
-        }
-        else
-        { // Plain text mail compose block
-            [self processPlainMail:headerFragment newLineFragment:newLineFragment];
-        }
-    }*/
 }
 
 - (id)initWithMailMessage:(id)mailMessage
@@ -189,21 +158,6 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         
         MHLog(@"Mail Document: %@", document);
         MHLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
-        
-        // for #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
-        /*if (GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
-        {
-            DOMElement *signatureElement = [[document htmlDocument] getElementById:AppleMailSignature];
-            if (signatureElement)
-            {
-                @try {
-                    [[[document htmlDocument] body] removeChild:signatureElement];
-                }
-                @catch (NSException *exception) {
-                    MHLog([exception description]);
-                }
-            }
-        }*/
         
         //now initialize the other vars
         [self initVars];

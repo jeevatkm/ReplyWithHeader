@@ -77,7 +77,7 @@
     if (self)
     {
         NSString *appCastUrl = [[[MailHeader bundle] infoDictionary] objectForKey:MHAppCastURLKey];        
-        NSData *appCastData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:appCastUrl]];
+        NSData *appCastData = [NSData dataWithContentsOfURL:[NSURL URLWithString:appCastUrl]];
         
         if (appCastData)
         {

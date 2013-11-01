@@ -45,7 +45,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="MailHeaderBundlePressed:" target="-2" id="368"/>
+                                    <action selector="mailHeaderBundlePressed:" target="-2" id="8ty-8l-NMx"/>
                                     <binding destination="80" name="value" keyPath="values.MailHeaderBundleEnabled" id="375"/>
                                 </connections>
                             </button>
@@ -117,7 +117,7 @@
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="HeaderTypographyPressed:" target="-2" id="369"/>
+                                                        <action selector="headerTypographyPressed:" target="-2" id="mRk-qx-5AN"/>
                                                         <binding destination="80" name="value" keyPath="values.MHHeaderTypographyEnabled" id="377"/>
                                                     </connections>
                                                 </button>
@@ -168,7 +168,7 @@
                                                         <font key="font" metaFont="smallSystem"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="SelectFontButtonPressed:" target="-2" id="367"/>
+                                                        <action selector="selectFontButtonPressed:" target="-2" id="UXV-Qy-HDD"/>
                                                     </connections>
                                                 </button>
                                                 <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="255">
@@ -207,7 +207,7 @@
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="HeaderLabelModePressed:" target="-2" id="370"/>
+                                                        <action selector="headerLabelModePressed:" target="-2" id="Njs-A9-Gqw"/>
                                                         <binding destination="80" name="value" keyPath="values.MHHeaderLabelOptionEnabled" id="379"/>
                                                     </connections>
                                                 </button>

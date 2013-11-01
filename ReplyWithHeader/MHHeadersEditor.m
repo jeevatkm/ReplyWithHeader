@@ -40,7 +40,6 @@
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1
 {    
-    // calling original implementation
     [self MHLoadHeadersFromBackEnd:arg1];
     
     if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled))

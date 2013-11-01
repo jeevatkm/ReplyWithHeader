@@ -32,8 +32,6 @@
  * The <code>MHPreferences</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
  * specific to the MailHeader plugin.
- * @version \@(#) $Id$
- * @updated $Date$
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
@@ -58,7 +56,7 @@
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;
 
 #pragma mark NSPreferencesModule instance methods
-/*! @group NSPreferencesModule instance methods */
+
 - (void)awakeFromNib;
 - (NSString*)preferencesNibName;
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName;
