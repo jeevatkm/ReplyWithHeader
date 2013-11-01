@@ -61,9 +61,8 @@
 // for issue #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
 - (BOOL)MHokToAddSignatureAutomatically
 {
-    [self MHokToAddSignatureAutomatically];
-    
-    return !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled);
+    return (([MailHeader isEnabled])
+        ? !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled) : [self MHokToAddSignatureAutomatically]);
 }
 
 // for issue #27 - https://github.com/jeevatkm/ReplyWithHeader/issues/27
@@ -71,7 +70,7 @@
 {
     BOOL include = [self MHincludeHeaders];
     
-    if(GET_DEFAULT_BOOL(MHForwardHeaderEnabled) && [self type] == 3)
+    if([MailHeader isEnabled] && GET_DEFAULT_BOOL(MHForwardHeaderEnabled) && [self type] == 3)
         include = FALSE;
     
     return include;

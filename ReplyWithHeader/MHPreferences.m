@@ -194,13 +194,9 @@
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![MailHeader isLocaleSupported] ) {
-        //[self toggleRwhHeaderLabelOptions:FALSE];
-        //[_MHHeaderOptionEnabled setEnabled:FALSE];
         [_MHHeaderOrderMode setEnabled:FALSE];
         
         NSString *toolTip = @"Currently this feature is not supported in your locale, please inform developer.";
-        //[_MHHeaderOptionEnabled setToolTip:toolTip];
-        //[_MHHeaderLabelMode setToolTip:toolTip];
         [_MHHeaderOrderMode setToolTip:toolTip];
     }
     
@@ -258,7 +254,7 @@
 - (void)languagePopUpSelectionChanged:(NSNotification *)notification {
     NSMenuItem *selectedItem = [_MHLanguagePopup selectedItem];
     
-    MHLog(@"Choosen language & code: %@ <==> %@", [selectedItem title], [selectedItem representedObject]);
+    MHLog(@"Choosen language & code: %@ - %@", [selectedItem title], [selectedItem representedObject]);
     
     SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
 }

@@ -1,0 +1,28 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "저작권 © 2013 Jeevanandam M., 판권 소유.";
+    
+    /* Message Strings */
+    "STRING_FROM" = "보낸 사람: ";
+    "STRING_SUBJECT" = "제목: ";
+    "STRING_DATE" = "날짜: ";
+    "STRING_TO" = "받는 사람: ";
+    "STRING_CC" = "참조: ";
+    "STRING_REPLY_TO" = "답장 받는 사람: ";
+    "STRING_SENT" = "보낸 날짜: ";
+    "STRING_WROTE" = "작성:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@ 플러그인 업데이트";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "%@의 새 버전을 사용할 수 있습니다!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ 지금 사용할 수 있습니다 - 당신은 %@가있다. 당신은 지금 다운로드 하시겠습니까?";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "다운로드";
+	"BUTTON_RELEASE_NOTES" = "릴리스 노트";
+	"BUTTON_LATER" = "후";
+}

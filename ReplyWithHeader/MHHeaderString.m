@@ -40,16 +40,12 @@
 
 @interface MHHeaderString (MHNoImplementation)
 - (id)originalMessageHeaders;
-- (NSFont *)userDefaultMessageFont;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
 #pragma mark Constants and global variables
 
-NSString *MH_LABEL_REGEX_STRING = @"\\w+:\\s";
-//NSString *HEADER_LABEL_REGEX_STRING = @"(\\n|\\r)[\\w\\-\\s]+:\\s";
-NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"(\\s<([a-zA-Z][a-zA-Z0-9]*)[^>]*>,?)";
-//NSString *SEMICOLON_NEWLINE_REGEX_STRING = @";\\s*?\\n";
+NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 @implementation MHHeaderString
 
@@ -61,12 +57,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:fontSize.floatValue];
     NSColor *color = [NSUnarchiver unarchiveObjectWithData:GET_DEFAULT_DATA(MHHeaderColor)];
-    
-    NSError * __autoreleasing error = nil;
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:MH_LABEL_REGEX_STRING
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:&error];
     
     if( !GET_DEFAULT_BOOL(MHTypographyEnabled) )
     {
@@ -83,12 +73,13 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
         [row addAttribute:NSForegroundColorAttributeName
                              value:color range:NSMakeRange(0, [row length])];
         
-        NSRange range = [regex rangeOfFirstMatchInString:[row string]
-                                                 options:0
-                                                   range:NSMakeRange(0, [row length])];
+        NSRange range = [[row string] rangeOfString:@":"
+                                            options:NSCaseInsensitiveSearch
+                                              range:NSMakeRange(0, [row length])
+                                             locale:choosenLocale];
         if (range.location != NSNotFound)
         {
-            [row applyFontTraits:NSBoldFontMask range:range];
+            [row applyFontTraits:NSBoldFontMask range:NSMakeRange(0, range.location + 1)];
         }
     }
 }
@@ -162,6 +153,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
     {
         choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
         currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
         NSAttributedString *headerString = [[mailMessage originalMessageHeaders]
                          attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
@@ -261,9 +253,16 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";  //@"
             for (NSTextCheckingResult *match in matches)
             {
                 fromMailId = [[row string] substringWithRange:[match rangeAtIndex:1]];
-                MHLog(@"From Email id %@", fromMailId);
                 
                 [row replaceCharactersInRange:[match range] withString:[NSString stringWithFormat:@" %@%@%@", @"[mailto:", fromMailId, @"]"]];
+                
+                NSString *fromString = [[row string] substringToIndex:[match range].location];
+                
+                fromString = [fromString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                
+                if ([fromString isEqualToString:[fromPrefix stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]) {
+                    [row replaceCharactersInRange:NSMakeRange([match range].location, 1) withString:[NSString stringWithFormat:@" %@ ", fromMailId]];
+                }
             }
         }
         

@@ -292,11 +292,13 @@
     }
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
-    if ( ![self isLocaleSupported] )
+    if ( [self isLocaleSupported] )
     {
+        SET_DEFAULT_INT(2, MHHeaderOrderMode);
+    }
+    else {
         NSLog(@"%@ - Outlook order mode, currently supported in english locale only.",
               [self bundleName]);
-        
         SET_DEFAULT_INT(1, MHHeaderOrderMode);
     }
     
