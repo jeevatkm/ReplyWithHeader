@@ -61,7 +61,7 @@
 // for issue #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
 - (BOOL)MHokToAddSignatureAutomatically
 {
-    return (([MailHeader isEnabled])
+    return (([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3))
         ? !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled) : [self MHokToAddSignatureAutomatically]);
 }
 
