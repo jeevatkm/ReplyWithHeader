@@ -37,6 +37,16 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1310991F1825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		131099201825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/Config.plist; sourceTree = "<group>"; };
+		13109921182554C900C24D9F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		13109922182554C900C24D9F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = pt; path = pt.lproj/Config.plist; sourceTree = "<group>"; };
+		13109923182559C000C24D9F /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/MailHeader.strings"; sourceTree = "<group>"; };
+		13109924182559C000C24D9F /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pt-PT"; path = "pt-PT.lproj/Config.plist"; sourceTree = "<group>"; };
+		1310992518255B8F00C24D9F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MailHeader.strings"; sourceTree = "<group>"; };
+		1310992618255B8F00C24D9F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Config.plist"; sourceTree = "<group>"; };
+		1310992718255C3000C24D9F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MailHeader.strings"; sourceTree = "<group>"; };
+		1310992818255C3100C24D9F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/Config.plist"; sourceTree = "<group>"; };
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
@@ -320,6 +330,7 @@
 				sv,
 				fi,
 				ko,
+				"pt-PT",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -401,6 +412,11 @@
 				138D6FDD1823BA4600D30C71 /* ja */,
 				138D6FDF1823C38200D30C71 /* ko */,
 				138D6FE11823CBF400D30C71 /* fr */,
+				1310991F1825524800C24D9F /* nl */,
+				13109921182554C900C24D9F /* pt */,
+				13109923182559C000C24D9F /* pt-PT */,
+				1310992518255B8F00C24D9F /* zh-Hans */,
+				1310992718255C3000C24D9F /* zh-Hant */,
 			);
 			name = MailHeader.strings;
 			sourceTree = "<group>";
@@ -447,6 +463,11 @@
 				138D6FDE1823BA4600D30C71 /* ja */,
 				138D6FE01823C38200D30C71 /* ko */,
 				138D6FE21823CBF400D30C71 /* fr */,
+				131099201825524800C24D9F /* nl */,
+				13109922182554C900C24D9F /* pt */,
+				13109924182559C000C24D9F /* pt-PT */,
+				1310992618255B8F00C24D9F /* zh-Hans */,
+				1310992818255C3100C24D9F /* zh-Hant */,
 			);
 			name = Config.plist;
 			sourceTree = "<group>";

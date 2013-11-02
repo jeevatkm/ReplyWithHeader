@@ -263,8 +263,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     // setup a regular expression to find a colon followed by some space and a new line -
     // the first one should be the original line...
     @try {
-        NSString *currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
-        if ([currentLocaleIdentifier isEqualToString:@"ja"])
+        if ([MailHeader isSpecificLocale]) // Need specific handling
         {
             NSString *searchString = MHLocalizedString(@"STRING_WROTE");
             if (msgComposeType == 3)
@@ -280,7 +279,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
                 textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];
             }
         }
-        else
+        else // Rest of the locale, feasible to take care by regex
         {
             NSError *error = nil;
             NSRegularExpression *regex = [NSRegularExpression

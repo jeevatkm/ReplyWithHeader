@@ -44,22 +44,37 @@
     return GET_DEFAULT_BOOL(MHBundleEnabled);
 }
 
+// for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
 + (BOOL)isLocaleSupported
 {
     static BOOL supported;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *preferredLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
-        
-        // for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
+        NSString *preferredLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations]
+                                               objectAtIndex:0];
+
         NSArray *bundlePreferredLocales = [[self bundle] preferredLocalizations];
         
-        supported = [bundlePreferredLocales containsObject:preferredLocale];
+        supported = [bundlePreferredLocales containsObject:preferredLocaleIdentifier];
         
         MHLog(@"Language Support:  bundlePreferredLocales %@ result %@",
               bundlePreferredLocales, supported ? @"YES" : @"NO");
     });
     return supported;
+}
+
++ (BOOL)isSpecificLocale
+{
+    static BOOL specificLocale;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        
+        specificLocale = ([currentLocaleIdentifier isEqualToString:@"ja"]
+                          || [currentLocaleIdentifier isEqualToString:@"zh-Hans"]
+                          || [currentLocaleIdentifier isEqualToString:@"zh-Hant"]);
+    });
+    return specificLocale;
 }
 
 + (NSBundle *)bundle

@@ -39,6 +39,7 @@
 
 + (BOOL)isEnabled;
 + (BOOL)isLocaleSupported;
++ (BOOL)isSpecificLocale;
 + (NSBundle *)bundle;
 + (NSString *)bundleNameAndVersion;
 + (NSString *)bundleName;

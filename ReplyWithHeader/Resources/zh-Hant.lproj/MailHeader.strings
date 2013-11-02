@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "版權 © 2013 Jeevanandam M., 保留所有權利。";
+    
+    /* Message Strings */
+    "STRING_FROM" = "寄件人";
+    "STRING_SUBJECT" = "標題";
+    "STRING_DATE" = "日期";
+    //"STRING_TO" = "To";
+    //"STRING_CC" = "Cc";
+    //"STRING_REPLY_TO" = "Reply-To";
+    "STRING_SENT" = "寄件日期";
+    "STRING_WROTE" = "寫道：";
+    "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件：";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@插件更新";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "新版本的%@！";
+    "STRING_UPDATE_VERSION_DESC" = "現已%@ %@ - %@。你想現在就下載嗎？";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "下載";
+	"BUTTON_RELEASE_NOTES" = "發行說明";
+	"BUTTON_LATER" = "後來";
+}
