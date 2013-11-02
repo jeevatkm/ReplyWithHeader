@@ -94,9 +94,14 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
-        NSRange range = [[row string] rangeOfString:[allowedHeaders objectAtIndex:i]];
         
-        [row replaceCharactersInRange:range withString:[choosenHeaderLabels objectAtIndex:i]];
+        NSRange range = [[row string] rangeOfString:@":"
+                                            options:NSCaseInsensitiveSearch
+                                              range:NSMakeRange(0, [row length])
+                                             locale:currentLocale];
+        
+        [row replaceCharactersInRange:NSMakeRange(0, range.location)
+                           withString:[choosenHeaderLabels objectAtIndex:i]];
     }
 }
 
@@ -153,6 +158,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     {
         choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
         currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        
+        currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:currentLocaleIdentifier];
         choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
         NSAttributedString *headerString = [[mailMessage originalMessageHeaders]
@@ -176,10 +183,19 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             for (int i=0; i<[headers count]; i++)
             {
                 NSString *row = [headers objectAtIndex:i];
-                if ([row hasPrefix:str]) {
-                    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:row];
-                    [messageAttribution addObject:attrString];
-                    break;
+                NSRange range = [row rangeOfString:@":"
+                                           options:NSCaseInsensitiveSearch
+                                             range:NSMakeRange(0, [row length])
+                                            locale:currentLocale];
+                
+                if (range.location != NSNotFound) {
+                    NSString *label = [row substringToIndex:range.location];
+                    
+                    if (NSOrderedSame == [str localizedCaseInsensitiveCompare:label]) {
+                        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:row];
+                        [messageAttribution addObject:attrString];
+                        break;
+                    }
                 }
             }
         }

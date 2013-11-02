@@ -4,11 +4,11 @@
 <dict>
 	<key>AllowedHeaders</key>
 	<array>
-		<string>보낸 사람: </string>
-		<string>제목: </string>
-		<string>날짜: </string>
-		<string>받는 사람: </string>
-		<string>참조: </string>
+		<string>보낸 사람</string>
+		<string>제목</string>
+		<string>날짜</string>
+		<string>받는 사람</string>
+		<string>참조</string>
 	</array>
 </dict>
 </plist>

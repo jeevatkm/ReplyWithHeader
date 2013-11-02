@@ -4,11 +4,11 @@
 <dict>
 	<key>AllowedHeaders</key>
 	<array>
-		<string>差出人: </string>
-		<string>件名: </string>
-		<string>日時: </string>
-		<string>宛先: </string>
-		<string>Cc: </string>
+		<string>差出人</string>
+		<string>件名</string>
+		<string>日付</string>
+		<string>宛先</string>
+		<string>Cc</string>
 	</array>
 </dict>
 </plist>

@@ -4,11 +4,11 @@
 <dict>
 	<key>AllowedHeaders</key>
 	<array>
-		<string>From: </string>
-		<string>Subject: </string>
-		<string>Date: </string>
-		<string>To: </string>
-		<string>Cc: </string>
+		<string>From</string>
+		<string>Subject</string>
+		<string>Date</string>
+		<string>To</string>
+		<string>Cc</string>
 	</array>
 </dict>
 </plist>

@@ -5,13 +5,13 @@
     "COPYRIGHT" = "저작권 © 2013 Jeevanandam M., 판권 소유.";
     
     /* Message Strings */
-    "STRING_FROM" = "보낸 사람: ";
-    "STRING_SUBJECT" = "제목: ";
-    "STRING_DATE" = "날짜: ";
-    "STRING_TO" = "받는 사람: ";
-    "STRING_CC" = "참조: ";
-    "STRING_REPLY_TO" = "답장 받는 사람: ";
-    "STRING_SENT" = "보낸 날짜: ";
+    "STRING_FROM" = "보낸 사람";
+    "STRING_SUBJECT" = "제목";
+    "STRING_DATE" = "날짜";
+    //"STRING_TO" = "받는 사람";
+    //"STRING_CC" = "참조";
+    //"STRING_REPLY_TO" = "답장 받는 사람";
+    "STRING_SENT" = "보낸 날짜";
     "STRING_WROTE" = "작성:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";

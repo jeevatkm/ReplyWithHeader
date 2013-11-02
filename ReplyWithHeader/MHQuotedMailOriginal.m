@@ -65,7 +65,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 #pragma mark Class instance methods
 
-- (void)processHTMLMail:(DOMDocumentFragment *)headerFragment
+- (void)insertForHTMLMail:(DOMDocumentFragment *)headerFragment
 {
     // depending on the options selected to increase quote level or whatever,
     // a reply might not have a grandchild from the first child
@@ -92,7 +92,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
 }
 
-- (void)processPlainMail:(DOMDocumentFragment *)headerFragment
+- (void)insertForPlainMail:(DOMDocumentFragment *)headerFragment
 {
     if ( textNodeLocation > 0 )
     {
@@ -112,11 +112,9 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
 }
 
-- (void)insertMailHeader:(MHHeaderString *)mailHeader msgComposeType:(int)composeType
+- (void)insertMailHeader:(MHHeaderString *)mailHeader
 {
-    MHLog(@"Composing message type is %d", composeType);
     
-    // global
     if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
     {
         [mailHeader applyHeaderLabelOptions];
@@ -137,26 +135,29 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         [self applyEntourage2004Support:headerFragment];
     }
     
-    if (composeType == 1 || composeType == 2 || (manageForwardHeader && composeType == 3))
+    if (msgComposeType == 1 || msgComposeType == 2 || (manageForwardHeader && msgComposeType == 3))
     {
         if ( isHTMLMail )
         {
-            [self processHTMLMail:headerFragment];
+            [self insertForHTMLMail:headerFragment];
         }
         else
         { // Plain text mail compose block
-            [self processPlainMail:headerFragment];
+            [self insertForPlainMail:headerFragment];
         }
     }
 }
 
-- (id)initWithMailMessage:(id)mailMessage
+- (id)initWithMailMessage:(id)mailMessage msgComposeType:(int)composeType
 {
     if ( self = [super init] )
     {
         document = [mailMessage document];
         
+        msgComposeType = composeType;
+        
         MHLog(@"Mail Document: %@", document);
+        MHLog(@"Composing message type is %d", msgComposeType);
         MHLog(@"Complete HTML string %@", [[[document htmlDocument] body] innerHTML]);
         
         //now initialize the other vars
@@ -176,9 +177,9 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         if ( dhc.length > 1)
         {   
             if (isHTMLMail)
-                [self removeOriginalHeaderPrefix];
+                [self removeHTMLHeaderPrefix];
             else
-                [self removeOriginalPlainTextHeaderPrefix];
+                [self removePlainTextHeaderPrefix];
         }
     }
     
@@ -219,38 +220,25 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     textNodeLocation = 0;
 }
 
-- (void)removeOriginalPlainTextHeaderPrefix
+- (void)removePlainTextHeaderPrefix
 {
-    BOOL isLocationFound = NO;
-    
-    for (int i=0; i<dhc.length; i++)
+    for (int i=0; i < dhc.length; i++)
     {
-        DOMNode *node = [dhc item:i];        
-        NSRange range = [[[node firstChild] stringValue]
-                            rangeOfString:MHLocalizedString(@"STRING_WROTE")];
-        
-        if (range.length != 0)
+        MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
+        if( [[dhc item:i] nodeType]==3 )
         {
-            [[node firstChild] setTextContent:@""];
-            textNodeLocation = i;
-            isLocationFound = YES;
+            // Text node, On ..., Wrote is text
+            textNodeLocation=i;
             break;
         }
     }
     
-    if (!isLocationFound)
-    { // kept for backward workaround, however need a revisit
-        for (int i=0; i < dhc.length; i++)
-        {
-            if( [[dhc item:i] nodeType]==3 )
-            {
-                // Text node, On ..., Wrote is text
-                textNodeLocation=i; break;
-            }
-        }
-        
-        // if signature at top, item==3 else item==1
-        [originalEmail removeChild:[dhc item:textNodeLocation]];
+    // if signature at top, item==3 else item==1
+    [originalEmail removeChild:[dhc item:textNodeLocation]];
+    
+    
+    if ([[[[originalEmail childNodes] item:textNodeLocation+1] nodeName] isEqualToString:@"BR"]) {
+        [originalEmail removeChild:[dhc item:textNodeLocation+1]];
     }
     
     //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
@@ -267,42 +255,69 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     MHLog(@"New header location for Plain Text mail is %d", textNodeLocation);
 }
 
-- (void)removeOriginalHeaderPrefix
+- (void)removeHTMLHeaderPrefix
 {
-    
     // Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
     // on those messages that arrive after mail.app is opened - so we'll just keep removing items
     // from the beginnning until we find the element that has the "wrote:" text in it.
     // setup a regular expression to find a colon followed by some space and a new line -
     // the first one should be the original line...
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:WROTE_TEXT_REGEX_STRING
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:&error];    
-    NSRange textRange = [regex
-                         rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
-                         options:0
-                         range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
-    
-    //keep removing items until we find the "wrote:" text...
-    while ( textRange.location == NSNotFound )
-    {        
-        [originalEmail removeChild:[dhc item:0]];
-        textRange = [regex
-                     rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
-                     options:0
-                     range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+    @try {
+        NSString *currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        if ([currentLocaleIdentifier isEqualToString:@"ja"])
+        {
+            NSString *searchString = MHLocalizedString(@"STRING_WROTE");
+            if (msgComposeType == 3)
+            {
+                searchString = MHLocalizedString(@"STRING_FORWARDED_MESSAGE");
+            }
+            
+            NSRange textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];
+            
+            while ( textRange.location == NSNotFound )
+            {
+                [originalEmail removeChild:[dhc item:0]];
+                textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];
+            }
+        }
+        else
+        {
+            NSError *error = nil;
+            NSRegularExpression *regex = [NSRegularExpression
+                                          regularExpressionWithPattern:WROTE_TEXT_REGEX_STRING
+                                          options:NSRegularExpressionCaseInsensitive
+                                          error:&error];
+            NSRange textRange = [regex
+                                 rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                                 options:0
+                                 range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+            
+            //keep removing items until we find the "wrote:" text...
+            while ( textRange.location == NSNotFound )
+            {
+                [originalEmail removeChild:[dhc item:0]];
+                textRange = [regex
+                             rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                             options:0
+                             range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+            }
+        }
+        
+        //remove the line with the "wrote:" text
+        if ([dhc item:0])
+        {
+            [originalEmail removeChild:[dhc item:0]];
+        }
+        
+        // remove the first new line element to shorten the distance between the new email and quoted text
+        // this is required in order to get the header inside the quoted text line
+        if ([[[originalEmail firstChild] nodeName] isEqualToString:@"BR"])
+        {   
+            [originalEmail removeChild:[originalEmail firstChild]];
+        }
     }
-    
-    //remove the line with the "wrote:" text
-    [originalEmail removeChild:[dhc item:0]];
-    
-    // remove the first new line element to shorten the distance between the new email and quoted text
-    // this is required in order to get the header inside the quoted text line
-    if ([[[originalEmail firstChild] nodeName] isEqualToString:@"BR"])
-    {   
-        [originalEmail removeChild:[originalEmail firstChild]];
+    @catch (NSException *exception) {
+        NSLog(@"%@", [exception reason]);
     }
 }
 

@@ -48,13 +48,13 @@
 	if (([MailHeader isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3))
     {
         // Initailzing the quoted text from the original email
-        MHQuotedMailOriginal *quotedText = [[MHQuotedMailOriginal alloc] initWithMailMessage:self];
+        MHQuotedMailOriginal *quotedText = [[MHQuotedMailOriginal alloc] initWithMailMessage:self msgComposeType:msgCompose];
         
         // Create the header string element from the original email
         MHHeaderString *newheaderString = [[MHHeaderString alloc] initWithMailMessage:self];
         
         //insert the new header text
-        [quotedText insertMailHeader:newheaderString msgComposeType:msgCompose];
+        [quotedText insertMailHeader:newheaderString];
     }
 }
 

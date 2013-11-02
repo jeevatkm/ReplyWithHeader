@@ -5,13 +5,13 @@
     "COPYRIGHT" = "Urheberrecht © 2013 Jeevanandam M., Alle Rechte vorbehalten.";
     
     /* Message Strings */
-    "STRING_FROM" = "Von: ";
-    "STRING_SUBJECT" = "Betreff: ";
-    "STRING_DATE" = "Datum: ";
-    "STRING_TO" = "An: ";
-    "STRING_CC" = "Kopie: ";
-    "STRING_REPLY_TO" = "Antwort an: ";
-    "STRING_SENT" = "Gesendet: ";
+    "STRING_FROM" = "Von";
+    "STRING_SUBJECT" = "Betreff";
+    "STRING_DATE" = "Datum";
+    //"STRING_TO" = "An";
+    //"STRING_CC" = "Kopie";
+    //"STRING_REPLY_TO" = "Antwort an";
+    "STRING_SENT" = "Gesendet";
     "STRING_WROTE" = "schrieb";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
