@@ -38,6 +38,8 @@
 @interface MailHeader : NSObject
 
 + (BOOL)isEnabled;
++ (NSLocale *)currentLocale;
++ (NSString *)localeIdentifier;
 + (BOOL)isLocaleSupported;
 + (BOOL)isSpecificLocale;
 + (NSBundle *)bundle;
@@ -49,7 +51,6 @@
 + (NSImage *)bundleLogo;
 + (NSString *)localizedString:(NSString *)key;
 + (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier;
-+ (NSString *)localeLanguageCode;
 + (id)getConfigValue:(NSString *)key;
 + (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
 

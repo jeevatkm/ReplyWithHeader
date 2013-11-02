@@ -40,9 +40,9 @@
     NSDictionary *cleanHeaders;
     NSUInteger noOfHeaderLabels;
     NSArray *allowedHeaders;
-    NSLocale *currentLocale;
+    //NSLocale *currentLocale;
     NSLocale *choosenLocale;
-    NSString *currentLocaleIdentifier;
+    //NSString *currentLocaleIdentifier;
     NSString *choosenLocaleIdentifier;
 }
 

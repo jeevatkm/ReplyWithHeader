@@ -43,9 +43,9 @@
 
 #pragma mark Class private methods
 
-- (void)toggleRwhPreferencesOptions:(BOOL *)state
+- (void)toggleMailPreferencesOptions:(BOOL *)state
 {
-    [_MHHeaderTypographyEnabled setEnabled:state];    
+    [_MHHeaderTypographyEnabled setEnabled:state];
     [_MHForwardHeaderEnabled setEnabled:state];
     [_MHHeaderOptionEnabled setEnabled:state];
     [_MHEntourage2004SupportEnabled setEnabled:state];
@@ -54,23 +54,21 @@
     [_MHRemoveSignatureEnabled setEnabled:state];
     [_MHLanguagePopup setEnabled:state];
     
-    [self toggleRwhHeaderTypograpghyOptions:state];
-    [self toggleRwhHeaderLabelOptions:state];
+    [self toggleHeaderTypograpghyOptions:state];
+    [self toggleHeaderLabelOptions:state];
 }
 
-- (void)toggleRwhHeaderLabelOptions:(BOOL *)state
+- (void)toggleHeaderLabelOptions:(BOOL *)state
 {
-    if ([MailHeader isLocaleSupported]) {
-        [_MHHeaderOrderMode setEnabled:state];
-    }
-    
+    [_MHHeaderOrderMode setEnabled:state];
     [_MHHeaderLabelMode setEnabled:state];
 }
 
-- (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state
+- (void)toggleHeaderTypograpghyOptions:(BOOL *)state
 {
     [_MHSelectFont setEnabled:state];
     [_MHColorWell setEnabled:state];
+    [_MHHeaderInfoFontAndSize setEnabled:state];
 }
 
 - (NSString *)NameAndVersion
@@ -85,12 +83,12 @@
 
 - (IBAction)mailHeaderBundlePressed:(id)sender
 {
-    [self toggleRwhPreferencesOptions:[sender state]];
+    [self toggleMailPreferencesOptions:[sender state]];
 }
 
 - (IBAction)headerTypographyPressed:(id)sender
 {
-    [self toggleRwhHeaderTypograpghyOptions:[sender state]];
+    [self toggleHeaderTypograpghyOptions:[sender state]];
 }
 
 - (IBAction)selectFontButtonPressed:(id)sender
@@ -108,7 +106,7 @@
 
 - (IBAction)headerLabelModePressed:(id)sender
 {
-    [self toggleRwhHeaderLabelOptions:[sender state]];
+    [self toggleHeaderLabelOptions:[sender state]];
 }
 
 - (void)changeFont:(id)sender
@@ -185,7 +183,7 @@
 
 - (void)awakeFromNib
 {   
-    [self toggleRwhPreferencesOptions:[MailHeader isEnabled]];
+    [self toggleMailPreferencesOptions:[MailHeader isEnabled]];
     
     [_MHHeaderInfoFontAndSize
      setStringValue:[NSString stringWithFormat:@"%@ %@",
@@ -194,10 +192,14 @@
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![MailHeader isLocaleSupported] ) {
-        [_MHHeaderOrderMode setEnabled:FALSE];
         
-        NSString *toolTip = @"Currently this feature is not supported in your locale, please inform developer.";
-        [_MHHeaderOrderMode setToolTip:toolTip];
+        [self toggleMailPreferencesOptions:FALSE];
+        
+        [_MHBundleEnabled setEnabled:FALSE];
+        
+        NSString *toolTip = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\n\nPlease contact plugin author for support.", [MailHeader bundleNameAndVersion], [MailHeader localeIdentifier]];
+        
+        [_MHBundleTabBox setToolTip:toolTip];
     }
     
     NSArray *localizations = [[MailHeader bundle] localizations];
@@ -215,14 +217,14 @@
         [[_MHLanguagePopup menu] addItem:item];
     }
     
-    NSString *langCode = GET_DEFAULT(MHBundleHeaderLanguageCode);
-    if (!langCode)
+    NSString *localeIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
+    if (!localeIdentifier)
     {
-        langCode = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
+        localeIdentifier = [MailHeader localeIdentifier];
     }
     
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:langCode];
-    NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:langCode];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localeIdentifier];
+    NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:localeIdentifier];
     [_MHLanguagePopup selectItemWithTitle:name];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -254,7 +256,8 @@
 - (void)languagePopUpSelectionChanged:(NSNotification *)notification {
     NSMenuItem *selectedItem = [_MHLanguagePopup selectedItem];
     
-    MHLog(@"Choosen language & code: %@ - %@", [selectedItem title], [selectedItem representedObject]);
+    MHLog(@"Choosen language & identifier: %@ - %@",
+          [selectedItem title], [selectedItem representedObject]);
     
     SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
 }

@@ -64,6 +64,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         color = [NSColor blackColor];
     }
     
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    [paraStyle setLineSpacing:15];
+    
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
@@ -72,6 +75,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                              value:font range:NSMakeRange(0, [row length])];
         [row addAttribute:NSForegroundColorAttributeName
                              value:color range:NSMakeRange(0, [row length])];
+        [row addAttribute:NSParagraphStyleAttributeName
+                          value:paraStyle
+                          range:NSMakeRange(0, [row length])];
         
         NSRange range = [[row string] rangeOfString:@":"
                                             options:NSCaseInsensitiveSearch
@@ -98,7 +104,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         NSRange range = [[row string] rangeOfString:@":"
                                             options:NSCaseInsensitiveSearch
                                               range:NSMakeRange(0, [row length])
-                                             locale:currentLocale];
+                                             locale:[MailHeader currentLocale]];
         
         [row replaceCharactersInRange:NSMakeRange(0, range.location)
                            withString:[choosenHeaderLabels objectAtIndex:i]];
@@ -133,7 +139,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
-    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
         [self applyChoosenLanguageLabels];
     }
     
@@ -157,9 +163,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     if (self = [super init])
     {
         choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
-        currentLocaleIdentifier = [[[MailHeader bundle] preferredLocalizations] objectAtIndex:0];
-        
-        currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:currentLocaleIdentifier];
         choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
         NSAttributedString *headerString = [[mailMessage originalMessageHeaders]
@@ -186,7 +189,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                 NSRange range = [row rangeOfString:@":"
                                            options:NSCaseInsensitiveSearch
                                              range:NSMakeRange(0, [row length])
-                                            locale:currentLocale];
+                                            locale:[MailHeader currentLocale]];
                 
                 if (range.location != NSNotFound) {
                     NSString *label = [row substringToIndex:range.location];
@@ -211,7 +214,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 {
     NSString *subjectPrefix = MHLocalizedString(@"STRING_SUBJECT");
     
-    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
         subjectPrefix = [MailHeader localizedString:@"STRING_SUBJECT"
                                    localeIdentifier:choosenLocaleIdentifier];
     }
@@ -245,7 +248,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSString *datePrefix = MHLocalizedString(@"STRING_DATE");
     NSString *dateToBePrefix = MHLocalizedString(@"STRING_SENT");
     
-    if ([currentLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
         fromPrefix = [MailHeader localizedString:@"STRING_FROM"
                                 localeIdentifier:choosenLocaleIdentifier];
         

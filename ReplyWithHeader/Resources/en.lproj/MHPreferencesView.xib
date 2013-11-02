@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MHPreferences">
             <connections>
                 <outlet property="_MHBundleEnabled" destination="8" id="354"/>
+                <outlet property="_MHBundleTabBox" destination="129" id="5w7-83-EXo"/>
                 <outlet property="_MHColorWell" destination="215" id="360"/>
                 <outlet property="_MHEntourage2004SupportEnabled" destination="16" id="361"/>
                 <outlet property="_MHForwardHeaderEnabled" destination="114" id="362"/>

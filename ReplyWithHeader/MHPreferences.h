@@ -37,6 +37,7 @@
  */
 @interface MHPreferences : NSPreferencesModule <NSWindowDelegate>
 {
+    IBOutlet NSTabView *_MHBundleTabBox;
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
     IBOutlet NSButton *_MHHeaderTypographyEnabled;
