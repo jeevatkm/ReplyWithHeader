@@ -65,19 +65,16 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
     
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    [paraStyle setLineSpacing:15];
+    [paraStyle setLineSpacing:0];
+    [paraStyle setMaximumLineHeight:15.0];
+    [paraStyle setParagraphSpacing:0.0];
+    [paraStyle setParagraphSpacingBefore:-1.3];
     
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
-        [row addAttribute:NSFontAttributeName
-                             value:font range:NSMakeRange(0, [row length])];
-        [row addAttribute:NSForegroundColorAttributeName
-                             value:color range:NSMakeRange(0, [row length])];
-        [row addAttribute:NSParagraphStyleAttributeName
-                          value:paraStyle
-                          range:NSMakeRange(0, [row length])];
+        [row addAttributes:@{ NSFontAttributeName:font, NSForegroundColorAttributeName:color, NSParagraphStyleAttributeName:paraStyle } range:NSMakeRange(0, [row length])];
         
         NSRange range = [[row string] rangeOfString:@":"
                                             options:NSCaseInsensitiveSearch

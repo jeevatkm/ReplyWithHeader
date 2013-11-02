@@ -129,6 +129,8 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     
+    MHLog(@"Header HTML %@", [[headerFragment firstChild] outerHTML]);
+    
     // Entourage 2004 text size transformations
     if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled))
     {
