@@ -1,0 +1,31 @@
+#!/bin/sh
+
+#  preinstall script
+#  ReplyWithHeader
+#
+#  Created by Jeevanandam M. on Nov 3, 2013.
+#
+
+mh_install_path=${HOME}/Library/Mail/Bundles
+mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
+mh_log_file=/tmp/replywithheader.installer.log
+
+echo "RWH:: Quitting Mail.app" > ${mh_log_file}
+osascript -e "quit app \"Mail\""
+
+OS_VERSION=`sw_vers -productVersion | cut -d . -f 1,2`
+echo "RWH:: Mac OS X ${OS_VERSION}" >> ${mh_log_file}
+
+mh_mail_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleShortVersionString)
+mh_mail_build_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleVersion)
+echo "RWH:: Mail.app ${mh_mail_version} [Build ${mh_mail_build_version}]" >> ${mh_log_file}
+
+if [ ! -e ${mh_install_path} ]; then
+	echo "RWH:: '${mh_install_path}' directory not exists, creating one" >> ${mh_log_file}
+    mkdir -p ${mh_install_path}
+fi
+
+if [ -s ${mh_plugin} ]; then
+	echo "RWH:: rm -rf ${mh_plugin}" >> ${mh_log_file}
+	rm -rf ${mh_plugin}
+fi

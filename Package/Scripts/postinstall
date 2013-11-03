@@ -1,0 +1,49 @@
+#!/bin/sh
+
+#  postinstall script
+#  ReplyWithHeader
+#
+#  Created by Jeevanandam M. on Nov 3, 2013.
+#
+
+mh_user=${USER}
+mh_install_path=${HOME}/Library/Mail/Bundles
+mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
+mh_log_file=/tmp/replywithheader.installer.log
+
+if [ ! -e ${mh_install_path} ]; then
+	echo "RWH:: '${mh_install_path}' directory not exists, creating one" >> ${mh_log_file}
+    mkdir -p ${mh_install_path}
+fi
+
+if [ -s ${mh_plugin} ]; then
+	echo "RWH:: rm -rf ${mh_plugin}" >> ${mh_log_file}
+	rm -rf ${mh_plugin}
+fi
+
+echo "RWH:: mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_path}" >> ${mh_log_file}
+mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_path}
+
+if [ ${mh_user} == root ] ; then
+	echo "RWH:: root users is installing" >> ${mh_log_file}
+    domain=/Library/Preferences/com.apple.mail.plist
+else
+	echo "RWH:: ${mh_user} user is installing plugin" >> ${mh_log_file}
+   domain=/Users/${mh_user}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
+fi
+
+echo "RWH:: domain is ${domain}"  >> ${mh_log_file}
+
+if [ -f ${domain} ]; then
+    echo "RWH:: Enabling plugin support in Mail.app" >> ${mh_log_file}
+    sudo chown ${mh_user} ${domain}
+    defaults write ${domain} EnableBundles -bool true
+    sudo defaults write ${domain} EnableBundles -bool true
+    sudo chown ${mh_user} ${domain}
+fi
+
+echo "RWH:: installation complete"  >> ${mh_log_file}
+
+# let's cleanup
+echo "RWH:: cleanup"  >> ${mh_log_file}
+rm -rf /tmp/rwh-installation

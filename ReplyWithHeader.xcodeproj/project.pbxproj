@@ -287,6 +287,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */,
+				138EB9281826B1B300B27E3E /* Package Maker */,
 			);
 			buildRules = (
 			);
@@ -360,6 +361,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		138EB9281826B1B300B27E3E /* Package Maker */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Package Maker";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#Packager\n\nif [[ $CONFIGURATION == \"Release\" ]]; then\nMH_BUILD_VERSION=$(defaults read ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Info CFBundleVersion)\n\nrm -rf '/tmp/MailHeader/*'\nmkdir -p '/tmp/MailHeader/pkg'\n\ncp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} /tmp/MailHeader/pkg\n\npkgbuild --root \"/tmp/MailHeader/pkg\" --scripts \"${SRCROOT}/Package/Scripts/\" --identifier \"com.myjeeva.replywithheader.pkg\" --version \"${MH_BUILD_VERSION}\" --install-location \"/tmp/rwh-installation/\" \"${BUILT_PRODUCTS_DIR}/ReplyWithHeader-${MH_BUILD_VERSION}.pkg\"\n\nopen \"$BUILT_PRODUCTS_DIR\"\n\nfi";
+		};
 		4D5FEE9312723CCE00A945C5 /* Bundle Packing and Deploy Local */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -373,7 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\n/bin/rm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}\n\n# Installer\n#MH_BUILD_VERSION=$(defaults read ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Info CFBundleVersion)\n#MH_BUILD_DIR_NAME=\"${PRODUCT_NAME}-v${MH_BUILD_VERSION}\"\n\n#/bin/rm -rf /tmp/MailHeader/\n#/bin/mkdir -p \"/tmp/MailHeader/${MH_BUILD_DIR_NAME}\"\n\n#/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} \"/tmp/MailHeader/${MH_BUILD_DIR_NAME}\"\n#/bin/cp ${SRCROOT}/Package/Install-or-Upgrade.command /tmp/MailHeader/${MH_BUILD_DIR_NAME}\n#/bin/cp ${SRCROOT}/Package/Uninstall.command /tmp/MailHeader/${MH_BUILD_DIR_NAME}\n\n#cd /tmp/MailHeader/ && zip -r \"${MH_BUILD_DIR_NAME}.zip\" ${MH_BUILD_DIR_NAME}\n\n#/bin/cp \"/tmp/MailHeader/${MH_BUILD_DIR_NAME}.zip\" ${HOME}/Downloads/\n\n# Installer\n#MH_BUILD_VERSION=$(defaults read ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Info CFBundleVersion)\n\n#/bin/rm -rf '/tmp/MailHeader/*'\n#/bin/mkdir -p '/tmp/MailHeader/pkg'\n\n#/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} /tmp/MailHeader/pkg\n\n#pkgbuild --root \"/tmp/MailHeader/pkg\" \\\n#--scripts \"${SRCROOT}/Package/Scripts\" \\\n#--identifier \"com.myjeeva.mac.install.ReplyWithHeader\" \\\n#--version \"${MH_BUILD_VERSION}\" \\\n#--install-location \"${HOME}/Library/Mail/Bundles\" \\\n#--ownership recommended \\\n#\"${BUILT_PRODUCTS_DIR}/ReplyWithHeader.pkg\"\n\n";
+			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\n/bin/rm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
