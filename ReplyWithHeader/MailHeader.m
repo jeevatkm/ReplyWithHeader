@@ -151,7 +151,7 @@
 {
     NSString *filePath = [[self bundle] pathForResource:@"MailHeader"
                                                        ofType:@"strings"
-                                                  inDirectory:@"Resources"
+                                                  inDirectory:@""
                                               forLocalization:identifier];
     
     NSDictionary *stringDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
@@ -173,7 +173,11 @@
 
 + (id)getConfigValue:(NSString *)key languageCode:(NSString *)identifier
 {
-    NSString *filePath = [[self bundle] pathForResource:@"Config" ofType:@"plist" inDirectory:@"Resources" forLocalization:identifier];
+    NSString *filePath = [[self bundle] pathForResource:@"Config"
+                                                 ofType:@"plist"
+                                            inDirectory:@""
+                                        forLocalization:identifier];
+    
     NSDictionary *configDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
     return [configDictionary objectForKey:key];
 }
