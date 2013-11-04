@@ -9,6 +9,7 @@
 mh_user=${USER}
 mh_install_path=${HOME}/Library/Mail/Bundles
 mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
+mh_plugin_plist=${mh_plugin}/Contents/Info.plist
 mh_log_file=/tmp/replywithheader.installer.log
 
 if [ ! -e ${mh_install_path} ]; then
@@ -40,6 +41,23 @@ if [ -f ${domain} ]; then
     defaults write ${domain} EnableBundles -bool true
     sudo defaults write ${domain} EnableBundles -bool true
     sudo chown ${mh_user} ${domain}
+fi
+
+if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
+mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
+        if [[ ! -z "${mh_mail_app_uuid}" ]]; then
+                echo "RWH:: adding UUID ${mh_mail_app_uuid}" >> ${mh_log_file}
+                defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        fi
+fi
+
+if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
+mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
+
+        if [[ ! -z "${mh_msg_frwk_uuid}" ]]; then
+                echo "RWH:: adding UUID ${mh_msg_frwk_uuid}" >> ${mh_log_file}
+                defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add '"${mh_msg_frwk_uuid}"'
+        fi
 fi
 
 echo "RWH:: installation complete"  >> ${mh_log_file}
