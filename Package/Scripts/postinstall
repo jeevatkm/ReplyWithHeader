@@ -53,10 +53,9 @@ fi
 
 if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
 mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
-
         if [[ ! -z "${mh_msg_frwk_uuid}" ]]; then
                 echo "RWH:: adding UUID ${mh_msg_frwk_uuid}" >> ${mh_log_file}
-                defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add '"${mh_msg_frwk_uuid}"'
+                defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_msg_frwk_uuid}"
         fi
 fi
 

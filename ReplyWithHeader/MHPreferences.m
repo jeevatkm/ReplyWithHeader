@@ -190,18 +190,6 @@
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
     
-    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
-    if ( ![MailHeader isLocaleSupported] ) {
-        
-        [self toggleMailPreferencesOptions:FALSE];
-        
-        [_MHBundleEnabled setEnabled:FALSE];
-        
-        NSString *toolTip = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\n\nPlease contact plugin author for support.", [MailHeader bundleNameAndVersion], [MailHeader localeIdentifier]];
-        
-        [_MHBundleTabBox setToolTip:toolTip];
-    }
-    
     NSArray *localizations = [[MailHeader bundle] localizations];
     [_MHLanguagePopup removeAllItems];
     
@@ -230,7 +218,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(languagePopUpSelectionChanged:)
                                                  name:NSMenuDidSendActionNotification
-                                               object:[_MHLanguagePopup menu]];    
+                                               object:[_MHLanguagePopup menu]];   
+    
+    // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
+    if ( ![MailHeader isLocaleSupported] ) {
+        
+        [self toggleMailPreferencesOptions:FALSE];
+        
+        [_MHBundleEnabled setEnabled:FALSE];
+        
+        NSString *toolTip = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\n\nPlease contact plugin author for support.", [MailHeader bundleNameAndVersion], [MailHeader localeIdentifier]];
+        
+        [_MHBundleTabBox setToolTip:toolTip];
+    }
 }
 
 - (NSString*)preferencesNibName

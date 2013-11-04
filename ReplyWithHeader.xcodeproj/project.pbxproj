@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
+		132C66631827E23400CD7C1A /* language.png in Resources */ = {isa = PBXBuildFile; fileRef = 132C66621827E23400CD7C1A /* language.png */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */; };
 		133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* MHMailMessage.m */; };
@@ -50,6 +51,7 @@
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
+		132C66621827E23400CD7C1A /* language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = language.png; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* MHHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHHeaderString.h; sourceTree = "<group>"; };
 		133A916E17E9745A00E3CC62 /* MHHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHHeaderString.m; sourceTree = "<group>"; };
 		133A916F17E9745A00E3CC62 /* MHQuotedMailOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHQuotedMailOriginal.h; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		1371DD0117F864FE00320B54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				132C66621827E23400CD7C1A /* language.png */,
 				138BAEBA1820218C00738ADB /* MHUpdateAlert.xib */,
 				13882A2F18073509004BCC6D /* LICENSE.txt */,
 				1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */,
@@ -352,6 +355,7 @@
 				138BAEBC1820218C00738ADB /* MHUpdateAlert.xib in Resources */,
 				1365843917FAC12700E8C57D /* MailHeader.strings in Resources */,
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
+				132C66631827E23400CD7C1A /* language.png in Resources */,
 				138BAEBD182022AA00738ADB /* Config.plist in Resources */,
 				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
@@ -388,7 +392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\n/bin/rm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}\n";
+			shellScript = "# Applying bundle icon\n/usr/local/bin/seticon -d ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/ReplyWithHeader.icns ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Package it\nSetFile -a B ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\n\n# Deploying to local\n/bin/rm -rf ${INSTALL_PATH}/${WRAPPER_NAME}\n/bin/cp -r ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME} ${INSTALL_PATH}\n\n# processing UUIDs\nmh_plugin_plist=${INSTALL_PATH}/${WRAPPER_NAME}/Contents/Info.plist\nif [ -f /Applications/Mail.app/Contents/Info.plist ]; then\nmh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)\nif [[ ! -z \"${mh_mail_app_uuid}\" ]]; then\ndefaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add \"${mh_mail_app_uuid}\"\nfi\nfi\n\nif [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then\nmh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)\nif [[ ! -z \"${mh_msg_frwk_uuid}\" ]]; then\ndefaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add \"${mh_msg_frwk_uuid}\"\nfi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
