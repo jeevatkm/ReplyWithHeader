@@ -59,6 +59,9 @@ mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Re
         fi
 fi
 
+echo "RWH:: applying user permission"  >> ${mh_log_file}
+sudo chown -R ${mh_user} ${mh_plugin}
+
 echo "RWH:: installation complete"  >> ${mh_log_file}
 
 # let's cleanup
