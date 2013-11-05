@@ -224,23 +224,47 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 - (void)removePlainTextHeaderPrefix
 {
-    for (int i=0; i < dhc.length; i++)
+    BOOL isLocationFound = NO;
+    
+    for (int i=0; i<dhc.length; i++)
     {
-        MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
-        if( [[dhc item:i] nodeType]==3 )
+        DOMNode *node = [dhc item:i];
+        NSRange range = [[[node firstChild] stringValue]
+                         rangeOfString:MHLocalizedString(@"STRING_WROTE")];
+        
+        if (range.length != 0)
         {
-            // Text node, On ..., Wrote is text
-            textNodeLocation=i;
+            [[node firstChild] setTextContent:@""];
+            textNodeLocation = i;
+            isLocationFound = YES;
             break;
         }
     }
     
-    // if signature at top, item==3 else item==1
-    [originalEmail removeChild:[dhc item:textNodeLocation]];
+    if (!isLocationFound)
+    { // kept for backward workaround, however need a revisit
+        for (int i=0; i < dhc.length; i++)
+        {
+            MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
+            if( [[dhc item:i] nodeType]==3 )
+            {
+                // Text node, On ..., Wrote is text
+                textNodeLocation=i; break;
+            }
+        }
+    }
     
-    
-    if ([[[[originalEmail childNodes] item:textNodeLocation+1] nodeName] isEqualToString:@"BR"]) {
-        [originalEmail removeChild:[dhc item:textNodeLocation+1]];
+    @try {
+        // if signature at top, item==3 else item==1
+        [originalEmail removeChild:[dhc item:textNodeLocation]];
+        
+        
+        if ([[[[originalEmail childNodes] item:textNodeLocation+1] nodeName] isEqualToString:@"BR"]) {
+            [originalEmail removeChild:[dhc item:textNodeLocation+1]];
+        }
+    }
+    @catch (NSException *exception) {
+        MHLog([exception description]);
     }
     
     //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element

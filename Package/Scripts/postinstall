@@ -26,27 +26,27 @@ echo "RWH:: mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_pat
 mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_path}
 
 if [ ${mh_user} == root ] ; then
-	echo "RWH:: root users is installing" >> ${mh_log_file}
+	echo "RWH:: Root users is installing plugin" >> ${mh_log_file}
     domain=/Library/Preferences/com.apple.mail.plist
 else
 	echo "RWH:: ${mh_user} user is installing plugin" >> ${mh_log_file}
    domain=/Users/${mh_user}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
 fi
 
-echo "RWH:: domain is ${domain}"  >> ${mh_log_file}
+echo "RWH:: Domain is ${domain}"  >> ${mh_log_file}
 
 if [ -f ${domain} ]; then
     echo "RWH:: Enabling plugin support in Mail.app" >> ${mh_log_file}
-    sudo chown ${mh_user} ${domain}
+    #sudo chown ${mh_user} ${domain}
     defaults write ${domain} EnableBundles -bool true
-    sudo defaults write ${domain} EnableBundles -bool true
+    #sudo defaults write ${domain} EnableBundles -bool true
     sudo chown ${mh_user} ${domain}
 fi
 
 if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
 mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
         if [[ ! -z "${mh_mail_app_uuid}" ]]; then
-                echo "RWH:: adding UUID ${mh_mail_app_uuid}" >> ${mh_log_file}
+                echo "RWH:: Adding UUID ${mh_mail_app_uuid}" >> ${mh_log_file}
                 defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
         fi
 fi
@@ -54,15 +54,15 @@ fi
 if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
 mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
         if [[ ! -z "${mh_msg_frwk_uuid}" ]]; then
-                echo "RWH:: adding UUID ${mh_msg_frwk_uuid}" >> ${mh_log_file}
+                echo "RWH:: Adding UUID ${mh_msg_frwk_uuid}" >> ${mh_log_file}
                 defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_msg_frwk_uuid}"
         fi
 fi
 
-echo "RWH:: applying user permission"  >> ${mh_log_file}
+echo "RWH:: Applying user permission"  >> ${mh_log_file}
 sudo chown -R ${mh_user} ${mh_plugin}
 
-echo "RWH:: installation complete"  >> ${mh_log_file}
+echo "RWH:: Installation complete"  >> ${mh_log_file}
 
 # let's cleanup
 echo "RWH:: cleanup"  >> ${mh_log_file}
