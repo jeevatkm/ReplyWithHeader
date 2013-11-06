@@ -25,22 +25,15 @@ fi
 echo "RWH:: mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_path}" >> ${mh_log_file}
 mv /tmp/rwh-installation/ReplyWithHeader.mailbundle ${mh_install_path}
 
-if [ ${mh_user} == root ] ; then
-	echo "RWH:: Root users is installing plugin" >> ${mh_log_file}
-    domain=/Library/Preferences/com.apple.mail.plist
-else
-	echo "RWH:: ${mh_user} user is installing plugin" >> ${mh_log_file}
-   domain=/Users/${mh_user}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
-fi
-
 echo "RWH:: Domain is ${domain}"  >> ${mh_log_file}
 
 if [ -f ${domain} ]; then
     echo "RWH:: Enabling plugin support in Mail.app" >> ${mh_log_file}
-    #sudo chown ${mh_user} ${domain}
     defaults write ${domain} EnableBundles -bool true
     #sudo defaults write ${domain} EnableBundles -bool true
-    sudo chown ${mh_user} ${domain}
+else
+	echo "RWH:: plist not exists, creating one for Mail.app" >> ${mh_log_file}
+	defaults write /Users/${mh_user}/Library/Preferences/com.apple.mail.plist EnableBundles -bool true
 fi
 
 if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
@@ -60,7 +53,8 @@ mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Re
 fi
 
 echo "RWH:: Applying user permission"  >> ${mh_log_file}
-sudo chown -R ${mh_user} ${mh_plugin}
+sudo chown -R ${mh_user} ${mh_install_path}
+sudo chown ${mh_user} ${domain}
 
 echo "RWH:: Installation complete"  >> ${mh_log_file}
 

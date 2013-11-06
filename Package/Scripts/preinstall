@@ -10,8 +10,9 @@ mh_install_path=${HOME}/Library/Mail/Bundles
 mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
 mh_log_file=/tmp/replywithheader.installer.log
 
-echo "RWH:: Quitting Mail.app" > ${mh_log_file}
-osascript -e "quit app \"Mail\""
+echo "RWH:: Installer Log file" > ${mh_log_file}
+#echo "RWH:: Quitting Mail.app" >> ${mh_log_file}
+#osascript -e "quit app \"Mail\""
 
 OS_VERSION=`sw_vers -productVersion | cut -d . -f 1,2`
 echo "RWH:: Mac OS X ${OS_VERSION}" >> ${mh_log_file}
