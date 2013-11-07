@@ -33,8 +33,11 @@ if [ -f ${domain} ]; then
     #sudo defaults write ${domain} EnableBundles -bool true
 else
 	echo "RWH:: plist not exists, creating one for Mail.app" >> ${mh_log_file}
-	defaults write /Users/${mh_user}/Library/Preferences/com.apple.mail.plist EnableBundles -bool true
+	domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
+	defaults write ${domain} EnableBundles -bool true
 fi
+
+sudo chown ${mh_user} ${domain}
 
 if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
 mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
@@ -54,7 +57,6 @@ fi
 
 echo "RWH:: Applying user permission"  >> ${mh_log_file}
 sudo chown -R ${mh_user} ${mh_install_path}
-sudo chown ${mh_user} ${domain}
 
 echo "RWH:: Installation complete"  >> ${mh_log_file}
 

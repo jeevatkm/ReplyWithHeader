@@ -96,18 +96,20 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 {
     if ( textNodeLocation > 0 )
     {
-        // check if this is plain text by seeing if textNodeLocation points to a br element...
+        // check if this is plain text by seeing if textNodeLocation points to a br/#text element...
         // if not, include in blockquote
-        if ( [[[[originalEmail childNodes] item:textNodeLocation] nodeName] isEqualToString:@"BR"] )
+        DOMNode *nodeRef = [[originalEmail childNodes] item:textNodeLocation];
+        MHLog(@"Node Refer Object is %@", nodeRef);
+        
+        if ( [[nodeRef nodeName] isEqualToString:@"BR"] || [[nodeRef nodeName] isEqualToString:@"#text"] )
         {
             [originalEmail insertBefore:headerFragment refChild:[dhc item:textNodeLocation]];
             [originalEmail insertBefore:headerBorder refChild:[dhc item:textNodeLocation]];
         }
-        else
+        else // blockquote
         {            
-            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerFragment refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
-            
-            [[[originalEmail childNodes] item:textNodeLocation] insertBefore:headerBorder refChild:[[[originalEmail childNodes] item:textNodeLocation] firstChild]];
+            [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
+            [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
         }
     }
 }
@@ -234,7 +236,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         
         if (range.length != 0)
         {
-            [[node firstChild] setTextContent:@""];
+            //[[node firstChild] setTextContent:@""];
             textNodeLocation = i;
             isLocationFound = YES;
             break;
@@ -258,9 +260,8 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         // if signature at top, item==3 else item==1
         [originalEmail removeChild:[dhc item:textNodeLocation]];
         
-        
-        if ([[[[originalEmail childNodes] item:textNodeLocation+1] nodeName] isEqualToString:@"BR"]) {
-            [originalEmail removeChild:[dhc item:textNodeLocation+1]];
+        while ([[[dhc item:textNodeLocation] nodeName] isEqualToString:@"BR"]) {
+            [originalEmail removeChild:[dhc item:textNodeLocation]];
         }
     }
     @catch (NSException *exception) {

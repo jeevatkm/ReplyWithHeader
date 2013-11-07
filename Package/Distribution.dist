@@ -22,7 +22,7 @@ function InstallationCheck(prefix) {
         <line choice="rwh"/>
     </choices-outline>
     <choice id="rwh" title="ReplyWithHeader Mail Plugin">
-        <pkg-ref id="ReplyWithHeaderX" auth="none">#installer.pkg<must-close>
+        <pkg-ref id="ReplyWithHeader" auth="Root">#installer.pkg<must-close>
                 <app id="com.apple.mail"/>
             </must-close>
         </pkg-ref>
