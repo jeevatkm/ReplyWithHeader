@@ -8,9 +8,9 @@
     "STRING_FROM" = "De";
     "STRING_SUBJECT" = "Asunto";
     "STRING_DATE" = "Fecha";
-    //"STRING_TO" = "Para";
-    //"STRING_CC" = "Cc";
-    //"STRING_REPLY_TO" = "Responder a";
+    "STRING_TO" = "Para";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Responder a";
     "STRING_SENT" = "Enviado";
     "STRING_WROTE" = "escribió:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";

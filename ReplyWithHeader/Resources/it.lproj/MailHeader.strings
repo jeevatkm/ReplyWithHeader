@@ -8,9 +8,9 @@
     "STRING_FROM" = "Da";
     "STRING_SUBJECT" = "Oggetto";
     "STRING_DATE" = "Data";
-    //"STRING_TO" = "A";
-    //"STRING_CC" = "Cc";
-    //"STRING_REPLY_TO" = "Rispondi a";
+    "STRING_TO" = "A";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Rispondi a";
     "STRING_SENT" = "Inviata";
     "STRING_WROTE" = "scritto:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";

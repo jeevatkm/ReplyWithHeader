@@ -8,9 +8,9 @@
     "STRING_FROM" = "发件人";
     "STRING_SUBJECT" = "主题";
     "STRING_DATE" = "日期";
-    //"STRING_TO" = "To";
-    //"STRING_CC" = "Cc";
-    //"STRING_REPLY_TO" = "Reply-To";
+    "STRING_TO" = "To";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "发出日期";
     "STRING_WROTE" = "写道：";
     "STRING_FORWARDED_MESSAGE" = "下面是被转发的邮件：";

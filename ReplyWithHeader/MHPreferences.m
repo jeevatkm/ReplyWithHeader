@@ -193,10 +193,13 @@
     NSArray *localizations = [[MailHeader bundle] localizations];
     [_MHLanguagePopup removeAllItems];
     
+    NSString *supportedLocales = @"";
     for (NSString *lang in localizations)
     {
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
         NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
+        [supportedLocales stringByAppendingString:name];
+        [supportedLocales stringByAppendingString:@" "];
         
         NSMenuItem *item = [[NSMenuItem alloc] init];
         [item setRepresentedObject:lang];
@@ -204,6 +207,8 @@
         
         [[_MHLanguagePopup menu] addItem:item];
     }
+    
+    MHLog(@"Supported languages %@", supportedLocales);
     
     NSString *localeIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
     if (!localeIdentifier)

@@ -8,9 +8,9 @@
     "STRING_FROM" = "寄件人";
     "STRING_SUBJECT" = "標題";
     "STRING_DATE" = "日期";
-    //"STRING_TO" = "To";
-    //"STRING_CC" = "Cc";
-    //"STRING_REPLY_TO" = "Reply-To";
+    "STRING_TO" = "To";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "寄件日期";
     "STRING_WROTE" = "寫道：";
     "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件：";

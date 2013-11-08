@@ -8,9 +8,9 @@
     "STRING_FROM" = "Van";
     "STRING_SUBJECT" = "Onderwerp";
     "STRING_DATE" = "Datum";
-    //"STRING_TO" = "To";
-    //"STRING_CC" = "Cc";
-    //"STRING_REPLY_TO" = "Reply-To";
+    "STRING_TO" = "To";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "Verstuurd";
     "STRING_WROTE" = "het volgende geschreven:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";

@@ -8,9 +8,9 @@
     "STRING_FROM" = "Von";
     "STRING_SUBJECT" = "Betreff";
     "STRING_DATE" = "Datum";
-    //"STRING_TO" = "An";
-    //"STRING_CC" = "Kopie";
-    //"STRING_REPLY_TO" = "Antwort an";
+    "STRING_TO" = "An";
+    "STRING_CC" = "Kopie";
+    "STRING_REPLY_TO" = "Antwort an";
     "STRING_SENT" = "Gesendet";
     "STRING_WROTE" = "schrieb";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
