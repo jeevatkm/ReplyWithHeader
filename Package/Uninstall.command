@@ -32,6 +32,6 @@ if [ -s ${mh_plugin} ]; then
 			;;
 	esac
 else
-	echo "ReplyWithHeader plugin is not installed."
+	echo "\nReplyWithHeader plugin is not installed."
 fi
 

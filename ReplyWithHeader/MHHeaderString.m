@@ -300,12 +300,20 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                                                range:NSMakeRange(0, [row length])];
         }
         
-        // double quoutes into empty
+        // double quotes into empty
         range = [[row string] rangeOfString:@"\""];
         while (range.location != NSNotFound)
         {
             [row replaceCharactersInRange:range withString:@""];
             range = [[row string] rangeOfString:@"\""];
+        }
+        
+        // single quotes into empty
+        range = [[row string] rangeOfString:@"'"];
+        while (range.location != NSNotFound)
+        {
+            [row replaceCharactersInRange:range withString:@""];
+            range = [[row string] rangeOfString:@"'"];
         }
         
         // Perfection of semi-colon (;) handling stage 2
