@@ -212,8 +212,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSString *subjectPrefix = MHLocalizedString(@"STRING_SUBJECT");
     
     if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
-        subjectPrefix = [MailHeader localizedString:@"STRING_SUBJECT"
-                                   localeIdentifier:choosenLocaleIdentifier];
+        subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
     }
     
     int subjectIndex = 1; // default position
@@ -254,6 +253,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             }
             
             fullName = [fullName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            
+            // for issue #38 - https://github.com/jeevatkm/ReplyWithHeader/issues/38
             fullName = [fullName stringByReplacingOccurrencesOfString:@"'" withString:@""];
             
             return [fullName
@@ -269,25 +270,19 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 - (void)applyHeaderLabelChange
 {
-    //NSError * __autoreleasing regError = nil;
-    //NSRegularExpression *lblRegex = [NSRegularExpression regularExpressionWithPattern:MH_QUOTED_EMAIL_REGEX_STRING options:NSRegularExpressionCaseInsensitive error:&regError];
-    
     NSString *fromPrefix = MHLocalizedString(@"STRING_FROM");
     NSString *toPrefix = MHLocalizedString(@"STRING_TO");
     NSString *ccPrefix = MHLocalizedString(@"STRING_CC");
     NSString *datePrefix = MHLocalizedString(@"STRING_DATE");
     NSString *dateToBePrefix = MHLocalizedString(@"STRING_SENT");
     
-    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
-        fromPrefix = [MailHeader localizedString:@"STRING_FROM" localeIdentifier:choosenLocaleIdentifier];
-        
-        toPrefix = [MailHeader localizedString:@"STRING_TO" localeIdentifier:choosenLocaleIdentifier];
-        
-        ccPrefix = [MailHeader localizedString:@"STRING_CC" localeIdentifier:choosenLocaleIdentifier];
-        
-        datePrefix = [MailHeader localizedString:@"STRING_DATE" localeIdentifier:choosenLocaleIdentifier];
-        
-        dateToBePrefix = [MailHeader localizedString:@"STRING_SENT" localeIdentifier:choosenLocaleIdentifier];
+    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier])
+    {
+        fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", choosenLocaleIdentifier);
+        toPrefix = MHLocalizedStringByLocale(@"STRING_TO", choosenLocaleIdentifier);
+        ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", choosenLocaleIdentifier);
+        datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", choosenLocaleIdentifier);
+        dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", choosenLocaleIdentifier);
     }
     
     for (int i=0; i<[messageAttribution count]; i++)
@@ -311,6 +306,28 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             
             if (range.location != NSNotFound)
                 [row replaceCharactersInRange:range withString:dateToBePrefix];
+            
+            // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
+            range.location = [dateToBePrefix length] + 2;
+            range.length = [row length] - ([dateToBePrefix length] + 2);
+            
+            NSString  *dateTimeString = [[row string] substringFromIndex:range.location];
+            
+            NSDateFormatter *sourceFormatter = [NSDateFormatter new];
+            [sourceFormatter setDateFormat:@"d MMM yyyy h:mm:ss a zzz"];
+            NSDate *fromDate = [sourceFormatter dateFromString:dateTimeString];
+            
+            NSDateFormatter *targetFormatter = [NSDateFormatter new];
+            if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
+                [targetFormatter setLocale:choosenLocale];
+            }
+            
+            [targetFormatter setDateFormat:@"EEEE, LLLL d, yyyy h:mm a"];
+            [targetFormatter setAMSymbol:@"AM"];
+            [targetFormatter setPMSymbol:@"PM"];
+            NSString *toDate = [targetFormatter stringFromDate:fromDate];
+            
+            [row replaceCharactersInRange:range withString:toDate];
         }
         
         if ([[row string] hasPrefix:toPrefix] || [[row string] hasPrefix:ccPrefix])
