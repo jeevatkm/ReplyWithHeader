@@ -61,12 +61,12 @@
 {
     NSString *identifier = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0];
     
-    if ([identifier isEqualToString:@"zh_CN"]) {
+    if ([identifier isEqualToString:@"zh_CN"])
         identifier = @"zh-Hans";
-    }
-    else if ([identifier isEqualToString:@"zh_TW"]) {
+    else if ([identifier isEqualToString:@"zh_TW"])
         identifier = @"zh-Hant";
-    }
+    else if ([identifier hasPrefix:@"en"]) // for issue #39 - considering all en-* into one umberlla
+        identifier = @"en";
     
     return identifier;
 }
@@ -199,7 +199,7 @@
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
-                          @"en", MHBundleHeaderLanguageCode,
+                          //@"en", MHBundleHeaderLanguageCode,
                           nil
                           ];
     
