@@ -232,7 +232,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     {
         DOMNode *node = [dhc item:i];
         NSRange range = [[[node firstChild] stringValue]
-                         rangeOfString:MHLocalizedString(@"STRING_WROTE")];
+                         rangeOfString:MHLocalizedStringByLocale(@"STRING_WROTE", MHLocaleIdentifier)];
         
         if (range.length != 0)
         {
@@ -292,10 +292,10 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     @try {
         if ([MailHeader isSpecificLocale]) // Need specific handling
         {
-            NSString *searchString = MHLocalizedString(@"STRING_WROTE");
+            NSString *searchString = MHLocalizedStringByLocale(@"STRING_WROTE", MHLocaleIdentifier);
             if (msgComposeType == 3)
             {
-                searchString = MHLocalizedString(@"STRING_FORWARDED_MESSAGE");
+                searchString = MHLocalizedStringByLocale(@"STRING_FORWARDED_MESSAGE", MHLocaleIdentifier);
             }
             
             NSRange textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];

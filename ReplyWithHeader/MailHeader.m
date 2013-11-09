@@ -111,7 +111,7 @@
 
 + (NSString *)bundleName
 {
-    return MHLocalizedString(@"PLUGIN_NAME");
+    return MHLocalizedStringByLocale(@"PLUGIN_NAME", MHLocaleIdentifier);
 }
 
 + (NSString *)bundleVersionString
@@ -121,7 +121,7 @@
 
 + (NSString *)bundleCopyright
 {
-    return MHLocalizedString(@"COPYRIGHT");
+    return MHLocalizedStringByLocale(@"COPYRIGHT", MHLocaleIdentifier);
 }
 
 + (NSImage *)bundleLogo
@@ -269,7 +269,7 @@
 
 + (NSString*)preferencesPanelName
 {
-    return MHLocalizedString(@"MAIL_HEADER_PREFERENCES");
+    return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
 }
 
 

@@ -54,7 +54,7 @@
         NSString *possibleMatch = [NSString stringWithFormat:@"%@-beta", serverVersion];
         if (result == NSOrderedAscending || ([currentVersion isEqualToString:possibleMatch]))
         {            
-            NSString *versionDesc = [NSString stringWithFormat:MHLocalizedString(@"STRING_UPDATE_VERSION_DESC"),
+            NSString *versionDesc = [NSString stringWithFormat:MHLocalizedStringByLocale(@"STRING_UPDATE_VERSION_DESC", MHLocaleIdentifier),
                                      [MailHeader bundleName],
                                      serverVersion,
                                      currentVersion];
