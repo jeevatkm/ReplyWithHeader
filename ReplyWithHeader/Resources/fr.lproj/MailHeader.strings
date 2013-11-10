@@ -13,6 +13,7 @@
     "STRING_REPLY_TO" = "Répondre à";
     "STRING_SENT" = "Date d'envoi";
     "STRING_WROTE" = "écrit :";
+    "STRING_FORWARDED_MESSAGE" = "a écrit :";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

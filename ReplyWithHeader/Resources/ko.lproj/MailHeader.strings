@@ -13,6 +13,7 @@
     "STRING_REPLY_TO" = "답장 받는 사람";
     "STRING_SENT" = "보낸 날짜";
     "STRING_WROTE" = "작성:";
+    "STRING_FORWARDED_MESSAGE" = "전달된 메시지";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

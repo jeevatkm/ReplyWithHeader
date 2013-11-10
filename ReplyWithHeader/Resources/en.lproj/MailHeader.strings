@@ -13,6 +13,7 @@
     "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "Sent";
     "STRING_WROTE" = "wrote:";
+    "STRING_FORWARDED_MESSAGE" = "forwarded message:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

@@ -211,7 +211,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 {
     NSString *subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", MHLocaleIdentifier);
     
-    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
         subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
     }
     
@@ -276,7 +276,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSString *datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", MHLocaleIdentifier);
     NSString *dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", MHLocaleIdentifier);
     
-    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier])
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
     {
         fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", choosenLocaleIdentifier);
         toPrefix = MHLocalizedStringByLocale(@"STRING_TO", choosenLocaleIdentifier);
@@ -308,7 +308,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                 [row replaceCharactersInRange:range withString:dateToBePrefix];
             
             // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
-            range.location = [dateToBePrefix length] + 2;
+            // Just realized, this might have to wait for a while
+            // thinking of universal solution
+            /*range.location = [dateToBePrefix length] + 2;
             range.length = [row length] - ([dateToBePrefix length] + 2);
             
             NSString  *dateTimeString = [[row string] substringFromIndex:range.location];
@@ -317,6 +319,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             [sourceFormatter setLocale:[MailHeader currentLocale]];
             [sourceFormatter setDateFormat:@"d MMM yyyy h:mm:ss a zzz"];
             NSDate *fromDate = [sourceFormatter dateFromString:dateTimeString];
+            
+            NSLog(@"fromDate %@", fromDate);
             
             NSDateFormatter *targetFormatter = [NSDateFormatter new];
             if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
@@ -328,7 +332,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             [targetFormatter setPMSymbol:@"PM"];
             NSString *toDate = [targetFormatter stringFromDate:fromDate];
             
-            [row replaceCharactersInRange:range withString:toDate];
+            NSLog(@"finalString of toDate %@", toDate);
+            
+            [row replaceCharactersInRange:range withString:toDate];*/
         }
         
         if ([[row string] hasPrefix:toPrefix] || [[row string] hasPrefix:ccPrefix])
