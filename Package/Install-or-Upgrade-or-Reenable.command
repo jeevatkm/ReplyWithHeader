@@ -40,6 +40,7 @@ fi
 mh_current_dir=`dirname "$0"`
 cp -r "${mh_current_dir}/ReplyWithHeader.mailbundle" ${mh_install_path}
 
+mh_enb_success=0
 if [ ${mh_user} == root ] ; then
     echo "RWH:: Root users is installing plugin"
     domain=/Library/Preferences/com.apple.mail.plist
@@ -47,6 +48,20 @@ else
     echo "RWH:: user '${mh_user}' is installing plugin"
    domain=/Users/${mh_user}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
 fi
+
+if [ ${mh_enable_plugin} -eq 1 ]; then
+if [ -f ${domain} ]; then
+    echo "RWH:: Enabling plugin support in Mail.app"
+    defaults write "${domain}" EnableBundles -bool true
+    mh_enb_success=1
+fi
+
+if [ ${mh_enb_success} -eq 0 ]; then
+	domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
+	defaults write "${domain}" EnableBundles -bool true
+fi
+fi
+
 
 if [ ${mh_enable_plugin} -eq 1 ]; then
 if [ -f ${domain} ]; then

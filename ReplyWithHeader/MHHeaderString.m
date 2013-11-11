@@ -91,7 +91,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 - (void)applyChoosenLanguageLabels
 {
     NSArray *choosenHeaderLabels = [MailHeader getConfigValue:@"AllowedHeaders"
-                                                 languageCode:GET_DEFAULT(MHBundleHeaderLanguageCode)];
+                                                 languageCode:choosenLocaleIdentifier];
     MHLog(@"Choosen language header labels %@", choosenHeaderLabels);
     
     for (int i=0; i<[messageAttribution count]; i++)
@@ -136,7 +136,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
-    if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
         [self applyChoosenLanguageLabels];
     }
     
@@ -160,6 +160,13 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     if (self = [super init])
     {
         choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
+        MHLog(@"From User defaults choosenLocaleIdentifier %@", choosenLocaleIdentifier);
+        
+        if (!choosenLocaleIdentifier)
+            choosenLocaleIdentifier = MHLocaleIdentifier;
+        
+        MHLog(@"Fallback to default value of choosenLocaleIdentifier %@", choosenLocaleIdentifier);
+        
         choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
         NSAttributedString *headerString = [[mailMessage originalMessageHeaders]

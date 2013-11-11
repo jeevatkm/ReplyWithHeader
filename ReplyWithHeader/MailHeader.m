@@ -199,7 +199,6 @@
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
-                          //@"en", MHBundleHeaderLanguageCode,
                           nil
                           ];
     
@@ -310,11 +309,7 @@
     [MLog setLogOn:GET_DEFAULT_BOOL(MHLogEnabled)];
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
-    if ( [self isLocaleSupported] )
-    {
-        SET_DEFAULT_BOOL(TRUE, MHBundleEnabled);
-    }
-    else
+    if ( ![self isLocaleSupported] )
     {
         NSLog(@"WARNING:: %@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\nPlease contact plugin author for support.",
               [self bundleNameAndVersion], [self localeIdentifier]);
