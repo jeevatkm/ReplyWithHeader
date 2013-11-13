@@ -202,6 +202,11 @@
                           nil
                           ];
     
+    if ( !GET_DEFAULT(MHBundleHeaderLanguageCode) )
+    {
+        SET_USER_DEFAULT(MHLocaleIdentifier, MHBundleHeaderLanguageCode);
+    }
+    
     // set defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 }
