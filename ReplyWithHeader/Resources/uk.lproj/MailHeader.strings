@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "Авторське право © 2013 Jeevanandam M., Всі права захищені.";
+    
+    /* Message Strings */
+    "STRING_FROM" = "Від кого";
+    "STRING_SUBJECT" = "Тема";
+    "STRING_DATE" = "Дата";
+    "STRING_TO" = "Кому";
+    "STRING_CC" = "Копія";
+    "STRING_REPLY_TO" = "Reply-To";
+    "STRING_SENT" = "посланий";
+    "STRING_WROTE" = "написав(ла):";
+    "STRING_FORWARDED_MESSAGE" = "що пересилається:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "Оновлення плагіна %@";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "Нова версія %@ доступно!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ тепер доступна - ви повинні %@. Хочете завантажити його зараз?";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "Завантажити";
+	"BUTTON_RELEASE_NOTES" = "Примітки до випуску";
+	"BUTTON_LATER" = "пізніше";
+}

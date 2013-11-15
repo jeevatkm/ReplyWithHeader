@@ -103,6 +103,12 @@
 		13AD486C18018D4600473407 /* MHUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUpdater.m; sourceTree = "<group>"; };
 		13B6E5D517F6F41E00878012 /* MHHeadersEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHHeadersEditor.h; sourceTree = "<group>"; };
 		13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHHeadersEditor.m; sourceTree = "<group>"; };
+		13CBE93F18360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		13CBE94018360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = sv.lproj/Config.plist; sourceTree = "<group>"; };
+		13CBE94118360EC3003CDA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		13CBE94218360EC3003CDA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Config.plist; sourceTree = "<group>"; };
+		13CBE94318360ED8003CDA1E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		13CBE94418360ED8003CDA1E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = uk.lproj/Config.plist; sourceTree = "<group>"; };
 		13E929F91800CB1000AAE5CE /* MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeader.h; sourceTree = "<group>"; };
 		13E929FA1800CB1000AAE5CE /* MailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHeader.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -334,6 +340,7 @@
 				fi,
 				ko,
 				"pt-PT",
+				uk,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -421,6 +428,9 @@
 				13109923182559C000C24D9F /* pt-PT */,
 				1310992518255B8F00C24D9F /* zh-Hans */,
 				1310992718255C3000C24D9F /* zh-Hant */,
+				13CBE93F18360EB1003CDA1E /* sv */,
+				13CBE94118360EC3003CDA1E /* ru */,
+				13CBE94318360ED8003CDA1E /* uk */,
 			);
 			name = MailHeader.strings;
 			sourceTree = "<group>";
@@ -472,6 +482,9 @@
 				13109924182559C000C24D9F /* pt-PT */,
 				1310992618255B8F00C24D9F /* zh-Hans */,
 				1310992818255C3100C24D9F /* zh-Hant */,
+				13CBE94018360EB1003CDA1E /* sv */,
+				13CBE94218360EC3003CDA1E /* ru */,
+				13CBE94418360ED8003CDA1E /* uk */,
 			);
 			name = Config.plist;
 			sourceTree = "<group>";
