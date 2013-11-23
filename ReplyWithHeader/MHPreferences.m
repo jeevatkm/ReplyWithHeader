@@ -198,8 +198,8 @@
     {
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
         NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
-        [supportedLocales stringByAppendingString:name];
-        [supportedLocales stringByAppendingString:@" "];
+        supportedLocales = [supportedLocales stringByAppendingString:name];
+        supportedLocales = [supportedLocales stringByAppendingString:@" "];
         
         NSMenuItem *item = [[NSMenuItem alloc] init];
         [item setRepresentedObject:lang];
