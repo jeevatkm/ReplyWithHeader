@@ -44,22 +44,49 @@
     return GET_DEFAULT_BOOL(MHBundleEnabled);
 }
 
-+ (BOOL)isLocaleSupported
+// This method differ from [NSLocale currentLocale], plugin depends on Mail.app preferred lanaguge mode.
++ (NSLocale *)currentLocale
 {
-    static BOOL supported;
+    static NSLocale *locale;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *preferredLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
-        
-        if ( preferredLocale && [preferredLocale isEqualToString:@"en"] ) {
-            supported = TRUE;
-        }
-        else
-        {
-            supported = FALSE;
-        }
+        NSString *identifier = [self localeIdentifier];
+        locale = [[NSLocale alloc] initWithLocaleIdentifier:identifier];
+        MHLog(@"Current Locale Identifier: %@", identifier);
     });
+    return [NSLocale currentLocale];
+}
+
++ (NSString *)localeIdentifier
+{
+    NSString *identifier = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0];
+    
+    if ([identifier isEqualToString:@"zh_CN"])
+        identifier = @"zh-Hans";
+    else if ([identifier isEqualToString:@"zh_TW"])
+        identifier = @"zh-Hant";
+    else if ([identifier hasPrefix:@"en"]) // for issue #39 - considering all en-* into one umberlla
+        identifier = @"en";
+    
+    return identifier;
+}
+
+// for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
++ (BOOL)isLocaleSupported
+{
+    BOOL supported = [[[self bundle] localizations] containsObject:[self localeIdentifier]];
+        
+    MHLog(@"%@ - Is locale supported: %@",[self bundleNameAndVersion], supported ? @"YES" : @"NO");
+    
     return supported;
+}
+
++ (BOOL)isSpecificLocale
+{
+    NSString *currentLocaleIdentifier = [self localeIdentifier];
+    return ([currentLocaleIdentifier isEqualToString:@"ja"]
+            || [currentLocaleIdentifier isEqualToString:@"zh-Hans"]
+            || [currentLocaleIdentifier isEqualToString:@"zh-Hant"]);
 }
 
 + (NSBundle *)bundle
@@ -84,7 +111,7 @@
 
 + (NSString *)bundleName
 {
-    return MHLocalizedString(@"PLUGIN_NAME");
+    return MHLocalizedStringByLocale(@"PLUGIN_NAME", MHLocaleIdentifier);
 }
 
 + (NSString *)bundleVersionString
@@ -94,7 +121,7 @@
 
 + (NSString *)bundleCopyright
 {
-    return MHLocalizedString(@"COPYRIGHT");
+    return MHLocalizedStringByLocale(@"COPYRIGHT", MHLocaleIdentifier);
 }
 
 + (NSImage *)bundleLogo
@@ -111,24 +138,48 @@
 
 + (NSString *)localizedString:(NSString *)key
 {
-    NSBundle *mhBundle = [MailHeader bundle];
+    NSBundle *mhBundle = [self bundle];
     NSString *localString = NSLocalizedStringFromTableInBundle(key, @"MailHeader", mhBundle, nil);
     
     if(![localString isEqualToString:key])
         return localString;
     
-    NSBundle *englishLanguage = [NSBundle
-                                 bundleWithPath:[mhBundle
-                                                 pathForResource:@"en" ofType:@"lproj" inDirectory:@"MailHeader"]];
-    return [englishLanguage localizedStringForKey:key value:@"" table:@"MailHeader"];
+    return [self localizedString:key localeIdentifier:@"en"];
 }
 
-+ (NSString *)localeLanguageCode
++ (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier
 {
-    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+    NSString *filePath = [[self bundle] pathForResource:@"MailHeader"
+                                                       ofType:@"strings"
+                                                  inDirectory:@""
+                                              forLocalization:identifier];
     
-    MHLog(@"Current Locale language code is %@", languageCode);
-    return languageCode;
+    NSDictionary *stringDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    return [stringDict objectForKey:key];
+}
+
++ (id)getConfigValue:(NSString *)key
+{
+    static NSDictionary *configDictionary;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *filePath = [[self bundle] pathForResource:@"Config" ofType:@"plist"];
+        configDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    });
+    
+    return [configDictionary objectForKey:key];    
+}
+
++ (id)getConfigValue:(NSString *)key languageCode:(NSString *)identifier
+{
+    NSString *filePath = [[self bundle] pathForResource:@"Config"
+                                                 ofType:@"plist"
+                                            inDirectory:@""
+                                        forLocalization:identifier];
+    
+    NSDictionary *configDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    return [configDictionary objectForKey:key];
 }
 
 + (void)assignUserDefaults
@@ -150,6 +201,11 @@
                           [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];
+    
+    if ( !GET_DEFAULT(MHBundleHeaderLanguageCode) )
+    {
+        SET_USER_DEFAULT(MHLocaleIdentifier, MHBundleHeaderLanguageCode);
+    }
     
     // set defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
@@ -217,7 +273,7 @@
 
 + (NSString*)preferencesPanelName
 {
-    return MHLocalizedString(@"MAIL_HEADER_PREFERENCES");
+    return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
 }
 
 
@@ -242,11 +298,11 @@
     // Registering plugin in Mail.app
     [mvMailBundleClass registerBundle];
     
-    // Assigning default value if not present
-    [self assignUserDefaults];
-    
     // For smooth upgrade to new User Interface
     [self smoothValueTransToNewMailPrefUI];
+    
+    // Assigning default value if not present
+    [self assignUserDefaults];
     
     // Add hooks into Mail.app Classes
     [MHCodeInjector injectMailHeaderCode];
@@ -257,19 +313,18 @@
     // Logger
     [MLog setLogOn:GET_DEFAULT_BOOL(MHLogEnabled)];
     
-    if (![self isEnabled])
-    {
-        NSLog(@"%@ plugin is disabled in preferences", [self bundleName]);
-    }
-    
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
     {
-        NSLog(@"%@ - Outlook order mode, currently supported in english locale only.",
-              [self bundleName]);
+        NSLog(@"WARNING:: %@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\nPlease contact plugin author for support.",
+              [self bundleNameAndVersion], [self localeIdentifier]);
         
-        //SET_DEFAULT_INT(1, MHHeaderLabelMode);
-        SET_DEFAULT_INT(1, MHHeaderOrderMode);
+        SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
+    }
+
+    if (![self isEnabled])
+    {
+        NSLog(@"%@ plugin is disabled in mail preferences", [self bundleName]);
     }
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))

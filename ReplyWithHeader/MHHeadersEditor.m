@@ -40,23 +40,22 @@
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1
 {    
-    // calling original implementation
     [self MHLoadHeadersFromBackEnd:arg1];
     
     if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled))
     {
         NSMutableString *subjectText = [[(NSTextField *)[self valueForKey:@"_subjectField"] stringValue] mutableCopy];
         
-        NSRange range = [subjectText rangeOfString:MHLocalizedString(@"STRING_SEARCH_PREFIX_SUBJECT_REPLY")];
+        NSRange range = [subjectText rangeOfString:MHLocalizedStringByLocale(@"STRING_SEARCH_PREFIX_SUBJECT_REPLY", MHLocaleIdentifier)];
         if (range.location != NSNotFound)
         {
-            [subjectText replaceCharactersInRange:range withString:MHLocalizedString(@"STRING_REPLACE_PREFIX_SUBJECT_REPLY")];
+            [subjectText replaceCharactersInRange:range withString:MHLocalizedStringByLocale(@"STRING_REPLACE_PREFIX_SUBJECT_REPLY", MHLocaleIdentifier)];
         }
         
-        range = [subjectText rangeOfString:MHLocalizedString(@"STRING_SEARCH_PREFIX_SUBJECT_FWD")];
+        range = [subjectText rangeOfString:MHLocalizedStringByLocale(@"STRING_SEARCH_PREFIX_SUBJECT_FWD", MHLocaleIdentifier)];
         if (range.location != NSNotFound)
         {
-            [subjectText replaceCharactersInRange:range withString:MHLocalizedString(@"STRING_REPLACE_PREFIX_SUBJECT_FWD")];
+            [subjectText replaceCharactersInRange:range withString:MHLocalizedStringByLocale(@"STRING_REPLACE_PREFIX_SUBJECT_FWD", MHLocaleIdentifier)];
         }
         
         [self willChangeValueForKey:@"_subjectField"];

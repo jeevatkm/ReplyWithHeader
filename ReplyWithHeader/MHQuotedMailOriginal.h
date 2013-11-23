@@ -42,9 +42,10 @@
     DOMHTMLDivElement *originalEmail;
     int textNodeLocation; //which
     DOMNodeList *dhc; //document header children
+    int msgComposeType;
 }
 
-- (id)initWithMailMessage:(id)mailMessage;
-- (void)insertMailHeader:(MHHeaderString *)rwhMailHeader msgComposeType:(int)composeType;
+- (id)initWithMailMessage:(id)mailMessage msgComposeType:(int)composeType;
+- (void)insertMailHeader:(MHHeaderString *)mailHeader;
 
 @end

@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "著作権 © 2013 Jeevanandam M., 無断複写·転載を禁じます。";
+    
+    /* Message Strings */
+    "STRING_FROM" = "差出人";
+    "STRING_SUBJECT" = "件名";
+    "STRING_DATE" = "日時";
+    "STRING_TO" = "宛先";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "返信先";
+    "STRING_SENT" = "送信日";
+    "STRING_WROTE" = "のメール：";
+    "STRING_FORWARDED_MESSAGE" = "転送されたメッセージ：";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@ プラグインのアップデート";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "%@の新しいバージョンが利用可能です！";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@が利用可能になりました - あなたは、%@を持っている。あなたは今、それをダウンロードしますか？";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "ダウンロード";
+	"BUTTON_RELEASE_NOTES" = "リリースノート";
+	"BUTTON_LATER" = "後で";
+}

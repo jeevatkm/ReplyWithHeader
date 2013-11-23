@@ -26,4 +26,6 @@
 #define GET_DEFAULT_INT(k) [[NSUserDefaults standardUserDefaults] integerForKey: k]
 #define SET_DEFAULT_INT(n,k)[[NSUserDefaults standardUserDefaults] setInteger: n forKey: k]
 
-#define MHLocalizedString(key) [MailHeader localizedString:(key)]
+#define MHLocaleIdentifier [MailHeader localeIdentifier]
+#define MHLocalizedString(k) [MailHeader localizedString: k]
+#define MHLocalizedStringByLocale(k,l) [MailHeader localizedString: k localeIdentifier: l]

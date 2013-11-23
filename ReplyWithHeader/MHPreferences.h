@@ -32,13 +32,12 @@
  * The <code>MHPreferences</code> class is the subclass of
  * <code>NSPreferencesModule</code> that displays and manages preferences
  * specific to the MailHeader plugin.
- * @version \@(#) $Id$
- * @updated $Date$
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MHPreferences : NSPreferencesModule
+@interface MHPreferences : NSPreferencesModule <NSWindowDelegate>
 {
+    IBOutlet NSTabView *_MHBundleTabBox;
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
     IBOutlet NSButton *_MHHeaderTypographyEnabled;
@@ -52,12 +51,13 @@
     IBOutlet NSColorWell *_MHColorWell;
     IBOutlet NSMatrix *_MHHeaderOrderMode;
     IBOutlet NSMatrix *_MHHeaderLabelMode;
+    IBOutlet NSPopUpButton *_MHLanguagePopup;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;
 
 #pragma mark NSPreferencesModule instance methods
-/*! @group NSPreferencesModule instance methods */
+
 - (void)awakeFromNib;
 - (NSString*)preferencesNibName;
 - (NSImage *)imageForPreferenceNamed:(NSString *)aName;

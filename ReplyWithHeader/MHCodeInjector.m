@@ -46,9 +46,15 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
     Class composeBackEnd = NSClassFromString(@"ComposeBackEnd");
     if (composeBackEnd)
     {
-        [composeBackEnd jrlp_addMethodsFromClass:NSClassFromString(@"MHMessage") error:&error];
+        [composeBackEnd jrlp_addMethodsFromClass:NSClassFromString(@"MHMailMessage") error:&error];
         
         [composeBackEnd jrlp_swizzleMethod:@selector(_continueToSetupContentsForView:withParsedMessages:) withMethod:@selector(MH_continueToSetupContentsForView:withParsedMessages:) error:&error];
+        
+        [composeBackEnd jrlp_swizzleMethod:@selector(includeHeaders)
+                                withMethod:@selector(MHincludeHeaders) error:&error];
+        
+        [composeBackEnd jrlp_swizzleMethod:@selector(okToAddSignatureAutomatically)
+                                withMethod:@selector(MHokToAddSignatureAutomatically) error:&error];
     }
     
     Class headerEditor = NSClassFromString(@"HeadersEditor");

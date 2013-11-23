@@ -51,13 +51,15 @@
         NSString *currentVersion = [MailHeader bundleVersionString];
         
         NSComparisonResult result = [comparator compareVersion:currentVersion toVersion:serverVersion];
-        if (result == NSOrderedAscending)
+        NSString *possibleMatch = [NSString stringWithFormat:@"%@-beta", serverVersion];
+        if (result == NSOrderedAscending || ([currentVersion isEqualToString:possibleMatch]))
         {            
-            NSString *versionDesc = [NSString stringWithFormat:MHLocalizedString(@"STRING_UPDATE_VERSION_DESC"),
+            NSString *versionDesc = [NSString stringWithFormat:MHLocalizedStringByLocale(@"STRING_UPDATE_VERSION_DESC", MHLocaleIdentifier),
                                      [MailHeader bundleName],
                                      serverVersion,
                                      currentVersion];
-            NSLog(@"%@ v%@ now available!", [MailHeader bundleName], serverVersion);
+            NSLog(@"%@ v%@ now available! -- you have v%@",
+                  [MailHeader bundleName], serverVersion, currentVersion);
             
             NSString *releaseNotes = [latest objectForKey:@"releaseNotes"];            
             NSString *downloadLink = [latest objectForKey:@"downloadUrl"];
@@ -77,7 +79,7 @@
     if (self)
     {
         NSString *appCastUrl = [[[MailHeader bundle] infoDictionary] objectForKey:MHAppCastURLKey];        
-        NSData *appCastData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:appCastUrl]];
+        NSData *appCastData = [NSData dataWithContentsOfURL:[NSURL URLWithString:appCastUrl]];
         
         if (appCastData)
         {

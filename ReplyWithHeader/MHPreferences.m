@@ -29,10 +29,10 @@
 #import "MHPreferences.h"
 
 @interface MHPreferences (PrivateMethods)
-    - (IBAction)MailHeaderBundlePressed:(id)sender;
-    - (IBAction)HeaderTypographyPressed:(id)sender;
-    - (IBAction)SelectFontButtonPressed:(id)sender;
-    - (IBAction)HeaderLabelModePressed:(id)sender;
+    - (IBAction)mailHeaderBundlePressed:(id)sender;
+    - (IBAction)headerTypographyPressed:(id)sender;
+    - (IBAction)selectFontButtonPressed:(id)sender;
+    - (IBAction)headerLabelModePressed:(id)sender;
     - (IBAction)openWebsite:(id)sender;
     - (IBAction)openFeedback:(id)sender;
     - (IBAction)openSupport:(id)sender;
@@ -43,33 +43,32 @@
 
 #pragma mark Class private methods
 
-- (void)toggleRwhPreferencesOptions:(BOOL *)state
+- (void)toggleMailPreferencesOptions:(BOOL *)state
 {
-    [_MHHeaderTypographyEnabled setEnabled:state];    
+    [_MHHeaderTypographyEnabled setEnabled:state];
     [_MHForwardHeaderEnabled setEnabled:state];
     [_MHHeaderOptionEnabled setEnabled:state];
     [_MHEntourage2004SupportEnabled setEnabled:state];
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
+    [_MHLanguagePopup setEnabled:state];
     
-    [self toggleRwhHeaderTypograpghyOptions:state];
-    [self toggleRwhHeaderLabelOptions:state];
+    [self toggleHeaderTypograpghyOptions:state];
+    [self toggleHeaderLabelOptions:state];
 }
 
-- (void)toggleRwhHeaderLabelOptions:(BOOL *)state
+- (void)toggleHeaderLabelOptions:(BOOL *)state
 {
-    if ([MailHeader isLocaleSupported]) {
-        [_MHHeaderOrderMode setEnabled:state];
-    }
-    
+    [_MHHeaderOrderMode setEnabled:state];
     [_MHHeaderLabelMode setEnabled:state];
 }
 
-- (void)toggleRwhHeaderTypograpghyOptions:(BOOL *)state
+- (void)toggleHeaderTypograpghyOptions:(BOOL *)state
 {
     [_MHSelectFont setEnabled:state];
     [_MHColorWell setEnabled:state];
+    [_MHHeaderInfoFontAndSize setEnabled:state];
 }
 
 - (NSString *)NameAndVersion
@@ -82,32 +81,32 @@
     return [MailHeader bundleCopyright];
 }
 
-- (IBAction)MailHeaderBundlePressed:(id)sender
+- (IBAction)mailHeaderBundlePressed:(id)sender
 {
-    [self toggleRwhPreferencesOptions:[sender state]];
+    [self toggleMailPreferencesOptions:[sender state]];
 }
 
-- (IBAction)HeaderTypographyPressed:(id)sender
+- (IBAction)headerTypographyPressed:(id)sender
 {
-    [self toggleRwhHeaderTypograpghyOptions:[sender state]];
+    [self toggleHeaderTypograpghyOptions:[sender state]];
 }
 
-- (IBAction)SelectFontButtonPressed:(id)sender
+- (IBAction)selectFontButtonPressed:(id)sender
 {
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    [fontManager setDelegate:self];
-    [fontManager setTarget:self];
-    [fontManager orderFrontFontPanel:self];
-    
     NSString *font = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     
-    [fontManager setSelectedFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
+    [[NSFontPanel sharedFontPanel] setDelegate:self];
+    [[NSFontPanel sharedFontPanel] setEnabled:YES];
+    [[NSFontPanel sharedFontPanel] makeKeyAndOrderFront:self];
+
+    [[NSFontPanel sharedFontPanel]
+     setPanelFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (IBAction)HeaderLabelModePressed:(id)sender
+- (IBAction)headerLabelModePressed:(id)sender
 {
-    [self toggleRwhHeaderLabelOptions:[sender state]];
+    [self toggleHeaderLabelOptions:[sender state]];
 }
 
 - (void)changeFont:(id)sender
@@ -147,7 +146,7 @@
 
 - (IBAction)openSupport:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeaders/issues"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeader/issues"]];
 }
 
 - (IBAction)notifyNewVersionPressed:(id)sender
@@ -160,7 +159,7 @@
         [alert setIcon:[MailHeader bundleLogo]];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert setMessageText:@"Are you sure you want to disable it?"];
-        [alert setInformativeText:@"Missing a opportunity of new version release notification."];
+        [alert setInformativeText:@"Missing an opportunity of new version release notification."];
         
         [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"Disable"];
@@ -184,23 +183,58 @@
 
 - (void)awakeFromNib
 {   
-    [self toggleRwhPreferencesOptions:[MailHeader isEnabled]];
+    [self toggleMailPreferencesOptions:[MailHeader isEnabled]];
     
     [_MHHeaderInfoFontAndSize
      setStringValue:[NSString stringWithFormat:@"%@ %@",
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
     
+    NSArray *localizations = [[MailHeader bundle] localizations];
+    [_MHLanguagePopup removeAllItems];
+    
+    NSString *supportedLocales = @"";
+    for (NSString *lang in localizations)
+    {
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
+        NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
+        supportedLocales = [supportedLocales stringByAppendingString:name];
+        supportedLocales = [supportedLocales stringByAppendingString:@" "];
+        
+        NSMenuItem *item = [[NSMenuItem alloc] init];
+        [item setRepresentedObject:lang];
+        [item setTitle:name];
+        
+        [[_MHLanguagePopup menu] addItem:item];
+    }
+    
+    MHLog(@"Supported languages %@", supportedLocales);
+    
+    NSString *localeIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
+    if (!localeIdentifier)
+    {
+        localeIdentifier = [MailHeader localeIdentifier];
+    }
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localeIdentifier];
+    NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:localeIdentifier];
+    [_MHLanguagePopup selectItemWithTitle:name];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(languagePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLanguagePopup menu]];   
+    
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![MailHeader isLocaleSupported] ) {
-        //[self toggleRwhHeaderLabelOptions:FALSE];
-        //[_MHHeaderOptionEnabled setEnabled:FALSE];
-        [_MHHeaderOrderMode setEnabled:FALSE];
         
-        NSString *toolTip = @"Currently this feature is supported in english(en) locale only.";
-        //[_MHHeaderOptionEnabled setToolTip:toolTip];
-        //[_MHHeaderLabelMode setToolTip:toolTip];
-        [_MHHeaderOrderMode setToolTip:toolTip];
+        [self toggleMailPreferencesOptions:FALSE];
+        
+        [_MHBundleEnabled setEnabled:FALSE];
+        
+        NSString *toolTip = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\n\nPlease contact plugin author for support.", [MailHeader bundleNameAndVersion], [MailHeader localeIdentifier]];
+        
+        [_MHBundleTabBox setToolTip:toolTip];
     }
 }
 
@@ -217,6 +251,20 @@
 - (BOOL)isResizable
 {
 	return NO;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+- (void)languagePopUpSelectionChanged:(NSNotification *)notification {
+    NSMenuItem *selectedItem = [_MHLanguagePopup selectedItem];
+    
+    MHLog(@"Choosen language & identifier: %@ - %@",
+          [selectedItem title], [selectedItem representedObject]);
+    
+    SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
 }
 
 @end

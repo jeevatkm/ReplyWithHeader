@@ -60,6 +60,7 @@
 
 #define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
+#define MHBundleHeaderLanguageCode @"MHBundleHeaderLanguageCode"
 
 #define MHPreferencesNibName @"MHPreferencesView"
 

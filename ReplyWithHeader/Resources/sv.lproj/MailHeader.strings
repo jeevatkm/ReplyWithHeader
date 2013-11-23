@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., Alla rättigheter förbehållna.";
+    
+    /* Message Strings */
+    "STRING_FROM" = "Från";
+    "STRING_SUBJECT" = "Ämne";
+    "STRING_DATE" = "Datum";
+    "STRING_TO" = "Till";
+    "STRING_CC" = "Kopia";
+    "STRING_REPLY_TO" = "Svara till";
+    "STRING_SENT" = "Skickat";
+    "STRING_WROTE" = "skrev";
+    "STRING_FORWARDED_MESSAGE" = "Vidarebefordrat brev:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "ReplyWithHeader Plugin Update";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "En ny version av %@ finns!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ finns nu - du har %@. Vill du ladda ner den nu?";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "ladda ner";
+	"BUTTON_RELEASE_NOTES" = "Release Notes";
+	"BUTTON_LATER" = "Senare";
+}

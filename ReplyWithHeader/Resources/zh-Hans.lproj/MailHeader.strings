@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "版权 © 2013 Jeevanandam M., 保留所有权利。";
+    
+    /* Message Strings */
+    "STRING_FROM" = "发件人";
+    "STRING_SUBJECT" = "主题";
+    "STRING_DATE" = "日期";
+    "STRING_TO" = "To";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Reply-To";
+    "STRING_SENT" = "发出日期";
+    "STRING_WROTE" = "写道：";
+    "STRING_FORWARDED_MESSAGE" = "下面是被转发的邮件：";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@插件更新";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "新版本的%@！";
+    "STRING_UPDATE_VERSION_DESC" = "现已%@ %@ - %@。你想现在就下载吗？";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "下载";
+	"BUTTON_RELEASE_NOTES" = "发行说明";
+	"BUTTON_LATER" = "后来";
+}

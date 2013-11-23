@@ -2,14 +2,18 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., All rights reserved.";    
+    "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., All rights reserved.";
     
     /* Message Strings */
-    "STRING_SUBJECT" = "Subject: ";
-    "STRING_DATE" = "Date: ";
-    "STRING_REPLY_TO" = "Reply-To: ";
-    "STRING_SENT" = "Sent: ";
+    "STRING_FROM" = "From";
+    "STRING_SUBJECT" = "Subject";
+    "STRING_DATE" = "Date";
+    "STRING_TO" = "To";
+    "STRING_CC" = "Cc";
+    "STRING_REPLY_TO" = "Reply-To";
+    "STRING_SENT" = "Sent";
     "STRING_WROTE" = "wrote:";
+    "STRING_FORWARDED_MESSAGE" = "forwarded message:";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

@@ -60,9 +60,9 @@
     
     NSString *pluginName = [MailHeader bundleName];    
     [[self window]
-     setTitle:[NSString stringWithFormat:MHLocalizedString(@"STRING_UPDATE_WINDOW_TITLE"), pluginName]];
+     setTitle:[NSString stringWithFormat:MHLocalizedStringByLocale(@"STRING_UPDATE_WINDOW_TITLE", MHLocaleIdentifier), pluginName]];
     
-    [_subTitle setStringValue:[NSString stringWithFormat:MHLocalizedString(@"STRING_UPDATE_WINDOW_SUBTITLE"), pluginName]];    
+    [_subTitle setStringValue:[NSString stringWithFormat:MHLocalizedStringByLocale(@"STRING_UPDATE_WINDOW_SUBTITLE", MHLocaleIdentifier), pluginName]];
     [_versionDesc setStringValue:versionDesc];    
     [[_releaseNotesView mainFrame] loadHTMLString:releaseNotes baseURL:nil];
 }

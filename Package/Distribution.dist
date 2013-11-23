@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<installer-gui-script minSpecVersion="1">
+	<options customize="never" hostArchitectures="i386" rootVolumeOnly="true"/>
+    <title>ReplyWithHeader Mail Plugin</title>
+    <script/>
+    <installation-check script="InstallationCheck()"/>
+    <script>
+function InstallationCheck(prefix) {
+	if (system.compareVersions(system.version.ProductVersion, '10.7.0') &lt; 0) {
+		my.result.message = 'This plugin is not supported on your system, it requires OS X version 10.7.0 or later.';
+		my.result.type = 'Fatal';
+		return false;
+	}
+	return true;
+}
+	</script>
+	<welcome file="welcome.rtf"/>
+	<license file="license.rtf" />
+	<conclusion file="conclusion.rtf" />
+    <background file="background.png" alignment="bottomleft" scaling="none"/>
+    <choices-outline>
+        <line choice="rwh"/>
+    </choices-outline>
+    <choice id="rwh" title="ReplyWithHeader Mail Plugin">
+        <pkg-ref id="ReplyWithHeader" auth="Root">#installer.pkg<must-close>
+                <app id="com.apple.mail"/>
+            </must-close>
+        </pkg-ref>
+    </choice>
+</installer-gui-script>

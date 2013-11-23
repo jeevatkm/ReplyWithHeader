@@ -38,7 +38,10 @@
 @interface MailHeader : NSObject
 
 + (BOOL)isEnabled;
++ (NSLocale *)currentLocale;
++ (NSString *)localeIdentifier;
 + (BOOL)isLocaleSupported;
++ (BOOL)isSpecificLocale;
 + (NSBundle *)bundle;
 + (NSString *)bundleNameAndVersion;
 + (NSString *)bundleName;
@@ -47,7 +50,9 @@
 + (NSString *)bundleCopyright;
 + (NSImage *)bundleLogo;
 + (NSString *)localizedString:(NSString *)key;
-+ (NSString *)localeLanguageCode;
++ (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier;
++ (id)getConfigValue:(NSString *)key;
++ (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;
