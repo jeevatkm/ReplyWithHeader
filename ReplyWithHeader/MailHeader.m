@@ -197,6 +197,7 @@
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
+                          [NSNumber numberWithInt:0], MHHeaderAttributionFromTagStyle,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];

@@ -57,6 +57,8 @@
 #define MHHeaderLabelMode @"MHHeaderLabelMode"
 #define MHHeaderOrderMode @"MHHeaderOrderMode"
 
+#define MHHeaderAttributionFromTagStyle @"MHHeaderAttributionFromTagStyle"
+
 #define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
 #define MHBundleHeaderLanguageCode @"MHBundleHeaderLanguageCode"
