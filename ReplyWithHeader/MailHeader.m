@@ -193,7 +193,6 @@
                           MHDefaultHeaderFontName, MHHeaderFontName,
                           MHDefaultHeaderFontSize, MHHeaderFontSize,
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
-                          [NSNumber numberWithBool:NO], MHEntourage2004SupportEnabled,
                           [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
@@ -229,7 +228,7 @@
     
     if (GET_DEFAULT_BOOL(@"entourage2004Support"))
     {
-        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), MHEntourage2004SupportEnabled);
+        SET_DEFAULT_BOOL(GET_DEFAULT_BOOL(@"entourage2004Support"), @"MHEntourage2004SupportEnabled");
         
         REMOVE_DEFAULT(@"entourage2004Support");
     }
@@ -255,6 +254,12 @@
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
     }
     // [end]
+    
+    // issue #42
+    if (GET_DEFAULT(@"MHEntourage2004SupportEnabled"))
+    {
+        REMOVE_DEFAULT(@"MHEntourage2004SupportEnabled");
+    }
 }
 
 

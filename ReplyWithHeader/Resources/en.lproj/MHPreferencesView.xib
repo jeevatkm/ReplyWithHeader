@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">13A603</string>
+		<string key="IBDocument.SystemVersion">13B42</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4514</string>
 		<string key="IBDocument.AppKitVersion">1265</string>
-		<string key="IBDocument.HIToolboxVersion">695.00</string>
+		<string key="IBDocument.HIToolboxVersion">696.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">4514</string>
@@ -99,7 +99,6 @@
 										<string key="NSFrame">{{11, 9}, {566, 407}}</string>
 										<reference key="NSSuperview" ref="1029343919"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="942401193"/>
 										<array class="NSMutableArray" key="NSTabViewItems">
 											<object class="NSTabViewItem" id="1013313776">
 												<string key="NSIdentifier">1</string>
@@ -107,66 +106,6 @@
 													<reference key="NSNextResponder" ref="144960519"/>
 													<int key="NSvFlags">274</int>
 													<array class="NSMutableArray" key="NSSubviews">
-														<object class="NSButton" id="577128236">
-															<reference key="NSNextResponder" ref="942401193"/>
-															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{15, 51}, {476, 18}}</string>
-															<reference key="NSSuperview" ref="942401193"/>
-															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="889443858"/>
-															<bool key="NSEnabled">YES</bool>
-															<object class="NSButtonCell" key="NSCell" id="965333510">
-																<int key="NSCellFlags">-2080374784</int>
-																<int key="NSCellFlags2">268435456</int>
-																<string key="NSContents">Entourage 2004 support</string>
-																<reference key="NSSupport" ref="581614428"/>
-																<reference key="NSControlView" ref="577128236"/>
-																<int key="NSButtonFlags">1211912448</int>
-																<int key="NSButtonFlags2">2</int>
-																<reference key="NSNormalImage" ref="1008127819"/>
-																<reference key="NSAlternateImage" ref="413563666"/>
-																<string key="NSAlternateContents"/>
-																<string key="NSKeyEquivalent"/>
-																<int key="NSPeriodicDelay">400</int>
-																<int key="NSPeriodicInterval">75</int>
-															</object>
-															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-														</object>
-														<object class="NSTextField" id="889443858">
-															<reference key="NSNextResponder" ref="942401193"/>
-															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{31, 17}, {501, 28}}</string>
-															<reference key="NSSuperview" ref="942401193"/>
-															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="164038164"/>
-															<bool key="NSEnabled">YES</bool>
-															<object class="NSTextFieldCell" key="NSCell" id="59098203">
-																<int key="NSCellFlags">67108864</int>
-																<int key="NSCellFlags2">205520896</int>
-																<string key="NSContents">Applied typography fix to support message consistent appearance, while message is received in Entourage 2004 [this option might affect appearance in latest mail clients].</string>
-																<object class="NSFont" key="NSSupport" id="26">
-																	<string key="NSName">.LucidaGrandeUI</string>
-																	<double key="NSSize">11</double>
-																	<int key="NSfFlags">3100</int>
-																</object>
-																<reference key="NSControlView" ref="889443858"/>
-																<object class="NSColor" key="NSBackgroundColor" id="993017804">
-																	<int key="NSColorSpace">6</int>
-																	<string key="NSCatalogName">System</string>
-																	<string key="NSColorName">controlColor</string>
-																	<object class="NSColor" key="NSColor">
-																		<int key="NSColorSpace">3</int>
-																		<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-																	</object>
-																</object>
-																<object class="NSColor" key="NSTextColor">
-																	<int key="NSColorSpace">1</int>
-																	<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
-																</object>
-															</object>
-															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-															<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
-														</object>
 														<object class="NSTextField" id="126511310">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
@@ -179,9 +118,21 @@
 																<int key="NSCellFlags">67108864</int>
 																<int key="NSCellFlags2">205520896</int>
 																<string key="NSContents">Applied customization and manages Forward header.</string>
-																<reference key="NSSupport" ref="26"/>
+																<object class="NSFont" key="NSSupport" id="26">
+																	<string key="NSName">.LucidaGrandeUI</string>
+																	<double key="NSSize">11</double>
+																	<int key="NSfFlags">3100</int>
+																</object>
 																<reference key="NSControlView" ref="126511310"/>
-																<reference key="NSBackgroundColor" ref="993017804"/>
+																<object class="NSColor" key="NSBackgroundColor" id="993017804">
+																	<int key="NSColorSpace">6</int>
+																	<string key="NSCatalogName">System</string>
+																	<string key="NSColorName">controlColor</string>
+																	<object class="NSColor" key="NSColor">
+																		<int key="NSColorSpace">3</int>
+																		<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+																	</object>
+																</object>
 																<object class="NSColor" key="NSTextColor">
 																	<int key="NSColorSpace">1</int>
 																	<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
@@ -581,7 +532,7 @@
 															<string key="NSFrame">{{15, 82}, {516, 18}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="577128236"/>
+															<reference key="NSNextKeyView"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSButtonCell" key="NSCell" id="243017198">
 																<int key="NSCellFlags">-2080374784</int>
@@ -1044,14 +995,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">_MHEntourage2004SupportEnabled</string>
-						<reference key="source" ref="302651457"/>
-						<reference key="destination" ref="577128236"/>
-					</object>
-					<string key="id">361</string>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">_MHForwardHeaderEnabled</string>
 						<reference key="source" ref="302651457"/>
 						<reference key="destination" ref="416572505"/>
@@ -1225,22 +1168,6 @@
 						</object>
 					</object>
 					<string key="id">375</string>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">values.MHEntourage2004SupportEnabled</string>
-						<reference key="source" ref="577128236"/>
-						<reference key="destination" ref="575662790"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="577128236"/>
-							<reference key="NSDestination" ref="575662790"/>
-							<string key="NSLabel">value: values.MHEntourage2004SupportEnabled</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.MHEntourage2004SupportEnabled</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<string key="id">383</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1502,8 +1429,6 @@
 						<string key="id">133</string>
 						<reference key="object" ref="942401193"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="577128236"/>
-							<reference ref="889443858"/>
 							<reference ref="126511310"/>
 							<reference ref="299132989"/>
 							<reference ref="416572505"/>
@@ -1520,32 +1445,6 @@
 							<reference ref="1012317592"/>
 						</array>
 						<reference key="parent" ref="1013313776"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">16</string>
-						<reference key="object" ref="577128236"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="965333510"/>
-						</array>
-						<reference key="parent" ref="942401193"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">17</string>
-						<reference key="object" ref="965333510"/>
-						<reference key="parent" ref="577128236"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">106</string>
-						<reference key="object" ref="889443858"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="59098203"/>
-						</array>
-						<reference key="parent" ref="942401193"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">107</string>
-						<reference key="object" ref="59098203"/>
-						<reference key="parent" ref="889443858"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">205</string>
@@ -1957,11 +1856,6 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="1.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="1.showNotes"/>
-				<string key="106.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<reference key="106.IBUserGuides" ref="0"/>
-				<boolean value="NO" key="106.showNotes"/>
-				<string key="107.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<boolean value="NO" key="107.showNotes"/>
 				<string key="114.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="114.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="114.showNotes"/>
@@ -1988,11 +1882,6 @@
 				<string key="133.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="133.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="133.showNotes"/>
-				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<reference key="16.IBUserGuides" ref="0"/>
-				<boolean value="NO" key="16.showNotes"/>
-				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<boolean value="NO" key="17.showNotes"/>
 				<string key="203.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="203.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="203.showNotes"/>
@@ -2243,7 +2132,6 @@
 						<string key="_MHBundleEnabled">NSButton</string>
 						<string key="_MHBundleTabBox">NSTabView</string>
 						<string key="_MHColorWell">NSColorWell</string>
-						<string key="_MHEntourage2004SupportEnabled">NSButton</string>
 						<string key="_MHForwardHeaderEnabled">NSButton</string>
 						<string key="_MHHeaderInfoFontAndSize">NSTextField</string>
 						<string key="_MHHeaderLabelMode">NSMatrix</string>
@@ -2268,10 +2156,6 @@
 						<object class="IBToOneOutletInfo" key="_MHColorWell">
 							<string key="name">_MHColorWell</string>
 							<string key="candidateClassName">NSColorWell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_MHEntourage2004SupportEnabled">
-							<string key="name">_MHEntourage2004SupportEnabled</string>
-							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_MHForwardHeaderEnabled">
 							<string key="name">_MHForwardHeaderEnabled</string>
