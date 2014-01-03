@@ -41,7 +41,6 @@
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
     IBOutlet NSButton *_MHHeaderTypographyEnabled;
-    IBOutlet NSButton *_MHEntourage2004SupportEnabled;
     IBOutlet NSButton *_MHSelectFont;
     IBOutlet NSButton *_MHHeaderOptionEnabled;
     IBOutlet NSButton *_MHNotifyNewVersion;

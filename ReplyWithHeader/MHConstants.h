@@ -44,7 +44,6 @@
 #define MHTypographyEnabled @"MHHeaderTypographyEnabled"
 #define MHHeaderOptionEnabled @"MHHeaderLabelOptionEnabled"
 #define MHRemoveSignatureEnabled @"MHRemoveSignatureEnabled"
-#define MHEntourage2004SupportEnabled @"MHEntourage2004SupportEnabled"
 #define MHDefaulReplyHeaderBorder @"<br />---------- Original Message ----------<br />"
 #define MHDefaultForwardHeaderBorder @"---------- Forwarded Message ----------<br />"
 #define MHHeaderBorder @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
@@ -57,6 +56,8 @@
 // Mode Values (1=Apple Mail, 2=Outlook Mail)
 #define MHHeaderLabelMode @"MHHeaderLabelMode"
 #define MHHeaderOrderMode @"MHHeaderOrderMode"
+
+#define MHHeaderAttributionFromTagStyle @"MHHeaderAttributionFromTagStyle"
 
 #define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"

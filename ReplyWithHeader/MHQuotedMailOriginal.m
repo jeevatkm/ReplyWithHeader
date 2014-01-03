@@ -133,12 +133,6 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     
     MHLog(@"Header HTML %@", [[headerFragment firstChild] outerHTML]);
     
-    // Entourage 2004 text size transformations
-    if (GET_DEFAULT_BOOL(MHEntourage2004SupportEnabled))
-    {
-        [self applyEntourage2004Support:headerFragment];
-    }
-    
     if (msgComposeType == 1 || msgComposeType == 2 || (manageForwardHeader && msgComposeType == 3))
     {
         if ( isHTMLMail )
@@ -368,7 +362,8 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
 }
 
-- (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment
+// issue #42
+/*- (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment
 {   
     // kind of silly, but this code is required so that the adulation appears correctly
     // in Entourage 2004 would interpret the paragraph tag and ignore
@@ -424,7 +419,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
             [[headerFragment firstChild] replaceChild:brelem oldChild:[fragmentNodes item:i] ];
         }
     }
-}
+} */
 
 - (DOMDocumentFragment *)createDocumentFragment:(NSString *)htmlString
 {

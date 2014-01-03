@@ -48,7 +48,6 @@
     [_MHHeaderTypographyEnabled setEnabled:state];
     [_MHForwardHeaderEnabled setEnabled:state];
     [_MHHeaderOptionEnabled setEnabled:state];
-    [_MHEntourage2004SupportEnabled setEnabled:state];
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
