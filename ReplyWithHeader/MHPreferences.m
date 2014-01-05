@@ -52,6 +52,7 @@
     [_MHSubjectPrefixTextEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
     [_MHLanguagePopup setEnabled:state];
+    [_MHHeaderAttributionFromTagStyle setEnabled:state];
     
     [self toggleHeaderTypograpghyOptions:state];
     [self toggleHeaderLabelOptions:state];
