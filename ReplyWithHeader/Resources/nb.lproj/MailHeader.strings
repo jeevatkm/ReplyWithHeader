@@ -1,0 +1,29 @@
+{
+    /* Plugin Info */
+    "PLUGIN_NAME" = "ReplyWithHeader";
+    "MAIL_HEADER_PREFERENCES" = "RWH";
+    "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., Alle rettigheter forbeholdt.";
+    
+    /* Message Strings */
+    "STRING_FROM" = "Fra";
+    "STRING_SUBJECT" = "Emne";
+    "STRING_DATE" = "Dato";
+    "STRING_TO" = "Til";
+    "STRING_CC" = "Kopi";
+    "STRING_REPLY_TO" = "Svar til";
+    "STRING_SENT" = "Sendt";
+    "STRING_WROTE" = "skrev";
+    "STRING_FORWARDED_MESSAGE" = "Videresendt melding:";
+    "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
+    "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
+    "STRING_REPLACE_PREFIX_SUBJECT_FWD" = "FW: ";    
+    "STRING_UPDATE_WINDOW_TITLE" = "%@ Plugin Update";
+    "STRING_UPDATE_WINDOW_SUBTITLE" = "En ny versjon av %@ er tilgjengelig!";
+    "STRING_UPDATE_VERSION_DESC" = "%@ %@ er nå tilgjengelig - du har %@. Vil du laste den ned nå?";
+    
+    /* Button Strings */
+	"BUTTON_DOWNLOAD" = "Last ned";
+	"BUTTON_RELEASE_NOTES" = "Release Notes";
+	"BUTTON_LATER" = "senere";
+}

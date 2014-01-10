@@ -51,6 +51,8 @@
 		131C192217F627B70053C587 /* SUStandardVersionComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUStandardVersionComparator.h; sourceTree = "<group>"; };
 		131C192317F627B70053C587 /* SUStandardVersionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUStandardVersionComparator.m; sourceTree = "<group>"; };
 		131C192617F6291E0053C587 /* SUVersionComparisonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionComparisonProtocol.h; sourceTree = "<group>"; };
+		13297B03187FE5F400BD37F9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MailHeader.strings; sourceTree = "<group>"; };
+		13297B04187FE5F400BD37F9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nb; path = nb.lproj/Config.plist; sourceTree = "<group>"; };
 		132C66621827E23400CD7C1A /* language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = language.png; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* MHHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHHeaderString.h; sourceTree = "<group>"; };
 		133A916E17E9745A00E3CC62 /* MHHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHHeaderString.m; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				ko,
 				"pt-PT",
 				uk,
+				nb,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -431,6 +434,7 @@
 				13CBE93F18360EB1003CDA1E /* sv */,
 				13CBE94118360EC3003CDA1E /* ru */,
 				13CBE94318360ED8003CDA1E /* uk */,
+				13297B03187FE5F400BD37F9 /* nb */,
 			);
 			name = MailHeader.strings;
 			sourceTree = "<group>";
@@ -485,6 +489,7 @@
 				13CBE94018360EB1003CDA1E /* sv */,
 				13CBE94218360EC3003CDA1E /* ru */,
 				13CBE94418360ED8003CDA1E /* uk */,
+				13297B04187FE5F400BD37F9 /* nb */,
 			);
 			name = Config.plist;
 			sourceTree = "<group>";

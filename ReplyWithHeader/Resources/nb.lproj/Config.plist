@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowedHeaders</key>
+	<array>
+		<string>Fra</string>
+		<string>Emne</string>
+		<string>Dato</string>
+		<string>Til</string>
+		<string>Kopi</string>
+	</array>
+</dict>
+</plist>
