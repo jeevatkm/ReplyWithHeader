@@ -62,13 +62,13 @@
 + (id)MHSharedPreferences
 {
 	static BOOL added = NO;
-	
-	id preferences = [self MHSharedPreferences];
+    
+    id preferences = [self MHSharedPreferences];
     
     if(preferences == nil)
         return nil;
     
-    if(added)
+    if( ![MailHeader isLocaleSupported] || added)
         return preferences;
     
     // Check modules, if MailHeaderPreferences is not yet in there.
@@ -76,7 +76,7 @@
     NSString *preferencesName = [MailHeader preferencesPanelName];
     [preferences addPreferenceNamed:preferencesName owner:mailHeaderPreferences];
     added = YES;
-	
+    
     NSWindow *preferencesPanel = [preferences valueForKey:@"_preferencesPanel"];
     NSToolbar *toolbar = [preferencesPanel toolbar];
     

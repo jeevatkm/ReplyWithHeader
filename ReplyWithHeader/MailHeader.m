@@ -110,7 +110,7 @@
 }
 
 + (NSString *)bundleName
-{
+{    
     return MHLocalizedStringByLocale(@"PLUGIN_NAME", MHLocaleIdentifier);
 }
 
@@ -155,6 +155,16 @@
                                               forLocalization:identifier];
     
     NSDictionary *stringDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    NSString *string = [stringDict objectForKey:key];
+    
+    if ( string == nil )
+    {
+        MHLog(@"Localized String locale: %@ key: %@ value: %@", identifier, key, string);
+        return [self localizedString:key localeIdentifier:@"en"];
+    }
+    
+    MHLog(@"Localized String locale: %@ key: %@ value: %@", identifier, key, string);
     
     return [stringDict objectForKey:key];
 }
@@ -322,8 +332,11 @@
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
     {
-        NSLog(@"WARNING:: %@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\nPlease contact plugin author for support.",
-              [self bundleNameAndVersion], [self localeIdentifier]);
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:[self localeIdentifier]];
+        NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:[self localeIdentifier]];
+        
+        NSLog(@"WARNING :: %@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author for support (http://myjeeva.com/replywithheader).",
+              [self bundleNameAndVersion], name, [self localeIdentifier]);
         
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
     }
