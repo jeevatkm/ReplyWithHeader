@@ -60,18 +60,6 @@ if [ ${mh_enb_success} -eq 0 ]; then
 	domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
 	defaults write "${domain}" EnableBundles -bool true
 fi
-fi
-
-
-if [ ${mh_enable_plugin} -eq 1 ]; then
-if [ -f ${domain} ]; then
-    echo "RWH:: Enabling plugin support in Mail.app"
-    defaults write ${domain} EnableBundles -bool true
-else
-	echo "RWH:: plist not exists, creating one for Mail.app"
-	domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
-	defaults write ${domain} EnableBundles -bool true
-fi
 echo "RWH:: Domain is ${domain}"
 fi
 
@@ -92,6 +80,14 @@ mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Re
         defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_msg_frwk_uuid}"
     fi
 fi
+fi
+
+# for issue #48 - Resolve Permission Issue while installed by Root user
+if [ ${mh_user} == root ] ; then
+	mh_cur_user_name=${HOME##*/}
+	echo "RWH:: Applying appropriate file permission for user '${mh_cur_user_name}'"
+	chown -R ${mh_cur_user_name} ${mh_install_path}
+	chmod -R 755 ${mh_install_path}
 fi
 
 echo "RWH:: Installation complete" 
