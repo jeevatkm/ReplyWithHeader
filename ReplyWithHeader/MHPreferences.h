@@ -51,6 +51,7 @@
     IBOutlet NSMatrix *_MHHeaderOrderMode;
     IBOutlet NSMatrix *_MHHeaderLabelMode;
     IBOutlet NSPopUpButton *_MHLanguagePopup;
+    IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;

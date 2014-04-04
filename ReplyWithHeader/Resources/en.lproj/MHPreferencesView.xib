@@ -99,7 +99,6 @@
 										<string key="NSFrame">{{11, 9}, {566, 407}}</string>
 										<reference key="NSSuperview" ref="1029343919"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="942401193"/>
 										<array class="NSMutableArray" key="NSTabViewItems">
 											<object class="NSTabViewItem" id="1013313776">
 												<string key="NSIdentifier">1</string>
@@ -1128,7 +1127,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 										<string key="NSFrame">{{454, 405}, {119, 25}}</string>
 										<reference key="NSSuperview" ref="1029343919"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSPopUpButtonCell" key="NSCell" id="100210319">
 											<int key="NSCellFlags">67108928</int>
@@ -1424,6 +1422,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<reference key="destination" ref="897279115"/>
 					</object>
 					<string key="id">346</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_MHHeaderAttributionFromTagStyle</string>
+						<reference key="source" ref="302651457"/>
+						<reference key="destination" ref="91198230"/>
+					</object>
+					<string key="id">INO-qs-BKh</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2467,6 +2473,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<string key="_MHBundleTabBox">NSTabView</string>
 						<string key="_MHColorWell">NSColorWell</string>
 						<string key="_MHForwardHeaderEnabled">NSButton</string>
+						<string key="_MHHeaderAttributionFromTagStyle">NSMatrix</string>
 						<string key="_MHHeaderInfoFontAndSize">NSTextField</string>
 						<string key="_MHHeaderLabelMode">NSMatrix</string>
 						<string key="_MHHeaderOptionEnabled">NSButton</string>
@@ -2494,6 +2501,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<object class="IBToOneOutletInfo" key="_MHForwardHeaderEnabled">
 							<string key="name">_MHForwardHeaderEnabled</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_MHHeaderAttributionFromTagStyle">
+							<string key="name">_MHHeaderAttributionFromTagStyle</string>
+							<string key="candidateClassName">NSMatrix</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_MHHeaderInfoFontAndSize">
 							<string key="name">_MHHeaderInfoFontAndSize</string>

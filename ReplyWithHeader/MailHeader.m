@@ -65,8 +65,11 @@
         identifier = @"zh-Hans";
     else if ([identifier isEqualToString:@"zh_TW"])
         identifier = @"zh-Hant";
-    else if ([identifier hasPrefix:@"en"]) // for issue #39 - considering all en-* into one umberlla
-        identifier = @"en";
+    else if ([identifier hasPrefix:@"en"])
+        identifier = @"en"; // for issue #39 - considering all en-* into one umberlla
+    else if ([identifier hasPrefix:@"no"]
+             || [identifier hasPrefix:@"nb"])
+        identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
     
     return identifier;
 }
@@ -74,6 +77,8 @@
 // for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
 + (BOOL)isLocaleSupported
 {
+    MHLog(@"Supported Localization %@", [[self bundle] localizations]);
+    
     BOOL supported = [[[self bundle] localizations] containsObject:[self localeIdentifier]];
         
     MHLog(@"%@ - Is locale supported: %@",[self bundleNameAndVersion], supported ? @"YES" : @"NO");
@@ -110,7 +115,7 @@
 }
 
 + (NSString *)bundleName
-{
+{    
     return MHLocalizedStringByLocale(@"PLUGIN_NAME", MHLocaleIdentifier);
 }
 
@@ -155,6 +160,16 @@
                                               forLocalization:identifier];
     
     NSDictionary *stringDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    NSString *string = [stringDict objectForKey:key];
+    
+    if ( string == nil )
+    {
+        MHLog(@"Localized String locale: %@ key: %@ value: %@", identifier, key, string);
+        return [self localizedString:key localeIdentifier:@"en"];
+    }
+    
+    MHLog(@"Localized String locale: %@ key: %@ value: %@", identifier, key, string);
     
     return [stringDict objectForKey:key];
 }
@@ -322,8 +337,11 @@
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
     {
-        NSLog(@"WARNING:: %@ is currently not supported in your Locale[%@] it may not work as expected, so disabling it.\nPlease contact plugin author for support.",
-              [self bundleNameAndVersion], [self localeIdentifier]);
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:[self localeIdentifier]];
+        NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:[self localeIdentifier]];
+        
+        NSLog(@"WARNING :: %@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author for support (http://myjeeva.com/replywithheader).",
+              [self bundleNameAndVersion], name, [self localeIdentifier]);
         
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
     }
