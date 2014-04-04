@@ -137,7 +137,8 @@
     [infoAlert setMessageText:[NSMutableString stringWithFormat:@"Feedback: %@", [MailHeader bundleNameAndVersion]]];
     [infoAlert setInformativeText:@"Please use Disqus thread on the page, I appreciate your feedback."];    
     [infoAlert setIcon:[MailHeader bundleLogo]];
-    [[[infoAlert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
+    // #58 - commented outfor 10.9.2
+    //[[[infoAlert buttons] objectAtIndex:0] setKeyEquivalent:@"\r"];
     
     [infoAlert runModal];
     
