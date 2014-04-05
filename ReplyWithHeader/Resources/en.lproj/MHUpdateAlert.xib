@@ -234,7 +234,7 @@
 							<object class="NSButtonCell" key="NSCell" id="114992561">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Donwload</string>
+								<string key="NSContents">Download</string>
 								<object class="NSFont" key="NSSupport" id="1006283246">
 									<string key="NSName">.LucidaGrandeUI</string>
 									<double key="NSSize">13</double>
