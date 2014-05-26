@@ -247,43 +247,53 @@
 
 - (NSString*)integerToString:(NSInteger)key
 {
-    return [[NSString stringWithFormat: @"%d", (int)key] copy];
+    return [NSString stringWithFormat: @"%d", (int)key];
 }
 
 - (void)selectRFSignatureForAccount:(NSInteger)key
 {
-    NSString *accountUniqueId = [[(MHSignature*)[signaturesData objectForKey:[self integerToString:accountIndex]] uniqueId] copy];
+    MHSignature *account = (MHSignature*)[signaturesData objectForKey:[self integerToString:accountIndex]];
+    NSString *aui = [[account uniqueId] copy];    
+    NSString *sui = [[(MHSignature*)[[account values] objectForKey:[self integerToString:key]] uniqueId] copy];
     
-    NSString *signatureUniqueId = [[(MHSignature*)[[(MHSignature*)[signaturesData objectForKey:[self integerToString:accountIndex]] values] objectForKey:[self integerToString:key]] uniqueId] copy];
+    NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", aui];
+    SET_USER_DEFAULT(sui, sKey);
     
-    MHLog(@"Mail account mapping: %@ <==> %@", accountUniqueId, signatureUniqueId);
-    
-    NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", accountUniqueId];
-    SET_USER_DEFAULT(signatureUniqueId, sKey);
+    NSLog(@"RWH: Signature mapping for account [%@, %@]: %@", [account name], aui, sui);
 }
 
-- (NSInteger)findSignatureIndex:(NSInteger)aIndex sKey:(NSString *)sKey
+- (void)highlightSignatureRow
 {
-    NSInteger count = 0;
-    NSString *signatureId = GET_DEFAULT(sKey);
-    NSLog(@"key: %@, signature id: %@", sKey, signatureId);
+    MHSignature *account = (MHSignature*)[signaturesData objectForKey:[self integerToString:accountIndex]];
+    NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", [[account uniqueId] copy]];
     
-    if (nil != signatureId)
+    NSString *signatureId = GET_DEFAULT(sKey);
+    NSLog(@"Account [%@, %@]: %@", [account name], sKey, signatureId);
+    
+    if (nil == signatureId)
     {
-        NSMutableDictionary *dict = [(MHSignature*)[signaturesData objectForKey:[self integerToString:aIndex]] values];
+        NSLog(@"RWH: Signature mapping doesn't exist");
         
-        for (id k in dict)
-        {
-            //NSLog(@"Inner:: key: %@, signature id: %@", sKey, [(MHSignature*)[dict objectForKey:k] uniqueId]);
-            if ([[(MHSignature*)[dict objectForKey:k] uniqueId] isEqualToString:signatureId]) break;
-            
-            count++;
+        for (int ic=0; ic<[[[account values] allKeys] count]; ic++) {
+            [_signaturesTableView deselectRow:ic];
         }
     }
-    
-    return count;
-}
+    else
+    {
+        MHLog(@"Account Signatures: %@", [account values]);
+        
+        for (id k in [account values])
+        {
+            if ([[(MHSignature*)[[account values] objectForKey:k] uniqueId] isEqualToString:signatureId])
+            {
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[(NSString*)k integerValue]];
+                [_signaturesTableView selectRowIndexes:indexSet byExtendingSelection:NO];
 
+                break;
+            }
+        }
+    }
+}
 
 
 #pragma mark NSTableView datasource delegates
@@ -338,12 +348,7 @@
             accountIndex = [proposedSelectionIndexes firstIndex];
             [_signaturesTableView reloadData];
             
-            // row selection
-            NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", [[(MHSignature*)[signaturesData objectForKey:[self integerToString:accountIndex]] uniqueId] copy]];
-            
-            NSIndexSet *indexSet = [NSIndexSet
-                                    indexSetWithIndex:[self findSignatureIndex:accountIndex sKey:sKey]];
-            [_signaturesTableView selectRowIndexes:indexSet byExtendingSelection:NO];
+            [self highlightSignatureRow];
         }
         else if ([[tableView identifier] isEqualToString:@"signaturesTable"])
         {

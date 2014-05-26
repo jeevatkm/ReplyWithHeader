@@ -87,9 +87,10 @@
         NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", uniqueId];
         NSString *signatureId = GET_DEFAULT(sKey);
         
-        MHLog(@"Account ID: %@ Signature ID: %@", sKey, signatureId);
+        MHLog(@"Account ID: %@, Name: %@, Signature ID: %@", sKey, [[self account] valueForKey:@"displayName"], signatureId);
         
-        if (signatureId == nil) {
+        if (nil == signatureId)
+        {
             return [self MHsignatureId];
         }
         
