@@ -29,9 +29,12 @@
 #import "MHMailMessage.h"
 #import "MHQuotedMailOriginal.h"
 #import "MHHeaderString.h"
+#import "Signature.h"
 
 @interface MHMailMessage (MHNoImplementation)
 - (int)type;
+- (id)account;
+- (id)deliveryAccount;
 @end
 
 @implementation MHMailMessage
@@ -74,6 +77,26 @@
         include = FALSE;
     
     return include;
+}
+
+- (id)MHsignatureId
+{
+    if ([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3) && !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
+    {
+        NSString *uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+        NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", uniqueId];
+        NSString *signatureId = GET_DEFAULT(sKey);
+        
+        MHLog(@"Account ID: %@ Signature ID: %@", sKey, signatureId);
+        
+        if (signatureId == nil) {
+            return [self MHsignatureId];
+        }
+        
+        return [signatureId copy];
+    }
+    
+    return [self MHsignatureId];
 }
 
 @end

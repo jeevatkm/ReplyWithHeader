@@ -34,6 +34,7 @@
 		13AD486D18018D4600473407 /* MHUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486C18018D4600473407 /* MHUpdater.m */; };
 		13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */; };
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
+		9C27AEB81932CF540007486F /* MHSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C27AEB71932CF540007486F /* MHSignature.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,9 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4D5FF0A9127255C500A945C5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* ReplyWithHeader.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReplyWithHeader.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C27AEB4193160990007486F /* Signature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Signature.h; sourceTree = "<group>"; };
+		9C27AEB61932CF540007486F /* MHSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSignature.h; sourceTree = "<group>"; };
+		9C27AEB71932CF540007486F /* MHSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSignature.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 		133A918A17E974CE00E3CC62 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				9C27AEB5193178A80007486F /* Mail */,
 				13882A2818072C62004BCC6D /* MLog */,
 				13AD485E1801561B00473407 /* Swizzle */,
 				1396366517FEB5D400A7D712 /* Foundation */,
@@ -200,6 +205,8 @@
 				13AD486718016F6400473407 /* MHUpdateAlert.m */,
 				13AD486B18018D4600473407 /* MHUpdater.h */,
 				13AD486C18018D4600473407 /* MHUpdater.m */,
+				9C27AEB61932CF540007486F /* MHSignature.h */,
+				9C27AEB71932CF540007486F /* MHSignature.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -285,6 +292,14 @@
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C27AEB5193178A80007486F /* Mail */ = {
+			isa = PBXGroup;
+			children = (
+				9C27AEB4193160990007486F /* Signature.h */,
+			);
+			name = Mail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +424,7 @@
 				13AD48611801575600473407 /* MHCodeInjector.m in Sources */,
 				13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */,
 				13AD486D18018D4600473407 /* MHUpdater.m in Sources */,
+				9C27AEB81932CF540007486F /* MHSignature.m in Sources */,
 				13882A2B18072C7D004BCC6D /* MLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013-2014 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +20,51 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- *
- * for issue #31 https://github.com/jeevatkm/ReplyWithHeader/issues/31
  */
 
+//
+//  MHSignature.m
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 5/25/14.
+//
+//
 
-@interface MHMailMessage : NSObject
+#import "MHSignature.h"
 
-- (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
-- (BOOL)MHokToAddSignatureAutomatically;
-- (BOOL)MHincludeHeaders;
-- (id)MHsignatureId;
+static NSString* const kName = @"name";
+static NSString* const kUniqueId = @"uniqueId";
+static NSString* const kValues = @"values";
+
+@implementation MHSignature
+
+- (id)initWithName:(NSString*)name uniqueId:(NSString*)uniqueId values:(NSMutableDictionary*) values
+{
+    self = [super init];
+    if(self) {
+        _name = [name copy];
+        _uniqueId = [uniqueId copy];
+        _values = [values copy];
+    }
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder*)aDecoder {
+    self = [super init];
+    if (self) {
+        _name = [aDecoder decodeObjectForKey:kName];
+        _uniqueId = [aDecoder decodeObjectForKey:kUniqueId];
+        _values = [aDecoder decodeObjectForKey:kValues];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder*)aCoder {
+    [aCoder encodeObject:_name forKey:kName];
+    [aCoder encodeObject:_uniqueId forKey:kUniqueId];
+    [aCoder encodeObject:_values forKey:kValues];
+}
 
 @end

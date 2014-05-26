@@ -55,6 +55,9 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
         
         [composeBackEnd jrlp_swizzleMethod:@selector(okToAddSignatureAutomatically)
                                 withMethod:@selector(MHokToAddSignatureAutomatically) error:&error];
+        
+        [composeBackEnd jrlp_swizzleMethod:@selector(signatureId)
+                                withMethod:@selector(MHsignatureId) error:&error];
     }
     
     Class headerEditor = NSClassFromString(@"HeadersEditor");

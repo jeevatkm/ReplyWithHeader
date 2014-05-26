@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013-2014 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +20,22 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- *
- * for issue #31 https://github.com/jeevatkm/ReplyWithHeader/issues/31
  */
 
+//
+//  MHSignature.h
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 5/25/14.
+//
+//
 
-@interface MHMailMessage : NSObject
+@interface MHSignature : NSObject<NSCoding>
 
-- (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
-- (BOOL)MHokToAddSignatureAutomatically;
-- (BOOL)MHincludeHeaders;
-- (id)MHsignatureId;
+- (id)initWithName:(NSString*)name uniqueId:(NSString*)uniqueId values:(NSMutableDictionary*) values;
+
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSString *uniqueId;
+@property (nonatomic, copy, readonly) NSMutableDictionary *values;
 
 @end
