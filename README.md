@@ -1,6 +1,6 @@
-Quoting reply and forward headers of email in Mail.app
-------------------------------------------------------
-[ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of the email message header in a reply and forward email message. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
+Quoting Headers and Signatures in Mail.app
+------------------------------------------
+[ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of message header and signature in a email. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
 
 * [Home page][2]
 * [Download Latest Release - MacUpdate.com][5]

@@ -268,7 +268,7 @@
     NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", [[account uniqueId] copy]];
     
     NSString *signatureId = GET_DEFAULT(sKey);
-    NSLog(@"Account [%@, %@]: %@", [account name], sKey, signatureId);
+    MHLog(@"Account [%@, %@]: %@", [account name], sKey, signatureId);
     
     if (nil == signatureId)
     {
