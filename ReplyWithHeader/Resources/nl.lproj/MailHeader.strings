@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "Verstuurd";
-    "STRING_WROTE" = "het volgende geschreven:";
-    "STRING_FORWARDED_MESSAGE" = "het volgende geschreven:";
+    "STRING_WROTE" = "het volgende geschreven";
+    "STRING_FORWARDED_MESSAGE" = "het volgende geschreven";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

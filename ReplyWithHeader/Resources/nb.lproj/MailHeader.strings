@@ -13,7 +13,7 @@
     "STRING_REPLY_TO" = "Svar til";
     "STRING_SENT" = "Sendt";
     "STRING_WROTE" = "skrev";
-    "STRING_FORWARDED_MESSAGE" = "Videresendt melding:";
+    "STRING_FORWARDED_MESSAGE" = "Videresendt melding";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

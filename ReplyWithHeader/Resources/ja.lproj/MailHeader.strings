@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "返信先";
     "STRING_SENT" = "送信日";
-    "STRING_WROTE" = "のメール：";
-    "STRING_FORWARDED_MESSAGE" = "転送されたメッセージ：";
+    "STRING_WROTE" = "のメール";
+    "STRING_FORWARDED_MESSAGE" = "転送されたメッセージ";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

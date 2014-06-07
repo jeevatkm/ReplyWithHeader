@@ -332,7 +332,9 @@
     NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
     
     // Logger
-    [MLog setLogOn:GET_DEFAULT_BOOL(MHLogEnabled)];
+    BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
+    [MLog setLogOn:logEnabled];
+    NSLog(@"%@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )

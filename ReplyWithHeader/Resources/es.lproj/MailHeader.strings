@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Responder a";
     "STRING_SENT" = "Enviado";
-    "STRING_WROTE" = "escribió:";
-    "STRING_FORWARDED_MESSAGE" = "mensaje reenviado:";
+    "STRING_WROTE" = "escribió";
+    "STRING_FORWARDED_MESSAGE" = "mensaje reenviado";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

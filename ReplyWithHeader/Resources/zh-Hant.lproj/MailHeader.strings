@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "寄件日期";
-    "STRING_WROTE" = "寫道：";
-    "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件：";
+    "STRING_WROTE" = "寫道";
+    "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
