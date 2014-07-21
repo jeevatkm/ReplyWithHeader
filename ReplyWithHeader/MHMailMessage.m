@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -29,9 +29,12 @@
 #import "MHMailMessage.h"
 #import "MHQuotedMailOriginal.h"
 #import "MHHeaderString.h"
+#import "Signature.h"
 
 @interface MHMailMessage (MHNoImplementation)
 - (int)type;
+- (id)account;
+- (id)deliveryAccount;
 @end
 
 @implementation MHMailMessage
@@ -74,6 +77,27 @@
         include = FALSE;
     
     return include;
+}
+
+- (id)MHsignatureId
+{
+    if ([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3) && !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
+    {
+        NSString *uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+        NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", uniqueId];
+        NSString *signatureId = GET_DEFAULT(sKey);
+        
+        MHLog(@"Account ID: %@, Name: %@, Signature ID: %@", sKey, [[self account] valueForKey:@"displayName"], signatureId);
+        
+        if (nil == signatureId)
+        {
+            return [self MHsignatureId];
+        }
+        
+        return [signatureId copy];
+    }
+    
+    return [self MHsignatureId];
 }
 
 @end

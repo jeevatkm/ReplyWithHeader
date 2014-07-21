@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013-2014 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,39 +22,49 @@
  * THE SOFTWARE.
  */
 
-/*!
- * @class
- * The <code>MailHeader</code> class is the subclass of
- * <code>MVMailBundle</code> that provides the plugin entrypoint for the
- * MailHeader plugin.
- * @version \@(#) $Id$
- * @updated $Date$
- *
- * MailHeader Class completely rewritten by Jeevanandam M. on Sep 21, 2013
- */
+//
+//  MHSignature.m
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 5/25/14.
+//
+//
 
-@interface MailHeader : NSObject
+#import "MHSignature.h"
 
-+ (BOOL)isEnabled;
-+ (NSLocale *)currentLocale;
-+ (NSString *)localeIdentifier;
-+ (BOOL)isLocaleSupported;
-+ (BOOL)isSpecificLocale;
-+ (NSBundle *)bundle;
-+ (NSString *)bundleNameAndVersion;
-+ (NSString *)bundleName;
-+ (NSString *)bundleVersionString;
-+ (NSString *)bundleIdentifier;
-+ (NSString *)bundleCopyright;
-+ (NSImage *)bundleLogo;
-+ (NSString *)localizedString:(NSString *)key;
-+ (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier;
-+ (id)getConfigValue:(NSString *)key;
-+ (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
+static NSString* const kName = @"name";
+static NSString* const kUniqueId = @"uniqueId";
+static NSString* const kValues = @"values";
 
-#pragma mark MVMailBundle methods
-+ (BOOL)hasPreferencesPanel;
-+ (NSString*)preferencesOwnerClassName;
-+ (NSString*)preferencesPanelName;
+@implementation MHSignature
+
+- (id)initWithName:(NSString*)name uniqueId:(NSString*)uniqueId values:(NSMutableDictionary*) values
+{
+    self = [super init];
+    if(self) {
+        _name = [name copy];
+        _uniqueId = [uniqueId copy];
+        _values = [values copy];
+    }
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder*)aDecoder {
+    self = [super init];
+    if (self) {
+        _name = [aDecoder decodeObjectForKey:kName];
+        _uniqueId = [aDecoder decodeObjectForKey:kUniqueId];
+        _values = [aDecoder decodeObjectForKey:kValues];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder*)aCoder {
+    [aCoder encodeObject:_name forKey:kName];
+    [aCoder encodeObject:_uniqueId forKey:kUniqueId];
+    [aCoder encodeObject:_values forKey:kValues];
+}
 
 @end

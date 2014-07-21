@@ -1,6 +1,7 @@
 #!/bin/sh
 
-#  Install-or-Upgrade.command
+#
+#  Install-or-Upgrade-or-Reenable.command
 #  ReplyWithHeader
 #
 #  Created by Jeevanandam M. on 10/9/13.
@@ -8,6 +9,7 @@
 #  Revision
 #  1.0	Created an initial installer script
 #  1.1	Added dynamic UUID processing and few enhancements
+#  1.2  Revising enable plugin logic
 #
 
 mh_user=${USER}
@@ -30,7 +32,7 @@ fi
 
 mh_enable_plugin=1
 if [ -s ${mh_plugin} ]; then
-	mh_enable_plugin=0
+	# mh_enable_plugin=0
 	echo "\nRWH:: Plugin is already installed, let's upgrade it"
 	rm -rf ${mh_plugin}
 else

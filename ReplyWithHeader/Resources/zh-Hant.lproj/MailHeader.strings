@@ -2,7 +2,7 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "版權 © 2013 Jeevanandam M., 保留所有權利。";
+    "COPYRIGHT" = "版權 © 2014 Jeevanandam M., 保留所有權利。";
     
     /* Message Strings */
     "STRING_FROM" = "寄件人";
@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "寄件日期";
-    "STRING_WROTE" = "寫道：";
-    "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件：";
+    "STRING_WROTE" = "寫道";
+    "STRING_FORWARDED_MESSAGE" = "開始轉寄郵件";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

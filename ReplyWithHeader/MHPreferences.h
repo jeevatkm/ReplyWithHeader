@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -35,8 +35,11 @@
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MHPreferences : NSPreferencesModule <NSWindowDelegate>
+@interface MHPreferences : NSPreferencesModule <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
+    NSMutableDictionary *signaturesData;
+    NSInteger accountIndex;
+    
     IBOutlet NSTabView *_MHBundleTabBox;
     IBOutlet NSButton *_MHBundleEnabled;
     IBOutlet NSButton *_MHForwardHeaderEnabled;
@@ -45,13 +48,15 @@
     IBOutlet NSButton *_MHHeaderOptionEnabled;
     IBOutlet NSButton *_MHNotifyNewVersion;
     IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
-    IBOutlet NSButton *_MHRemoveSignatureEnabled;
+    IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
     IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
     IBOutlet NSColorWell *_MHColorWell;
     IBOutlet NSMatrix *_MHHeaderOrderMode;
     IBOutlet NSMatrix *_MHHeaderLabelMode;
     IBOutlet NSPopUpButton *_MHLanguagePopup;
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
+    IBOutlet NSTableView *_accountsTableView;
+    IBOutlet NSTableView *_signaturesTableView;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;

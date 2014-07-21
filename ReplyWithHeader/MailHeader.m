@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -332,7 +332,9 @@
     NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
     
     // Logger
-    [MLog setLogOn:GET_DEFAULT_BOOL(MHLogEnabled)];
+    BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
+    [MLog setLogOn:logEnabled];
+    NSLog(@"%@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )

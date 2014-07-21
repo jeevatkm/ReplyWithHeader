@@ -2,7 +2,7 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "Copyright © 2013 Jeevanandam M., Alle rettigheter forbeholdt.";
+    "COPYRIGHT" = "Copyright © 2014 Jeevanandam M., Alle rettigheter forbeholdt.";
     
     /* Message Strings */
     "STRING_FROM" = "Fra";
@@ -13,7 +13,7 @@
     "STRING_REPLY_TO" = "Svar til";
     "STRING_SENT" = "Sendt";
     "STRING_WROTE" = "skrev";
-    "STRING_FORWARDED_MESSAGE" = "Videresendt melding:";
+    "STRING_FORWARDED_MESSAGE" = "Videresendt melding";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

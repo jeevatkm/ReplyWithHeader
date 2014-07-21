@@ -2,7 +2,7 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "diritto d'autore © 2013 Jeevanandam M., Tutti i diritti riservati.";
+    "COPYRIGHT" = "diritto d'autore © 2014 Jeevanandam M., Tutti i diritti riservati.";
     
     /* Message Strings */
     "STRING_FROM" = "Da";
@@ -12,8 +12,8 @@
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Rispondi a";
     "STRING_SENT" = "Inviata";
-    "STRING_WROTE" = "scritto:";
-    "STRING_FORWARDED_MESSAGE" = "ha scritto:";
+    "STRING_WROTE" = "scritto";
+    "STRING_FORWARDED_MESSAGE" = "ha scritto";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";

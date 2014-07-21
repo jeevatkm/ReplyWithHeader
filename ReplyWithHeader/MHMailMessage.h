@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -32,5 +32,6 @@
 - (void)MH_continueToSetupContentsForView:(id)arg1 withParsedMessages:(id)arg2;
 - (BOOL)MHokToAddSignatureAutomatically;
 - (BOOL)MHincludeHeaders;
+- (id)MHsignatureId;
 
 @end

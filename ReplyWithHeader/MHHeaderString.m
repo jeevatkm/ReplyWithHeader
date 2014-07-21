@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -162,10 +162,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         choosenLocaleIdentifier = GET_DEFAULT(MHBundleHeaderLanguageCode);
         MHLog(@"From User defaults choosenLocaleIdentifier %@", choosenLocaleIdentifier);
         
-        if (!choosenLocaleIdentifier)
+        if (!choosenLocaleIdentifier) {
             choosenLocaleIdentifier = MHLocaleIdentifier;
         
-        MHLog(@"Fallback to default value of choosenLocaleIdentifier %@", choosenLocaleIdentifier);
+            MHLog(@"Fallback to default value of choosenLocaleIdentifier %@", choosenLocaleIdentifier);
+        }
         
         choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
@@ -218,24 +219,44 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 {
     NSString *subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", MHLocaleIdentifier);
     
-    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
         subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
     }
     
     int subjectIndex = 1; // default position
+    BOOL subjectIndexFound = FALSE;
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
-        if ([[row string] hasPrefix:subjectPrefix]) {
+        if ([[row string] hasPrefix:subjectPrefix])
+        {
             subjectIndex = i;
+            subjectIndexFound = TRUE;
             break;
         }
     }
     
-    NSMutableAttributedString *subject = [[messageAttribution objectAtIndex:subjectIndex] mutableCopy];
-    [messageAttribution removeObjectAtIndex:subjectIndex];
-    [messageAttribution addObject:subject];
+    if (subjectIndexFound)
+    {
+        MHLog(@"Subject Index found : %@", subjectIndexFound ? @"YES" : @"NO");
+        
+        @try {
+            MHLog(@"Before: %@", messageAttribution);
+            NSMutableAttributedString *subject = [[messageAttribution objectAtIndex:subjectIndex] mutableCopy];
+            [messageAttribution removeObjectAtIndex:subjectIndex];
+            [messageAttribution addObject:subject];
+            MHLog(@"After: %@", messageAttribution);
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception occured: %@", exception.description);
+        }        
+    }
+    else
+    {
+        MHLog(@"Subject index is not found, so skiping Header order change.");
+    }
 }
 
 - (NSString *)getFullNameFromEmailAddress:(NSString *)emailAddress isMailToNeeded:(BOOL)mailTo

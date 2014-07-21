@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Jeevanandam M.
+ * Copyright (c) 2013-2014 Jeevanandam M.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -55,6 +55,9 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
         
         [composeBackEnd jrlp_swizzleMethod:@selector(okToAddSignatureAutomatically)
                                 withMethod:@selector(MHokToAddSignatureAutomatically) error:&error];
+        
+        [composeBackEnd jrlp_swizzleMethod:@selector(signatureId)
+                                withMethod:@selector(MHsignatureId) error:&error];
     }
     
     Class headerEditor = NSClassFromString(@"HeadersEditor");

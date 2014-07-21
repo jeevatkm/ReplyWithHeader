@@ -2,7 +2,7 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "저작권 © 2013 Jeevanandam M., 판권 소유.";
+    "COPYRIGHT" = "저작권 © 2014 Jeevanandam M., 판권 소유.";
     
     /* Message Strings */
     "STRING_FROM" = "보낸 사람";
@@ -12,7 +12,7 @@
     "STRING_CC" = "참조";
     "STRING_REPLY_TO" = "답장 받는 사람";
     "STRING_SENT" = "보낸 날짜";
-    "STRING_WROTE" = "작성:";
+    "STRING_WROTE" = "작성";
     "STRING_FORWARDED_MESSAGE" = "전달된 메시지";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";

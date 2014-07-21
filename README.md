@@ -1,8 +1,8 @@
-Quoting reply and forward headers of email in Mail.app
-------------------------------------------------------
-[ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of the email message header in a reply and forward email message. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
+Quoting Headers and Signatures in Mail.app
+------------------------------------------
+[ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of message header and signature in a email. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
 
-* [Plugin page - Features, supported version, etc][2]
+* [Home page][2]
 * [Download Latest Release - MacUpdate.com][5]
 * [Issue Tracker](#issue-tracker)
 * [How to Install](#how-to-install)
@@ -15,20 +15,20 @@ Quoting reply and forward headers of email in Mail.app
 How to Install
 --------------
 
-1. Double click `Install-or-Upgrade-or-Reenable.command` in downloaded Zip
-
-2. Restart Mail.app
-
-**Verification (Optional)**
-
-1. Start Console.app (/Applications/Utilities)
-
-2. In the search bar (top right corner of Console.app) type: **Mail**
-
-   This will restrict your information to Mail.app messages
-
-3. In the console, if all goes well, you should see
-<pre><code>ReplyWithHeader &lt;version number> plugin loaded</pre></code>
+* Double click the file `Install-or-Upgrade-or-Reenable.command` from downloaded `ReplyWithHeader-vX.X.zip`
+<pre><code>RWH:: Mac OS X version: 10.X
+RWH:: Mail Plugin: ReplyWithHeader
+RWH:: Mail.app X.X [Build XXXX.X]
+RWH:: Installing ReplyWithHeader Mail plugin
+RWH:: user 'name' is installing plugin
+RWH:: Enabling plugin support in Mail.app
+RWH:: Domain is /Users/&lt;username>/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
+RWH:: Adding UUID <Respective UUID value>
+RWH:: Installation complete
+===================================================
+  Plugin installation completed, restart Mail.app  
+===================================================</code></pre>
+* Restart Mail.app
 
 Issue Tracker
 -------------
