@@ -23,7 +23,7 @@ RWH:: Installing ReplyWithHeader Mail plugin
 RWH:: user 'name' is installing plugin
 RWH:: Enabling plugin support in Mail.app
 RWH:: Domain is /Users/&lt;username>/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
-RWH:: Adding UUID <Respective UUID value>
+RWH:: Adding UUID &lt;Respective UUID value>
 RWH:: Installation complete
 ===================================================
   Plugin installation completed, restart Mail.app  

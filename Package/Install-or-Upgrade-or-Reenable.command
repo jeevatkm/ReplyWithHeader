@@ -73,7 +73,8 @@ mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist Plug
     fi
 fi
 
-mh_ver_chk=$(echo "${mh_mac_osx_version} < 10.9" | bc)
+# for issue #66 - Version check condition updated
+mh_ver_chk=$(echo "${mh_mac_osx_version} == 10.7 || ${mh_mac_osx_version} == 10.8" | bc)
 if [ ${mh_ver_chk} -eq 1 ]; then
 if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
 mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
