@@ -224,10 +224,16 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 - (void)removePlainTextHeaderPrefix
 {
-    for (int i=0; i < dhc.length; i++)
+    DOMNodeList *nodeList = dhc;
+    if ([[MailHeader getOSXVersion] isEqualToString:@"10.10"])
+    {
+        nodeList = [[originalEmail firstChild] childNodes];
+    }
+    
+    for (int i=0; i < nodeList.length; i++)
     {
         MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
-        if( [[dhc item:i] nodeType]==3 )
+        if( [[nodeList item:i] nodeType]==3 )
         {
             // Text node, On ..., Wrote is text
             textNodeLocation=i; break;
@@ -235,11 +241,17 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     }
     
     @try {
-        // if signature at top, item==3 else item==1
-        [originalEmail removeChild:[dhc item:textNodeLocation]];
+        if ([[MailHeader getOSXVersion] isEqualToString:@"10.10"])
+        {
+            // if signature at top, item==3 else item==1
+            [originalEmail removeChild:[nodeList item:textNodeLocation]];
         
-        while ([[[dhc item:textNodeLocation] nodeName] isEqualToString:@"BR"]) {
-            [originalEmail removeChild:[dhc item:textNodeLocation]];
+            while ([[[dhc item:textNodeLocation] nodeName] isEqualToString:@"BR"]) {
+                [originalEmail removeChild:[nodeList item:textNodeLocation]];
+            }
+        }
+        else {
+            [[originalEmail firstChild] removeChild:[nodeList item:textNodeLocation]];
         }
     }
     @catch (NSException *exception) {
