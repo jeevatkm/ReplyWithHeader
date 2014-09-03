@@ -130,6 +130,7 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
     // specifics
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
+    [(DOMElement *)[headerFragment firstChild] setAttribute:@"id" value:@"RwhHeaderAttributes"];
     
     MHLog(@"Header HTML %@", [[headerFragment firstChild] outerHTML]);
     
@@ -170,6 +171,9 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         
         //now that the email is set... set the child nodes
         dhc = [originalEmail childNodes];
+        
+        //identifying blockquote tag
+        [self identifyBlockquote];
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         if ( dhc.length > 1)
@@ -339,6 +343,16 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
         }
         
         originalEmail = (id)[[originalEmail children] item:itemNum];
+    }
+}
+
+- (void)identifyBlockquote
+{
+    DOMNodeList *nodeList = [originalEmail getElementsByTagName:@"BLOCKQUOTE"];
+    if (nodeList != nil && nodeList.length == 1)
+    {
+        isBlockquotePresent = TRUE;
+        MHLog(@"BLOCKQUOTE tag identified");
     }
 }
 
