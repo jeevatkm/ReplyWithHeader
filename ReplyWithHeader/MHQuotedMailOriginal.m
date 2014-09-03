@@ -220,33 +220,13 @@ NSString *WROTE_TEXT_REGEX_STRING = @":\\s*(\\n|\\r)";
 
 - (void)removePlainTextHeaderPrefix
 {
-    BOOL isLocationFound = NO;
-    
-    for (int i=0; i<dhc.length; i++)
+    for (int i=0; i < dhc.length; i++)
     {
-        DOMNode *node = [dhc item:i];
-        NSRange range = [[[node firstChild] stringValue]
-                         rangeOfString:MHLocalizedStringByLocale(@"STRING_WROTE", MHLocaleIdentifier)];
-        
-        if (range.length != 0)
+        MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
+        if( [[dhc item:i] nodeType]==3 )
         {
-            //[[node firstChild] setTextContent:@""];
-            textNodeLocation = i;
-            isLocationFound = YES;
-            break;
-        }
-    }
-    
-    if (!isLocationFound)
-    { // kept for backward workaround, however need a revisit
-        for (int i=0; i < dhc.length; i++)
-        {
-            MHLog(@"current location %d, nodeType %d, nodeName %@ and string value is %@", i, [[dhc item:i] nodeType], [[dhc item:i] nodeName], [[dhc item:i] stringValue]);
-            if( [[dhc item:i] nodeType]==3 )
-            {
-                // Text node, On ..., Wrote is text
-                textNodeLocation=i; break;
-            }
+            // Text node, On ..., Wrote is text
+            textNodeLocation=i; break;
         }
     }
     
