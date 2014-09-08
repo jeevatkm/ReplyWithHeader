@@ -117,6 +117,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
     [(DOMElement *)[headerFragment firstChild] setAttribute:@"id" value:@"RwhHeaderAttributes"];
     
+    // for issue #64
+    headerFragment = [self paragraphTagToSpanTag:headerFragment];
+    
     MHLog(@"Header HTML %@", [[headerFragment firstChild] outerHTML]);
     
     if (msgComposeType == 1 || msgComposeType == 2 || (manageForwardHeader && msgComposeType == 3))
@@ -384,64 +387,15 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     return [[[document htmlDocument] getElementsByTagName:tagName] item:0];
 }
 
-// issue #42
-/*- (void)applyEntourage2004Support:(DOMDocumentFragment *) headerFragment
- {
- // kind of silly, but this code is required so that the adulation appears correctly
- // in Entourage 2004 would interpret the paragraph tag and ignore
- // the specified style information creating large spaces between line items
- DOMNodeList *fragmentNodes = [[headerFragment firstChild] childNodes];
- 
- for (int i=0; i< fragmentNodes.length;i++)
- {
- MHLog(@"Frag node %d: (Type %d) %@ %@ %@",i, [[fragmentNodes item:i] nodeType], [fragmentNodes item:i], [[fragmentNodes item:i] nodeName],[[fragmentNodes item:i] nodeValue]);
- 
- if ( [[fragmentNodes item:i] nodeType] == 1 )
- {
- MHLog(@"Outer HTML %@",[[fragmentNodes item:i] outerHTML]);
- 
- if ( [[[fragmentNodes item:i] nodeName] isEqualToString:@"FONT"] )
- {
- NSString *fontTag = [[fragmentNodes item:i] outerHTML];
- NSArray *tagComponents = [fontTag componentsSeparatedByString:@" "];
- NSString *oldSize = @"";
- for ( int j=0; j < tagComponents.count; j++)
- {
- NSString *testString = [[tagComponents objectAtIndex:j] commonPrefixWithString:@"size" options:NSCaseInsensitiveSearch];
- if ( [testString isEqualToString:@"size"] )
- {
- oldSize = [tagComponents objectAtIndex:j];
- MHLog(@"sizeString : %@",oldSize);
- }
- }
- oldSize = [@" " stringByAppendingString:oldSize];
- MHLog(@"newsizetext : %@",fontTag);
- NSString *newTag = [fontTag stringByReplacingOccurrencesOfString:oldSize withString:@""];
- MHLog(@"newString : %@",newTag);
- [[fragmentNodes item:i] setOuterHTML:newTag];
- }
- }
- 
- if ( [[[fragmentNodes item:i] nodeName] isEqualToString:@"P"] )
- {
- //we have a paragraph element, so now replace it with a break element
- DOMDocumentFragment *brelem = [self createDocumentFragment:@"<br />"];
- if (i == 0)
- {
- //because the paragraphs are the containers so you get two initially...
- brelem = [self createDocumentFragment:@"<span />"];
- }
- DOMNodeList *pnodes = [[fragmentNodes item:i] childNodes];
- for (int j=0; j< pnodes.length;j++)
- {
- //copy all child nodes to the new node...
- [brelem appendChild:[pnodes item:j]];
- }
- //now replace the paragraph node...
- [[headerFragment firstChild] replaceChild:brelem oldChild:[fragmentNodes item:i] ];
- }
- }
- } */
+- (DOMDocumentFragment *)paragraphTagToSpanTag:(DOMDocumentFragment *) headerFragment
+{
+    NSString *htmlString = [[headerFragment firstChild] outerHTML];
+    MHLog(@"Paragraph based HTML string %@", htmlString);
+    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
+    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
+    MHLog(@"Span based HTML string %@", htmlString);
+    return [self createDocumentFragment:htmlString];
+}
 
 - (DOMDocumentFragment *)createDocumentFragment:(NSString *)htmlString
 {
