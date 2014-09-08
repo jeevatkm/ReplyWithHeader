@@ -68,16 +68,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (void)insertForHTMLMail:(DOMDocumentFragment *)headerFragment
 {
-    // depending on the options selected to increase quote level or whatever,
-    // a reply might not have a grandchild from the first child
-    // so we need to account for that... man this gets complicated...
-    // so if it is a textnode, there are no children... :( so account for that too
-    /*int numGrandChildCount = 0;
-    if ( ![ [[originalEmail firstChild] nodeName] isEqualToString:@"#text"] )
-    {
-        numGrandChildCount = [[originalEmail firstChild] childElementCount];
-    }*/
-    
     if (isBlockquotePresent)
     {
         DOMNode *nodeRef = [self getElementByName:TAG_BLOCKQUOTE];
@@ -137,8 +127,8 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         {
             [self insertForHTMLMail:headerFragment];
         }
-        else
-        { // Plain text mail compose block
+        else // Plain text mail compose block
+        {
             [self insertForPlainMail:headerFragment];
         }
         MHLog(@"After header insert, Inner HTML String:: %@", [originalEmail innerHTML]);
@@ -171,10 +161,11 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         dhc = [originalEmail childNodes];
         
         //identifying blockquote tag
-        [self identifyBlockquote];
+        isBlockquotePresent = [self isTagPresent:TAG_BLOCKQUOTE];
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
-        if (dhc.length > 1)
+        // "... message"
+        if (dhc.length >= 1)
         {
             if (isHTMLMail)
                 [self removeHTMLHeaderPrefix];
@@ -227,7 +218,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     if (IS_MAC_YOSEMITE && isBlockquotePresent)
     {
-        emailDocument = (DOMHTMLElement *)[self getElementByName:@"BLOCKQUOTE"];
+        emailDocument = (DOMHTMLElement *)[self getElementByName:TAG_BLOCKQUOTE];
         nodeList = [emailDocument childNodes];
     }
     else
@@ -240,10 +231,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     {
         DOMNode *node = [nodeList item:i];
         MHLog(@"current location %d, nodeType %d, nodeName %@", i, [node nodeType], [node nodeName]);
-        if ([node nodeType] == 3)
+        if ([node nodeType] == 3) // Text node, On ..., Wrote is text
         {
-            // Text node, On ..., Wrote is text
-            NSLog(@"Text Node found at %d, name is %@", i, [node nodeName]);
+            MHLog(@"Text Node found at %d, name is %@", i, [node nodeName]);
             textNodeLocation=i; break;
         }
     }
@@ -263,11 +253,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     //find the quoted text - if plain text (blockquote does not exist), -which- will point to br element
     for (int i=0; i<[emailDocument childElementCount]; i++)
     {
-        if ( [[[[emailDocument childNodes] item:i] nodeName] isEqualToString:@"BLOCKQUOTE"] )
+        if ( [[[[emailDocument childNodes] item:i] nodeName] isEqualToString:TAG_BLOCKQUOTE] ) //this is the quoted text
         {
-            //this is the quoted text
-            textNodeLocation=i;
-            break;
+            textNodeLocation = i; break;
         }
     }
     
@@ -276,62 +264,76 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (void)removeHTMLHeaderPrefix
 {
-    // Mountain Lion created the issue on new messages and "wrote" appears in a new div when replying
-    // on those messages that arrive after mail.app is opened - so we'll just keep removing items
-    // from the beginnning until we find the element that has the "wrote:" text in it.
-    // setup a regular expression to find a colon followed by some space and a new line -
-    // the first one should be the original line...
+    DOMNodeList *nodeList;
+    DOMHTMLElement *emailDocument;
+    
+    if (IS_MAC_YOSEMITE && isBlockquotePresent)
+    {
+        emailDocument = (DOMHTMLElement *)[self getElementByName:TAG_BLOCKQUOTE];
+        nodeList = [emailDocument childNodes];
+    }
+    else
+    {
+        nodeList = dhc;
+        emailDocument = (DOMHTMLElement *)originalEmail;
+    }
+    
     @try {
         if ([MailHeader isSpecificLocale]) // Need specific handling
         {
+            MHLog(@"Handling specific locale by Range matching");
             NSString *searchString = MHLocalizedStringByLocale(@"STRING_WROTE", MHLocaleIdentifier);
             if (msgComposeType == 3)
             {
                 searchString = MHLocalizedStringByLocale(@"STRING_FORWARDED_MESSAGE", MHLocaleIdentifier);
             }
             
-            NSRange textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];
+            NSRange textRange = [[[emailDocument firstChild] stringValue] rangeOfString:searchString];
             
             while ( textRange.location == NSNotFound )
             {
-                [originalEmail removeChild:[dhc item:0]];
-                textRange = [[[originalEmail firstChild] stringValue] rangeOfString:searchString];
+                [emailDocument removeChild:[nodeList item:0]];
+                textRange = [[[emailDocument firstChild] stringValue] rangeOfString:searchString];
             }
         }
         else // Rest of the locale, feasible to take care by regex
         {
+            MHLog(@"Handling remaining locale by Regex");
             NSError *error = nil;
             NSRegularExpression *regex = [NSRegularExpression
                                           regularExpressionWithPattern:WROTE_TEXT_REGEX_STRING
                                           options:NSRegularExpressionCaseInsensitive
                                           error:&error];
             NSRange textRange = [regex
-                                 rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                                 rangeOfFirstMatchInString:[[emailDocument firstChild] stringValue]
                                  options:0
-                                 range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+                                 range:NSMakeRange(0, [[[emailDocument firstChild] stringValue] length])];
+            MHLog(@"Before while loop, Text range is %@", NSStringFromRange(textRange));
             
             //keep removing items until we find the "wrote:" text...
             while ( textRange.location == NSNotFound )
             {
-                [originalEmail removeChild:[dhc item:0]];
+                [emailDocument removeChild:[emailDocument firstChild]];
                 textRange = [regex
-                             rangeOfFirstMatchInString:[[originalEmail firstChild] stringValue]
+                             rangeOfFirstMatchInString:[[emailDocument firstChild] stringValue]
                              options:0
-                             range:NSMakeRange(0, [[[originalEmail firstChild] stringValue] length])];
+                             range:NSMakeRange(0, [[[emailDocument firstChild] stringValue] length])];
+                MHLog(@"Text range is %@", NSStringFromRange(textRange));
             }
         }
         
+        DOMNode *node = [emailDocument firstChild];
         //remove the line with the "wrote:" text
-        if ([dhc item:0])
+        if (node)
         {
-            [originalEmail removeChild:[dhc item:0]];
+            MHLog(@"Node name: %@, Node Type: %hu, Node Value: %@", [node nodeName], [node nodeType], [node stringValue]);
+            [emailDocument removeChild:node];
         }
         
         // remove the first new line element to shorten the distance between the new email and quoted text
         // this is required in order to get the header inside the quoted text line
-        if ([[[originalEmail firstChild] nodeName] isEqualToString:@"BR"])
-        {
-            [originalEmail removeChild:[originalEmail firstChild]];
+        while ([[[emailDocument firstChild] nodeName] isEqualToString:@"BR"]) {
+            [emailDocument removeChild:[emailDocument firstChild]];
         }
     }
     @catch (NSException *exception) {
@@ -360,24 +362,26 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     }
 }
 
-- (void)identifyBlockquote
+- (BOOL)isTagPresent:(NSString *)tagName
 {
-    DOMNodeList *nodeList = [self getElementsByName:@"BLOCKQUOTE"];
-    if (nodeList != nil && nodeList.length == 1)
+    BOOL tag = FALSE;
+    DOMNodeList *nodeList = [self getElementsByName:tagName];
+    if (nodeList != nil && nodeList.length >= 1)
     {
-        isBlockquotePresent = TRUE;
-        MHLog(@"BLOCKQUOTE tag identified");
+        tag = TRUE;
     }
+    MHLog(@"Tag '%@' is present: %@", tagName, tag ? @"YES" : @"NO");
+    return tag;
 }
 
 - (DOMNodeList *)getElementsByName:(NSString *)tagName
 {
-    return [originalEmail getElementsByTagName:tagName];
+    return [[document htmlDocument] getElementsByTagName:tagName];
 }
 
 - (DOMNode *)getElementByName:(NSString *)tagName
 {
-    return [[originalEmail getElementsByTagName:tagName] item:0];
+    return [[[document htmlDocument] getElementsByTagName:tagName] item:0];
 }
 
 // issue #42
