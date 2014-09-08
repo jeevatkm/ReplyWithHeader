@@ -35,6 +35,7 @@
 		13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */; };
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
 		9C27AEB81932CF540007486F /* MHSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C27AEB71932CF540007486F /* MHSignature.m */; };
+		9C3230E619BD578200757AA4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9C3230E519BD578200757AA4 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		9C27AEB4193160990007486F /* Signature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Signature.h; sourceTree = "<group>"; };
 		9C27AEB61932CF540007486F /* MHSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSignature.h; sourceTree = "<group>"; };
 		9C27AEB71932CF540007486F /* MHSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSignature.m; sourceTree = "<group>"; };
+		9C3230E519BD578200757AA4 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				13A25F4617F9CE90002394DF /* Entitlements.plist */,
 				1365843B17FAC12700E8C57D /* MailHeader.strings */,
 				138BAEBF182022AA00738ADB /* Config.plist */,
+				9C3230E519BD578200757AA4 /* Credits.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
 				132C66631827E23400CD7C1A /* language.png in Resources */,
 				138BAEBD182022AA00738ADB /* Config.plist in Resources */,
+				9C3230E619BD578200757AA4 /* Credits.rtf in Resources */,
 				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
 			);
