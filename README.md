@@ -4,16 +4,14 @@ Quoting Headers and Signatures in Mail.app
 
 * [Home page][2]
 * [Download Latest Release - MacUpdate.com][5]
-* [Issue Tracker](#issue-tracker)
-* [How to Install](#how-to-install)
-* [Author](#author)
-* [Credits](#credits)
-* [License][4]
+* [Reporting Issues](#reporting-issues)
+* [Installation](#installation)
+* [FAQ][7]
 
 * * *
 
-How to Install
---------------
+Installation
+------------
 
 * Double click the file `Install-or-Upgrade-or-Reenable.command` from downloaded `ReplyWithHeader-vX.X.zip`
 <pre><code>RWH:: Mac OS X version: 10.X
@@ -23,16 +21,20 @@ RWH:: Installing ReplyWithHeader Mail plugin
 RWH:: user 'name' is installing plugin
 RWH:: Enabling plugin support in Mail.app
 RWH:: Domain is /Users/&lt;username>/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
-RWH:: Adding UUID <Respective UUID value>
+RWH:: Adding UUID &lt;Respective UUID value>
 RWH:: Installation complete
 ===================================================
   Plugin installation completed, restart Mail.app  
 ===================================================</code></pre>
 * Restart Mail.app
 
-Issue Tracker
--------------
-Please submit any bugs or annoyances [here][3]
+Reporting Issues
+----------------
+ReplyWithHeader uses [GitHub’s integrated issue tracking system][3] to record bugs and feature requests. If you want to raise an issue, please follow the recommendations bellow:
+
+* Before you log a bug, please search the issue tracker to see if someone has already reported the problem. If the issue doesn’t already exist, create a new issue.
+* Please provide as much information as possible with the issue report, we like to know the version of ReplyWithHeader that you are using.
+* If you need to paste code, or include a stack trace use Markdown ``` escapes before and after your text.
 
 Author
 ------
@@ -44,6 +46,10 @@ Credits
 * Jason Schroth (jschroth) extended his helping hands towards maintaining [ReplyWithHeader][2] mail bundle from Aug 9th, 2012 to Sep 16, 2013
 * Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth).
 
+License
+-------
+ReplyWithHeader is released under [MIT License][4]
+
 
 [1]: http://myjeeva.com
 [2]: http://myjeeva.com/replywithheader
@@ -51,3 +57,4 @@ Credits
 [4]: https://github.com/jeevatkm/ReplyWithHeader/blob/master/ReplyWithHeader/LICENSE.txt
 [5]: https://www.macupdate.com/app/mac/49256/replywithheader
 [6]: https://github.com/jeevatkm
+[7]: http://myjeeva.com/replywithheader#faq

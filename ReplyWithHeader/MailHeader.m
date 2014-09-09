@@ -278,6 +278,31 @@
     }
 }
 
++ (NSString *)getOSXVersion
+{
+    NSString *version = @"";
+    double versionNumber = floor(NSAppKitVersionNumber);
+    
+    if (versionNumber == 1138) // NSAppKitVersionNumber10_7
+    {
+        version = @"10.7";
+    }
+    else if (versionNumber == 1187) // NSAppKitVersionNumber10_8
+    {
+        version = @"10.8";
+    }
+    else if (versionNumber == 1265) // NSAppKitVersionNumber10_9
+    {
+        version = @"10.9";
+    }
+    else // NSAppKitVersionNumber10_10
+    {
+        version = @"10.10";
+    }
+    
+    return version;
+}
+
 
 #pragma mark MVMailBundle class methods
 
@@ -329,7 +354,7 @@
     [MHCodeInjector injectMailHeaderCode];
     
     // Bundle registered successfully
-    NSLog(@"%@ plugin loaded", [self bundleNameAndVersion]);
+    NSLog(@"%@ plugin loaded, OS X version: %@", [self bundleNameAndVersion], [self getOSXVersion]);
     
     // Logger
     BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);

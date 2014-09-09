@@ -53,6 +53,7 @@
 + (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier;
 + (id)getConfigValue:(NSString *)key;
 + (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
++ (NSString *)getOSXVersion;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;
