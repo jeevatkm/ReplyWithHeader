@@ -36,6 +36,8 @@
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
 		9C27AEB81932CF540007486F /* MHSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C27AEB71932CF540007486F /* MHSignature.m */; };
 		9C3230E619BD578200757AA4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9C3230E519BD578200757AA4 /* Credits.rtf */; };
+		9CE4221D19BFAD3C005E7C07 /* MHDisplayNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4221B19BFAD3C005E7C07 /* MHDisplayNotes.m */; };
+		9CE4222419BFDFE1005E7C07 /* MHDisplayNotes.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4222219BFDFE1005E7C07 /* MHDisplayNotes.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +125,9 @@
 		9C27AEB61932CF540007486F /* MHSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSignature.h; sourceTree = "<group>"; };
 		9C27AEB71932CF540007486F /* MHSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSignature.m; sourceTree = "<group>"; };
 		9C3230E519BD578200757AA4 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		9CE4221A19BFAD3C005E7C07 /* MHDisplayNotes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHDisplayNotes.h; sourceTree = "<group>"; };
+		9CE4221B19BFAD3C005E7C07 /* MHDisplayNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHDisplayNotes.m; sourceTree = "<group>"; };
+		9CE4222319BFDFE1005E7C07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHDisplayNotes.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +214,8 @@
 				13AD486C18018D4600473407 /* MHUpdater.m */,
 				9C27AEB61932CF540007486F /* MHSignature.h */,
 				9C27AEB71932CF540007486F /* MHSignature.m */,
+				9CE4221A19BFAD3C005E7C07 /* MHDisplayNotes.h */,
+				9CE4221B19BFAD3C005E7C07 /* MHDisplayNotes.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 		1371DD0117F864FE00320B54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9CE4222219BFDFE1005E7C07 /* MHDisplayNotes.xib */,
 				132C66621827E23400CD7C1A /* language.png */,
 				138BAEBA1820218C00738ADB /* MHUpdateAlert.xib */,
 				13882A2F18073509004BCC6D /* LICENSE.txt */,
@@ -380,6 +388,7 @@
 				1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */,
 				13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */,
 				138BAEBC1820218C00738ADB /* MHUpdateAlert.xib in Resources */,
+				9CE4222419BFDFE1005E7C07 /* MHDisplayNotes.xib in Resources */,
 				1365843917FAC12700E8C57D /* MailHeader.strings in Resources */,
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
 				132C66631827E23400CD7C1A /* language.png in Resources */,
@@ -430,6 +439,7 @@
 				13AD486D18018D4600473407 /* MHUpdater.m in Sources */,
 				9C27AEB81932CF540007486F /* MHSignature.m in Sources */,
 				13882A2B18072C7D004BCC6D /* MLog.m in Sources */,
+				9CE4221D19BFAD3C005E7C07 /* MHDisplayNotes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +522,14 @@
 				13297B04187FE5F400BD37F9 /* nb */,
 			);
 			name = Config.plist;
+			sourceTree = "<group>";
+		};
+		9CE4222219BFDFE1005E7C07 /* MHDisplayNotes.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CE4222319BFDFE1005E7C07 /* en */,
+			);
+			name = MHDisplayNotes.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
