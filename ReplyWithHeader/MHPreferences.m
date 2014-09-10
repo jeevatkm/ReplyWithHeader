@@ -29,6 +29,7 @@
 #import "MHPreferences.h"
 #import "MHSignature.h"
 #import "Signature.h"
+#import "MHDisplayNotes.h"
 
 @interface MHPreferences (MHNoImplementation)
 - (id)signatureAccounts;
@@ -44,6 +45,7 @@
     - (IBAction)openWebsite:(id)sender;
     - (IBAction)openFeedback:(id)sender;
     - (IBAction)openSupport:(id)sender;
+    - (IBAction)openCredits:(id)sender;
     - (IBAction)notifyNewVersionPressed:(id)sender;
 @end
 
@@ -173,6 +175,13 @@
 - (IBAction)openSupport:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeader/issues"]];
+}
+
+- (IBAction)openCredits:(id)sender
+{
+    NSString *filePath = [[MailHeader bundle] pathForResource:@"Credits" ofType:@"rtf"];
+    MHDisplayNotes *displayNotes = [[MHDisplayNotes alloc] initWithPath:filePath];
+    [NSApp runModalForWindow:[displayNotes window]];    
 }
 
 - (IBAction)notifyNewVersionPressed:(id)sender
