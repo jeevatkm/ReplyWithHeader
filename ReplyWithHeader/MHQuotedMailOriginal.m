@@ -70,7 +70,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 {
     if (isBlockquotePresent)
     {
-        DOMNode *nodeRef = [self getElementByName:TAG_BLOCKQUOTE];
+        DOMNode *nodeRef = [self getBlockquoteTagNode];
         [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
         [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
     }
@@ -83,11 +83,11 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (void)insertForPlainMail:(DOMDocumentFragment *)headerFragment
 {
-    if ( textNodeLocation >= 0 )
+    if (textNodeLocation >= 0)
     {
         if (isBlockquotePresent) // include inside blockquote
         {
-            DOMNode *nodeRef = [self getElementByName:TAG_BLOCKQUOTE];
+            DOMNode *nodeRef = [self getBlockquoteTagNode];
             [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
             [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
         }
@@ -164,7 +164,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         dhc = [originalEmail childNodes];
         
         //identifying blockquote tag
-        isBlockquotePresent = [self isTagPresent:TAG_BLOCKQUOTE];
+        isBlockquotePresent = [self isBlockquoteTagPresent]; //[self isTagPresent:TAG_BLOCKQUOTE];
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         // "... message"
@@ -295,7 +295,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
             
             while ( textRange.location == NSNotFound )
             {
-                [emailDocument removeChild:[nodeList item:0]];
+                [emailDocument removeChild:[emailDocument firstChild]];
                 textRange = [[[emailDocument firstChild] stringValue] rangeOfString:searchString];
             }
         }
@@ -363,6 +363,38 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         
         originalEmail = (id)[[originalEmail children] item:itemNum];
     }
+}
+
+- (BOOL)isBlockquoteTagPresent
+{
+    BOOL present = FALSE;
+    
+    for (int i=0; i < dhc.length; i++)
+    {
+        if ([[[dhc item:i] nodeName] isEqualToString:TAG_BLOCKQUOTE])
+        {
+            present = TRUE;
+            MHLog(@"%@ Node found at %d", TAG_BLOCKQUOTE, i);
+            break;
+        }
+    }
+    
+    return present;
+}
+
+- (DOMNode *)getBlockquoteTagNode
+{
+    MHLog(@"No of child nodes: %d", dhc.length);
+    for (int i=0; i < dhc.length; i++)
+    {
+        if ([[[dhc item:i] nodeName] isEqualToString:TAG_BLOCKQUOTE])
+        {
+            MHLog(@"getBlockquoteTagNode:: %@ Node found at %d", TAG_BLOCKQUOTE, i);
+            return [dhc item:i];
+        }
+    }
+    
+    return nil;
 }
 
 - (BOOL)isTagPresent:(NSString *)tagName
