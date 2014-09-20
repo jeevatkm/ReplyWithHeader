@@ -43,7 +43,6 @@
     int textNodeLocation; //which
     DOMNodeList *dhc; //document header children
     int msgComposeType;
-    BOOL isBlockquotePresent;
 }
 
 - (id)initWithMailMessage:(id)mailMessage msgComposeType:(int)composeType;
