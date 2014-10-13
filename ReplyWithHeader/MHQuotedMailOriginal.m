@@ -68,7 +68,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (void)insertForHTMLMail:(DOMDocumentFragment *)headerFragment
 {
-    if (isBlockquotePresent)
+    if ([self isBlockquoteTagPresent])
     {
         DOMNode *nodeRef = [self getBlockquoteTagNode];
         [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
@@ -85,7 +85,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 {
     if (textNodeLocation >= 0)
     {
-        if (isBlockquotePresent) // include inside blockquote
+        if ([self isBlockquoteTagPresent]) // include inside blockquote
         {
             DOMNode *nodeRef = [self getBlockquoteTagNode];
             [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
@@ -164,7 +164,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         dhc = [originalEmail childNodes];
         
         //identifying blockquote tag
-        isBlockquotePresent = [self isBlockquoteTagPresent]; //[self isTagPresent:TAG_BLOCKQUOTE];
+        MHLog(@"isBlockquotePresent = %@", [self isBlockquoteTagPresent] ? @"YES" : @"NO");
         
         //now get the quoted content and remove the first part (where it says "On ... X wrote"
         // "... message"
@@ -219,9 +219,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if (IS_MAC_YOSEMITE && isBlockquotePresent)
+    if (IS_MAC_YOSEMITE && [self isBlockquoteTagPresent])
     {
-        emailDocument = (DOMHTMLElement *)[self getElementByName:TAG_BLOCKQUOTE];
+        emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
     }
     else
@@ -270,9 +270,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if (IS_MAC_YOSEMITE && isBlockquotePresent)
+    if (IS_MAC_YOSEMITE && [self isBlockquoteTagPresent])
     {
-        emailDocument = (DOMHTMLElement *)[self getElementByName:TAG_BLOCKQUOTE];
+        emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
     }
     else
@@ -367,19 +367,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (BOOL)isBlockquoteTagPresent
 {
-    BOOL present = FALSE;
-    
-    for (int i=0; i < dhc.length; i++)
-    {
-        if ([[[dhc item:i] nodeName] isEqualToString:TAG_BLOCKQUOTE])
-        {
-            present = TRUE;
-            MHLog(@"%@ Node found at %d", TAG_BLOCKQUOTE, i);
-            break;
-        }
-    }
-    
-    return present;
+    return !GET_DEFAULT_BOOL(@"SupressQuoteBarsInComposeWindows");
 }
 
 - (DOMNode *)getBlockquoteTagNode
@@ -395,28 +383,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     }
     
     return nil;
-}
-
-- (BOOL)isTagPresent:(NSString *)tagName
-{
-    BOOL tag = FALSE;
-    DOMNodeList *nodeList = [self getElementsByName:tagName];
-    if (nodeList != nil && nodeList.length >= 1)
-    {
-        tag = TRUE;
-    }
-    MHLog(@"Tag '%@' is present: %@", tagName, tag ? @"YES" : @"NO");
-    return tag;
-}
-
-- (DOMNodeList *)getElementsByName:(NSString *)tagName
-{
-    return [[document htmlDocument] getElementsByTagName:tagName];
-}
-
-- (DOMNode *)getElementByName:(NSString *)tagName
-{
-    return [[[document htmlDocument] getElementsByTagName:tagName] item:0];
 }
 
 - (DOMDocumentFragment *)paragraphTagToSpanTag:(DOMDocumentFragment *) headerFragment

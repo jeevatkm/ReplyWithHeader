@@ -120,8 +120,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     MHLog(@"final header values before web archiving %@", messageAttribution);
     
     WebArchive *webarch = [finalHeader
-                        webArchiveForRange:NSMakeRange(0, [finalHeader length])
-                        fixUpNewlines:YES];
+                           webArchiveForRange:NSMakeRange(0, [finalHeader length])
+                           fixUpNewlines:YES];
     
     return webarch;
 }
@@ -164,19 +164,30 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         
         if (!choosenLocaleIdentifier) {
             choosenLocaleIdentifier = MHLocaleIdentifier;
-        
+            
             MHLog(@"Fallback to default value of choosenLocaleIdentifier %@", choosenLocaleIdentifier);
         }
         
         choosenLocale = [[NSLocale alloc] initWithLocaleIdentifier:choosenLocaleIdentifier];
         
-        NSAttributedString *headerString = [[mailMessage originalMessageHeaders]
-                         attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
+        //for issue #71 - https://github.com/jeevatkm/ReplyWithHeader/issues/71
+        NSAttributedString *headerString = nil;
+        id mcMessageHeaders = [mailMessage originalMessageHeaders];
         
-        cleanHeaders = [mailMessage valueForKey:@"_cleanHeaders"];
+        if ([mcMessageHeaders respondsToSelector:@selector(attributedStringShowingHeaderDetailLevel:)])
+        {
+            headerString = [mcMessageHeaders
+                            attributedStringShowingHeaderDetailLevel:[NSNumber numberWithInt:1]];
+        }
+        else
+        {
+            headerString = [mcMessageHeaders valueForKey:@"attributedString"];
+        }
         
         NSArray *headers = [[headerString string]
                             componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        
+        cleanHeaders = [mailMessage valueForKey:@"_cleanHeaders"];
         noOfHeaderLabels = [headers count];
         
         MHLog(@"Original headers %@", headers);
@@ -251,7 +262,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         }
         @catch (NSException *exception) {
             NSLog(@"Exception occured: %@", exception.description);
-        }        
+        }
     }
     else
     {
@@ -343,30 +354,30 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             // Just realized, this might have to wait for a while
             // thinking of universal solution
             /*range.location = [dateToBePrefix length] + 2;
-            range.length = [row length] - ([dateToBePrefix length] + 2);
-            
-            NSString  *dateTimeString = [[row string] substringFromIndex:range.location];
-            
-            NSDateFormatter *sourceFormatter = [NSDateFormatter new];
-            [sourceFormatter setLocale:[MailHeader currentLocale]];
-            [sourceFormatter setDateFormat:@"d MMM yyyy h:mm:ss a zzz"];
-            NSDate *fromDate = [sourceFormatter dateFromString:dateTimeString];
-            
-            NSLog(@"fromDate %@", fromDate);
-            
-            NSDateFormatter *targetFormatter = [NSDateFormatter new];
-            if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
-                [targetFormatter setLocale:choosenLocale];
-            }
-            
-            [targetFormatter setDateFormat:@"EEEE, LLLL d, yyyy h:mm a"];
-            [targetFormatter setAMSymbol:@"AM"];
-            [targetFormatter setPMSymbol:@"PM"];
-            NSString *toDate = [targetFormatter stringFromDate:fromDate];
-            
-            NSLog(@"finalString of toDate %@", toDate);
-            
-            [row replaceCharactersInRange:range withString:toDate];*/
+             range.length = [row length] - ([dateToBePrefix length] + 2);
+             
+             NSString  *dateTimeString = [[row string] substringFromIndex:range.location];
+             
+             NSDateFormatter *sourceFormatter = [NSDateFormatter new];
+             [sourceFormatter setLocale:[MailHeader currentLocale]];
+             [sourceFormatter setDateFormat:@"d MMM yyyy h:mm:ss a zzz"];
+             NSDate *fromDate = [sourceFormatter dateFromString:dateTimeString];
+             
+             NSLog(@"fromDate %@", fromDate);
+             
+             NSDateFormatter *targetFormatter = [NSDateFormatter new];
+             if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
+             [targetFormatter setLocale:choosenLocale];
+             }
+             
+             [targetFormatter setDateFormat:@"EEEE, LLLL d, yyyy h:mm a"];
+             [targetFormatter setAMSymbol:@"AM"];
+             [targetFormatter setPMSymbol:@"PM"];
+             NSString *toDate = [targetFormatter stringFromDate:fromDate];
+             
+             NSLog(@"finalString of toDate %@", toDate);
+             
+             [row replaceCharactersInRange:range withString:toDate];*/
         }
         
         if ([[row string] hasPrefix:toPrefix] || [[row string] hasPrefix:ccPrefix])
