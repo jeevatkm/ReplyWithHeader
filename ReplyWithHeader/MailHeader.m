@@ -208,7 +208,7 @@
                           MHDefaultHeaderFontName, MHHeaderFontName,
                           MHDefaultHeaderFontSize, MHHeaderFontSize,
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
-                          [NSNumber numberWithBool:YES], MHSubjectPrefixTextEnabled,
+                          [NSNumber numberWithBool:NO], MHSubjectPrefixTextEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
