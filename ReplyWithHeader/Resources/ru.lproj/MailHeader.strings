@@ -5,13 +5,13 @@
     "COPYRIGHT" = "Aвторское право © 2015 Jeevanandam M., Все права защищены.";
     
     /* Message Strings */
-    "STRING_FROM" = "От1";
-    "STRING_SUBJECT" = "Тема2";
-    "STRING_DATE" = "Дата3";
-    "STRING_TO" = "Кому4";
-    "STRING_CC" = "Копия5";
+    "STRING_FROM" = "От";
+    "STRING_SUBJECT" = "Тема";
+    "STRING_DATE" = "Дата";
+    "STRING_TO" = "Кому";
+    "STRING_CC" = "Копия";
     "STRING_REPLY_TO" = "Reply-To";
-    "STRING_SENT" = "Отправлено6";
+    "STRING_SENT" = "Отправлено";
     "STRING_WROTE" = "написал(а)";
     "STRING_FORWARDED_MESSAGE" = "переадресованного сообщения";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";

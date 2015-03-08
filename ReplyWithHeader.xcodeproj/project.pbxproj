@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130238B01AABC48000AA2C01 /* NSString+MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 130238AF1AABC48000AA2C01 /* NSString+MailHeader.m */; };
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
 		132C66631827E23400CD7C1A /* language.png in Resources */ = {isa = PBXBuildFile; fileRef = 132C66621827E23400CD7C1A /* language.png */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		130238AE1AABC48000AA2C01 /* NSString+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MailHeader.h"; sourceTree = "<group>"; };
+		130238AF1AABC48000AA2C01 /* NSString+MailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MailHeader.m"; sourceTree = "<group>"; };
 		1310991F1825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MailHeader.strings; sourceTree = "<group>"; };
 		131099201825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/Config.plist; sourceTree = "<group>"; };
 		13109921182554C900C24D9F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MailHeader.strings; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 		1376067E17F0C43200BDEB41 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				130238AE1AABC48000AA2C01 /* NSString+MailHeader.h */,
+				130238AF1AABC48000AA2C01 /* NSString+MailHeader.m */,
 				135829F517FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m */,
 				135829F617FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.h */,
 				13A25F4217F9B0C7002394DF /* NSPreferences+MailHeader.h */,
@@ -429,6 +434,7 @@
 				133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */,
 				133A918617E9745A00E3CC62 /* MHPreferences.m in Sources */,
 				131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */,
+				130238B01AABC48000AA2C01 /* NSString+MailHeader.m in Sources */,
 				13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */,
 				13A25F4417F9B0C7002394DF /* NSPreferences+MailHeader.m in Sources */,
 				135829F717FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m in Sources */,
