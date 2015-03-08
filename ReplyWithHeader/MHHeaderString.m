@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2014 Jeevanandam M.
+ * Copyright (c) 2013-2015 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -262,7 +262,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"After: %@", messageAttribution);
         }
         @catch (NSException *exception) {
-            NSLog(@"Exception occured: %@", exception.description);
+            MHLog(@"Exception occured: %@", exception.description);
         }
     }
     else
@@ -327,11 +327,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", choosenLocaleIdentifier);
         subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
     }
-    
-    NSArray *choosenHeaderLabels = [MailHeader getConfigValue:@"AllowedHeaders"
-                                                 languageCode:choosenLocaleIdentifier];
-    NSLog(@"applyHeaderLabelChange: %@", messageAttribution);
-    NSLog(@"fromPrefix: %@, toPrefix: %@, ccPrefix: %@, datePrefix: %@, dateToBePrefix: %@", fromPrefix, toPrefix, ccPrefix, datePrefix, dateToBePrefix);
+ 
+    MHLog(@"applyHeaderLabelChange: %@", messageAttribution);
+    MHLog(@"fromPrefix: %@, toPrefix: %@, ccPrefix: %@, datePrefix: %@, dateToBePrefix: %@", fromPrefix, toPrefix, ccPrefix, datePrefix, dateToBePrefix);
 
     //0 => from
     //1 => subject
