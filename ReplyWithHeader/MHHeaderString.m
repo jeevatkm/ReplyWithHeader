@@ -77,10 +77,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         
         [row addAttributes:@{ NSFontAttributeName:font, NSForegroundColorAttributeName:color, NSParagraphStyleAttributeName:paraStyle } range:NSMakeRange(0, [row length])];
         
-        NSRange range = [[row string] rangeOfString:@":"
+        /*NSRange range = [[row string] rangeOfString:@":"
                                             options:NSCaseInsensitiveSearch
                                               range:NSMakeRange(0, [row length])
-                                             locale:choosenLocale];
+                                             locale:choosenLocale];*/
+        NSRange range = [[row string] rangeOf:@":" byLocale:choosenLocale];
         if (range.location != NSNotFound)
         {
             [row applyFontTraits:NSBoldFontMask range:NSMakeRange(0, range.location + 1)];
@@ -99,10 +100,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
-        NSRange range = [[row string] rangeOfString:@":"
+        /*NSRange range = [[row string] rangeOfString:@":"
                                             options:NSCaseInsensitiveSearch
                                               range:NSMakeRange(0, [row length])
-                                             locale:[MailHeader currentLocale]];
+                                             locale:[MailHeader currentLocale]];*/
+        NSRange range = [[row string] rangeOf:@":"];
         
         [row replaceCharactersInRange:NSMakeRange(0, range.location)
                            withString:[choosenHeaderLabels objectAtIndex:i]];
@@ -195,7 +197,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         MHLog(@"Original headers count %lu", noOfHeaderLabels);
         
         // for issue #27 - https://github.com/jeevatkm/ReplyWithHeader/issues/27
-        allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders"];
+        allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders" languageCode:MHLocaleIdentifier];
         messageAttribution = [[NSMutableArray alloc] init];
         
         for (NSString *str in allowedHeaders)
@@ -203,17 +205,18 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             for (int i=0; i<[headers count]; i++)
             {
                 NSString *row = [headers objectAtIndex:i];
-                NSRange range = [row rangeOfString:@":"
+                /*NSRange range = [row rangeOfString:@":"
                                            options:NSCaseInsensitiveSearch
                                              range:NSMakeRange(0, [row length])
-                                            locale:[MailHeader currentLocale]];
+                                            locale:[MailHeader currentLocale]];*/
+                NSRange range = [row rangeOf:@":"];
                 
                 if (range.location != NSNotFound) {
                     NSString *label = [row substringToIndex:range.location];
                     
                     if (NSOrderedSame == [str localizedCaseInsensitiveCompare:label]) {
-                        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:row];
-                        [messageAttribution addObject:attrString];
+                        //NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[row trim]];
+                        [messageAttribution addObject:[row mutableAttributedString]];
                         break;
                     }
                 }
@@ -242,7 +245,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         // for #76 - https://github.com/jeevatkm/ReplyWithHeader/issues/76
-        NSString *rowNorm = [[row string] precomposedStringWithCanonicalMapping];
+        NSString *rowNorm = [[[row string] precomposedStringWithCanonicalMapping] trim];
         
         if ([rowNorm hasPrefix:subjectPrefix])
         {
@@ -272,13 +275,14 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
 }
 
-- (NSString *)getFullNameFromEmailAddress:(NSString *)emailAddress isMailToNeeded:(BOOL)mailTo
+- (NSString *)fullNameFromEmailAddress:(NSString *)emailAddress isMailToNeeded:(BOOL)mailTo
 {
     //emailAddress = [emailAddress stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     emailAddress = [emailAddress trim];
     
     if ([emailAddress length] > 0) {
-        NSRange range = [emailAddress rangeOfString:@"<" options:NSCaseInsensitiveSearch];
+        //NSRange range = [emailAddress rangeOfString:@"<" options:NSCaseInsensitiveSearch];
+        NSRange range = [emailAddress rangeOf:@"<"];
         
         if (range.location != NSNotFound && range.location != 0)
         {
@@ -332,11 +336,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     MHLog(@"applyHeaderLabelChange: %@", messageAttribution);
     MHLog(@"fromPrefix: %@, toPrefix: %@, ccPrefix: %@, datePrefix: %@, dateToBePrefix: %@", fromPrefix, toPrefix, ccPrefix, datePrefix, dateToBePrefix);
 
-    //0 => from
-    //1 => subject
-    //2 => date
-    //3 => to
-    //4 ==> cc
+    // Attribution position
+    // 0 => from
+    // 1 => subject
+    // 2 => date
+    // 3 => to
+    // 4 => cc
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
@@ -353,7 +358,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             BOOL mailToNeeded = FALSE;
             
             if (fromTagStyle == 1) mailToNeeded = TRUE;
-            fromString = [self getFullNameFromEmailAddress:fromString isMailToNeeded:mailToNeeded];
+            fromString = [self fullNameFromEmailAddress:fromString isMailToNeeded:mailToNeeded];
             
             [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
             
@@ -408,8 +413,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         
         if (i == 3 || i == 4)
         {
-            range = [[row string] rangeOfString:@":"];
+            //range = [[row string] rangeOfString:@":"];
             //NSString *emailString = [[[row string] substringFromIndex:range.location + 2] trim];
+            range = [[row string] rangeOf:@":"];
             NSString *emailString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
             /*emailString = [emailString
                            stringByTrimmingCharactersInSet:[NSCharacterSet
@@ -422,7 +428,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             {
                 for (NSString *emailId in emails)
                 {
-                    NSString *response = [self getFullNameFromEmailAddress:emailId isMailToNeeded:FALSE];
+                    NSString *response = [self fullNameFromEmailAddress:emailId isMailToNeeded:FALSE];
                     finalString = [finalString stringByAppendingString:response];
                     finalString = [finalString stringByAppendingString:@"; "];
                 }
@@ -435,21 +441,14 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             }
             else
             {
-                finalString = [self getFullNameFromEmailAddress:emailString isMailToNeeded:FALSE];
+                finalString = [self fullNameFromEmailAddress:emailString isMailToNeeded:FALSE];
             }
             
             [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:finalString];
             
-            range = [[row string] rangeOfString:@":"];
-            if (i == 3)
-            {
-                [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:toPrefix];
-            }
-            
-            if (i == 4)
-            {
-                [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:ccPrefix];
-            }
+            range = [[row string] rangeOf:@":"];
+            [row replaceCharactersInRange:NSMakeRange(0, range.location)
+                               withString:(i == 3) ? toPrefix : ccPrefix];
         }
     }   
 }

@@ -34,5 +34,8 @@
 
 - (BOOL)isBlank;
 - (NSString *)trim;
+- (NSRange)rangeOf:(NSString *)str;
+- (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale;
+- (NSMutableAttributedString *)mutableAttributedString;
 
 @end

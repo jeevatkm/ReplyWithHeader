@@ -31,6 +31,7 @@
 //
 
 #import "NSString+MailHeader.h"
+#import "MailHeader.h"
 
 @implementation NSString (MailHeader)
 
@@ -50,7 +51,7 @@
 {
     if (string)
     {
-        NSRange range = [self rangeOfString:string];
+        NSRange range = [self rangeOf:string];
         return (range.location != NSNotFound);
     }
     else
@@ -58,6 +59,24 @@
         return NO;
     }
     
+}
+
+- (NSRange)rangeOf:(NSString *)str
+{
+    return [self rangeOf:str byLocale:[MailHeader currentLocale]];
+}
+
+- (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale
+{
+    return [self rangeOfString:@":"
+                       options:NSCaseInsensitiveSearch
+                         range:NSMakeRange(0, self.length)
+                        locale:locale];
+}
+
+- (NSMutableAttributedString *)mutableAttributedString
+{
+    return [[NSMutableAttributedString alloc] initWithString:[[self trim] copy]];
 }
 
 @end
