@@ -37,5 +37,6 @@
 - (NSRange)rangeOf:(NSString *)str;
 - (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale;
 - (NSMutableAttributedString *)mutableAttributedString;
+- (NSAttributedString *)attributedString;
 
 @end

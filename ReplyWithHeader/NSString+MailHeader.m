@@ -79,4 +79,9 @@
     return [[NSMutableAttributedString alloc] initWithString:[[self trim] copy]];
 }
 
+- (NSAttributedString *)attributedString
+{
+    return [[NSAttributedString alloc] initWithString:[[self trim] copy]];
+}
+
 @end

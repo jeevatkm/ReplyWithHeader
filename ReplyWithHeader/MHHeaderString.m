@@ -76,11 +76,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         
         [row addAttributes:@{ NSFontAttributeName:font, NSForegroundColorAttributeName:color, NSParagraphStyleAttributeName:paraStyle } range:NSMakeRange(0, [row length])];
-        
-        /*NSRange range = [[row string] rangeOfString:@":"
-                                            options:NSCaseInsensitiveSearch
-                                              range:NSMakeRange(0, [row length])
-                                             locale:choosenLocale];*/
+  
         NSRange range = [[row string] rangeOf:@":" byLocale:choosenLocale];
         if (range.location != NSNotFound)
         {
@@ -99,11 +95,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     for (int i=0; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
-        
-        /*NSRange range = [[row string] rangeOfString:@":"
-                                            options:NSCaseInsensitiveSearch
-                                              range:NSMakeRange(0, [row length])
-                                             locale:[MailHeader currentLocale]];*/
         NSRange range = [[row string] rangeOf:@":"];
         
         [row replaceCharactersInRange:NSMakeRange(0, range.location)
@@ -205,17 +196,13 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             for (int i=0; i<[headers count]; i++)
             {
                 NSString *row = [headers objectAtIndex:i];
-                /*NSRange range = [row rangeOfString:@":"
-                                           options:NSCaseInsensitiveSearch
-                                             range:NSMakeRange(0, [row length])
-                                            locale:[MailHeader currentLocale]];*/
                 NSRange range = [row rangeOf:@":"];
                 
-                if (range.location != NSNotFound) {
+                if (range.location != NSNotFound)
+                {
                     NSString *label = [row substringToIndex:range.location];
-                    
-                    if (NSOrderedSame == [str localizedCaseInsensitiveCompare:label]) {
-                        //NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[row trim]];
+                    if (NSOrderedSame == [str localizedCaseInsensitiveCompare:label])
+                    {
                         [messageAttribution addObject:[row mutableAttributedString]];
                         break;
                     }
@@ -277,11 +264,10 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 - (NSString *)fullNameFromEmailAddress:(NSString *)emailAddress isMailToNeeded:(BOOL)mailTo
 {
-    //emailAddress = [emailAddress stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     emailAddress = [emailAddress trim];
     
-    if ([emailAddress length] > 0) {
-        //NSRange range = [emailAddress rangeOfString:@"<" options:NSCaseInsensitiveSearch];
+    if ([emailAddress length] > 0)
+    {
         NSRange range = [emailAddress rangeOf:@"<"];
         
         if (range.location != NSNotFound && range.location != 0)
@@ -302,7 +288,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             // for issue #38 - https://github.com/jeevatkm/ReplyWithHeader/issues/38
             fullName = [fullName stringByReplacingOccurrencesOfString:@"'" withString:@""];
             
-            //return [fullName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             return [fullName trim];
         }
         
@@ -367,60 +352,50 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         
         if (i == 1)
         {
-            range = [[row string] rangeOfString:@":"];
+            range = [[row string] rangeOf:@":"];
             [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];
         }
         
         if (i == 2)
         {
-            /*range = [[row string] rangeOfString:datePrefix];
-            
-            if (range.location != NSNotFound)
-                [row replaceCharactersInRange:range withString:dateToBePrefix];*/
-            
-            range = [[row string] rangeOfString:@":"];
+            range = [[row string] rangeOf:@":"];
             [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:dateToBePrefix];
             
             // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
-            // Just realized, this might have to wait for a while
-            // thinking of universal solution
-            /*range.location = [dateToBePrefix length] + 2;
-             range.length = [row length] - ([dateToBePrefix length] + 2);
-             
-             NSString  *dateTimeString = [[row string] substringFromIndex:range.location];
-             
-             NSDateFormatter *sourceFormatter = [NSDateFormatter new];
-             [sourceFormatter setLocale:[MailHeader currentLocale]];
-             [sourceFormatter setDateFormat:@"d MMM yyyy h:mm:ss a zzz"];
-             NSDate *fromDate = [sourceFormatter dateFromString:dateTimeString];
-             
-             NSLog(@"fromDate %@", fromDate);
-             
-             NSDateFormatter *targetFormatter = [NSDateFormatter new];
-             if ([[MailHeader localeIdentifier] isNotEqualTo:choosenLocaleIdentifier]) {
-             [targetFormatter setLocale:choosenLocale];
-             }
-             
-             [targetFormatter setDateFormat:@"EEEE, LLLL d, yyyy h:mm a"];
-             [targetFormatter setAMSymbol:@"AM"];
-             [targetFormatter setPMSymbol:@"PM"];
-             NSString *toDate = [targetFormatter stringFromDate:fromDate];
-             
-             NSLog(@"finalString of toDate %@", toDate);
-             
-             [row replaceCharactersInRange:range withString:toDate];*/
+            // trying this universal solution
+            if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+            {
+                range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
+                NSUInteger start = range.location + 2;
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
+                MHLog(@"Date format: %@", [dateFormatter dateFormat]);
+                
+                @try {
+                    NSString *dateTimeStr = [[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:start];
+                    NSDate *date = [dateFormatter dateFromString:dateTimeStr];
+                    MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
+                    
+                    [dateFormatter setLocale:choosenLocale];
+                    NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
+                    MHLog(@"Localized date: %@", newLocalDateStr);
+                    
+                    NSUInteger length = [[row string] length] - start;
+                    MHLog(@"Before date: %@", [row string]);
+                    [row replaceCharactersInRange:NSMakeRange(start, length) withString:newLocalDateStr];
+                    MHLog(@"After date: %@", [row string]);
+                }
+                @catch (NSException *exception) {
+                    MHLog(@"Exception occured: %@", exception.description);
+                }
+            }
         }
         
         if (i == 3 || i == 4)
         {
-            //range = [[row string] rangeOfString:@":"];
-            //NSString *emailString = [[[row string] substringFromIndex:range.location + 2] trim];
             range = [[row string] rangeOf:@":"];
             NSString *emailString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
-            /*emailString = [emailString
-                           stringByTrimmingCharactersInSet:[NSCharacterSet
-                                                            whitespaceAndNewlineCharacterSet]]; */
-            
             NSArray *emails = [emailString componentsSeparatedByString:@">, "];
             
             NSString *finalString = @"";
