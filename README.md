@@ -2,9 +2,6 @@ Quoting Headers and Signatures in Mail.app
 ------------------------------------------
 [ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of message header and signature in a email. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
 
-<a href="https://www.coinbase.com/checkouts/6217eb1a5bea958e9683796f6ce1d661" target="_blank"><img src="http://myjeeva.com/content/site/donate-bitcoins.png" 
-alt="Donate Bitcoins" width="195" height="48" border="0" /></a>
-
 * [Home page][2]
 * [Download Latest Release - MacUpdate.com][5]
 * [Reporting Issues](#reporting-issues)
