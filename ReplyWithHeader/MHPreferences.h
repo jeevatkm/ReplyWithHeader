@@ -57,6 +57,7 @@
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
+    IBOutlet NSImageView *_bitcoinImageView;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;

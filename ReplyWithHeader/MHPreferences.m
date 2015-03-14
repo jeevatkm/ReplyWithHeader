@@ -51,7 +51,7 @@
 
 @implementation MHPreferences
 
-#pragma mark Class private methods
+#pragma mark Class instance methods
 
 - (void)toggleMailPreferencesOptions:(BOOL *)state
 {
@@ -210,6 +210,21 @@
             [_MHNotifyNewVersion setState:YES];
         }
     }    
+}
+
+- (IBAction)openBitcoin:(id)sender
+{
+    [self openURL:@"bitcoin:1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD?message=Support%20ReplyWithHeader!&amount=0.01"];
+}
+
+- (IBAction)openPaypal:(id)sender
+{
+    [self openURL:@"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QWMZG74FW4QYC&lc=US&item_name=Jeevanandam%20M%2e&item_number=ReplyWithHeader&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"];
+}
+
+- (void)openURL:(NSString *)url
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)loadSignatures
