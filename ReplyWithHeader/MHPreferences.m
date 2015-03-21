@@ -152,7 +152,7 @@
 
 - (IBAction)openWebsite:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader"]];
+    [self openURL:@"http://myjeeva.com/replywithheader"];
 }
 
 - (IBAction)openFeedback:(id)sender
@@ -169,12 +169,12 @@
     
     [infoAlert runModal];
     
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
+    [self openURL:@"http://myjeeva.com/replywithheader#wp-comments"];
 }
 
 - (IBAction)openSupport:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeader/issues"]];
+    [self openURL:@"https://github.com/jeevatkm/ReplyWithHeader/issues"];
 }
 
 - (IBAction)openCredits:(id)sender
@@ -210,11 +210,6 @@
             [_MHNotifyNewVersion setState:YES];
         }
     }    
-}
-
-- (IBAction)openBitcoin:(id)sender
-{
-    [self openURL:@"bitcoin:1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD?message=Support%20ReplyWithHeader!&amount=0.01"];
 }
 
 - (IBAction)openPaypal:(id)sender

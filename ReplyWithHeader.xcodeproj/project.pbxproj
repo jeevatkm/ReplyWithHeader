@@ -18,9 +18,7 @@
 		13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
 		13423DAA17EDACF700623E45 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		13503BF81AB49B4800AF09CC /* bitcoin-donate_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 13503BF61AB49B4800AF09CC /* bitcoin-donate_64.png */; };
 		13503BF91AB49B4800AF09CC /* btn_donate_pp_142x27.png in Resources */ = {isa = PBXBuildFile; fileRef = 13503BF71AB49B4800AF09CC /* btn_donate_pp_142x27.png */; };
-		13503BFF1AB4BA2C00AF09CC /* qr-code-bitcoin-rwh.png in Resources */ = {isa = PBXBuildFile; fileRef = 13503BFE1AB4BA2C00AF09CC /* qr-code-bitcoin-rwh.png */; };
 		135829F717FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 135829F517FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m */; };
 		1365843917FAC12700E8C57D /* MailHeader.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1365843B17FAC12700E8C57D /* MailHeader.strings */; };
 		1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */; };
@@ -74,9 +72,7 @@
 		133A917A17E9745A00E3CC62 /* MHPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPreferences.h; sourceTree = "<group>"; };
 		133A917B17E9745A00E3CC62 /* MHPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPreferences.m; sourceTree = "<group>"; };
 		133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MailAttributedStringToHTML.h"; sourceTree = "<group>"; };
-		13503BF61AB49B4800AF09CC /* bitcoin-donate_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitcoin-donate_64.png"; sourceTree = "<group>"; };
 		13503BF71AB49B4800AF09CC /* btn_donate_pp_142x27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate_pp_142x27.png; sourceTree = "<group>"; };
-		13503BFE1AB4BA2C00AF09CC /* qr-code-bitcoin-rwh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qr-code-bitcoin-rwh.png"; sourceTree = "<group>"; };
 		135829F117FD5A6A00FC5C1F /* MHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConstants.h; sourceTree = "<group>"; };
 		135829F517FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+MailHeader.m"; sourceTree = "<group>"; };
 		135829F617FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+MailHeader.h"; sourceTree = "<group>"; };
@@ -232,8 +228,6 @@
 		1371DD0117F864FE00320B54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				13503BFE1AB4BA2C00AF09CC /* qr-code-bitcoin-rwh.png */,
-				13503BF61AB49B4800AF09CC /* bitcoin-donate_64.png */,
 				13503BF71AB49B4800AF09CC /* btn_donate_pp_142x27.png */,
 				9CE4222219BFDFE1005E7C07 /* MHDisplayNotes.xib */,
 				132C66621827E23400CD7C1A /* language.png */,
@@ -407,10 +401,8 @@
 				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
 				13503BF91AB49B4800AF09CC /* btn_donate_pp_142x27.png in Resources */,
 				132C66631827E23400CD7C1A /* language.png in Resources */,
-				13503BFF1AB4BA2C00AF09CC /* qr-code-bitcoin-rwh.png in Resources */,
 				138BAEBD182022AA00738ADB /* Config.plist in Resources */,
 				9C3230E619BD578200757AA4 /* Credits.rtf in Resources */,
-				13503BF81AB49B4800AF09CC /* bitcoin-donate_64.png in Resources */,
 				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
 			);
