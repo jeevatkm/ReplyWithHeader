@@ -1,14 +1,16 @@
 Quoting Headers and Signatures in Mail.app
 ------------------------------------------
-[ReplyWithHeader][2] is an Apple Mail bundle/plugin that enables quoting of message header and signature in a email. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
 
-* [Home page][2]
-* [Download Latest Release - MacUpdate.com][5]
-* [Reporting Issues](#reporting-issues)
-* [Installation](#installation)
-* [FAQ][7]
+[ReplyWithHeader][2] [aka RWH] is an Apple Mail bundle/plugin that enables quoting of message header and signature in a email. It brings Outlook Mail Header capabilities to Apple Mail and adds missing functionality of headers to Mail.app. Blends with corporate world email communication.
 
-* * *
+**|  [Home page][2]  |  [Download RWH][5]  |  [Report Issues][8]  |  [Installation][9]  |  [FAQ][7]  |  [Changelogs][10]  |**
+
+Support RWH :moneybag:
+----------------
+
+BTC | LTC | PayPal
+--- | --- | ---
+<a href="bitcoin:1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD?message=Support%20ReplyWithHeader!&amp;amount=0.01" target="">1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD</a> | <a href="litecoin:LLtwC5ovFdRECXPSUznJC3jKfFGRbcfVLY?message=Support%20ReplyWithHeader!&amp;amount=1">LLtwC5ovFdRECXPSUznJC3jKfFGRbcfVLY</a> | [![Donate with Paypal](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=QWMZG74FW4QYC&amp;lc=US&amp;item_name=Jeevanandam%20M%2e&amp;item_number=ReplyWithHeader&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 Installation
 ------------
@@ -28,8 +30,8 @@ RWH:: Installation complete
 ===================================================</code></pre>
 * Restart Mail.app
 
-Reporting Issues
-----------------
+Report Issues
+-------------
 ReplyWithHeader uses [GitHub’s integrated issue tracking system][3] to record bugs and feature requests. If you want to raise an issue, please follow the recommendations bellow:
 
 * Before you log a bug, please search the issue tracker to see if someone has already reported the problem. If the issue doesn’t already exist, create a new issue.
@@ -58,3 +60,6 @@ ReplyWithHeader is released under [MIT License][4]
 [5]: https://www.macupdate.com/app/mac/49256/replywithheader
 [6]: https://github.com/jeevatkm
 [7]: http://myjeeva.com/replywithheader#faq
+[8]: #report-issues
+[9]: #installation
+[10]: http://myjeeva.com/replywithheader-change-log.html
