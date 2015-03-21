@@ -23,48 +23,65 @@
  */
 
 //
-//  MHSignature.m
+//  NSString+MailHeader.m
 //  ReplyWithHeader
 //
-//  Created by Jeevanandam M. on 5/25/14.
+//  Created by Jeevanandam M. on 07/03/15.
 //
 //
 
-#import "MHSignature.h"
+#import "NSString+MailHeader.h"
+#import "MailHeader.h"
 
-static NSString* const kName = @"name";
-static NSString* const kUniqueId = @"uniqueId";
-static NSString* const kValues = @"values";
+@implementation NSString (MailHeader)
 
-@implementation MHSignature
-
-- (id)initWithName:(NSString*)name uniqueId:(NSString*)uniqueId values:(NSMutableDictionary*) values
+- (BOOL)isBlank
 {
-    self = [super init];
-    if(self) {
-        _name = [name copy];
-        _uniqueId = [uniqueId copy];
-        _values = [values copy];
-    }
-    
-    return self;
+    if([[self trim] isEqualToString:@""])
+        return YES;
+    return NO;
 }
 
-- (id)initWithCoder:(NSCoder*)aDecoder {
-    self = [super init];
-    if (self) {
-        _name = [aDecoder decodeObjectForKey:kName];
-        _uniqueId = [aDecoder decodeObjectForKey:kUniqueId];
-        _values = [aDecoder decodeObjectForKey:kValues];
-    }
-    
-    return self;
+- (NSString *)trim
+{
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-- (void)encodeWithCoder:(NSCoder*)aCoder {
-    [aCoder encodeObject:_name forKey:kName];
-    [aCoder encodeObject:_uniqueId forKey:kUniqueId];
-    [aCoder encodeObject:_values forKey:kValues];
+- (BOOL)contains:(NSString *)string
+{
+    if (string)
+    {
+        NSRange range = [self rangeOf:string];
+        return (range.location != NSNotFound);
+    }
+    else
+    {
+        return NO;
+    }
+    
+}
+
+- (NSRange)rangeOf:(NSString *)str
+{
+    return [self rangeOf:str byLocale:[MailHeader currentLocale]];
+}
+
+- (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale
+{
+    return [self rangeOfString:@":"
+                       options:NSCaseInsensitiveSearch
+                         range:NSMakeRange(0, self.length)
+                        locale:locale];
+}
+
+- (NSMutableAttributedString *)mutableAttributedString
+{
+    return [[NSMutableAttributedString alloc] initWithString:[[self trim] copy]];
+}
+
+- (NSAttributedString *)attributedString
+{
+    return [[NSAttributedString alloc] initWithString:[[self trim] copy]];
 }
 
 @end

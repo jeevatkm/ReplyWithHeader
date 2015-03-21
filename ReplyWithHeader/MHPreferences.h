@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2014 Jeevanandam M.
+ * Copyright (c) 2013-2015 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -57,6 +57,7 @@
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
+    IBOutlet NSButton *_MHPaypalBtn;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;

@@ -1,9 +1,7 @@
-/* 
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2013-2015 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,30 +22,21 @@
  * THE SOFTWARE.
  */
 
-
 //
-//  MHHeaderString.h
-//  MailHeader
+//  NSString+MailHeader.h
+//  ReplyWithHeader
 //
-//  Created by Jason Schroth on 8/15/12.
+//  Created by Jeevanandam M. on 07/03/15.
 //
-//  MHHeaderString Class refactored & completely rewritten by Jeevanandam M. on Sep 22, 2013
+//
 
-@class WebArchive;
+@interface NSString (MailHeader)
 
-@interface MHHeaderString : NSObject {    
-    NSMutableArray *messageAttribution;
-    NSDictionary *cleanHeaders;
-    NSUInteger noOfHeaderLabels;
-    NSArray *allowedHeaders;
-    NSLocale *choosenLocale;
-    NSString *choosenLocaleIdentifier;
-}
-
-- (id)initWithMailMessage:(id)mailMessage;
-- (void)applyHeaderTypography;
-- (void)applyHeaderLabelOptions;
-- (WebArchive *)getWebArchive;
-- (NSUInteger)getHeaderItemCount;
+- (BOOL)isBlank;
+- (NSString *)trim;
+- (NSRange)rangeOf:(NSString *)str;
+- (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale;
+- (NSMutableAttributedString *)mutableAttributedString;
+- (NSAttributedString *)attributedString;
 
 @end

@@ -2,16 +2,16 @@
     /* Plugin Info */
     "PLUGIN_NAME" = "ReplyWithHeader";
     "MAIL_HEADER_PREFERENCES" = "RWH";
-    "COPYRIGHT" = "Aвторское право © 2014 Jeevanandam M., Все права защищены.";
+    "COPYRIGHT" = "© 2015 Jeevanandam M.,\nВсе права защищены.";
     
     /* Message Strings */
-    "STRING_FROM" = "Отправитель";
+    "STRING_FROM" = "От";
     "STRING_SUBJECT" = "Тема";
     "STRING_DATE" = "Дата";
-    "STRING_TO" = "Получатель";
+    "STRING_TO" = "Кому";
     "STRING_CC" = "Копия";
     "STRING_REPLY_TO" = "Reply-To";
-    "STRING_SENT" = "посланный";
+    "STRING_SENT" = "Отправлено";
     "STRING_WROTE" = "написал(а)";
     "STRING_FORWARDED_MESSAGE" = "переадресованного сообщения";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";

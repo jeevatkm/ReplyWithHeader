@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2014 Jeevanandam M.
+ * Copyright (c) 2013-2015 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -51,7 +51,7 @@
 
 @implementation MHPreferences
 
-#pragma mark Class private methods
+#pragma mark Class instance methods
 
 - (void)toggleMailPreferencesOptions:(BOOL *)state
 {
@@ -152,7 +152,7 @@
 
 - (IBAction)openWebsite:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader"]];
+    [self openURL:@"http://myjeeva.com/replywithheader"];
 }
 
 - (IBAction)openFeedback:(id)sender
@@ -169,12 +169,12 @@
     
     [infoAlert runModal];
     
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://myjeeva.com/replywithheader#wp-comments"]];
+    [self openURL:@"http://myjeeva.com/replywithheader#wp-comments"];
 }
 
 - (IBAction)openSupport:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/jeevatkm/ReplyWithHeader/issues"]];
+    [self openURL:@"https://github.com/jeevatkm/ReplyWithHeader/issues"];
 }
 
 - (IBAction)openCredits:(id)sender
@@ -210,6 +210,16 @@
             [_MHNotifyNewVersion setState:YES];
         }
     }    
+}
+
+- (IBAction)openPaypal:(id)sender
+{
+    [self openURL:@"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QWMZG74FW4QYC&lc=US&item_name=Jeevanandam%20M%2e&item_number=ReplyWithHeader&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"];
+}
+
+- (void)openURL:(NSString *)url
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)loadSignatures

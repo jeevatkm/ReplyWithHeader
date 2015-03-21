@@ -19,17 +19,17 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.8</string>
+	<string>4.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4.8</string>
+	<string>4.9</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>MHAppCastURL</key>
 	<string>http://myjeeva.com/replywithheader.json</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2014 Jeevanandam M., All rights reserved.</string>
+	<string>© 2015 Jeevanandam M., All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>MailHeader</string>
 </dict>
