@@ -339,10 +339,10 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             range = [[row string] rangeOfString:@":"];
             NSString *fromString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
             
-            NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
-            BOOL mailToNeeded = FALSE;
+            //NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
+            BOOL mailToNeeded = GET_DEFAULT_BOOL(MHHeaderAttributionFromTagStyle);
             
-            if (fromTagStyle == 1) mailToNeeded = TRUE;
+            //if (fromTagStyle == 1) mailToNeeded = TRUE;
             fromString = [self fullNameFromEmailAddress:fromString isMailToNeeded:mailToNeeded];
             
             [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];

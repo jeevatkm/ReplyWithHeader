@@ -68,7 +68,7 @@
 
 - (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale
 {
-    return [self rangeOfString:@":"
+    return [self rangeOfString:str
                        options:NSCaseInsensitiveSearch
                          range:NSMakeRange(0, self.length)
                         locale:locale];
