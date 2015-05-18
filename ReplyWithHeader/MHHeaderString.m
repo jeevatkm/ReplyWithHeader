@@ -348,7 +348,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSMutableAttributedString *row = [messageAttribution objectAtIndex:2];
     NSRange range;
     
-    if (GET_DEFAULT_INT(MHHeaderAttributionLblSeqTagStyle) == 2)
+    if (GET_DEFAULT_INT(MHHeaderAttributionLblSeqTagStyle) == 1)
     {
         range = [[row string] rangeOf:@":"];
         [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:dateToBePrefix];
