@@ -298,6 +298,44 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     return emailAddress;
 }
 
+- (NSString *)fullNameFromEmailAddress:(NSString *)emailAddress attribStyle:(NSInteger)style {
+    
+    emailAddress = [emailAddress trim];
+    
+    if ([emailAddress length] > 0)
+    {
+        NSRange range = [emailAddress rangeOf:@"<"];
+        
+        if (range.location != NSNotFound && range.location != 0)
+        {
+            NSString *fullName = [emailAddress copy];
+            if (style == 1 || style == 2) {
+                fullName = [emailAddress substringToIndex:range.location];
+                
+                if (style == 2) {
+                    NSString *fromMailId = [emailAddress substringFromIndex:range.location];
+                    fromMailId = [fromMailId
+                              stringByReplacingOccurrencesOfString:@"<" withString:@"[mailto:"];
+                    fromMailId = [fromMailId stringByReplacingOccurrencesOfString:@">" withString:@"]"];
+                    fullName = [fullName stringByAppendingString:fromMailId];
+                }
+            }
+            
+            fullName = [fullName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            
+            // for issue #38 - https://github.com/jeevatkm/ReplyWithHeader/issues/38
+            fullName = [fullName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+            
+            return [fullName trim];
+        }
+        
+        emailAddress = [emailAddress stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        emailAddress = [emailAddress stringByReplacingOccurrencesOfString:@">" withString:@""];
+    }
+    
+    return emailAddress;
+}
+
 // for #76 - https://github.com/jeevatkm/ReplyWithHeader/issues/76
 - (void)applyHeaderLabelChange
 {
@@ -329,9 +367,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     // 4 => cc
     for (int i=0; i<[messageAttribution count]; i++)
     {
-        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
-        //NSString *rowNorm = [[row string] precomposedStringWithCanonicalMapping];
-        
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];        
         NSRange range;
         
         if (i == 0)
@@ -339,15 +375,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             range = [[row string] rangeOfString:@":"];
             NSString *fromString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
             
-            //NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
-            BOOL mailToNeeded = GET_DEFAULT_BOOL(MHHeaderAttributionFromTagStyle);
+            [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:fromPrefix];
             
-            //if (fromTagStyle == 1) mailToNeeded = TRUE;
-            fromString = [self fullNameFromEmailAddress:fromString isMailToNeeded:mailToNeeded];
+            NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
+            fromString = [self fullNameFromEmailAddress:fromString attribStyle:fromTagStyle];
             
             [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
-            
-            [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:fromPrefix];
         }
         
         if (i == 1)
