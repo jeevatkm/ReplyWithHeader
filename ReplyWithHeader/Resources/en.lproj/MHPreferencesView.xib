@@ -558,23 +558,23 @@
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 														</object>
-														<object class="NSTextField" id="338909311">
+														<object class="NSTextField" id="163501175">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{15, 314}, {516, 17}}</string>
+															<string key="NSFrame">{{15, 315}, {516, 17}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="1019158542"/>
+															<reference key="NSNextKeyView" ref="568107091"/>
 															<string key="NSReuseIdentifierKey">_NS:397</string>
 															<string key="NSHuggingPriority">{251, 750}</string>
 															<bool key="NSEnabled">YES</bool>
-															<object class="NSTextFieldCell" key="NSCell" id="646966792">
+															<object class="NSTextFieldCell" key="NSCell" id="1026194574">
 																<int key="NSCellFlags">68157504</int>
 																<int key="NSCellFlags2">272630784</int>
 																<string key="NSContents">Header 'To' &amp; 'Cc' attribution style</string>
 																<reference key="NSSupport" ref="581614428"/>
 																<string key="NSCellIdentifier">_NS:397</string>
-																<reference key="NSControlView" ref="338909311"/>
+																<reference key="NSControlView" ref="163501175"/>
 																<reference key="NSBackgroundColor" ref="993017804"/>
 																<reference key="NSTextColor" ref="935566603"/>
 															</object>
@@ -584,10 +584,10 @@
 														<object class="NSMatrix" id="91198230">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{35, 343}, {408, 58}}</string>
+															<string key="NSFrame">{{35, 345}, {408, 58}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="338909311"/>
+															<reference key="NSNextKeyView" ref="163501175"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -724,7 +724,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSCellFlags">67108864</int>
 																	<int key="NSCellFlags2">0</int>
 																	<string key="NSContents">Outlook Extended (From: Name [mailto:email-address])</string>
-																	<object class="NSFont" key="NSSupport" id="612664518">
+																	<object class="NSFont" key="NSSupport" id="1017899327">
 																		<string key="NSName">LucidaGrande</string>
 																		<double key="NSSize">12</double>
 																		<int key="NSfFlags">16</int>
@@ -853,10 +853,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 															</object>
 															<reference key="NSFont" ref="581614428"/>
 														</object>
-														<object class="NSMatrix" id="1019158542">
+														<object class="NSMatrix" id="568107091">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{35, 268}, {408, 38}}</string>
+															<string key="NSFrame">{{35, 269}, {408, 38}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="416572505"/>
@@ -866,12 +866,12 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 															<int key="NSNumRows">2</int>
 															<int key="NSNumCols">1</int>
 															<array class="NSMutableArray" key="NSCells">
-																<object class="NSButtonCell" id="743911838">
+																<object class="NSButtonCell" id="733397226">
 																	<int key="NSCellFlags">-2080374784</int>
 																	<int key="NSCellFlags2">0</int>
 																	<string key="NSContents">Default (To: Name1 &lt;email-address1&gt;, ...)</string>
-																	<reference key="NSSupport" ref="612664518"/>
-																	<reference key="NSControlView" ref="1019158542"/>
+																	<reference key="NSSupport" ref="1017899327"/>
+																	<reference key="NSControlView" ref="568107091"/>
 																	<int key="NSButtonFlags">1211912448</int>
 																	<int key="NSButtonFlags2">0</int>
 																	<reference key="NSAlternateImage" ref="782608542"/>
@@ -880,12 +880,12 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																	<int key="NSPeriodicDelay">200</int>
 																	<int key="NSPeriodicInterval">25</int>
 																</object>
-																<object class="NSButtonCell" id="949294959">
+																<object class="NSButtonCell" id="669687727">
 																	<int key="NSCellFlags">67108864</int>
 																	<int key="NSCellFlags2">0</int>
 																	<string key="NSContents">Outlook (To: Name1, Name2, ...)</string>
-																	<reference key="NSSupport" ref="612664518"/>
-																	<reference key="NSControlView" ref="1019158542"/>
+																	<reference key="NSSupport" ref="1017899327"/>
+																	<reference key="NSControlView" ref="568107091"/>
 																	<int key="NSTag">1</int>
 																	<int key="NSButtonFlags">1211912448</int>
 																	<int key="NSButtonFlags2">0</int>
@@ -990,7 +990,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 															<string key="NSIntercellSpacing">{4, 2}</string>
 															<int key="NSMatrixFlags">1151868928</int>
 															<string key="NSCellClass">NSActionCell</string>
-															<object class="NSButtonCell" key="NSProtoCell" id="472401222">
+															<object class="NSButtonCell" key="NSProtoCell" id="617293143">
 																<int key="NSCellFlags">67108864</int>
 																<int key="NSCellFlags2">0</int>
 																<string key="NSContents">Radio</string>
@@ -1093,7 +1093,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																<int key="NSPeriodicDelay">400</int>
 																<int key="NSPeriodicInterval">75</int>
 															</object>
-															<reference key="NSSelectedCell" ref="743911838"/>
+															<reference key="NSSelectedCell" ref="733397226"/>
 															<reference key="NSBackgroundColor" ref="993017804"/>
 															<reference key="NSCellBackgroundColor" ref="120094160"/>
 															<reference key="NSFont" ref="581614428"/>
@@ -2470,7 +2470,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">_MHHeaderAttributionToCcTagStyle</string>
 						<reference key="source" ref="302651457"/>
-						<reference key="destination" ref="1019158542"/>
+						<reference key="destination" ref="568107091"/>
 					</object>
 					<string key="id">dKD-Jg-y5g</string>
 				</object>
@@ -2665,10 +2665,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">selectedTag: values.MHHeaderAttributionToCcTagStyle</string>
-						<reference key="source" ref="1019158542"/>
+						<reference key="source" ref="568107091"/>
 						<reference key="destination" ref="575662790"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="1019158542"/>
+							<reference key="NSSource" ref="568107091"/>
 							<reference key="NSDestination" ref="575662790"/>
 							<string key="NSLabel">selectedTag: values.MHHeaderAttributionToCcTagStyle</string>
 							<string key="NSBinding">selectedTag</string>
@@ -2838,8 +2838,8 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference ref="578471917"/>
 							<reference ref="101247727"/>
 							<reference ref="91198230"/>
-							<reference ref="338909311"/>
-							<reference ref="1019158542"/>
+							<reference ref="163501175"/>
+							<reference ref="568107091"/>
 						</array>
 						<reference key="parent" ref="1013313776"/>
 					</object>
@@ -3475,41 +3475,41 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">xq9-gt-Pwc</string>
-						<reference key="object" ref="338909311"/>
+						<reference key="object" ref="163501175"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="646966792"/>
+							<reference ref="1026194574"/>
 						</array>
 						<reference key="parent" ref="942401193"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">bG0-sJ-Hf8</string>
-						<reference key="object" ref="646966792"/>
-						<reference key="parent" ref="338909311"/>
+						<reference key="object" ref="1026194574"/>
+						<reference key="parent" ref="163501175"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">4xy-eg-6Du</string>
-						<reference key="object" ref="1019158542"/>
+						<reference key="object" ref="568107091"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="472401222"/>
-							<reference ref="743911838"/>
-							<reference ref="949294959"/>
+							<reference ref="617293143"/>
+							<reference ref="733397226"/>
+							<reference ref="669687727"/>
 						</array>
 						<reference key="parent" ref="942401193"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">Z5h-qY-OJa</string>
-						<reference key="object" ref="472401222"/>
-						<reference key="parent" ref="1019158542"/>
+						<reference key="object" ref="617293143"/>
+						<reference key="parent" ref="568107091"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">rbm-GH-Kr5</string>
-						<reference key="object" ref="743911838"/>
-						<reference key="parent" ref="1019158542"/>
+						<reference key="object" ref="733397226"/>
+						<reference key="parent" ref="568107091"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">OTO-4m-agl</string>
-						<reference key="object" ref="949294959"/>
-						<reference key="parent" ref="1019158542"/>
+						<reference key="object" ref="669687727"/>
+						<reference key="parent" ref="568107091"/>
 					</object>
 				</array>
 			</object>

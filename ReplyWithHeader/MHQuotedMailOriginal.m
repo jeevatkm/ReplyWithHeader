@@ -102,10 +102,10 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 - (void)insertMailHeader:(MHHeaderString *)mailHeader
 {
     
-    if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
-    {
+    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
+    //{
         [mailHeader applyHeaderLabelOptions];
-    }
+    //}
     
     if (isHTMLMail)
     {

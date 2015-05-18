@@ -136,13 +136,15 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     
     [self applyFromAttibutionStyle];
     [self applyToCcAttibutionStyle];
+    [self applySubjectAttibutionStyle];
+    [self applyDateAttibutionStyle];
     
     int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
     int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
     MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
     
-    if (headerLabelMode == 2)
-        [self applyHeaderLabelChange];
+    /*if (headerLabelMode == 2)
+        [self applyHeaderLabelChange]; */
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( [MailHeader isLocaleSupported] ) {
@@ -220,7 +222,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 #pragma mark Class private methods
 
-- (void)applyFromAttibutionStyle {
+- (void)applyFromAttibutionStyle
+{
     NSString *fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", MHLocaleIdentifier);
     if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
     {
@@ -244,7 +247,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
 }
 
-- (void)applyToCcAttibutionStyle {
+- (void)applyToCcAttibutionStyle
+{
     NSString *toPrefix = MHLocalizedStringByLocale(@"STRING_TO", MHLocaleIdentifier);
     NSString *ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", MHLocaleIdentifier);
     
@@ -254,10 +258,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", choosenLocaleIdentifier);
     }
     
+    MHLog(@"toPrefix: %@, ccPrefix: %@", toPrefix, ccPrefix);
+    
     // Attribution position
     // 3 => to
     // 4 => cc
-    for (int i=3; i<5; i++)
+    for (int i=3; i<[messageAttribution count]; i++)
     {
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
         NSRange range = [[row string] rangeOf:@":"];
@@ -284,6 +290,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                 
             if ([last isEqualToString:@"; "])
                 finalString = [finalString substringToIndex:posIndex];
+            else if ([last isEqualToString:@", "])
+                finalString = [finalString substringToIndex:(posIndex - 1)];
         }
         else
         {
@@ -297,6 +305,77 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                                withString:(i == 3) ? toPrefix : ccPrefix];
     }
     
+}
+
+- (void)applySubjectAttibutionStyle
+{
+    NSString *subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", MHLocaleIdentifier);
+    
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
+        subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
+    }
+    
+    MHLog(@"subjectPrefix: %@", subjectPrefix);
+    
+    // Attribution position
+    // 1 => subject
+    NSMutableAttributedString *row = [messageAttribution objectAtIndex:1];
+    NSRange range;
+    
+    range = [[row string] rangeOf:@":"];
+    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];
+    
+}
+
+- (void)applyDateAttibutionStyle
+{
+    NSString *datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", MHLocaleIdentifier);
+    NSString *dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", MHLocaleIdentifier);
+    
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
+        datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", choosenLocaleIdentifier);
+        dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", choosenLocaleIdentifier);
+    }
+    
+    MHLog(@"datePrefix: %@, dateToBePrefix: %@", datePrefix, dateToBePrefix);
+    
+    // Attribution position
+    // 2 => date
+    NSMutableAttributedString *row = [messageAttribution objectAtIndex:2];
+    NSRange range = [[row string] rangeOf:@":"];
+    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:dateToBePrefix];
+    
+    // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
+    // trying this universal solution
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
+        range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
+        NSUInteger start = range.location + 2;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
+        MHLog(@"Date format: %@", [dateFormatter dateFormat]);
+        
+        @try {
+            NSString *dateTimeStr = [[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:start];
+            NSDate *date = [dateFormatter dateFromString:dateTimeStr];
+            MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
+            
+            [dateFormatter setLocale:choosenLocale];
+            NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
+            MHLog(@"Localized date: %@", newLocalDateStr);
+            
+            NSUInteger length = [[row string] length] - start;
+            MHLog(@"Before date: %@", [row string]);
+            [row replaceCharactersInRange:NSMakeRange(start, length) withString:newLocalDateStr];
+            MHLog(@"After date: %@", [row string]);
+        }
+        @catch (NSException *exception) {
+            MHLog(@"Exception occured: %@", exception.description);
+        }
+    }
 }
 
 - (void)applyHeaderOrderChange
