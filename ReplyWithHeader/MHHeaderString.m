@@ -134,6 +134,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         [self applyChoosenLanguageLabels];
     }
     
+    [self applyFromAttibutionStyle];
+    [self applyToCcAttibutionStyle];
+    
     int headerOrderMode = GET_DEFAULT_INT(MHHeaderOrderMode);
     int headerLabelMode = GET_DEFAULT_INT(MHHeaderLabelMode);
     MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
@@ -216,6 +219,85 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 
 #pragma mark Class private methods
+
+- (void)applyFromAttibutionStyle {
+    NSString *fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", MHLocaleIdentifier);
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
+        fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", choosenLocaleIdentifier);
+    }
+    
+    MHLog(@"fromPrefix: %@", fromPrefix);
+    
+    // Attribution position
+    // 0 => from
+    NSMutableAttributedString *row = [messageAttribution objectAtIndex:0];
+    NSRange range = [[row string] rangeOfString:@":"];
+    
+    NSString *fromString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
+    
+    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:fromPrefix];
+    
+    NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
+    fromString = [self fullNameFromEmailAddress:fromString attribStyle:fromTagStyle];
+    
+    [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
+}
+
+- (void)applyToCcAttibutionStyle {
+    NSString *toPrefix = MHLocalizedStringByLocale(@"STRING_TO", MHLocaleIdentifier);
+    NSString *ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", MHLocaleIdentifier);
+    
+    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    {
+        toPrefix = MHLocalizedStringByLocale(@"STRING_TO", choosenLocaleIdentifier);
+        ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", choosenLocaleIdentifier);
+    }
+    
+    // Attribution position
+    // 3 => to
+    // 4 => cc
+    for (int i=3; i<5; i++)
+    {
+        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];
+        NSRange range = [[row string] rangeOf:@":"];
+        
+        NSString *emailString = [[[[row string] precomposedStringWithCanonicalMapping]
+                                  substringFromIndex:range.location + 2] trim];
+        NSArray *emails = [emailString componentsSeparatedByString:@">, "];
+        
+        NSInteger toCcTagStyle = GET_DEFAULT_INT(MHHeaderAttributionToCcTagStyle);
+        NSString *delimStr = (toCcTagStyle == 1) ? @"; " : @">, ";
+            
+        NSString *finalString = @"";
+        if (emails && [emails count] > 0)
+        {
+            for (NSString *emailId in emails)
+            {
+                NSString *response = [self fullNameFromEmailAddress:emailId attribStyle:toCcTagStyle];
+                finalString = [finalString stringByAppendingString:response];
+                finalString = [finalString stringByAppendingString:delimStr];
+            }
+                
+            int posIndex = [finalString length] - 2;
+            NSString *last = [finalString substringWithRange:NSMakeRange(posIndex, 2)];
+                
+            if ([last isEqualToString:@"; "])
+                finalString = [finalString substringToIndex:posIndex];
+        }
+        else
+        {
+                finalString = [self fullNameFromEmailAddress:emailString attribStyle:toCcTagStyle];
+        }
+            
+        [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:finalString];
+            
+        range = [[row string] rangeOf:@":"];
+        [row replaceCharactersInRange:NSMakeRange(0, range.location)
+                               withString:(i == 3) ? toPrefix : ccPrefix];
+    }
+    
+}
 
 - (void)applyHeaderOrderChange
 {
@@ -370,7 +452,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];        
         NSRange range;
         
-        if (i == 0)
+        /*if (i == 0)
         {
             range = [[row string] rangeOfString:@":"];
             NSString *fromString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
@@ -381,7 +463,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             fromString = [self fullNameFromEmailAddress:fromString attribStyle:fromTagStyle];
             
             [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
-        }
+        } */
         
         if (i == 1)
         {
@@ -425,7 +507,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             }
         }
         
-        if (i == 3 || i == 4)
+        /*if (i == 3 || i == 4)
         {
             range = [[row string] rangeOf:@":"];
             NSString *emailString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
@@ -457,7 +539,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             range = [[row string] rangeOf:@":"];
             [row replaceCharactersInRange:NSMakeRange(0, range.location)
                                withString:(i == 3) ? toPrefix : ccPrefix];
-        }
+        }*/
     }   
 }
 

@@ -55,6 +55,7 @@
     IBOutlet NSMatrix *_MHHeaderLabelMode;
     IBOutlet NSPopUpButton *_MHLanguagePopup;
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
     IBOutlet NSButton *_MHPaypalBtn;

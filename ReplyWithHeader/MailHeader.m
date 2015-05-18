@@ -212,7 +212,8 @@
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:2], MHHeaderLabelMode,
                           [NSNumber numberWithInt:2], MHHeaderOrderMode,
-                          [NSNumber numberWithInt:0], MHHeaderAttributionFromTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionFromTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];

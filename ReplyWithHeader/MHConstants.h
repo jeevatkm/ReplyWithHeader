@@ -58,6 +58,7 @@
 #define MHHeaderOrderMode @"MHHeaderOrderMode"
 
 #define MHHeaderAttributionFromTagStyle @"MHHeaderAttributionFromTagStyle"
+#define MHHeaderAttributionToCcTagStyle @"MHHeaderAttributionToCcTagStyle"
 
 #define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
