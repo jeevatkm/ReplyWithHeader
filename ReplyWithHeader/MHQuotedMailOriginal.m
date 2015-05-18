@@ -204,7 +204,15 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     MHLog(@"Composing mail isHTMLMail %@", (isHTMLMail ? @"YES" : @"NO"));
     
-    NSString *borderString = (isHTMLMail) ? MHHeaderBorder : MHDefaulReplyHeaderBorder;
+    NSString *borderString = (isHTMLMail) ?
+                                MHHeaderBorder : (msgComposeType == 3)
+                                    ? MHDefaultForwardHeaderBorder : MHDefaulReplyHeaderBorder;
+    // Line space
+    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
+    for (int i=0; i<linesBefore; i++) {
+        borderString = [NSString stringWithFormat:@"%@%@", @"<br/>", borderString];
+    }
     
     MHLog(@"initVars Header border text: %@", borderString);
     
@@ -392,6 +400,19 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
     MHLog(@"Span based HTML string %@", htmlString);
+    
+    // Adding Line Space
+    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
+    for (int i=0; i<linesBefore; i++) {
+        htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
+    }
+    
+    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    for (int i=0; i<linesAfter; i++) {
+        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
+    }
+    
     return [self createDocumentFragment:htmlString];
 }
 

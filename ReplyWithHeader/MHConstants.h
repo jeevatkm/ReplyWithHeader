@@ -61,6 +61,10 @@
 #define MHHeaderAttributionToCcTagStyle @"MHHeaderAttributionToCcTagStyle"
 #define MHHeaderAttributionLblSeqTagStyle @"MHHeaderAttributionLblSeqTagStyle"
 
+#define MHLineSpaceBeforeHeader @"MHLineSpaceBeforeHeader"
+#define MHLineSpaceAfterHeader @"MHLineSpaceAfterHeader"
+#define MHLineSpaceBeforeHeaderSeparator @"MHLineSpaceBeforeHeaderSeparator"
+
 #define MHPluginNotifyNewVersion @"MHNotifyPluginNewVersion"
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
 #define MHRawHeadersEnabled @"MHRawHeadersEnabled"

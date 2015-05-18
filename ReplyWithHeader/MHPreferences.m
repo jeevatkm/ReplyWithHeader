@@ -409,6 +409,7 @@
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
     
+    // Localization Popup
     NSArray *localizations = [[MailHeader bundle] localizations];
     [_MHLanguagePopup removeAllItems];
     
@@ -457,6 +458,45 @@
     }
     
     [self toggleSignatureTables:!GET_DEFAULT_BOOL(MHRemoveSignatureEnabled)];
+    
+    // Header line spaces
+    [_MHLineSpaceBeforeHeaderPopup removeAllItems];
+    [_MHLineSpaceAfterHeaderPopup removeAllItems];
+    [_MHLineSpaceBeforeHeaderSepPopup removeAllItems];
+    
+    [[_MHLineSpaceBeforeHeaderPopup menu] setTitle:@"SpaceBeforeHeader"];
+    [[_MHLineSpaceAfterHeaderPopup menu] setTitle:@"SpaceAfterHeader"];
+    [[_MHLineSpaceBeforeHeaderSepPopup menu] setTitle:@"SpaceBeforeHeaderSep"];
+    
+    for (int i=0; i<6; i++)
+    {
+        NSMenuItem *item = [[NSMenuItem alloc] init];
+        [item setRepresentedObject:[NSNumber numberWithInt:i]];
+        [item setTitle:[@(i) stringValue]];
+        
+        [[_MHLineSpaceBeforeHeaderPopup menu] addItem:[item copy]];
+        [[_MHLineSpaceAfterHeaderPopup menu] addItem:[item copy]];
+        [[_MHLineSpaceBeforeHeaderSepPopup menu] addItem:[item copy]];
+    }
+    
+    [_MHLineSpaceBeforeHeaderPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceBeforeHeader)];
+    [_MHLineSpaceAfterHeaderPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceAfterHeader)];
+    [_MHLineSpaceBeforeHeaderSepPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceBeforeHeaderPopup menu]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceAfterHeaderPopup menu]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceBeforeHeaderSepPopup menu]];
 }
 
 - (NSString*)preferencesNibName
@@ -486,6 +526,37 @@
           [selectedItem title], [selectedItem representedObject]);
     
     SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
+}
+
+- (void)lineSpacePopUpSelectionChanged:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    
+    NSString *title = [[[info objectForKey:@"MenuItem"] menu] title];
+    NSMenuItem *selectedItem = nil;
+    NSString *configKey = @"";
+    
+    if ([title isEqualToString:@"SpaceBeforeHeader"])
+    {
+        selectedItem = [_MHLineSpaceBeforeHeaderPopup selectedItem];
+        configKey = MHLineSpaceBeforeHeader;
+    }
+    else if ([title isEqualToString:@"SpaceAfterHeader"])
+    {
+        selectedItem = [_MHLineSpaceAfterHeaderPopup selectedItem];
+        configKey = MHLineSpaceAfterHeader;
+    }
+    else if ([title isEqualToString:@"SpaceBeforeHeaderSep"])
+    {
+        selectedItem = [_MHLineSpaceBeforeHeaderSepPopup selectedItem];
+        configKey = MHLineSpaceBeforeHeaderSeparator;
+    }
+    
+    if (selectedItem != nil && [configKey isNotEqualTo:@""])
+    {
+        MHLog(@"Choosen line space menu & value: %@ - %@", title, [selectedItem representedObject]);
+    
+        SET_USER_DEFAULT([selectedItem representedObject], configKey);
+    }
 }
 
 @end

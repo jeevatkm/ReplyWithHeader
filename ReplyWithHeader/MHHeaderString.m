@@ -105,6 +105,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 - (WebArchive *)getWebArchive
 {
     NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
+    
     for (int i=0; i<[messageAttribution count]; i++)
     {
         [finalHeader appendAttributedString:[messageAttribution objectAtIndex:i]];
