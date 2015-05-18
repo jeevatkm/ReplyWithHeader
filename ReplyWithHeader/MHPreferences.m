@@ -38,9 +38,9 @@
 
 @interface MHPreferences (PrivateMethods)
     - (IBAction)mailHeaderBundlePressed:(id)sender;
-    - (IBAction)headerTypographyPressed:(id)sender;
+    //- (IBAction)headerTypographyPressed:(id)sender;
     - (IBAction)selectFontButtonPressed:(id)sender;
-    - (IBAction)headerLabelModePressed:(id)sender;
+    //- (IBAction)headerLabelModePressed:(id)sender;
     - (IBAction)signatureMatrixPressed:(id)sender;
     - (IBAction)openWebsite:(id)sender;
     - (IBAction)openFeedback:(id)sender;
@@ -55,25 +55,28 @@
 
 - (void)toggleMailPreferencesOptions:(BOOL *)state
 {
-    [_MHHeaderTypographyEnabled setEnabled:state];
+    //[_MHHeaderTypographyEnabled setEnabled:state];
     [_MHForwardHeaderEnabled setEnabled:state];
-    [_MHHeaderOptionEnabled setEnabled:state];
+    //[_MHHeaderOptionEnabled setEnabled:state];
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
+    [_MHRawHeadersEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
     [_MHLanguagePopup setEnabled:state];
     [_MHHeaderAttributionFromTagStyle setEnabled:state];
+    [_MHHeaderAttributionToCcTagStyle setEnabled:state];
+    [_MHHeaderAttributionLblSeqTagStyle setEnabled:state];
     
     [self toggleHeaderTypograpghyOptions:state];
-    [self toggleHeaderLabelOptions:state];
+    //[self toggleHeaderLabelOptions:state];
     [self toggleSignatureTables:state];
 }
 
-- (void)toggleHeaderLabelOptions:(BOOL *)state
+/*- (void)toggleHeaderLabelOptions:(BOOL *)state
 {
     [_MHHeaderOrderMode setEnabled:state];
     [_MHHeaderLabelMode setEnabled:state];
-}
+}*/
 
 - (void)toggleHeaderTypograpghyOptions:(BOOL *)state
 {
@@ -103,10 +106,10 @@
     [self toggleMailPreferencesOptions:[sender state]];
 }
 
-- (IBAction)headerTypographyPressed:(id)sender
+/*- (IBAction)headerTypographyPressed:(id)sender
 {
     [self toggleHeaderTypograpghyOptions:[sender state]];
-}
+}*/
 
 - (IBAction)selectFontButtonPressed:(id)sender
 {
@@ -121,10 +124,10 @@
      setPanelFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
 }
 
-- (IBAction)headerLabelModePressed:(id)sender
+/*- (IBAction)headerLabelModePressed:(id)sender
 {
     [self toggleHeaderLabelOptions:[sender state]];
-}
+}*/
 
 - (IBAction)signatureMatrixPressed:(id)sender
 {

@@ -209,11 +209,13 @@
                           MHDefaultHeaderFontSize, MHHeaderFontSize,
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
                           [NSNumber numberWithBool:NO], MHSubjectPrefixTextEnabled,
+                          [NSNumber numberWithBool:NO], MHRawHeadersEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
-                          [NSNumber numberWithInt:2], MHHeaderLabelMode,
-                          [NSNumber numberWithInt:2], MHHeaderOrderMode,
+                          /*[NSNumber numberWithInt:2], MHHeaderLabelMode,
+                          [NSNumber numberWithInt:2], MHHeaderOrderMode, */
                           [NSNumber numberWithInt:1], MHHeaderAttributionFromTagStyle,
                           [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionLblSeqTagStyle,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];
