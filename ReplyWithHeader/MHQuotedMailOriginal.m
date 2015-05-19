@@ -134,6 +134,15 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         {
             [self insertForPlainMail:headerFragment];
         }
+        
+        // Line space
+        // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+        int linesBeforeSep = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
+        for (int i=0; i<linesBeforeSep; i++) {
+            DOMDocumentFragment *brFragment = [self createDocumentFragment:@"<br/>"];
+            [originalEmail insertBefore:brFragment refChild: [originalEmail firstChild]];
+        }
+        
         MHLog(@"After header insert, Inner HTML String:: %@", [originalEmail innerHTML]);
     }
 }
@@ -207,12 +216,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     NSString *borderString = (isHTMLMail) ?
                                 MHHeaderBorder : (msgComposeType == 3)
                                     ? MHDefaultForwardHeaderBorder : MHDefaulReplyHeaderBorder;
-    // Line space
-    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
-    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
-    for (int i=0; i<linesBefore; i++) {
-        borderString = [NSString stringWithFormat:@"%@%@", @"<br/>", borderString];
-    }
     
     MHLog(@"initVars Header border text: %@", borderString);
     
