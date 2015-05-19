@@ -38,9 +38,13 @@
 #import "NSMutableAttributedString+MailHeader.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 #import "NSString+MailHeader.h"
+#import "objc/objc-class.h"
 
 @interface MHHeaderString (MHNoImplementation)
 - (id)originalMessageHeaders;
+- (id)allHeaderKeys;
+- (id)headersForKey:(NSString *)key;
+- (id)addressListForKey:(NSString *)key;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
@@ -83,6 +87,23 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             [row applyFontTraits:NSBoldFontMask range:NSMakeRange(0, range.location + 1)];
         }
     }
+    
+    // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/85
+    if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
+    {
+        for (int i=0; i<[allHeaders count]; i++)
+        {
+            NSMutableAttributedString *row = [allHeaders objectAtIndex:i];
+            
+            [row addAttributes:@{ NSFontAttributeName:font, NSForegroundColorAttributeName:color, NSParagraphStyleAttributeName:paraStyle } range:NSMakeRange(0, [row length])];
+            
+            NSRange range = [[row string] rangeOf:@":" byLocale:choosenLocale];
+            if (range.location != NSNotFound)
+            {
+                [row applyFontTraits:NSBoldFontMask range:NSMakeRange(0, range.location + 1)];
+            }
+        }
+    }
 }
 
 // for issue #28 - https://github.com/jeevatkm/ReplyWithHeader/issues/28
@@ -112,7 +133,17 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
     }
     
-    MHLog(@"final header values before web archiving %@", messageAttribution);
+    // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/85
+    if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
+    {
+        for (int i=0; i<[allHeaders count]; i++)
+        {
+            [finalHeader appendAttributedString:[allHeaders objectAtIndex:i]];
+            [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+        }
+    }
+    
+    MHLog(@"final header values before web archiving %@", finalHeader);
     
     WebArchive *webarch = [finalHeader
                            webArchiveForRange:NSMakeRange(0, [finalHeader length])
@@ -191,6 +222,50 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         
         cleanHeaders = [mailMessage valueForKey:@"_cleanHeaders"];
         noOfHeaderLabels = [headers count];
+        
+        // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/85
+        if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
+        {
+            // Preparing All headers
+            allHeaders = [[NSMutableArray alloc] init];
+            NSMutableArray *allHeaderkeys = [[[NSOrderedSet
+                                               orderedSetWithArray:[mcMessageHeaders allHeaderKeys]] array] mutableCopy];
+            MHLog(@"Before cleanup allHeaderKeys:: %@", allHeaderkeys);
+            
+            // Cleanup of already parsed headers from, to, cc, subject, date
+            [allHeaderkeys removeObject:@"from"];
+            [allHeaderkeys removeObject:@"subject"];
+            [allHeaderkeys removeObject:@"date"];
+            [allHeaderkeys removeObject:@"to"];
+            
+            if ([allHeaderkeys containsObject:@"cc"])
+            {
+                [allHeaderkeys removeObject:@"cc"];
+            }
+            
+            if ([allHeaderkeys containsObject:@"reply-to"])
+            {
+                [allHeaderkeys removeObject:@"reply-to"];
+                NSString *value = [[mcMessageHeaders addressListForKey:@"reply-to"]
+                                        componentsJoinedByString:@", "];
+                MHLog(@"Key: reply-to, Values: %@", value);
+                
+                [allHeaders addObject:[[NSString stringWithFormat:@"Reply-To: %@", value] mutableAttributedString]];
+            }
+            
+            MHLog(@"After cleanup allHeaderKeys:: %@", allHeaderkeys);
+            
+            
+            for (int i=0; i<[allHeaderkeys count]; i++)
+            {
+                NSString *key = [allHeaderkeys objectAtIndex:i];
+                NSString *values = [[mcMessageHeaders headersForKey:key] componentsJoinedByString:@",\n"];
+                
+                [allHeaders addObject:[[NSString stringWithFormat:@"%@: %@", [key capitalizedString], values] mutableAttributedString]];
+            }
+            
+            MHLog(@"allHeaders:: %@", allHeaders);
+        }
         
         MHLog(@"Original headers %@", headers);
         MHLog(@"Original headers count %lu", noOfHeaderLabels);

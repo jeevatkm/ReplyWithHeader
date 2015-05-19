@@ -326,7 +326,7 @@
 														<object class="NSButton" id="578471917">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{15, 40}, {516, 18}}</string>
+															<string key="NSFrame">{{15, 40}, {453, 18}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="309118874"/>
@@ -351,15 +351,15 @@
 														<object class="NSButton" id="309118874">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{15, 14}, {516, 18}}</string>
+															<string key="NSFrame">{{15, 14}, {159, 18}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView"/>
+															<reference key="NSNextKeyView" ref="171155575"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSButtonCell" key="NSCell" id="368520903">
 																<int key="NSCellFlags">-2080374784</int>
 																<int key="NSCellFlags2">268435456</int>
-																<string key="NSContents">Include raw headers from email</string>
+																<string key="NSContents">Include raw headers</string>
 																<reference key="NSSupport" ref="581614428"/>
 																<reference key="NSControlView" ref="309118874"/>
 																<int key="NSButtonFlags">1211912448</int>
@@ -390,6 +390,29 @@
 																<reference key="NSSupport" ref="581614428"/>
 																<string key="NSCellIdentifier">_NS:397</string>
 																<reference key="NSControlView" ref="101247727"/>
+																<reference key="NSBackgroundColor" ref="993017804"/>
+																<reference key="NSTextColor" ref="935566603"/>
+															</object>
+															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+															<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
+														</object>
+														<object class="NSTextField" id="171155575">
+															<reference key="NSNextResponder" ref="942401193"/>
+															<int key="NSvFlags">268</int>
+															<string key="NSFrame">{{165, 12}, {130, 17}}</string>
+															<reference key="NSSuperview" ref="942401193"/>
+															<reference key="NSWindow"/>
+															<reference key="NSNextKeyView"/>
+															<string key="NSReuseIdentifierKey">_NS:397</string>
+															<string key="NSHuggingPriority">{251, 750}</string>
+															<bool key="NSEnabled">YES</bool>
+															<object class="NSTextFieldCell" key="NSCell" id="847081485">
+																<int key="NSCellFlags">68157504</int>
+																<int key="NSCellFlags2">272630784</int>
+																<string key="NSContents">(*only in English)</string>
+																<reference key="NSSupport" ref="26"/>
+																<string key="NSCellIdentifier">_NS:397</string>
+																<reference key="NSControlView" ref="171155575"/>
 																<reference key="NSBackgroundColor" ref="993017804"/>
 																<reference key="NSTextColor" ref="935566603"/>
 															</object>
@@ -2215,7 +2238,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 																			</set>
 																			<string key="NSFrame">{{359, 15}, {147, 27}}</string>
 																			<reference key="NSSuperview" ref="886390374"/>
-																			<reference key="NSNextKeyView"/>
 																			<string key="NSReuseIdentifierKey">_NS:9</string>
 																			<string key="NSHuggingPriority">{251, 251}</string>
 																			<bool key="NSEnabled">YES</bool>
@@ -3057,6 +3079,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference ref="239218929"/>
 							<reference ref="686566530"/>
 							<reference ref="309118874"/>
+							<reference ref="171155575"/>
 						</array>
 						<reference key="parent" ref="1013313776"/>
 					</object>
@@ -3852,6 +3875,19 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<reference key="object" ref="368520903"/>
 						<reference key="parent" ref="309118874"/>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">vCo-Mx-gQJ</string>
+						<reference key="object" ref="171155575"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="847081485"/>
+						</array>
+						<reference key="parent" ref="942401193"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">9Oh-yl-kOY</string>
+						<reference key="object" ref="847081485"/>
+						<reference key="parent" ref="171155575"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4028,6 +4064,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="9.showNotes"/>
 				<string key="952-It-eIl.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="9Oh-yl-kOY.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9Zc-Eh-se3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="A4u-9h-ddD.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="B21-Ba-2IN.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4132,6 +4169,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 				<string key="tYm-ZX-mYF.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="uhJ-rc-zld.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="uj9-UW-lrt.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="vCo-Mx-gQJ.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<object class="NSMutableDictionary" key="vWI-VE-mHZ.IBAttributePlaceholdersKey">
 					<string key="NS.key.0">ToolTip</string>
 					<object class="IBToolTipAttribute" key="NS.object.0">
