@@ -30,9 +30,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
-@interface MHHeadersEditor : NSObject 
+@interface MHHeadersEditor : NSObject
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1;
 

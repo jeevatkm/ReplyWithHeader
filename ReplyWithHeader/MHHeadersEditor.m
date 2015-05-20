@@ -34,13 +34,20 @@
 
 @interface MHHeadersEditor (MHNoImplementation)
 - (void)_subjectChanged;
+- (id)backEnd;
+- (unsigned long long)type;
+- (id)originalMessageHeaders;
+- (id)addressListForKey:(NSString *)key;
+- (void)setAddresses:(id)arg1;
 @end
 
 @implementation MHHeadersEditor
 
 - (void)MHLoadHeadersFromBackEnd:(id)arg1
-{    
+{
     [self MHLoadHeadersFromBackEnd:arg1];
+    
+    [self bringOutlookReplyAllBehaviour];
     
     if (GET_DEFAULT_BOOL(MHSubjectPrefixTextEnabled))
     {
@@ -64,7 +71,51 @@
         
         // cascading subject text change
         [self _subjectChanged];
-    }    
+    }
+}
+
+- (void)bringOutlookReplyAllBehaviour
+{
+    id backEnd = [[self valueForKey:@"_documentEditor"] backEnd];
+    id mcMessageHeaders = [backEnd originalMessageHeaders];
+    //int msgComposeType = [()backEnd type];
+    
+    //NSLog(@"Msg Compose type: %d", msgComposeType);
+    
+    //if (msgComposeType == 2)
+    //{
+    
+    // TODO how to get msg compose type
+    // TODO how to get current account email id
+    
+    NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
+    
+    id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
+    id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
+    MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
+    
+    if (fromAddress) {
+        [newToAddressList addObjectsFromArray:fromAddress];
+    }
+    
+    if (toAddressList) {
+        [newToAddressList addObjectsFromArray:toAddressList];
+    }
+    
+    NSLog(@"newToAddressList: %@", newToAddressList);
+    [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
+    
+    NSMutableArray *newCcAddressList = [[NSMutableArray alloc] init];
+    id ccAddressList = [mcMessageHeaders addressListForKey:@"cc"];
+    
+    if (ccAddressList) {
+        [newCcAddressList addObjectsFromArray:ccAddressList];
+    }
+    
+    NSLog(@"newCcAddressList: %@", newCcAddressList);
+    [[self valueForKey:@"_ccField"] setAddresses:newCcAddressList];
+    
+    //}
 }
 
 @end
