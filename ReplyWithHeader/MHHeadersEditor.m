@@ -89,6 +89,14 @@
     // Only for ReplyAll
     if (msgComposeType == 2)
     {
+        // Preparing Cc list
+        NSArray *oldToList = [[self valueForKey:@"_toField"] addresses];
+        NSMutableArray *currentCcList = [[[self valueForKey:@"_ccField"] addresses] mutableCopy];
+        [currentCcList removeObjectsInArray:oldToList];
+        [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
+        MHLog(@"Updated CC list: %@", currentCcList);
+        
+        // Preparing To list
         NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
         id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
         id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
@@ -118,27 +126,6 @@
         
         MHLog(@"newToAddressList: %@", newToAddressList);
         [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
-        
-        NSMutableArray *newCcAddressList = [[NSMutableArray alloc] init];
-        id ccAddressList = [mcMessageHeaders addressListForKey:@"cc"];
-        
-        if (ccAddressList)
-        {
-            [newCcAddressList addObjectsFromArray:ccAddressList];
-        }
-        
-        for (int i=0; i<[newCcAddressList count]; i++)
-        {
-            NSString *eid = [newCcAddressList objectAtIndex:i];
-            if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
-            {
-                MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
-                [newCcAddressList removeObjectAtIndex:i];
-            }
-        }
-        
-        MHLog(@"newCcAddressList: %@", newCcAddressList);
-        [[self valueForKey:@"_ccField"] setAddresses:newCcAddressList];
     }
 }
 
