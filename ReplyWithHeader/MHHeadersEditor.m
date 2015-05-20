@@ -31,14 +31,16 @@
 //
 
 #import "MHHeadersEditor.h"
+#import "NSString+MailHeader.h"
 
 @interface MHHeadersEditor (MHNoImplementation)
 - (void)_subjectChanged;
 - (id)backEnd;
-- (unsigned long long)type;
 - (id)originalMessageHeaders;
 - (id)addressListForKey:(NSString *)key;
 - (void)setAddresses:(id)arg1;
+- (id)mailAccount;
+- (id)firstEmailAddress;
 @end
 
 @implementation MHHeadersEditor
@@ -74,48 +76,70 @@
     }
 }
 
+// for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/82
 - (void)bringOutlookReplyAllBehaviour
 {
-    id backEnd = [[self valueForKey:@"_documentEditor"] backEnd];
-    id mcMessageHeaders = [backEnd originalMessageHeaders];
-    //int msgComposeType = [()backEnd type];
+    id docEditor = [self valueForKey:@"_documentEditor"];
+    id mcMessageHeaders = [[docEditor backEnd] originalMessageHeaders];
+    id account = [self mailAccount];
     
-    //NSLog(@"Msg Compose type: %d", msgComposeType);
-    
-    //if (msgComposeType == 2)
-    //{
-    
-    // TODO how to get msg compose type
-    // TODO how to get current account email id
-    
-    NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
-    
-    id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
-    id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
-    MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
-    
-    if (fromAddress) {
-        [newToAddressList addObjectsFromArray:fromAddress];
+    int msgComposeType = [[docEditor valueForKey:@"_messageType"] intValue];
+    MHLog(@"msgComposeType: %d", msgComposeType);
+  
+    // Only for ReplyAll
+    if (msgComposeType == 2)
+    {
+        NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
+        id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
+        id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
+        
+        MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
+        
+        if (fromAddress)
+        {
+            [newToAddressList addObjectsFromArray:fromAddress];
+        }
+        
+        if (toAddressList)
+        {
+            [newToAddressList addObjectsFromArray:toAddressList];
+        }
+        
+        NSString *firstEmailAddress = [account firstEmailAddress];
+        for (int i=0; i<[newToAddressList count]; i++)
+        {
+            NSString *eid = [newToAddressList objectAtIndex:i];
+            if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
+            {
+                MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
+                [newToAddressList removeObjectAtIndex:i];
+            }
+        }
+        
+        MHLog(@"newToAddressList: %@", newToAddressList);
+        [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
+        
+        NSMutableArray *newCcAddressList = [[NSMutableArray alloc] init];
+        id ccAddressList = [mcMessageHeaders addressListForKey:@"cc"];
+        
+        if (ccAddressList)
+        {
+            [newCcAddressList addObjectsFromArray:ccAddressList];
+        }
+        
+        for (int i=0; i<[newCcAddressList count]; i++)
+        {
+            NSString *eid = [newCcAddressList objectAtIndex:i];
+            if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
+            {
+                MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
+                [newCcAddressList removeObjectAtIndex:i];
+            }
+        }
+        
+        MHLog(@"newCcAddressList: %@", newCcAddressList);
+        [[self valueForKey:@"_ccField"] setAddresses:newCcAddressList];
     }
-    
-    if (toAddressList) {
-        [newToAddressList addObjectsFromArray:toAddressList];
-    }
-    
-    NSLog(@"newToAddressList: %@", newToAddressList);
-    [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
-    
-    NSMutableArray *newCcAddressList = [[NSMutableArray alloc] init];
-    id ccAddressList = [mcMessageHeaders addressListForKey:@"cc"];
-    
-    if (ccAddressList) {
-        [newCcAddressList addObjectsFromArray:ccAddressList];
-    }
-    
-    NSLog(@"newCcAddressList: %@", newCcAddressList);
-    [[self valueForKey:@"_ccField"] setAddresses:newCcAddressList];
-    
-    //}
 }
 
 @end
