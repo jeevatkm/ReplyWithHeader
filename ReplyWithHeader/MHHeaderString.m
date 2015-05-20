@@ -38,7 +38,6 @@
 #import "NSMutableAttributedString+MailHeader.h"
 #import "NSAttributedString+MailAttributedStringToHTML.h"
 #import "NSString+MailHeader.h"
-#import "objc/objc-class.h"
 
 @interface MHHeaderString (MHNoImplementation)
 - (id)originalMessageHeaders;

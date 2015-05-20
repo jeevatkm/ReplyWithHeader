@@ -351,7 +351,7 @@
 														<object class="NSButton" id="309118874">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{15, 14}, {159, 18}}</string>
+															<string key="NSFrame">{{15, 14}, {148, 18}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="171155575"/>
@@ -359,7 +359,7 @@
 															<object class="NSButtonCell" key="NSCell" id="368520903">
 																<int key="NSCellFlags">-2080374784</int>
 																<int key="NSCellFlags2">268435456</int>
-																<string key="NSContents">Include raw headers</string>
+																<string key="NSContents">Include all headers</string>
 																<reference key="NSSupport" ref="581614428"/>
 																<reference key="NSControlView" ref="309118874"/>
 																<int key="NSButtonFlags">1211912448</int>
@@ -399,7 +399,7 @@
 														<object class="NSTextField" id="171155575">
 															<reference key="NSNextResponder" ref="942401193"/>
 															<int key="NSvFlags">268</int>
-															<string key="NSFrame">{{165, 12}, {130, 17}}</string>
+															<string key="NSFrame">{{155, 12}, {130, 17}}</string>
 															<reference key="NSSuperview" ref="942401193"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView"/>
@@ -2404,7 +2404,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 										<int key="NSTvFlags">0</int>
 										<bool key="NSAllowTruncatedLabels">YES</bool>
 										<bool key="NSDrawsBackground">YES</bool>
-										<reference key="NSDelegate"/>
 										<array class="NSMutableArray" key="NSSubviews">
 											<reference ref="942401193"/>
 										</array>
