@@ -275,13 +275,27 @@
     {
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
     }
-    // [end]
     
     // issue #42
     if (GET_DEFAULT(@"MHEntourage2004SupportEnabled"))
     {
         REMOVE_DEFAULT(@"MHEntourage2004SupportEnabled");
     }
+    
+    if (GET_DEFAULT(@"MHHeaderLabelMode"))
+    {
+        REMOVE_DEFAULT(@"MHHeaderLabelMode");
+    }
+    
+    if (GET_DEFAULT(@"MHHeaderOrderMode"))
+    {
+        REMOVE_DEFAULT(@"MHHeaderOrderMode");
+    }
+}
+
++ (NSString *)osxVersionString
+{
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
 + (NSString *)getOSXVersion
@@ -360,7 +374,7 @@
     [MHCodeInjector injectMailHeaderCode];
     
     // Bundle registered successfully
-    NSLog(@"%@ plugin loaded, OS X version: %@", [self bundleNameAndVersion], [self getOSXVersion]);
+    NSLog(@"%@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
     
     // Logger
     BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
