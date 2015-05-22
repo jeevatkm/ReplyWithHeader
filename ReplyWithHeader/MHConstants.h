@@ -53,10 +53,6 @@
 #define MHHeaderFontSize @"MHHeaderFontSize"
 #define MHHeaderColor @"MHHeaderColor"
 
-// Mode Values (1=Apple Mail, 2=Outlook Mail)
-/*#define MHHeaderLabelMode @"MHHeaderLabelMode"
-#define MHHeaderOrderMode @"MHHeaderOrderMode" */
-
 #define MHHeaderAttributionFromTagStyle @"MHHeaderAttributionFromTagStyle"
 #define MHHeaderAttributionToCcTagStyle @"MHHeaderAttributionToCcTagStyle"
 #define MHHeaderAttributionLblSeqTagStyle @"MHHeaderAttributionLblSeqTagStyle"

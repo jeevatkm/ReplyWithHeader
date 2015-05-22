@@ -30,6 +30,7 @@
 #import "MHCodeInjector.h"
 #import "MHPreferences.h"
 #import "MHUpdater.h"
+#import "NSString+MailHeader.h"
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -71,7 +72,7 @@
              || [identifier hasPrefix:@"nb"])
         identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
     
-    return identifier;
+    return [identifier trim];
 }
 
 // for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
@@ -211,8 +212,6 @@
                           [NSNumber numberWithBool:NO], MHSubjectPrefixTextEnabled,
                           [NSNumber numberWithBool:NO], MHRawHeadersEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
-                          /*[NSNumber numberWithInt:2], MHHeaderLabelMode,
-                          [NSNumber numberWithInt:2], MHHeaderOrderMode, */
                           [NSNumber numberWithInt:1], MHHeaderAttributionFromTagStyle,
                           [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
                           [NSNumber numberWithInt:1], MHHeaderAttributionLblSeqTagStyle,

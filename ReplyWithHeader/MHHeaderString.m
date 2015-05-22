@@ -170,13 +170,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     [self applySubjectAttibutionStyle];
     [self applyDateAttibutionStyle];
     
-    int headerOrderMode = 2; //GET_DEFAULT_INT(MHHeaderOrderMode);
-    int headerLabelMode = 2; //GET_DEFAULT_INT(MHHeaderLabelMode);
-    MHLog(@"Mail Header Order mode: %d and Label mode: %d", headerOrderMode, headerLabelMode);
-    
-    /*if (headerLabelMode == 2)
-        [self applyHeaderLabelChange]; */
-    
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( [MailHeader isLocaleSupported] ) {
         int headerLblSeqStyle = GET_DEFAULT_INT(MHHeaderAttributionLblSeqTagStyle);
@@ -505,42 +498,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
 }
 
-/*- (NSString *)fullNameFromEmailAddress:(NSString *)emailAddress isMailToNeeded:(BOOL)mailTo
-{
-    emailAddress = [emailAddress trim];
-    
-    if ([emailAddress length] > 0)
-    {
-        NSRange range = [emailAddress rangeOf:@"<"];
-        
-        if (range.location != NSNotFound && range.location != 0)
-        {
-            NSString *fullName = [emailAddress substringToIndex:range.location];
-            
-            if (mailTo)
-            {
-                NSString *fromMailId = [emailAddress substringFromIndex:range.location];
-                fromMailId = [fromMailId
-                              stringByReplacingOccurrencesOfString:@"<" withString:@"[mailto:"];
-                fromMailId = [fromMailId stringByReplacingOccurrencesOfString:@">" withString:@"]"];
-                fullName = [fullName stringByAppendingString:fromMailId];
-            }
-            
-            fullName = [fullName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-            
-            // for issue #38 - https://github.com/jeevatkm/ReplyWithHeader/issues/38
-            fullName = [fullName stringByReplacingOccurrencesOfString:@"'" withString:@""];
-            
-            return [fullName trim];
-        }
-        
-        emailAddress = [emailAddress stringByReplacingOccurrencesOfString:@"<" withString:@""];
-        emailAddress = [emailAddress stringByReplacingOccurrencesOfString:@">" withString:@""];
-    }
-    
-    return emailAddress;
-} */
-
 - (NSString *)fullNameFromEmailAddress:(NSString *)emailAddress attribStyle:(NSInteger)style {
     
     emailAddress = [emailAddress trim];
@@ -578,130 +535,5 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     
     return emailAddress;
 }
-
-// for #76 - https://github.com/jeevatkm/ReplyWithHeader/issues/76
-/*- (void)applyHeaderLabelChange
-{
-    NSString *fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", MHLocaleIdentifier);
-    NSString *toPrefix = MHLocalizedStringByLocale(@"STRING_TO", MHLocaleIdentifier);
-    NSString *ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", MHLocaleIdentifier);
-    NSString *datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", MHLocaleIdentifier);
-    NSString *dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", MHLocaleIdentifier);
-    NSString *subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", MHLocaleIdentifier);
-    
-    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
-    {
-        fromPrefix = MHLocalizedStringByLocale(@"STRING_FROM", choosenLocaleIdentifier);
-        toPrefix = MHLocalizedStringByLocale(@"STRING_TO", choosenLocaleIdentifier);
-        ccPrefix = MHLocalizedStringByLocale(@"STRING_CC", choosenLocaleIdentifier);
-        datePrefix = MHLocalizedStringByLocale(@"STRING_DATE", choosenLocaleIdentifier);
-        dateToBePrefix = MHLocalizedStringByLocale(@"STRING_SENT", choosenLocaleIdentifier);
-        subjectPrefix = MHLocalizedStringByLocale(@"STRING_SUBJECT", choosenLocaleIdentifier);
-    }
- 
-    MHLog(@"applyHeaderLabelChange: %@", messageAttribution);
-    MHLog(@"fromPrefix: %@, toPrefix: %@, ccPrefix: %@, datePrefix: %@, dateToBePrefix: %@", fromPrefix, toPrefix, ccPrefix, datePrefix, dateToBePrefix);
-
-    // Attribution position
-    // 0 => from
-    // 1 => subject
-    // 2 => date
-    // 3 => to
-    // 4 => cc
-    for (int i=0; i<[messageAttribution count]; i++)
-    {
-        NSMutableAttributedString *row = [messageAttribution objectAtIndex:i];        
-        NSRange range;
-        
-        if (i == 0)
-        {
-            range = [[row string] rangeOfString:@":"];
-            NSString *fromString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
-            
-            [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:fromPrefix];
-            
-            NSInteger fromTagStyle = GET_DEFAULT_INT(MHHeaderAttributionFromTagStyle);
-            fromString = [self fullNameFromEmailAddress:fromString attribStyle:fromTagStyle];
-            
-            [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:fromString];
-        }
-        
-        if (i == 1)
-        {
-            range = [[row string] rangeOf:@":"];
-            [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];
-        }
-        
-        if (i == 2)
-        {
-            range = [[row string] rangeOf:@":"];
-            [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:dateToBePrefix];
-            
-            // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
-            // trying this universal solution
-            if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
-            {
-                range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
-                NSUInteger start = range.location + 2;
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-                [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
-                MHLog(@"Date format: %@", [dateFormatter dateFormat]);
-                
-                @try {
-                    NSString *dateTimeStr = [[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:start];
-                    NSDate *date = [dateFormatter dateFromString:dateTimeStr];
-                    MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
-                    
-                    [dateFormatter setLocale:choosenLocale];
-                    NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
-                    MHLog(@"Localized date: %@", newLocalDateStr);
-                    
-                    NSUInteger length = [[row string] length] - start;
-                    MHLog(@"Before date: %@", [row string]);
-                    [row replaceCharactersInRange:NSMakeRange(start, length) withString:newLocalDateStr];
-                    MHLog(@"After date: %@", [row string]);
-                }
-                @catch (NSException *exception) {
-                    MHLog(@"Exception occured: %@", exception.description);
-                }
-            }
-        }
-        
-        if (i == 3 || i == 4)
-        {
-            range = [[row string] rangeOf:@":"];
-            NSString *emailString = [[[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:range.location + 2] trim];
-            NSArray *emails = [emailString componentsSeparatedByString:@">, "];
-            
-            NSString *finalString = @"";
-            if (emails && [emails count] > 0)
-            {
-                for (NSString *emailId in emails)
-                {
-                    NSString *response = [self fullNameFromEmailAddress:emailId isMailToNeeded:FALSE];
-                    finalString = [finalString stringByAppendingString:response];
-                    finalString = [finalString stringByAppendingString:@"; "];
-                }
-                
-                int posIndex = [finalString length] - 2;
-                NSString *last = [finalString substringWithRange:NSMakeRange(posIndex, 2)];
-                
-                if ([last isEqualToString:@"; "])
-                    finalString = [finalString substringToIndex:posIndex];
-            }
-            else
-            {
-                finalString = [self fullNameFromEmailAddress:emailString isMailToNeeded:FALSE];
-            }
-            
-            [row replaceCharactersInRange:NSMakeRange(range.location + 2, [row length] - (range.location + 2)) withString:finalString];
-            
-            range = [[row string] rangeOf:@":"];
-            [row replaceCharactersInRange:NSMakeRange(0, range.location)
-                               withString:(i == 3) ? toPrefix : ccPrefix];
-        }
-    }   
-}*/
 
 @end
