@@ -322,6 +322,10 @@
     return version;
 }
 
++ (BOOL)isYosemite {
+    return TRUE; // TODO floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9;
+}
+
 
 #pragma mark MVMailBundle class methods
 

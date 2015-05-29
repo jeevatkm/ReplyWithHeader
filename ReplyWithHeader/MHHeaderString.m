@@ -44,6 +44,7 @@
 - (id)allHeaderKeys;
 - (id)headersForKey:(NSString *)key;
 - (id)addressListForKey:(NSString *)key;
+- (id)messageIDListForKey:(NSString *)key;
 - (NSMutableAttributedString *)attributedStringShowingHeaderDetailLevel:(id)level;
 @end
 
@@ -237,23 +238,61 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             
             if ([allHeaderkeys containsObject:@"reply-to"])
             {
-                [allHeaderkeys removeObject:@"reply-to"];
-                NSString *value = [[mcMessageHeaders addressListForKey:@"reply-to"]
-                                        componentsJoinedByString:@", "];
-                MHLog(@"Key: reply-to, Values: %@", value);
+                NSString *key = @"reply-to";
+                [allHeaderkeys removeObject:key];
+                NSString *value = [[mcMessageHeaders addressListForKey:key]
+                                   componentsJoinedByString:@", "];
+                MHLog(@"Key: %@, Values: %@", key, value);
                 
                 [allHeaders addObject:[[NSString stringWithFormat:@"Reply-To: %@", value] mutableAttributedString]];
             }
             
             MHLog(@"After cleanup allHeaderKeys:: %@", allHeaderkeys);
             
-            
+            NSMutableArray *nonKeys = [[NSMutableArray alloc] init];
             for (int i=0; i<[allHeaderkeys count]; i++)
             {
                 NSString *key = [allHeaderkeys objectAtIndex:i];
-                NSString *values = [[mcMessageHeaders headersForKey:key] componentsJoinedByString:@",\n"];
                 
-                [allHeaders addObject:[[NSString stringWithFormat:@"%@: %@", [key capitalizedString], values] mutableAttributedString]];
+                @try
+                {
+                    NSString *values = [[mcMessageHeaders headersForKey:key]
+                                            componentsJoinedByString:@",\n"];
+                    [allHeaders addObject:[[NSString stringWithFormat:@"%@: %@", [key capitalizedString], values] mutableAttributedString]];
+                }
+                @catch (NSException *exception)
+                {
+                    [nonKeys addObject:[NSString stringWithFormat:@"%d||%@", i, key]];
+                    
+                    MHLog(@"Error occured for header key [%@], message is [%@]",
+                          key, exception.description);
+                }
+            }
+            
+            if ([nonKeys count] > 0)
+            {
+                // Special case
+                if ([[MailHeader getOSXVersion] isEqualToString:@"10.10"])
+                {
+                    MHLog(@"Special header [%@] handling in Yosemite for this message.", nonKeys);
+                    for (int i=0; i<[nonKeys count]; i++)
+                    {
+                        NSString *posKey = [nonKeys objectAtIndex:i];
+                        NSArray *t = [posKey componentsSeparatedByString:@"||"];
+                        NSString *key = [t objectAtIndex:1];
+                        
+                        NSString *values = [[mcMessageHeaders messageIDListForKey:key] componentsJoinedByString:@",\n"];
+                        
+                        [allHeaders
+                            insertObject:[[NSString
+                                        stringWithFormat:@"%@: %@", [key capitalizedString], values] mutableAttributedString]
+                                         atIndex:[[t objectAtIndex:1] intValue]];
+                    }
+                }
+                else
+                {
+                    NSLog(@"RWH: Unable to parse following headers [%@] for this message.", nonKeys);
+                }
             }
             
             MHLog(@"allHeaders:: %@", allHeaders);
