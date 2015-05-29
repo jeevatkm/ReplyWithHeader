@@ -463,8 +463,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     
     // for issue #37 - https://github.com/jeevatkm/ReplyWithHeader/issues/37
     // trying this universal solution
-    if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
-    {
+    //if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
+    //{
         range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
         NSUInteger start = range.location + 2;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -478,6 +478,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
             
             [dateFormatter setLocale:choosenLocale];
+            [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a z"];
+            MHLog(@"Modified date format %@", [dateFormatter dateFormat]);
+            
             NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
             MHLog(@"Localized date: %@", newLocalDateStr);
             
@@ -487,9 +490,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"After date: %@", [row string]);
         }
         @catch (NSException *exception) {
-            MHLog(@"Exception occured: %@", exception.description);
+            NSLog(@"RWH:: Unable to parse date [%@]", exception.description);
         }
-    }
+    //}
 }
 
 - (void)applyHeaderOrderChange
