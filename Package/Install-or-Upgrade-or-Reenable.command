@@ -10,6 +10,7 @@
 #  1.0	Created an initial installer script
 #  1.1	Added dynamic UUID processing and few enhancements
 #  1.2  Revising enable plugin logic
+#  1.3  Improved OS X version print and added color support to highlight text
 #
 
 mh_user=${USER}
@@ -17,9 +18,21 @@ mh_install_path=${HOME}/Library/Mail/Bundles
 mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
 mh_plugin_plist=${mh_plugin}/Contents/Info.plist
 
+CC='\033[00m'
+RCB='\033[01;31m'
+GCB='\033[01;32m'
+RC='\033[31m'
+GC='\033[32m'
+WC='\033[37m'
+RCWHB='\033[1;31;43;5m'
+BOLD='\033[1m'
+
+echo "\n\n${WC}RWH:: Starting installation..."
+echo "RWH:: Mail Plugin - ${BOLD}ReplyWithHeader${CC}${WC}"
+
+mh_mac_osx_version_p=`sw_vers -productVersion | cut -d . -f 1,2,3`
 mh_mac_osx_version=`sw_vers -productVersion | cut -d . -f 1,2`
-echo "\n\nRWH:: Mac OS X version: ${mh_mac_osx_version}"
-echo "RWH:: Mail Plugin: ReplyWithHeader"
+echo "RWH:: Mac OS X version: ${mh_mac_osx_version_p}"
 
 mh_mail_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleShortVersionString)
 mh_mail_build_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleVersion)
@@ -95,6 +108,6 @@ fi
 
 echo "RWH:: Installation complete" 
 
-echo "\n==================================================="
-echo "  Plugin installation completed, restart Mail.app  "
-echo "==================================================="
+echo "\n=========================================================${CC}"
+echo "  ${GCB}RWH Plugin successfully installed${CC}, ${RCWHB} restart Mail.app ${CC}  "
+echo "${WC}=========================================================${CC}\n\n"
