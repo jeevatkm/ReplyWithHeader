@@ -43,6 +43,7 @@
     NSLocale *choosenLocale;
     NSString *choosenLocaleIdentifier;
     NSMutableArray *allHeaders;
+    NSString *impHeader;
 }
 
 - (id)initWithMailMessage:(id)mailMessage;

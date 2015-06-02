@@ -179,6 +179,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         if (headerLblSeqStyle == 1)
             [self applyHeaderOrderChange];
     }
+    
+    // Handling : importance / x-priority
+    if ([impHeader length] > 0) {
+        [messageAttribution addObject:[impHeader mutableAttributedString]];
+    }
 }
 
 - (id)initWithMailMessage:(id)mailMessage
@@ -216,14 +221,18 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         cleanHeaders = [mailMessage valueForKey:@"_cleanHeaders"];
         noOfHeaderLabels = [headers count];
         
+        NSMutableArray *allHeaderkeys = [[[NSOrderedSet
+                                           orderedSetWithArray:[mcMessageHeaders allHeaderKeys]] array] mutableCopy];
+        MHLog(@"allHeaderKeys from message:: %@", allHeaderkeys);
+        
+        // Handling : importance / x-priority
+        impHeader = [self getImportanceHdr:allHeaderkeys mcMessageHeaders:mcMessageHeaders];
+        
         // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/85
         if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
         {
             // Preparing All headers
             allHeaders = [[NSMutableArray alloc] init];
-            NSMutableArray *allHeaderkeys = [[[NSOrderedSet
-                                               orderedSetWithArray:[mcMessageHeaders allHeaderKeys]] array] mutableCopy];
-            MHLog(@"Before cleanup allHeaderKeys:: %@", allHeaderkeys);
             
             // Cleanup of already parsed headers from, to, cc, subject, date
             [allHeaderkeys removeObject:@"from"];
@@ -245,6 +254,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                 MHLog(@"Key: %@, Values: %@", key, value);
                 
                 [allHeaders addObject:[[NSString stringWithFormat:@"Reply-To: %@", value] mutableAttributedString]];
+            }
+            
+            if ([impHeader length] > 0) {
+                [allHeaderkeys removeObject:@"importance"];
+                [allHeaderkeys removeObject:@"x-priority"];
             }
             
             MHLog(@"After cleanup allHeaderKeys:: %@", allHeaderkeys);
@@ -576,6 +590,33 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
     
     return emailAddress;
+}
+
+- (NSString *)getImportanceHdr:(NSMutableArray *)headerKeys mcMessageHeaders:(id)mcMessageHeaders
+{
+    NSString *hdr = nil;
+    NSString *hdrKey = @"";
+    
+    if ([headerKeys containsObject:@"importance"]) {
+        hdrKey = @"importance";
+    } else if ([headerKeys  containsObject:@"x-priority"]) {
+        hdrKey = @"x-priority";
+    }
+    
+    NSString *value = [[mcMessageHeaders headersForKey:hdrKey] componentsJoinedByString:@",\n"];
+    MHLog(@"Original Importance/X-Priority Header Value:: %@", value);
+    
+    if ([value length] > 0) {
+        if ([value isEqualToString:@"1"]) {
+            value = @"high";
+        } else if ([value isEqualToString:@"5"]) {
+            value = @"low";
+        }
+        
+        hdr = [NSString stringWithFormat:@"Importance: %@", [value capitalizedString]];
+    }
+    
+    return hdr;
 }
 
 @end
