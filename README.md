@@ -48,7 +48,12 @@ Credits
 -------
 * Since v3.5 (from Sep 16, 2013), [Jeevanandam M.][6] have taken over the project to make more wonderful :)
 * Jason Schroth (jschroth) extended his helping hands towards maintaining [ReplyWithHeader][2] mail bundle from Aug 9th, 2012 to Sep 16, 2013
-* Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth).
+* Saptarshi Guha (saptarshiguha) initially started [ReplyWithHeader][2] mail bundle development for Apple Mail Application on Oct 22nd, 2010. He handed over the project to Jason Schroth (jschroth)
+ 
+Below is a short description of the external classes inside ReplyWithHeader:
+* [MLog][12] - Enhanced MLog classes for RWH
+* [JRLPSwizzle][13] - For Mail.app method swizzle
+* [Sparkle][14] - Version Comparator classes
 
 License
 -------
@@ -66,3 +71,6 @@ ReplyWithHeader is released under [MIT License][4]
 [9]: #installation
 [10]: http://myjeeva.com/replywithheader-change-log.html
 [11]: http://myjeeva.com/replywithheader-mozilla
+[12]: http://borkware.com/rants/agentm/mlog/
+[13]: http://rentzsch.com
+[14]: https://github.com/sparkle-project/Sparkle
