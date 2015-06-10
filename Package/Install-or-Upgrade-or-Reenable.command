@@ -27,8 +27,8 @@ WC='\033[37m'
 RCWHB='\033[1;31;43;5m'
 BOLD='\033[1m'
 
-echo "\n\n${WC}RWH:: Starting installation..."
-echo "RWH:: Mail Plugin - ${BOLD}ReplyWithHeader${CC}${WC}"
+echo "\n\nRWH:: Starting installation..."
+echo "RWH:: Mail Plugin - ${BOLD}ReplyWithHeader${CC}"
 
 mh_mac_osx_version_p=`sw_vers -productVersion | cut -d . -f 1,2,3`
 mh_mac_osx_version=`sw_vers -productVersion | cut -d . -f 1,2`
@@ -108,6 +108,6 @@ fi
 
 echo "RWH:: Installation complete" 
 
-echo "\n=========================================================${CC}"
+echo "\n========================================================="
 echo "  ${GCB}RWH Plugin successfully installed${CC}, ${RCWHB} restart Mail.app ${CC}  "
-echo "${WC}=========================================================${CC}\n\n"
+echo "=========================================================\n\n"
