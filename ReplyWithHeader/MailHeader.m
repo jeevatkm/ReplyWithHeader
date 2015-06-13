@@ -30,6 +30,7 @@
 #import "MHCodeInjector.h"
 #import "MHPreferences.h"
 #import "MHUpdater.h"
+#import "NSString+MailHeader.h"
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -71,7 +72,7 @@
              || [identifier hasPrefix:@"nb"])
         identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
     
-    return identifier;
+    return [identifier trim];
 }
 
 // for issue #21 - https://github.com/jeevatkm/ReplyWithHeader/issues/21
@@ -209,10 +210,14 @@
                           MHDefaultHeaderFontSize, MHHeaderFontSize,
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
                           [NSNumber numberWithBool:NO], MHSubjectPrefixTextEnabled,
+                          [NSNumber numberWithBool:NO], MHRawHeadersEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
-                          [NSNumber numberWithInt:2], MHHeaderLabelMode,
-                          [NSNumber numberWithInt:2], MHHeaderOrderMode,
-                          [NSNumber numberWithInt:0], MHHeaderAttributionFromTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionFromTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
+                          [NSNumber numberWithInt:1], MHHeaderAttributionLblSeqTagStyle,
+                          [NSNumber numberWithInt:0], MHLineSpaceBeforeHeader,
+                          [NSNumber numberWithInt:1], MHLineSpaceAfterHeader,
+                          [NSNumber numberWithInt:1], MHLineSpaceBeforeHeaderSeparator,
                           [NSNumber numberWithBool:NO], MHLogEnabled,
                           nil
                           ];
@@ -269,13 +274,27 @@
     {
         REMOVE_DEFAULT(@"RwhReplyHeaderText");
     }
-    // [end]
     
     // issue #42
     if (GET_DEFAULT(@"MHEntourage2004SupportEnabled"))
     {
         REMOVE_DEFAULT(@"MHEntourage2004SupportEnabled");
     }
+    
+    if (GET_DEFAULT(@"MHHeaderLabelMode"))
+    {
+        REMOVE_DEFAULT(@"MHHeaderLabelMode");
+    }
+    
+    if (GET_DEFAULT(@"MHHeaderOrderMode"))
+    {
+        REMOVE_DEFAULT(@"MHHeaderOrderMode");
+    }
+}
+
++ (NSString *)osxVersionString
+{
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
 + (NSString *)getOSXVersion
@@ -301,6 +320,10 @@
     }
     
     return version;
+}
+
++ (BOOL)isYosemite {
+    return TRUE; // TODO floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9;
 }
 
 
@@ -354,7 +377,7 @@
     [MHCodeInjector injectMailHeaderCode];
     
     // Bundle registered successfully
-    NSLog(@"%@ plugin loaded, OS X version: %@", [self bundleNameAndVersion], [self getOSXVersion]);
+    NSLog(@"%@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
     
     // Logger
     BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);

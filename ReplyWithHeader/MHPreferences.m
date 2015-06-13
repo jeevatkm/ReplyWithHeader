@@ -38,9 +38,7 @@
 
 @interface MHPreferences (PrivateMethods)
     - (IBAction)mailHeaderBundlePressed:(id)sender;
-    - (IBAction)headerTypographyPressed:(id)sender;
     - (IBAction)selectFontButtonPressed:(id)sender;
-    - (IBAction)headerLabelModePressed:(id)sender;
     - (IBAction)signatureMatrixPressed:(id)sender;
     - (IBAction)openWebsite:(id)sender;
     - (IBAction)openFeedback:(id)sender;
@@ -55,24 +53,24 @@
 
 - (void)toggleMailPreferencesOptions:(BOOL *)state
 {
-    [_MHHeaderTypographyEnabled setEnabled:state];
-    [_MHForwardHeaderEnabled setEnabled:state];
-    [_MHHeaderOptionEnabled setEnabled:state];
     [_MHNotifyNewVersion setEnabled:state];
     [_MHSubjectPrefixTextEnabled setEnabled:state];
+    [_MHRawHeadersEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
     [_MHLanguagePopup setEnabled:state];
     [_MHHeaderAttributionFromTagStyle setEnabled:state];
+    [_MHHeaderAttributionToCcTagStyle setEnabled:state];
+    [_MHHeaderAttributionLblSeqTagStyle setEnabled:state];
+    
+    [_MHLineSpaceBeforeHeaderPopup setEnabled:state];
+    [_MHLineSpaceAfterHeaderPopup setEnabled:state];
+    [_MHLineSpaceBeforeHeaderSepPopup setEnabled:state];
     
     [self toggleHeaderTypograpghyOptions:state];
-    [self toggleHeaderLabelOptions:state];
     [self toggleSignatureTables:state];
-}
-
-- (void)toggleHeaderLabelOptions:(BOOL *)state
-{
-    [_MHHeaderOrderMode setEnabled:state];
-    [_MHHeaderLabelMode setEnabled:state];
+    
+    // for labels
+    [_MHHeaderInfoFontAndSize setEnabled:state];
 }
 
 - (void)toggleHeaderTypograpghyOptions:(BOOL *)state
@@ -103,11 +101,6 @@
     [self toggleMailPreferencesOptions:[sender state]];
 }
 
-- (IBAction)headerTypographyPressed:(id)sender
-{
-    [self toggleHeaderTypograpghyOptions:[sender state]];
-}
-
 - (IBAction)selectFontButtonPressed:(id)sender
 {
     NSString *font = GET_DEFAULT_VALUE(MHHeaderFontName);
@@ -119,11 +112,6 @@
 
     [[NSFontPanel sharedFontPanel]
      setPanelFont:[NSFont fontWithName:font size:[fontSize floatValue]] isMultiple:NO];
-}
-
-- (IBAction)headerLabelModePressed:(id)sender
-{
-    [self toggleHeaderLabelOptions:[sender state]];
 }
 
 - (IBAction)signatureMatrixPressed:(id)sender
@@ -406,6 +394,7 @@
                      GET_DEFAULT_VALUE(MHHeaderFontName),
                      GET_DEFAULT_VALUE(MHHeaderFontSize)]];
     
+    // Localization Popup
     NSArray *localizations = [[MailHeader bundle] localizations];
     [_MHLanguagePopup removeAllItems];
     
@@ -454,6 +443,45 @@
     }
     
     [self toggleSignatureTables:!GET_DEFAULT_BOOL(MHRemoveSignatureEnabled)];
+    
+    // Header line spaces
+    [_MHLineSpaceBeforeHeaderPopup removeAllItems];
+    [_MHLineSpaceAfterHeaderPopup removeAllItems];
+    [_MHLineSpaceBeforeHeaderSepPopup removeAllItems];
+    
+    [[_MHLineSpaceBeforeHeaderPopup menu] setTitle:@"SpaceBeforeHeader"];
+    [[_MHLineSpaceAfterHeaderPopup menu] setTitle:@"SpaceAfterHeader"];
+    [[_MHLineSpaceBeforeHeaderSepPopup menu] setTitle:@"SpaceBeforeHeaderSep"];
+    
+    for (int i=0; i<6; i++)
+    {
+        NSMenuItem *item = [[NSMenuItem alloc] init];
+        [item setRepresentedObject:[NSNumber numberWithInt:i]];
+        [item setTitle:[@(i) stringValue]];
+        
+        [[_MHLineSpaceBeforeHeaderPopup menu] addItem:[item copy]];
+        [[_MHLineSpaceAfterHeaderPopup menu] addItem:[item copy]];
+        [[_MHLineSpaceBeforeHeaderSepPopup menu] addItem:[item copy]];
+    }
+    
+    [_MHLineSpaceBeforeHeaderPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceBeforeHeader)];
+    [_MHLineSpaceAfterHeaderPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceAfterHeader)];
+    [_MHLineSpaceBeforeHeaderSepPopup selectItemAtIndex:GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceBeforeHeaderPopup menu]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceAfterHeaderPopup menu]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lineSpacePopUpSelectionChanged:)
+                                                 name:NSMenuDidSendActionNotification
+                                               object:[_MHLineSpaceBeforeHeaderSepPopup menu]];
 }
 
 - (NSString*)preferencesNibName
@@ -483,6 +511,37 @@
           [selectedItem title], [selectedItem representedObject]);
     
     SET_USER_DEFAULT([selectedItem representedObject], MHBundleHeaderLanguageCode);
+}
+
+- (void)lineSpacePopUpSelectionChanged:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    
+    NSString *title = [[[info objectForKey:@"MenuItem"] menu] title];
+    NSMenuItem *selectedItem = nil;
+    NSString *configKey = @"";
+    
+    if ([title isEqualToString:@"SpaceBeforeHeader"])
+    {
+        selectedItem = [_MHLineSpaceBeforeHeaderPopup selectedItem];
+        configKey = MHLineSpaceBeforeHeader;
+    }
+    else if ([title isEqualToString:@"SpaceAfterHeader"])
+    {
+        selectedItem = [_MHLineSpaceAfterHeaderPopup selectedItem];
+        configKey = MHLineSpaceAfterHeader;
+    }
+    else if ([title isEqualToString:@"SpaceBeforeHeaderSep"])
+    {
+        selectedItem = [_MHLineSpaceBeforeHeaderSepPopup selectedItem];
+        configKey = MHLineSpaceBeforeHeaderSeparator;
+    }
+    
+    if (selectedItem != nil && [configKey isNotEqualTo:@""])
+    {
+        MHLog(@"Choosen line space menu & value: %@ - %@", title, [selectedItem representedObject]);
+    
+        SET_USER_DEFAULT([selectedItem representedObject], configKey);
+    }
 }
 
 @end

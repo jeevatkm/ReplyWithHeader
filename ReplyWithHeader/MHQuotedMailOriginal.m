@@ -102,10 +102,10 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 - (void)insertMailHeader:(MHHeaderString *)mailHeader
 {
     
-    if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
-    {
+    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
+    //{
         [mailHeader applyHeaderLabelOptions];
-    }
+    //}
     
     if (isHTMLMail)
     {
@@ -134,6 +134,15 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         {
             [self insertForPlainMail:headerFragment];
         }
+        
+        // Line space
+        // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+        int linesBeforeSep = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
+        for (int i=0; i<linesBeforeSep; i++) {
+            DOMDocumentFragment *brFragment = [self createDocumentFragment:@"<br/>"];
+            [originalEmail insertBefore:brFragment refChild: [originalEmail firstChild]];
+        }
+        
         MHLog(@"After header insert, Inner HTML String:: %@", [originalEmail innerHTML]);
     }
 }
@@ -204,7 +213,9 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     MHLog(@"Composing mail isHTMLMail %@", (isHTMLMail ? @"YES" : @"NO"));
     
-    NSString *borderString = (isHTMLMail) ? MHHeaderBorder : MHDefaulReplyHeaderBorder;
+    NSString *borderString = (isHTMLMail) ?
+                                MHHeaderBorder : (msgComposeType == 3)
+                                    ? MHDefaultForwardHeaderBorder : MHDefaulReplyHeaderBorder;
     
     MHLog(@"initVars Header border text: %@", borderString);
     
@@ -392,6 +403,19 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
     MHLog(@"Span based HTML string %@", htmlString);
+    
+    // Adding Line Space
+    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
+    for (int i=0; i<linesBefore; i++) {
+        htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
+    }
+    
+    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    for (int i=0; i<linesAfter; i++) {
+        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
+    }
+    
     return [self createDocumentFragment:htmlString];
 }
 

@@ -42,19 +42,20 @@
     
     IBOutlet NSTabView *_MHBundleTabBox;
     IBOutlet NSButton *_MHBundleEnabled;
-    IBOutlet NSButton *_MHForwardHeaderEnabled;
-    IBOutlet NSButton *_MHHeaderTypographyEnabled;
     IBOutlet NSButton *_MHSelectFont;
-    IBOutlet NSButton *_MHHeaderOptionEnabled;
     IBOutlet NSButton *_MHNotifyNewVersion;
     IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
+    IBOutlet NSButton *_MHRawHeadersEnabled;
     IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
     IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
     IBOutlet NSColorWell *_MHColorWell;
-    IBOutlet NSMatrix *_MHHeaderOrderMode;
-    IBOutlet NSMatrix *_MHHeaderLabelMode;
     IBOutlet NSPopUpButton *_MHLanguagePopup;
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
+    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
+    IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
+    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
     IBOutlet NSButton *_MHPaypalBtn;

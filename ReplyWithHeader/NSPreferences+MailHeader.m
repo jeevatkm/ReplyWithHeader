@@ -33,6 +33,7 @@
 #import "NSPreferences+MailHeader.h"
 #import "MHPreferences.h"
 #import "MailHeader.h"
+#import "NSString+MailHeader.h"
 
 @implementation NSPreferences (MailHeader)
 
@@ -91,7 +92,13 @@
 
 - (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize
 {
-    return [self sizeForWindowShowingAllToolbarItems:window];
+    //for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/80
+    NSString *winTitles = @"Accounts, Rules, Signatures";
+    
+    if ([winTitles rangeOf:[self windowTitle]].location != NSNotFound)
+        return [self MHWindowWillResize:window toSize:toSize];
+    else
+        return [self sizeForWindowShowingAllToolbarItems:window];
 }
 
 - (void)MHToolbarItemClicked:(id)toolbarItem
