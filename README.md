@@ -10,9 +10,9 @@ Quoting Headers and Signatures in Mail.app
 Support RWH :moneybag:
 ----------------
 
-BTC | Paypal 
+BTC | PayPal 
 --- | ---
-1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD | [![Donate with Paypal](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=QWMZG74FW4QYC&amp;lc=US&amp;item_name=Jeevanandam%20M%2e&amp;item_number=ReplyWithHeader&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+1Q87wEWvQyxFHag77fqvabrEuPsAidWpyD | [![Donate with PayPal](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=QWMZG74FW4QYC&amp;lc=US&amp;item_name=Jeevanandam%20M%2e&amp;item_number=ReplyWithHeader&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 Installation
 ------------
@@ -57,7 +57,7 @@ Below is a short description of the external classes inside ReplyWithHeader:
 
 License
 -------
-ReplyWithHeader is released under [MIT License][4]
+ReplyWithHeader plugin is released under [MIT License][4]
 
 
 [1]: http://myjeeva.com
