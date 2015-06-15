@@ -32,6 +32,7 @@
 
 #import "MHHeadersEditor.h"
 #import "NSString+MailHeader.h"
+#import "objc/objc-class.h"
 
 @interface MHHeadersEditor (MHNoImplementation)
 - (void)_subjectChanged;
@@ -79,53 +80,62 @@
 // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/82
 - (void)bringOutlookReplyAllBehaviour
 {
-    id docEditor = [self valueForKey:@"_documentEditor"];
-    id mcMessageHeaders = [[docEditor backEnd] originalMessageHeaders];
-    id account = [self mailAccount];
-    
-    int msgComposeType = [[docEditor valueForKey:@"_messageType"] intValue];
-    MHLog(@"msgComposeType: %d", msgComposeType);
-  
-    // Only for ReplyAll
-    if (msgComposeType == 2)
+    id addressField = [self valueForKey:@"_toField"];
+    if ([addressField respondsToSelector:@selector(addresses)])
     {
-        // Preparing Cc list
-        NSArray *oldToList = [[self valueForKey:@"_toField"] addresses];
-        NSMutableArray *currentCcList = [[[self valueForKey:@"_ccField"] addresses] mutableCopy];
-        [currentCcList removeObjectsInArray:oldToList];
-        [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
-        MHLog(@"Updated CC list: %@", currentCcList);
+        id docEditor = [self valueForKey:@"_documentEditor"];
+        id mcMessageHeaders = [[docEditor backEnd] originalMessageHeaders];
+        id account = [self mailAccount];
+        MHLog(@"Account: %@, Header: %@", account, mcMessageHeaders);
         
-        // Preparing To list
-        NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
-        id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
-        id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
-        
-        MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
-        
-        if (fromAddress)
+        int msgComposeType = [[docEditor valueForKey:@"_messageType"] intValue];
+        MHLog(@"msgComposeType: %d", msgComposeType);
+    
+        // Only for ReplyAll
+        if (msgComposeType == 2)
         {
-            [newToAddressList addObjectsFromArray:fromAddress];
-        }
-        
-        if (toAddressList)
-        {
-            [newToAddressList addObjectsFromArray:toAddressList];
-        }
-        
-        NSString *firstEmailAddress = [account firstEmailAddress];
-        for (int i=0; i<[newToAddressList count]; i++)
-        {
-            NSString *eid = [newToAddressList objectAtIndex:i];
-            if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
+            // Preparing Cc list
+            NSArray *oldToList = [[self valueForKey:@"_toField"] addresses];
+            NSMutableArray *currentCcList = [[[self valueForKey:@"_ccField"] addresses] mutableCopy];
+            [currentCcList removeObjectsInArray:oldToList];
+            [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
+            MHLog(@"Updated CC list: %@", currentCcList);
+            
+            // Preparing To list
+            NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
+            id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
+            id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
+            
+            MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
+            
+            if (fromAddress)
             {
-                MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
-                [newToAddressList removeObjectAtIndex:i];
+                [newToAddressList addObjectsFromArray:fromAddress];
             }
+            
+            if (toAddressList)
+            {
+                [newToAddressList addObjectsFromArray:toAddressList];
+            }
+            
+            NSString *firstEmailAddress = [account firstEmailAddress];
+            for (int i=0; i<[newToAddressList count]; i++)
+            {
+                NSString *eid = [newToAddressList objectAtIndex:i];
+                if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
+                {
+                    MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
+                    [newToAddressList removeObjectAtIndex:i];
+                }
+            }
+            
+            MHLog(@"newToAddressList: %@", newToAddressList);
+            [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
         }
-        
-        MHLog(@"newToAddressList: %@", newToAddressList);
-        [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
+    }
+    else
+    {
+        MHLog(@"Outlook Reply behavior is not applied");
     }
 }
 
