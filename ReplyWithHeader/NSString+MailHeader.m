@@ -84,4 +84,27 @@
     return [[NSAttributedString alloc] initWithString:[[self trim] copy]];
 }
 
+//    NSDictionary *exportParams1 = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+//    NSData *htmlData = [finalHeader dataFromRange:NSMakeRange(0, [finalHeader length]) documentAttributes:exportParams1 error:nil];
+//    NSString *htmlStr = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+//    NSLog(@"HTML String: %@", htmlStr);
+
+
++ (NSString *) ToHTML:(NSMutableAttributedString *)aString
+{
+    NSArray *excluded = [NSArray arrayWithObjects: @"doctype", @"html",
+                         @"head", @"body", @"xml", nil];
+    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:
+                          NSHTMLTextDocumentType, NSDocumentTypeDocumentAttribute,
+                          //aTitle, NSTitleDocumentAttribute,
+                          excluded, NSExcludedElementsDocumentAttribute,
+                          [NSNumber numberWithInt: NSUTF8StringEncoding], NSCharacterEncodingDocumentAttribute,
+                          nil];
+    NSData * tdata = [aString dataFromRange: NSMakeRange(0, [aString length])
+                         documentAttributes: attr error: nil];
+    
+    NSString * tString = [[NSString alloc] initWithData:tdata encoding:NSUTF8StringEncoding];
+    return tString;
+}
+
 @end

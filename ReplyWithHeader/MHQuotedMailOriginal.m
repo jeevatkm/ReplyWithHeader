@@ -114,11 +114,18 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     // specifics
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
-    DOMDocumentFragment *headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
-    [(DOMElement *)[headerFragment firstChild] setAttribute:@"id" value:@"RwhHeaderAttributes"];
+    DOMDocumentFragment *headerFragment = nil;
     
-    // for issue #64
-    headerFragment = [self paragraphTagToSpanTag:headerFragment];
+    if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) {
+        headerFragment = [self paragraphTagToSpanTagByString:[mailHeader getHTML]];
+    } else {
+        headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
+        
+        // for issue #64
+        headerFragment = [self paragraphTagToSpanTag:headerFragment];
+    }
+    
+    [(DOMElement *)[headerFragment firstChild] setAttribute:@"id" value:@"RwhHeaderAttributes"];
     
     MHLog(@"Header HTML %@", [[headerFragment firstChild] outerHTML]);
     
@@ -399,6 +406,32 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 - (DOMDocumentFragment *)paragraphTagToSpanTag:(DOMDocumentFragment *) headerFragment
 {
     NSString *htmlString = [[headerFragment firstChild] outerHTML];
+    
+    return [self paragraphTagToSpanTagByString:htmlString];
+    
+//    MHLog(@"Paragraph based HTML string %@", htmlString);
+//    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
+//    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
+//    MHLog(@"Span based HTML string %@", htmlString);
+//    
+//    // Adding Line Space
+//    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
+//    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
+//    for (int i=0; i<linesBefore; i++) {
+//        htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
+//    }
+//    
+//    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+//    for (int i=0; i<linesAfter; i++) {
+//        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
+//    }
+//    
+//    return [self createDocumentFragment:htmlString];
+}
+
+- (DOMDocumentFragment *)paragraphTagToSpanTagByString:(NSString *) htmlString
+{
+    //NSString *htmlString = [[headerFragment firstChild] outerHTML];
     MHLog(@"Paragraph based HTML string %@", htmlString);
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
@@ -411,7 +444,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
     }
     
-    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader);
     for (int i=0; i<linesAfter; i++) {
         htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
     }

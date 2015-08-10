@@ -51,5 +51,6 @@
 - (void)applyHeaderLabelOptions;
 - (WebArchive *)getWebArchive;
 - (NSUInteger)getHeaderItemCount;
+- (NSString *)getHTML;
 
 @end

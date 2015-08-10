@@ -38,5 +38,6 @@
 - (NSRange)rangeOf:(NSString *)str byLocale:(NSLocale *)locale;
 - (NSMutableAttributedString *)mutableAttributedString;
 - (NSAttributedString *)attributedString;
++ (NSString *) ToHTML:(NSMutableAttributedString*)aString;
 
 @end

@@ -301,6 +301,7 @@
 {
     NSString *version = @"";
     double versionNumber = floor(NSAppKitVersionNumber);
+    MHLog(@"getOSXVersion: versionNumber- %f", versionNumber);
     
     if (versionNumber == 1138) // NSAppKitVersionNumber10_7
     {
@@ -314,10 +315,16 @@
     {
         version = @"10.9";
     }
-    else // NSAppKitVersionNumber10_10
+    else if (versionNumber >= 1343 && versionNumber <= 1380) // NSAppKitVersionNumber10_10 to 10_10_3 - 1347
     {
         version = @"10.10";
     }
+    else // NSAppKitVersionNumber10_11
+    {
+        version = @"10.11";
+    }
+    
+    MHLog(@"getOSXVersion: %@", version);
     
     return version;
 }
