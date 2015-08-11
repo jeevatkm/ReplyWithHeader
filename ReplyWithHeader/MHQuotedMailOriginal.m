@@ -122,7 +122,8 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
         
         // for issue #64
-        headerFragment = [self paragraphTagToSpanTag:headerFragment];
+        //headerFragment = [self paragraphTagToSpanTag:headerFragment];
+        headerFragment = [self paragraphTagToSpanTagByString:[[headerFragment firstChild] outerHTML]];
     }
     
     [(DOMElement *)[headerFragment firstChild] setAttribute:@"id" value:@"RwhHeaderAttributes"];

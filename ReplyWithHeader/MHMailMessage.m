@@ -83,7 +83,18 @@
 {
     if ([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3) && !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
     {
-        NSString *uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+        //NSString *uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+        // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
+        NSString *uniqueId = @"";
+        if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"])
+        {
+            uniqueId = [[self account] valueForKey:@"identifier"];
+        }
+        else
+        {
+            uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+        }
+        
         NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", uniqueId];
         NSString *signatureId = GET_DEFAULT(sKey);
         

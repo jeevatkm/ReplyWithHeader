@@ -31,6 +31,7 @@
 #import "Signature.h"
 #import "MHDisplayNotes.h"
 
+
 @interface MHPreferences (MHNoImplementation)
 - (id)signatureAccounts;
 - (id)signatures;
@@ -216,16 +217,30 @@
     id signatures = [signatureBundle signatures];
     signaturesData = nil;
     signaturesData = [[NSMutableDictionary alloc] init];
+    MHLog(@"signatures: %@", signatures);
     
     NSInteger aCount = 0;
     for (id obj in [signatureBundle signatureAccounts])
     {
+        MHLog(@"type of obj: %@", [obj class]);
         BOOL isActive = (BOOL)[obj valueForKey:@"isActive"];
         
         if (isActive)
         {
             NSString *name = [obj valueForKey:@"displayName"];
-            NSString *uniqueId = [[obj valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+            MHLog(@"Display Name: %@", name);
+            
+            // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
+            NSString *uniqueId = @"";
+            if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"])
+            {
+                uniqueId = [obj valueForKey:@"identifier"];
+            }
+            else
+            {
+                uniqueId = [[obj valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
+            }
+            
             NSMutableDictionary *values = [[NSMutableDictionary alloc] init];
             
             NSInteger sCount = 0;
