@@ -523,8 +523,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
             
             [dateFormatter setLocale:choosenLocale];
-            [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a z"];
-            MHLog(@"Modified date format %@", [dateFormatter dateFormat]);
+            
+            if (GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle) == 1)
+            {
+                [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a z"];
+                MHLog(@"Modified date format %@", [dateFormatter dateFormat]);
+            }            
             
             NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
             MHLog(@"Localized date: %@", newLocalDateStr);

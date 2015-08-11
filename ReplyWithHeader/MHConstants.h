@@ -56,6 +56,7 @@
 #define MHHeaderAttributionFromTagStyle @"MHHeaderAttributionFromTagStyle"
 #define MHHeaderAttributionToCcTagStyle @"MHHeaderAttributionToCcTagStyle"
 #define MHHeaderAttributionLblSeqTagStyle @"MHHeaderAttributionLblSeqTagStyle"
+#define MHHeaderAttributionDateTagStyle @"MHHeaderAttributionDateTagStyle"
 
 #define MHLineSpaceBeforeHeader @"MHLineSpaceBeforeHeader"
 #define MHLineSpaceAfterHeader @"MHLineSpaceAfterHeader"

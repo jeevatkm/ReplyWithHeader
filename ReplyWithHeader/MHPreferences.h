@@ -53,6 +53,7 @@
     IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
     IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
     IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
     IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
     IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
     IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;

@@ -62,6 +62,7 @@
     [_MHHeaderAttributionFromTagStyle setEnabled:state];
     [_MHHeaderAttributionToCcTagStyle setEnabled:state];
     [_MHHeaderAttributionLblSeqTagStyle setEnabled:state];
+    [_MHHeaderAttributionDateTagStyle setEnabled:state];
     
     [_MHLineSpaceBeforeHeaderPopup setEnabled:state];
     [_MHLineSpaceAfterHeaderPopup setEnabled:state];
