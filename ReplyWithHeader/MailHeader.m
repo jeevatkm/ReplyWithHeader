@@ -316,11 +316,11 @@
     {
         version = @"10.9";
     }
-    else if (versionNumber >= 1343 && versionNumber <= 1380) // NSAppKitVersionNumber10_10 to 10_10_3 - 1347
+    else if (versionNumber >= 1343 && versionNumber <= 1380) // NSAppKitVersionNumber10_10 to 10_10_3 - 1347 // 10_10_4 - 1348
     {
         version = @"10.10";
     }
-    else // NSAppKitVersionNumber10_11
+    else // NSAppKitVersionNumber10_11 // 1386
     {
         version = @"10.11";
     }

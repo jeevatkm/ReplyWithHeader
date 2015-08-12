@@ -513,6 +513,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
         NSUInteger start = range.location + 2;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
         MHLog(@"Date format: %@", [dateFormatter dateFormat]);
@@ -526,9 +527,11 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             
             if (GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle) == 1)
             {
-                [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a z"];
+                NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+                [dateFormatter setTimeZone:gmt];
+                //[dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a Z"];
                 MHLog(@"Modified date format %@", [dateFormatter dateFormat]);
-            }            
+            }
             
             NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
             MHLog(@"Localized date: %@", newLocalDateStr);
