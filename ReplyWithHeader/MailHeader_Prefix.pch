@@ -30,4 +30,4 @@
 #define MHLocalizedString(k) [MailHeader localizedString: k]
 #define MHLocalizedStringByLocale(k,l) [MailHeader localizedString: k localeIdentifier: l]
 
-#define IS_MAC_YOSEMITE [[MailHeader getOSXVersion] isEqualToString:@"10.10"]
+// #define IS_MAC_YOSEMITE [[MailHeader getOSXVersion] isEqualToString:@"10.10"] TODO - cleanup before release

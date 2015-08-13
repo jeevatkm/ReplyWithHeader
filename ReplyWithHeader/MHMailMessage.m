@@ -86,8 +86,10 @@
         //NSString *uniqueId = [[[self account] valueForKey:@"accountInfo"] valueForKey:@"uniqueId"];
         // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
         NSString *uniqueId = @"";
-        if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"])
+        //if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) TODO - cleanup before release
+        if ([MailHeader isElCapitan])
         {
+            NSLog(@"It's El Capitan, handle accordingly");
             uniqueId = [[self account] valueForKey:@"identifier"];
         }
         else

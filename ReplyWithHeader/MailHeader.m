@@ -298,8 +298,9 @@
     return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
-+ (NSString *)getOSXVersion
+/*+ (NSString *)getOSXVersion // TODO - cleanup before release
 {
+    
     NSString *version = @"";
     double versionNumber = floor(NSAppKitVersionNumber);
     MHLog(@"getOSXVersion: versionNumber- %f", versionNumber);
@@ -320,7 +321,7 @@
     {
         version = @"10.10";
     }
-    else // NSAppKitVersionNumber10_11 // 1386
+    else if (versionNumber >= 1386)// NSAppKitVersionNumber10_11 // 1386 onwards
     {
         version = @"10.11";
     }
@@ -328,10 +329,36 @@
     MHLog(@"getOSXVersion: %@", version);
     
     return version;
+} */
+
++ (BOOL)isLion // 10.7.x
+{
+    double vn = floor(NSAppKitVersionNumber);
+    return vn >= NSAppKitVersionNumber10_7 && vn < NSAppKitVersionNumber10_8;
 }
 
-+ (BOOL)isYosemite {
-    return TRUE; // TODO floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9;
++ (BOOL)isMountainLion // 10.8.x
+{
+    double vn = floor(NSAppKitVersionNumber);
+    return vn >= NSAppKitVersionNumber10_8 && vn < NSAppKitVersionNumber10_9;
+}
+
++ (BOOL)isMavericks // 10.9.x
+{
+    double vn = floor(NSAppKitVersionNumber);
+    return vn >= NSAppKitVersionNumber10_9 && vn < NSAppKitVersionNumber10_10;
+}
+
++ (BOOL)isYosemite // 10.10.x
+{
+    double vn = floor(NSAppKitVersionNumber);
+    return vn >= NSAppKitVersionNumber10_10 && vn <= 1380; // some higher number but less 10.11 beta which starts from 1386
+}
+
++ (BOOL)isElCapitan // 10.11.x
+{
+    // since AppKit Version for 10.11 beta starts from 1386
+    return floor(NSAppKitVersionNumber) >= 1386;
 }
 
 

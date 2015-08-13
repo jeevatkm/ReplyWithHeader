@@ -102,7 +102,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 - (void)insertMailHeader:(MHHeaderString *)mailHeader
 {
     
-    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
+    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled)) // TODO - cleanup before release
     //{
         [mailHeader applyHeaderLabelOptions];
     //}
@@ -116,13 +116,15 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = nil;
     
-    if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) {
+    //if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) { TODO - cleanup before release
+    if ([MailHeader isElCapitan]) {
+        NSLog(@"It's EL capitan, handle accordingly");
         headerFragment = [self paragraphTagToSpanTagByString:[mailHeader getHTML]];
     } else {
         headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
         
         // for issue #64
-        //headerFragment = [self paragraphTagToSpanTag:headerFragment];
+        //headerFragment = [self paragraphTagToSpanTag:headerFragment]; // TODO - cleanup before release
         headerFragment = [self paragraphTagToSpanTagByString:[[headerFragment firstChild] outerHTML]];
     }
     
@@ -238,7 +240,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if (IS_MAC_YOSEMITE && [self isBlockquoteTagPresent])
+    if ([MailHeader isYosemite] && [self isBlockquoteTagPresent])
     {
         emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
@@ -289,7 +291,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if (IS_MAC_YOSEMITE && [self isBlockquoteTagPresent])
+    if ([MailHeader isYosemite] && [self isBlockquoteTagPresent])
     {
         emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
@@ -410,6 +412,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     return [self paragraphTagToSpanTagByString:htmlString];
     
+    // TODO - cleanup before release
 //    MHLog(@"Paragraph based HTML string %@", htmlString);
 //    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
 //    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
