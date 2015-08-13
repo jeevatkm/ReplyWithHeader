@@ -437,19 +437,46 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 {
     //NSString *htmlString = [[headerFragment firstChild] outerHTML];
     MHLog(@"Paragraph based HTML string %@", htmlString);
-    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
-    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
+    
+    /*if (isHTMLMail)
+    {
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
+                                                           withString:@"<span"
+                                                              options:1 range:NSMakeRange(0, [htmlString length])];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
+                                                           withString:@"</span><br/>"
+                                                              options:1 range:NSMakeRange(0, [htmlString length])];
+    }
+    else
+    {
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
+                                                           withString:@""
+                                                              options:1 range:NSMakeRange(0, [htmlString length])];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
+                                                           withString:@"</span><br/>"
+                                                              options:1 range:NSMakeRange(0, [htmlString length])];
+    }*/
+    
+    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
+                                                       withString:@"<span"
+                                                          options:1 range:NSMakeRange(0, [htmlString length])];
+    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
+                                                       withString:@"</span><br/>"
+                                                          options:1 range:NSMakeRange(0, [htmlString length])];
+
     MHLog(@"Span based HTML string %@", htmlString);
     
     // Adding Line Space
     // https://github.com/jeevatkm/ReplyWithHeader/issues/84
     int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
-    for (int i=0; i<linesBefore; i++) {
+    for (int i=0; i<linesBefore; i++)
+    {
         htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
     }
     
-    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader);
-    for (int i=0; i<linesAfter; i++) {
+    int linesAfter = [MailHeader isElCapitan] ? GET_DEFAULT_INT(MHLineSpaceAfterHeader) : GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    for (int i=0; i<linesAfter; i++)
+    {
         htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
     }
     

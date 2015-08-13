@@ -526,7 +526,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
             
             [dateFormatter setLocale:choosenLocale];
-            
             if (GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle) == 1)
             {
                 NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
@@ -643,10 +642,12 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         hdrKey = @"x-priority";
     }
     
-    NSString *value = [[mcMessageHeaders headersForKey:hdrKey] componentsJoinedByString:@",\n"];
-    MHLog(@"Original Importance/X-Priority Header Value:: %@", value);
+    NSString *value = [[[mcMessageHeaders headersForKey:hdrKey] componentsJoinedByString:@",\n"] trim];
+    MHLog(@"Original Importance/X-Priority Header Value[%@]:: %@", hdrKey, value);
     
-    if ([value length] > 0) {
+    if ([value isEqualToString:@"1"] || [value isEqualToString:@"5"]
+        || [value isEqualToString:@"high"] || [value isEqualToString:@"low"]) {
+        
         if ([value isEqualToString:@"1"]) {
             value = @"high";
         } else if ([value isEqualToString:@"5"]) {
@@ -657,6 +658,19 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
     
     return hdr;
+    
+    // TODO - cleanup before release
+//    if ([value length] > 0) {
+//        if ([value isEqualToString:@"1"]) {
+//            value = @"high";
+//        } else if ([value isEqualToString:@"5"]) {
+//            value = @"low";
+//        }
+//        
+//        hdr = [NSString stringWithFormat:@"Importance: %@", [value capitalizedString]];
+//    }
+//    
+//    return hdr;
 }
 
 - (NSMutableAttributedString *) getFinalHeader
