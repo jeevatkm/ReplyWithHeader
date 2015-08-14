@@ -48,6 +48,8 @@
 - (DOMDocumentFragment *)createDocumentFragmentWithMarkupString: (NSString *)str;
 - (id)descendantsWithClassName:(NSString *)str;
 - (DOMDocumentFragment *)createFragmentForWebArchive:(WebArchive *)webArch;
+- (BOOL)hasContents;
+- (BOOL)containsRichText;
 @end
 
 @interface DOMNode ()
@@ -149,7 +151,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         // https://github.com/jeevatkm/ReplyWithHeader/issues/84
         int linesBeforeSep = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
         for (int i=0; i<linesBeforeSep; i++) {
-            DOMDocumentFragment *brFragment = [self createDocumentFragment:@"<br/>"];
+            DOMDocumentFragment *brFragment = [self createDocumentFragment:@"<br>"];
             [originalEmail insertBefore:brFragment refChild: [originalEmail firstChild]];
         }
         
@@ -161,8 +163,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 {
     if ( self = [super init] )
     {
-        document = [mailMessage document];
-        
+        document = [mailMessage document];        
         msgComposeType = composeType;
         
         MHLog(@"Mail Document: %@", document);
@@ -208,7 +209,8 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     // forward mail is not our compose since it falls
     // into default setting of compose type in user mail client
     // AppleOriginalContents: (isHTMLMail=YES) | ApplePlainTextBody: (isHTMLMail=NO)
-    if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL)
+    if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL
+        || [[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == nil)
     {
         isHTMLMail = YES;
         originalEmail=[[[document htmlDocument]
@@ -438,31 +440,34 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     //NSString *htmlString = [[headerFragment firstChild] outerHTML];
     MHLog(@"Paragraph based HTML string %@", htmlString);
     
-    /*if (isHTMLMail)
+    if (isHTMLMail)
     {
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
                                                            withString:@"<span"
                                                               options:1 range:NSMakeRange(0, [htmlString length])];
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
-                                                           withString:@"</span><br/>"
+                                                           withString:@"</span><br>"
                                                               options:1 range:NSMakeRange(0, [htmlString length])];
     }
     else
     {
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
-                                                           withString:@""
-                                                              options:1 range:NSMakeRange(0, [htmlString length])];
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
-                                                           withString:@"</span><br/>"
-                                                              options:1 range:NSMakeRange(0, [htmlString length])];
-    }*/
-    
-    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p"
-                                                       withString:@"<span"
-                                                          options:1 range:NSMakeRange(0, [htmlString length])];
-    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>"
-                                                       withString:@"</span><br/>"
-                                                          options:1 range:NSMakeRange(0, [htmlString length])];
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:@"<[^pP].*?>"
+                                      options:NSRegularExpressionCaseInsensitive error:&error];
+        htmlString = [regex stringByReplacingMatchesInString:htmlString
+                                                             options:0
+                                                               range:NSMakeRange(0, [htmlString length])
+                                                        withTemplate:@"<div>"];
+        
+        regex = [NSRegularExpression
+                 regularExpressionWithPattern:@"</[^pP]>"
+                 options:NSRegularExpressionCaseInsensitive error:&error];
+        htmlString = [regex stringByReplacingMatchesInString:htmlString
+                                                     options:0
+                                                       range:NSMakeRange(0, [htmlString length])
+                                                withTemplate:@"</div><br>"];
+    }
 
     MHLog(@"Span based HTML string %@", htmlString);
     
@@ -471,13 +476,13 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
     for (int i=0; i<linesBefore; i++)
     {
-        htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
+        htmlString = [NSString stringWithFormat:@"%@%@", @"<br>", htmlString];
     }
     
     int linesAfter = [MailHeader isElCapitan] ? GET_DEFAULT_INT(MHLineSpaceAfterHeader) : GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
     for (int i=0; i<linesAfter; i++)
     {
-        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
+        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br>"];
     }
     
     return [self createDocumentFragment:htmlString];
