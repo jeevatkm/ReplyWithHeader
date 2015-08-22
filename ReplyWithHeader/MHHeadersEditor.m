@@ -40,7 +40,7 @@
 - (id)addressListForKey:(NSString *)key;
 - (void)setAddresses:(id)arg1;
 - (id)mailAccount;
-//- (id)firstEmailAddress;
+- (id)firstEmailAddress;
 - (id)emailAliases;
 @end
 
@@ -118,38 +118,40 @@
                 [newToAddressList addObjectsFromArray:toAddressList];
             }
             
-//            NSString *firstEmailAddress = [account firstEmailAddress]; TODO cleanup release
-//            NSLog(@"Look for firstEmailAddress: %@", firstEmailAddress);
             
             NSArray *emailAliases = [account emailAliases];
             MHLog(@"Email Aliases: %@", emailAliases);
             
-            for(int i=0; i<[emailAliases count]; i++) {
-                NSString *emailId = [emailAliases[i] valueForKey:@"alias"];
-                MHLog(@"email %@", emailId);
-                
+            if (emailAliases == nil) {
+                NSString *firstEmailAddress = [account firstEmailAddress];
+                MHLog(@"Look for firstEmailAddress: %@", firstEmailAddress);
+
                 for (int i=0; i<[newToAddressList count]; i++)
                 {
                     NSString *eid = [newToAddressList objectAtIndex:i];
-                    if ([eid rangeOf:emailId].location != NSNotFound)
+                    if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
                     {
-                        MHLog(@"Found emailAlias: %@, Index is %d", emailId, i);
+                        MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
                         [newToAddressList removeObjectAtIndex:i];
-                        break;
+                    }
+                }
+            } else {
+                for(int i=0; i<[emailAliases count]; i++) {
+                    NSString *emailId = [emailAliases[i] valueForKey:@"alias"];
+                    MHLog(@"email %@", emailId);
+                    
+                    for (int i=0; i<[newToAddressList count]; i++)
+                    {
+                        NSString *eid = [newToAddressList objectAtIndex:i];
+                        if ([eid rangeOf:emailId].location != NSNotFound)
+                        {
+                            MHLog(@"Found emailAlias: %@, Index is %d", emailId, i);
+                            [newToAddressList removeObjectAtIndex:i];
+                            break;
+                        }
                     }
                 }
             }
-            
-            
-//            for (int i=0; i<[newToAddressList count]; i++) TODO cleanup for release
-//            {
-//                NSString *eid = [newToAddressList objectAtIndex:i];
-//                if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
-//                {
-//                    NSLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
-//                    [newToAddressList removeObjectAtIndex:i];
-//                }
-//            }
             
             MHLog(@"newToAddressList: %@", newToAddressList);
             [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
