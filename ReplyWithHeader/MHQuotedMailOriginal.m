@@ -469,6 +469,8 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
                                                      options:0
                                                        range:NSMakeRange(0, [htmlString length])
                                                 withTemplate:@"</div><br>"];
+        
+        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br>"];
     }
 
     MHLog(@"Span based HTML string %@", htmlString);
@@ -482,11 +484,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     }
     
     int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
-    if ([MailHeader isElCapitan] && !isHTMLMail)
-    {
-        linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader);
-    }
-    
     for (int i=0; i<linesAfter; i++)
     {
         htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br>"];
