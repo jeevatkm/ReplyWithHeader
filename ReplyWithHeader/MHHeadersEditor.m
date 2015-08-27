@@ -83,7 +83,16 @@
     id addressField = [self valueForKey:@"_toField"];
     if ([addressField respondsToSelector:@selector(addresses)])
     {
-        id docEditor = [self valueForKey:@"_documentEditor"];
+        id docEditor;
+        if ([MailHeader isElCapitan])
+        {
+            docEditor = [self valueForKey:@"_composeViewController"];
+        }
+        else
+        {
+            docEditor = [self valueForKey:@"_documentEditor"];
+        }
+        
         id mcMessageHeaders = [[docEditor backEnd] originalMessageHeaders];
         id account = [self mailAccount];
         MHLog(@"Account: %@, Header: %@", account, mcMessageHeaders);
@@ -118,37 +127,22 @@
                 [newToAddressList addObjectsFromArray:toAddressList];
             }
             
+            NSArray *emailIds = [self findAccountEmailIds];
+            MHLog(@"Found email Ids for removal: %@", emailIds);
             
-            NSArray *emailAliases = [account emailAliases];
-            MHLog(@"Email Aliases: %@", emailAliases);
-            
-            if (emailAliases == nil) {
-                NSString *firstEmailAddress = [account firstEmailAddress];
-                MHLog(@"Look for firstEmailAddress: %@", firstEmailAddress);
-
-                for (int i=0; i<[newToAddressList count]; i++)
+            for(int i=0; i<[emailIds count]; i++)
+            {
+                NSString *emailId = [emailIds objectAtIndex:i];
+                MHLog(@"Searching email id: %@", emailId);
+                
+                for (int j=0; j<[newToAddressList count]; j++)
                 {
-                    NSString *eid = [newToAddressList objectAtIndex:i];
-                    if ([eid rangeOf:firstEmailAddress].location != NSNotFound)
+                    NSString *eid = [newToAddressList objectAtIndex:j];
+                    if ([eid rangeOf:emailId].location != NSNotFound)
                     {
-                        MHLog(@"Found firstEmailAddress: %@, Index is %d", firstEmailAddress, i);
-                        [newToAddressList removeObjectAtIndex:i];
-                    }
-                }
-            } else {
-                for(int i=0; i<[emailAliases count]; i++) {
-                    NSString *emailId = [emailAliases[i] valueForKey:@"alias"];
-                    MHLog(@"email %@", emailId);
-                    
-                    for (int i=0; i<[newToAddressList count]; i++)
-                    {
-                        NSString *eid = [newToAddressList objectAtIndex:i];
-                        if ([eid rangeOf:emailId].location != NSNotFound)
-                        {
-                            MHLog(@"Found emailAlias: %@, Index is %d", emailId, i);
-                            [newToAddressList removeObjectAtIndex:i];
-                            break;
-                        }
+                        MHLog(@"Found email id: %@, Index is %d", emailId, j);
+                        [newToAddressList removeObjectAtIndex:j];
+                        break;
                     }
                 }
             }
@@ -161,6 +155,53 @@
     {
         MHLog(@"Outlook Reply behavior is not applied");
     }
+}
+
+- (NSArray *)findAccountEmailIds
+{
+    NSMutableArray *emailIds = [NSMutableArray array];
+    id account = [self mailAccount];
+    
+    NSArray *emailAliases = [account emailAliases];
+    MHLog(@"From mail account - Email Aliases: %@", emailAliases);
+    
+    if (emailAliases == nil)
+    {
+        MHLog(@"emailAliases is nil");
+        [emailIds addObject:[account firstEmailAddress]];
+    }
+    else
+    {
+        MHLog(@"emailAliases is not nil");
+        if ([MailHeader isElCapitan])
+        {
+            MHLog(@"In El Capitan mode");
+            NSArray *emailAddresses = [[emailAliases objectAtIndex:0] valueForKey:@"EmailAddresses"];
+            for (int i=0; i<[emailAddresses count]; i++)
+            {
+                NSString *emailId = [[emailAddresses objectAtIndex:i] valueForKey:@"EmailAddress"];
+                
+                if ([emailId rangeOf:@","].location != NSNotFound)
+                {
+                    [emailIds addObjectsFromArray:[emailId componentsSeparatedByString:@", "]];
+                }
+                else
+                {
+                    [emailIds addObject:emailId];
+                }
+            }
+        }
+        else
+        {
+            MHLog(@"Not a El Capitan mode");
+            for(int i=0; i<[emailAliases count]; i++) {
+                [emailIds addObject:[emailAliases[i] valueForKey:@"alias"]];
+            }
+        }
+        
+    }
+    
+    return emailIds;
 }
 
 @end
