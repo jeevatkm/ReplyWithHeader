@@ -321,7 +321,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                 //if ([[MailHeader getOSXVersion] isEqualToString:@"10.10"]) TODO - cleanup before release
                 if ([MailHeader isYosemite])
                 {
-                    NSLog(@"Special header [%@] handling in Yosemite for this message.", nonKeys);
+                    MHLog(@"Special header [%@] handling in Yosemite for this message.", nonKeys);
                     for (int i=0; i<[nonKeys count]; i++)
                     {
                         NSString *posKey = [nonKeys objectAtIndex:i];

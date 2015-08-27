@@ -42,6 +42,7 @@
 
 #import "MHQuotedMailOriginal.h"
 #import "MHHeaderString.h"
+#import "NSString+MailHeader.h"
 
 @interface MHQuotedMailOriginal (MHNoImplementation)
 - (id)htmlDocument;
@@ -120,7 +121,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     //if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) { TODO - cleanup before release
     if ([MailHeader isElCapitan]) {
-        NSLog(@"It's EL capitan, handle accordingly");
+        MHLog(@"It's EL capitan, handle accordingly");
         headerFragment = [self paragraphTagToSpanTagByString:[mailHeader getHTML]];
     } else {
         headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
@@ -242,7 +243,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if ([MailHeader isYosemite] && [self isBlockquoteTagPresent])
+    if (([MailHeader isYosemite] || [MailHeader isElCapitan]) && [self isBlockquoteTagPresent])
     {
         emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
@@ -257,10 +258,11 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     {
         DOMNode *node = [nodeList item:i];
         MHLog(@"current location %d, nodeType %d, nodeName %@", i, [node nodeType], [node nodeName]);
+        
         if ([node nodeType] == 3) // Text node, On ..., Wrote is text
         {
             MHLog(@"Text Node found at %d, name is %@", i, [node nodeName]);
-            textNodeLocation=i; break;
+            textNodeLocation = i; break;
         }
     }
     
@@ -314,12 +316,12 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
                 searchString = MHLocalizedStringByLocale(@"STRING_FORWARDED_MESSAGE", MHLocaleIdentifier);
             }
             
-            NSRange textRange = [[[emailDocument firstChild] stringValue] rangeOfString:searchString];
+            NSRange textRange = [[[emailDocument firstChild] stringValue] rangeOf:searchString];
             
-            while ( textRange.location == NSNotFound )
+            while (textRange.location == NSNotFound)
             {
                 [emailDocument removeChild:[emailDocument firstChild]];
-                textRange = [[[emailDocument firstChild] stringValue] rangeOfString:searchString];
+                textRange = [[[emailDocument firstChild] stringValue] rangeOf:searchString];
             }
         }
         else // Rest of the locale, feasible to take care by regex
@@ -348,12 +350,12 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
             }
         }
         
-        DOMNode *node = [emailDocument firstChild];
+        DOMNode *node = [[emailDocument firstChild] firstChild];
         //remove the line with the "wrote:" text
         if (node)
         {
             MHLog(@"Node name: %@, Node Type: %hu, Node Value: %@", [node nodeName], [node nodeType], [node stringValue]);
-            [emailDocument removeChild:node];
+            [[emailDocument firstChild] removeChild:node];
         }
         
         // remove the first new line element to shorten the distance between the new email and quoted text
@@ -479,7 +481,12 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         htmlString = [NSString stringWithFormat:@"%@%@", @"<br>", htmlString];
     }
     
-    int linesAfter = [MailHeader isElCapitan] ? GET_DEFAULT_INT(MHLineSpaceAfterHeader) : GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    if ([MailHeader isElCapitan] && !isHTMLMail)
+    {
+        linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader);
+    }
+    
     for (int i=0; i<linesAfter; i++)
     {
         htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br>"];

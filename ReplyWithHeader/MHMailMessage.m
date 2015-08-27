@@ -89,7 +89,7 @@
         //if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) TODO - cleanup before release
         if ([MailHeader isElCapitan])
         {
-            NSLog(@"It's El Capitan, handle accordingly");
+            MHLog(@"It's El Capitan, handle accordingly");
             uniqueId = [[self account] valueForKey:@"identifier"];
         }
         else
