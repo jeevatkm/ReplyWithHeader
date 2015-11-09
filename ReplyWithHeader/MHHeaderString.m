@@ -383,6 +383,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         }
     }
     
+    MHLog(@"messageAttribution:=> %@", messageAttribution);
+    
     return self;
 }
 
@@ -491,7 +493,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSRange range;
     
     range = [[row string] rangeOf:@":"];
-    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];    
+    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];
 }
 
 - (void)applyDateAttibutionStyle
@@ -524,7 +526,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     //{
         range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
         NSUInteger start = range.location + 2;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];    
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
         MHLog(@"Date format: %@", [dateFormatter dateFormat]);
@@ -537,7 +539,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             [dateFormatter setLocale:choosenLocale];
             if (GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle) == 1)
             {
-                [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+                //[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
                 NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
                 [dateFormatter setTimeZone:gmt];
                 //[dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a Z"];
