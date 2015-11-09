@@ -352,8 +352,13 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         allowedHeaders = [MailHeader getConfigValue:@"AllowedHeaders" languageCode:MHLocaleIdentifier];
         messageAttribution = [[NSMutableArray alloc] init];
         
-        for (NSString *str in allowedHeaders)
+        //for (NSString *str in allowedHeaders)
+        // for issue #94 - https://github.com/jeevatkm/ReplyWithHeader/issues/94
+        for (int h=0; h< [allowedHeaders count]; h++)
         {
+            NSString *str = [allowedHeaders objectAtIndex:h];
+            bool found = false;
+            
             for (int i=0; i<[headers count]; i++)
             {
                 NSString *row = [headers objectAtIndex:i];
@@ -364,10 +369,16 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
                     NSString *label = [row substringToIndex:range.location];
                     if (NSOrderedSame == [str localizedCaseInsensitiveCompare:label])
                     {
+                        found = true;
                         [messageAttribution addObject:[row mutableAttributedString]];
                         break;
                     }
                 }
+            }
+            
+            if (h==1 && !found) // empty Subject header
+            {
+                [messageAttribution addObject:[[NSString stringWithFormat:@"%@:", str] mutableAttributedString]];
             }
         }
     }
@@ -480,8 +491,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     NSRange range;
     
     range = [[row string] rangeOf:@":"];
-    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];
-    
+    [row replaceCharactersInRange:NSMakeRange(0, range.location) withString:subjectPrefix];    
 }
 
 - (void)applyDateAttibutionStyle
