@@ -8,12 +8,12 @@
     "STRING_FROM" = "De";
     "STRING_SUBJECT" = "Assunto";
     "STRING_DATE" = "Data";
-    "STRING_TO" = "To";
+    "STRING_TO" = "Para";
     "STRING_CC" = "Cc";
     "STRING_REPLY_TO" = "Reply-To";
     "STRING_SENT" = "Enviado";
     "STRING_WROTE" = "escreveu";
-    "STRING_FORWARDED_MESSAGE" = "escreveu";
+    "STRING_FORWARDED_MESSAGE" = "Encaminhou";
     "STRING_SEARCH_PREFIX_SUBJECT_REPLY" = "Re: ";
     "STRING_SEARCH_PREFIX_SUBJECT_FWD" = "Fwd: ";
     "STRING_REPLACE_PREFIX_SUBJECT_REPLY" = "RE: ";
