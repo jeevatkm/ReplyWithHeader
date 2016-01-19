@@ -29,7 +29,7 @@
 	<key>MHAppCastURL</key>
 	<string>http://myjeeva.com/replywithheader.json</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2015 Jeevanandam M., All rights reserved.</string>
+	<string>© 2016 Jeevanandam M., All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>MailHeader</string>
 </dict>
