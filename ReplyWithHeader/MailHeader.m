@@ -424,11 +424,21 @@
     {
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:[self localeIdentifier]];
         NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:[self localeIdentifier]];
+    
+        NSString *msgStr = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author - https://github.com/jeevatkm/ReplyWithHeader/issues.", [self bundleNameAndVersion], name, [self localeIdentifier]];
         
-        NSLog(@"WARNING :: %@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author for support (http://myjeeva.com/replywithheader).",
-              [self bundleNameAndVersion], name, [self localeIdentifier]);
+        //NSLog(@"WARNING :: %@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author for support (http://myjeeva.com/replywithheader).", [self bundleNameAndVersion], name, [self localeIdentifier]);
+        
+        NSLog(@"WARNING :: %@", msgStr);
         
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
+        
+        NSAlert *warnAlert = [[NSAlert alloc] init];        
+        [warnAlert setAlertStyle:NSWarningAlertStyle];
+        [warnAlert setMessageText:[NSMutableString stringWithFormat:@"Warning: %@", [MailHeader bundleNameAndVersion]]];
+        [warnAlert setInformativeText:msgStr];
+        [warnAlert setIcon:[MailHeader bundleLogo]];
+        [warnAlert runModal];
     }
 
     if (![self isEnabled])
