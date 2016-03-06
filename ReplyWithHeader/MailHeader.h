@@ -54,7 +54,6 @@
 + (id)getConfigValue:(NSString *)key;
 + (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
 + (NSString *)osxVersionString;
-//+ (NSString *)getOSXVersion; // TODO - cleanup before release
 + (BOOL)isYosemite;
 + (BOOL)isElCapitan;
 

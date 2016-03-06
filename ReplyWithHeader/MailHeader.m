@@ -298,39 +298,6 @@
     return [[NSProcessInfo processInfo] operatingSystemVersionString];
 }
 
-/*+ (NSString *)getOSXVersion // TODO - cleanup before release
-{
-    
-    NSString *version = @"";
-    double versionNumber = floor(NSAppKitVersionNumber);
-    MHLog(@"getOSXVersion: versionNumber- %f", versionNumber);
-    
-    if (versionNumber == 1138) // NSAppKitVersionNumber10_7
-    {
-        version = @"10.7";
-    }
-    else if (versionNumber == 1187) // NSAppKitVersionNumber10_8
-    {
-        version = @"10.8";
-    }
-    else if (versionNumber == 1265) // NSAppKitVersionNumber10_9
-    {
-        version = @"10.9";
-    }
-    else if (versionNumber >= 1343 && versionNumber <= 1380) // NSAppKitVersionNumber10_10 to 10_10_3 - 1347 // 10_10_4 - 1348
-    {
-        version = @"10.10";
-    }
-    else if (versionNumber >= 1386)// NSAppKitVersionNumber10_11 // 1386 onwards
-    {
-        version = @"10.11";
-    }
-    
-    MHLog(@"getOSXVersion: %@", version);
-    
-    return version;
-} */
-
 + (BOOL)isLion // 10.7.x
 {
     double vn = floor(NSAppKitVersionNumber);

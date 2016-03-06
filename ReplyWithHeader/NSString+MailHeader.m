@@ -84,12 +84,6 @@
     return [[NSAttributedString alloc] initWithString:[[self trim] copy]];
 }
 
-//    NSDictionary *exportParams1 = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
-//    NSData *htmlData = [finalHeader dataFromRange:NSMakeRange(0, [finalHeader length]) documentAttributes:exportParams1 error:nil];
-//    NSString *htmlStr = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
-//    NSLog(@"HTML String: %@", htmlStr);
-
-
 + (NSString *) ToHTML:(NSMutableAttributedString *)aString
 {
     NSArray *excluded = [NSArray arrayWithObjects: @"doctype", @"html",

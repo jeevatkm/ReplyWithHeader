@@ -125,7 +125,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 - (WebArchive *)getWebArchive
 {
-    // TODO - cleanup before release
 //    NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
 //    
 //    for (int i=0; i<[messageAttribution count]; i++)
@@ -156,7 +155,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
 - (NSString *)getHTML
 {
-    // TODO - cleanup before release
 //    NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
 //    
 //    for (int i=0; i<[messageAttribution count]; i++)
@@ -318,7 +316,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             if ([nonKeys count] > 0)
             {
                 // Special case
-                //if ([[MailHeader getOSXVersion] isEqualToString:@"10.10"]) TODO - cleanup before release
                 if ([MailHeader isYosemite])
                 {
                     MHLog(@"Special header [%@] handling in Yosemite for this message.", nonKeys);
@@ -670,19 +667,6 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     }
     
     return hdr;
-    
-    // TODO - cleanup before release
-//    if ([value length] > 0) {
-//        if ([value isEqualToString:@"1"]) {
-//            value = @"high";
-//        } else if ([value isEqualToString:@"5"]) {
-//            value = @"low";
-//        }
-//        
-//        hdr = [NSString stringWithFormat:@"Importance: %@", [value capitalizedString]];
-//    }
-//    
-//    return hdr;
 }
 
 - (NSMutableAttributedString *) getFinalHeader

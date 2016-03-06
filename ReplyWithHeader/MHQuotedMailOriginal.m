@@ -105,7 +105,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 - (void)insertMailHeader:(MHHeaderString *)mailHeader
 {
     
-    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled)) // TODO - cleanup before release
+    //if (GET_DEFAULT_BOOL(MHHeaderOptionEnabled))
     //{
         [mailHeader applyHeaderLabelOptions];
     //}
@@ -119,7 +119,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = nil;
     
-    //if ([[MailHeader getOSXVersion] isEqualToString:@"10.11"]) { TODO - cleanup before release
     if ([MailHeader isElCapitan]) {
         MHLog(@"It's EL capitan, handle accordingly");
         headerFragment = [self paragraphTagToSpanTagByString:[mailHeader getHTML]];
@@ -127,7 +126,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
         
         // for issue #64
-        //headerFragment = [self paragraphTagToSpanTag:headerFragment]; // TODO - cleanup before release
+        //headerFragment = [self paragraphTagToSpanTag:headerFragment];
         headerFragment = [self paragraphTagToSpanTagByString:[[headerFragment firstChild] outerHTML]];
     }
     
@@ -415,26 +414,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     NSString *htmlString = [[headerFragment firstChild] outerHTML];
     
     return [self paragraphTagToSpanTagByString:htmlString];
-    
-    // TODO - cleanup before release
-//    MHLog(@"Paragraph based HTML string %@", htmlString);
-//    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<p" withString:@"<span" options:1 range:NSMakeRange(0, [htmlString length])];
-//    htmlString = [htmlString stringByReplacingOccurrencesOfString:@"</p>" withString:@"</span><br/>" options:1 range:NSMakeRange(0, [htmlString length])];
-//    MHLog(@"Span based HTML string %@", htmlString);
-//    
-//    // Adding Line Space
-//    // https://github.com/jeevatkm/ReplyWithHeader/issues/84
-//    int linesBefore = GET_DEFAULT_INT(MHLineSpaceBeforeHeader);
-//    for (int i=0; i<linesBefore; i++) {
-//        htmlString = [NSString stringWithFormat:@"%@%@", @"<br/>", htmlString];
-//    }
-//    
-//    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
-//    for (int i=0; i<linesAfter; i++) {
-//        htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br/>"];
-//    }
-//    
-//    return [self createDocumentFragment:htmlString];
 }
 
 - (DOMDocumentFragment *)paragraphTagToSpanTagByString:(NSString *) htmlString
