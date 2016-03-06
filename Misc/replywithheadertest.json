@@ -1,0 +1,148 @@
+{
+    "title": "ReplyWithHeader Mail Plugin/Bundle's Changelog",
+    "homepage": "http://myjeeva.com/replywithheader",
+    "description": "Most recent changes with release notes and links to updates.",
+    "language": "en",
+    "releases": {
+        "latest": {
+            "title": "Version 5.1 (1 new feature, 2 enhancements, 3 bugs)",
+            "pubDate": "Sunday, Mar 06 2016 00:11:00 -0700",
+            "buildDate": "Sunday, Mar 06 2016 00:11:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v5.1.zip",
+            "version": "5.1",
+            "shortVersion": "5.1",
+            "length": 214299,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.1 (1 new features, 2 enhancements, 3 bugs)</div><div style='background-color:#223161;width:100%;font-size:11px;line-height:16px;color:#fff;font-family:Helvetica,Georgia,Serif;text-align:center'>My apologies for delay in v5.1 release.</div><div><ul><li>Support for OS X El Capitan</li><li>Honoring Email aliases too while reply-all on to list</li><li>Bringing Locale and GMT date format for header</li><li>Dutch translation update</li><li>Addressed issue of plugin hangs if Subject value is empty</li></ul></div></body></html>"
+        },
+        "v5.0": {
+            "title": "Version 5.0 (2 new features, 3 enhancements, 1 bug)",
+            "pubDate": "Saturday, Jun 13 2015 09:36:00 -0700",
+            "buildDate": "Saturday, Jun 13 2015 09:36:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v5.0.zip",
+            "version": "5.0",
+            "shortVersion": "5.0",
+            "length": 206922,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.0 (2 new features, 3 enhancements, 1 bug)</div><div style='background-color:#223161;width:100%;font-size:11px;line-height:16px;color:#fff;font-family:Helvetica,Georgia,Serif;text-align:center'>Added donation options, support ReplyWithHeader.</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:18px'><li>Improved options and possibilties with RWH</li><li>Ability to add 'full raw headers' of email message (only in english)</li><li>Outlook Reply-All Parity with Apple Mail</li><li>Added 'Importance' header attribution</li><li>Improved 'Date' parsing & formating as per Locale</li><li>Header line spaces (before seperator, before header & after header)</li><li>Addressed an issue of Account Tab can't resize while in focus</li></ul></div></body></html>"
+        },
+        "v4.9": {
+            "title": "Version 4.9 (3 enhancements, 1 bug)",
+            "pubDate": "Saturday, Mar 21 2015 11:47:00 -0700",
+            "buildDate": "Saturday, Mar 21 2015 11:47:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v4.9.zip",
+            "version": "4.9",
+            "shortVersion": "4.9",
+            "length": 194841,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.9 (3 enhancements, 1 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Addressed unreadable chars in header</li><li>Correction of Russian localization string value</li><li>Initial implementation of sent date format as per selected language</li><li>Added donation options, support ReplyWithHeader</li></ul></div></body></html>"
+        },
+    	"v4.8": {
+            "title": "Version 4.8 (2 enhancements, 1 bug)",
+            "pubDate": "Sunday, Oct 12 2014 05:21:00 -0800",
+            "buildDate": "Sunday, Oct 12 2014 05:21:00 -0800",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.8.zip",
+            "version": "4.8",
+            "shortVersion": "4.8",
+            "length": 182367,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.8 (2 enhancements, 1 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Improve handling of Blockquote Tag for Header attribution</li><li>Handling of Yosemite Beta 4 & Beta 5 internal Mail.app APIs changes</li><li>Email Subject prefix feature is not enabled by default, user can enable it on demand</li></ul></div></body></html>"
+        },
+    	"v4.7": {
+            "title": "Version 4.7 (1 bug)",
+            "pubDate": "Saturday, Sep 13 2014 10:56:00 -0800",
+            "buildDate": "Saturday, Sep 13 2014 10:56:00 -0800",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.7.zip",
+            "version": "4.7",
+            "shortVersion": "4.7",
+            "length": 182761,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.7 (1 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Strange Behavior in v4.6 release (non-english and few english email content doesn't have header attribution)</li></ul></div></body></html>"
+        },
+    	"v4.6": {
+            "title": "Version 4.6 (1 enhancement, 2 bug)",
+            "pubDate": "Tuesday, Sep 09 2014 18:44:00 -0800",
+            "buildDate": "Tuesday, Sep 09 2014 18:44:00 -0800",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.6.zip",
+            "version": "4.6",
+            "shortVersion": "4.6",
+            "length": 182314,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.6 (1 enhancement, 2 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>OS X 10.10 Yosemite support added</li><li>Extra blank lines in Gmail.com and Outlook.com web clients</li><li>Installer fix - Check message framework for 10.7 & 10.8 only</li></ul></div></body></html>"
+        },
+    	"v4.5": {
+            "title": "Version 4.5 (1 new feature, 1 bug)",
+            "pubDate": "Monday, Jul 21 2014 12:54:00 -0800",
+            "buildDate": "Monday, Jul 21 2014 12:54:00 -0800",
+            "downloadUrl": "http://dl.macupdate.com/prod/ReplyWithHeader-v4.5.zip",
+            "version": "4.5",
+            "shortVersion": "4.5",
+            "length": 174786,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.5 (1 new feature, 1 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Automatic Signature selection option for reply/forward email</li><li>Plugin Update Window Download Button Typo Fix</li></ul></div></body></html>"
+        },
+    	"v4.4": {
+            "title": "Version 4.4 (1 enhancement, 3 bug)",
+            "pubDate": "Fri, Apr 04 2014 17:33:00 +0530",
+            "buildDate": "Fri, Apr 04 2014 17:33:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.4.zip",
+            "version": "4.4",
+            "shortVersion": "4.4",
+            "length": 164220,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.4 (1 enhancement, 3 bug)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>'Norwegian Bokmål (nb, no)' locale support added</li><li>Resolved permission issue of Root user installing plugin</li><li>UI enable/disable sync issue updated</li><li>Feedback button click issue resolved</li></ul></div></body></html>"
+        },
+        "v4.3": {
+            "title": "Version 4.3 (1 new feature, 1 enhancement)",
+            "pubDate": "Fri, Jan 03 2014 19:14:00 +0530",
+            "buildDate": "Fri, Jan 03 2014 19:14:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.3.zip",
+            "version": "4.3",
+            "shortVersion": "4.3",
+            "length": 162346,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='background-color:#0066cc;width:100%;border-bottom-style:dotted;border-bottom-color:#fff;border-width:1px;padding:10px;color:#fff;font-family: Candara, Calibri, Segoe, Optima, Arial, sans-serif;text-align:center;font-weight:bold;'>Wish you a Happy New Year 2014<br /><i>- Jeeva</i></div><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.3 (1 new feature, 1 enhancement)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Implementation of From header label style</li><li>Handled header style implicitly for all mail clients, removed Entourage 2004 option from mail preferences</li></ul></div></body></html>"
+        },
+        "v4.2": {
+            "title": "Version 4.2 (1 new feature, 2 bug fixes, 4 enhancement)",
+            "pubDate": "Sat, Nov 23 2013 17:20:00 +0530",
+            "buildDate": "Sat, Nov 23 2013 17:20:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.2.zip",
+            "version": "4.2",
+            "shortVersion": "4.2",
+            "length": 170207,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='background-color:#0066cc;width:100%;border-bottom-style:dotted;border-bottom-color:#fff;border-width:1px;padding:10px;color:#fff;font-family: Candara, Calibri, Segoe, Optima, Arial, sans-serif;text-align:center;font-weight:bold;'>Spread The Word<br /><div style='font-weight:normal;margin-top:6px;'>Let Mail.app users know about<br />'Wonderful new face of ReplyWithHeader'<br /><i>- Jeeva</i></div></div><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px;'>Version 4.2 (1 new feature, 2 bug fixes, 4 enhancement)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Multilingual – plugin fully supports header attribution in 15 languages. [Deutsch, English, español, français, italiano, 日本語, 한국어, Nederlands, português (Portugal), português, русский, svenska, українська, 中文（简体中文）, 中文（繁體中文）]</li> <li>Header attribution in choosen language regardless of system locale/language</li> <li>Dynamic UUIDs processing, after every new version of Mail.app update.  Simply, user have to do is to just run the installer of Install-or-Upgrade-or-Reenable.command to re-enable the plugin</li> <li>Clean handling of forward header [From, Subject, Date, To, Cc], rest are suppressed from header attribution</li> <li>Improved handling of line spaces between header and plain text message</li><li>Considering all en-* locale into one umbrella</li><li>Single quotes handling in labels</li><li>Latest MailHub Compatibility</li></ul></div></body></html>"
+        },
+    	"4.1": {
+            "title": "Version 4.1 (1 new features, 1 bug fix, 1 enhancement)",
+            "pubDate": "Tue, Oct 29 2013 12:14:00 +0530",
+            "buildDate": "Tue, Oct 29 2013 12:14:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.1.zip",
+            "version": "4.1",
+            "shortVersion": "4.1",
+            "length": 142233,
+            "releaseNotes": "<div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;'>Version 4.1 (1 new features, 1 bug fix)</div><div><ul style='font-family:Helvetica,Georgia,Serif;font-size:12px;line-height:20px;'><li>Added fix: plugin breaks in non-english locale</li><li>Introduced new feature 'Remove signature for reply &amp; forward' message</li><li>Outlook email address labeling is available to non-english locale</li></ul></div>"
+        },
+    	"4.0": {
+            "title": "Version 4.0 (5 new features, 5 enhancements)",
+            "pubDate": "Thu, Oct 24 2013 20:45:00 +0530",
+            "buildDate": "Thu, Oct 24 2013 20:45:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader-v4.0.zip",
+            "version": "4.0",
+            "shortVersion": "4.0",
+            "length": 169096,
+            "releaseNotes": "<div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;'>Version 4.0 (5 new features, 5 enhancements)</div><div><ul><li>Added OS X 10.9 Mavericks support</li><li>Header typography: applies font, size, color to reply & forward headers</li><li>Brings Outlook Mail similar header functionalities/capabilities into Mail.app</li><li>Header Label [Date=>Sent, Names being used instead of email address]</li><li>Header Ordering [From, Sent, To, CC, Subject]</li><li>Outgoing Mail Subject Prefix [Re: => RE: and Fwd: => FW:]</li><li>Separator: Light blue thin line above header</li><li>Plugin completely manages Forward Header in Mail.app</li><li>Plugin will notifies user about new version availability & upgrade</li><li>Consummate handing of Plain Text email</li><li>Suppression of ‘Reply-To’ Label from reply and forward headers</li></ul></div>"
+        },
+        "3.6": {
+            "title": "Version 3.6 (4 enhancements; 1 suggestion)",
+            "pubDate": "Sun, Sep 29 2013 08:54:00 +0530",
+            "buildDate": "Sun, Sep 28 2013 14:19:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader.mailbundle-3.6.zip",
+            "version": "3.6",
+            "shortVersion": "3.6",
+            "length": 195993,
+            "releaseNotes": ""
+        },
+        "3.6-prerelease": {
+            "title": "Version 3.6 Release Candidate (4 enhancements; 1 suggestion)",
+            "pubDate": "Fri, Sep 20 2013 19:34:00 +0530",
+            "buildDate": "Fri, Sep 28 2013 19:34:00 +0530",
+            "downloadUrl": "https://www.macupdate.com/download/49256/ReplyWithHeader.mailbundle.pre-release-3.6.zip",
+            "version": "3.6rc",
+            "shortVersion": "3.6rc",
+            "length": 232837,
+            "releaseNotes": ""
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "title": "ReplyWithHeader Mail Plugin/Bundle's Changelog",
+    "homepage": "http://myjeeva.com/replywithheader",
+    "description": "Most recent changes with release notes and links to updates.",
+    "language": "en",
+    "releases": {
+        "latest": {
+            "title": "Version 5.1 (1 new feature, 2 enhancements, 3 bugs)",
+            "pubDate": "Sunday, Mar 06 2016 00:11:00 -0700",
+            "buildDate": "Sunday, Mar 06 2016 00:11:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v5.1.zip",
+            "version": "5.1",
+            "shortVersion": "5.1",
+            "length": 214299,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.1 (1 new features, 2 enhancements, 3 bugs)</div><div style='background-color:#223161;width:100%;font-size:11px;line-height:16px;color:#fff;font-family:Helvetica,Georgia,Serif;text-align:center'>My apologies for delay in v5.1 release.</div><div><ul><li>Support for OS X El Capitan</li><li>Honoring Email aliases too while reply-all on to list</li><li>Bringing Locale and GMT date format for header</li><li>Dutch translation update</li><li>Addressed issue of plugin hangs if Subject value is empty</li></ul></div></body></html>"
+        }
+    }
+}
