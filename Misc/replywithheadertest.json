@@ -5,6 +5,16 @@
     "language": "en",
     "releases": {
         "latest": {
+            "title": "Version 5.2-beta (1 enhancement)",
+            "pubDate": "Saturday, Sep 03 2016 13:45:00 -0700",
+            "buildDate": "Saturday, Sep 03 2016 13:45:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v5.2-beta.zip",
+            "version": "5.2-beta",
+            "shortVersion": "5.2-beta",
+            "length": 215421,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.2-beta (1 enhancement)</div><div><ul><li>Added support for Mac OS Sierra</li></ul></div></body></html>"
+        },
+        "v5.1": {
             "title": "Version 5.1 (1 new feature, 2 enhancements, 3 bugs)",
             "pubDate": "Sunday, Mar 06 2016 00:11:00 -0700",
             "buildDate": "Sunday, Mar 06 2016 00:11:00 -0700",
