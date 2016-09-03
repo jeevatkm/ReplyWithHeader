@@ -83,6 +83,11 @@ mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist Plug
     if [[ ! -z "${mh_mail_app_uuid}" ]]; then
         echo "RWH:: Adding UUID ${mh_mail_app_uuid}"
         defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        
+        if [[ ${mh_mac_osx_version_p} == *"10.12"* ]]; then
+            echo "RWH:: Adding UUID ${mh_mail_app_uuid} for Sierra"
+            defaults write ${mh_plugin_plist} Supported10.12PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        fi
     fi
 fi
 

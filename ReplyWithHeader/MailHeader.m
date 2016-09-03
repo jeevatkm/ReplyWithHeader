@@ -394,8 +394,6 @@
     
         NSString *msgStr = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author - https://github.com/jeevatkm/ReplyWithHeader/issues.", [self bundleNameAndVersion], name, [self localeIdentifier]];
         
-        //NSLog(@"WARNING :: %@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author for support (http://myjeeva.com/replywithheader).", [self bundleNameAndVersion], name, [self localeIdentifier]);
-        
         NSLog(@"WARNING :: %@", msgStr);
         
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);

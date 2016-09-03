@@ -125,25 +125,8 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 - (WebArchive *)getWebArchive
 {
-//    NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
-//    
-//    for (int i=0; i<[messageAttribution count]; i++)
-//    {
-//        [finalHeader appendAttributedString:[messageAttribution objectAtIndex:i]];
-//        [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-//    }
-//    
-//    // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/85
-//    if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
-//    {
-//        for (int i=0; i<[allHeaders count]; i++)
-//        {
-//            [finalHeader appendAttributedString:[allHeaders objectAtIndex:i]];
-//            [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-//        }
-//    }
-//    
-//    MHLog(@"final header values before web archiving %@", finalHeader);
+    // MHLog(@"final header values before web archiving %@", finalHeader);
+    
     NSMutableAttributedString *finalHeader = [self getFinalHeader];    
     WebArchive *webarch = [finalHeader
                            webArchiveForRange:NSMakeRange(0, [finalHeader length])
@@ -155,26 +138,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
 - (NSString *)getHTML
 {
-//    NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
-//    
-//    for (int i=0; i<[messageAttribution count]; i++)
-//    {
-//        [finalHeader appendAttributedString:[messageAttribution objectAtIndex:i]];
-//        [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-//    }
-//    
-//    if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
-//    {
-//        for (int i=0; i<[allHeaders count]; i++)
-//        {
-//            [finalHeader appendAttributedString:[allHeaders objectAtIndex:i]];
-//            [finalHeader appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-//        }
-//    }
-//    
-//    MHLog(@"final header values before web archiving %@", finalHeader);
-    
-    //NSMutableAttributedString *finalHeader = [self getFinalHeader];
+    // MHLog(@"final header values before web archiving %@", finalHeader);
     
     NSString *htmlStr = [NSString ToHTML:[self getFinalHeader]];
     MHLog(@"HTML String: %@", htmlStr);
