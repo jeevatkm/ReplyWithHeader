@@ -11,6 +11,7 @@
 #  1.1	Added dynamic UUID processing and few enhancements
 #  1.2  Revising enable plugin logic
 #  1.3  Improved OS X version print and added color support to highlight text
+#  1.4  Added support for Mac OS Sierra
 #
 
 mh_user=${USER}
