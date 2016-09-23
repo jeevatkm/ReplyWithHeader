@@ -71,6 +71,14 @@
     else if ([identifier hasPrefix:@"no"]
              || [identifier hasPrefix:@"nb"])
         identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
+    else if ([identifier hasPrefix:@"de"])
+        identifier = @"de"; // considering all de-* into one umberlla
+    else if ([identifier hasPrefix:@"it"])
+        identifier = @"it"; // considering all it-* into one umberlla
+    else if ([identifier hasPrefix:@"nl"])
+        identifier = @"nl"; // considering all nl-* into one umberlla
+    else if ([identifier hasPrefix:@"sv"])
+        identifier = @"sv"; // considering all sv-* into one umberlla
     
     return [identifier trim];
 }
