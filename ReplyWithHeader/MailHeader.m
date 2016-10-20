@@ -62,23 +62,41 @@
 {
     NSString *identifier = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0];
     
-    if ([identifier isEqualToString:@"zh_CN"])
-        identifier = @"zh-Hans";
-    else if ([identifier isEqualToString:@"zh_TW"])
-        identifier = @"zh-Hant";
-    else if ([identifier hasPrefix:@"en"])
+    if ([identifier hasPrefix:@"en"])
         identifier = @"en"; // for issue #39 - considering all en-* into one umberlla
+    else if ([identifier hasPrefix:@"zh-Hans"] || [identifier isEqualToString:@"zh_CN"])
+        identifier = @"zh-Hans";
+    else if ([identifier hasPrefix:@"zh-Hant"] || [identifier isEqualToString:@"zh_TW"])
+        identifier = @"zh-Hant";
     else if ([identifier hasPrefix:@"no"]
              || [identifier hasPrefix:@"nb"])
         identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
     else if ([identifier hasPrefix:@"de"])
-        identifier = @"de"; // considering all de-* into one umberlla
+        identifier = @"de";
+    else if ([identifier hasPrefix:@"es"])
+        identifier = @"es";
+    else if ([identifier hasPrefix:@"fr"])
+        identifier = @"fr";
     else if ([identifier hasPrefix:@"it"])
-        identifier = @"it"; // considering all it-* into one umberlla
+        identifier = @"it";
+    else if ([identifier hasPrefix:@"ja"])
+        identifier = @"ja";
+    else if ([identifier hasPrefix:@"ko"])
+        identifier = @"ko";
     else if ([identifier hasPrefix:@"nl"])
-        identifier = @"nl"; // considering all nl-* into one umberlla
+        identifier = @"nl";
+    else if ([identifier hasPrefix:@"pt-BR"])
+        identifier = @"pt-BR";
+    else if ([identifier hasPrefix:@"pt-PT"])
+        identifier = @"pt-PT";
+    else if ([identifier hasPrefix:@"pt"])
+        identifier = @"pt";
+    else if ([identifier hasPrefix:@"ru"])
+        identifier = @"ru";
     else if ([identifier hasPrefix:@"sv"])
-        identifier = @"sv"; // considering all sv-* into one umberlla
+        identifier = @"sv";
+    else if ([identifier hasPrefix:@"uk"])
+        identifier = @"uk";
     
     return [identifier trim];
 }
