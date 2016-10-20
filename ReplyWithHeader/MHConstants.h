@@ -47,7 +47,7 @@
 #define MHDefaulReplyHeaderBorder @"---------- Original Message ----------<br />"
 #define MHDefaultForwardHeaderBorder @"---------- Forwarded Message ----------<br />"
 #define MHHeaderBorder @"<hr style='border:none;border-top:solid #B5C4DF 1.0pt;padding:0 0 0 0;margin:10px 0 5px 0;' />"
-#define MHDefaultHeaderFontName @"Tahoma"
+#define MHDefaultHeaderFontName @"Helvetica"
 #define MHDefaultHeaderFontSize @"13"
 #define MHHeaderFontName @"MHHeaderFontName"
 #define MHHeaderFontSize @"MHHeaderFontSize"
