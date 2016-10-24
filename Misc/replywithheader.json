@@ -5,14 +5,14 @@
     "language": "en",
     "releases": {
         "latest": {
-            "title": "Version 5.2-beta (1 enhancement)",
-            "pubDate": "Saturday, Sep 03 2016 13:45:00 -0700",
-            "buildDate": "Saturday, Sep 03 2016 13:45:00 -0700",
-            "downloadUrl": "https://www.macupdate.com/download/49256/replywithheader-v5.2-beta.zip",
-            "version": "5.2-beta",
-            "shortVersion": "5.2-beta",
-            "length": 215421,
-            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.2-beta (1 enhancement)</div><div><ul><li>Added support for Mac OS Sierra</li></ul></div></body></html>"
+            "title": "Version 5.2 (2 enhancements)",
+            "pubDate": "Monday, Oct 24 2016 11:01:00 -0700",
+            "buildDate": "Saturday, Oct 23 2016 16:19:00 -0700",
+            "downloadUrl": "https://www.macupdate.com/app/mac/49256/replywithheader/download",
+            "version": "5.2",
+            "shortVersion": "5.2",
+            "length": 207391,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.2 (2 enhancement)</div><div><ul><li>Added support for Mac OS Sierra</li><li>Adapted to Mac OS Sierra localization changes</li></ul></div></body></html>"
         }
     }
 }
