@@ -57,7 +57,7 @@ Below is a short description of the external classes inside ReplyWithHeader:
 
 License
 -------
-ReplyWithHeader plugin is released under [MIT License][4]
+ReplyWithHeader plugin is released under [MIT License](LICENSE)
 
 
 [1]: http://myjeeva.com
