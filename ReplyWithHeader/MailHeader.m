@@ -348,7 +348,7 @@
     return vn >= NSAppKitVersionNumber10_10 && vn <= 1380; // some higher number but less 10.11 beta which starts from 1386
 }
 
-+ (BOOL)isElCapitan // 10.11.x
++ (BOOL)isElCapitanOrGreater // 10.11.x or greater
 {
     // since AppKit Version for 10.11 beta starts from 1386
     return floor(NSAppKitVersionNumber) >= 1386;

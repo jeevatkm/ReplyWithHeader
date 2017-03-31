@@ -87,9 +87,9 @@
         // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90
         NSString *uniqueId = @"";
 
-        if ([MailHeader isElCapitan])
+        if ([MailHeader isElCapitanOrGreater])
         {
-            MHLog(@"It's El Capitan, handle accordingly");
+            MHLog(@"It's El Capitan or greater, handle accordingly");
             uniqueId = [[self account] valueForKey:@"identifier"];
         }
         else

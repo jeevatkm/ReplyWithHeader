@@ -84,7 +84,7 @@
     if ([addressField respondsToSelector:@selector(addresses)])
     {
         id docEditor;
-        if ([MailHeader isElCapitan])
+        if ([MailHeader isElCapitanOrGreater])
         {
             docEditor = [self valueForKey:@"_composeViewController"];
         }
@@ -92,6 +92,7 @@
         {
             docEditor = [self valueForKey:@"_documentEditor"];
         }
+        MHLog(@"RWH: %@", docEditor);
         
         id mcMessageHeaders = [[docEditor backEnd] originalMessageHeaders];
         id account = [self mailAccount];
@@ -106,15 +107,17 @@
             // Preparing Cc list
             NSArray *oldToList = [[self valueForKey:@"_toField"] addresses];
             NSMutableArray *currentCcList = [[[self valueForKey:@"_ccField"] addresses] mutableCopy];
-            [currentCcList removeObjectsInArray:oldToList];
-            [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
-            MHLog(@"Updated CC list: %@", currentCcList);
+            if (currentCcList)
+            {
+                [currentCcList removeObjectsInArray:oldToList];
+                [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
+                MHLog(@"Updated CC list: %@", currentCcList);
+            }
             
             // Preparing To list
             NSMutableArray *newToAddressList = [[NSMutableArray alloc] init];
             id fromAddress = [mcMessageHeaders addressListForKey:@"from"];
             id toAddressList = [mcMessageHeaders addressListForKey:@"to"];
-            
             MHLog(@"From: %@, To: %@", fromAddress, toAddressList);
             
             if (fromAddress)
@@ -129,7 +132,6 @@
             
             NSArray *emailIds = [self findAccountEmailIds];
             MHLog(@"Found email Ids for removal: %@", emailIds);
-            
             for(int i=0; i<[emailIds count]; i++)
             {
                 NSString *emailId = [emailIds objectAtIndex:i];
@@ -149,11 +151,12 @@
             
             MHLog(@"newToAddressList: %@", newToAddressList);
             [[self valueForKey:@"_toField"] setAddresses:newToAddressList];
+            
         }
     }
     else
     {
-        MHLog(@"Outlook Reply behavior is not applied");
+        MHLog(@"Outlook Reply All behavior is not applied");
     }
 }
 
@@ -167,19 +170,23 @@
     
     if (emailAliases == nil)
     {
-        MHLog(@"emailAliases is nil");
-        [emailIds addObject:[account firstEmailAddress]];
+        MHLog(@"emailAliases is nil also firstEmailAddress: %@", [account firstEmailAddress]);
+        if ([account firstEmailAddress])
+        {
+            [emailIds addObject:[account firstEmailAddress]];
+        }
     }
     else
     {
-        MHLog(@"emailAliases is not nil");
-        if ([MailHeader isElCapitan])
+        MHLog(@"emailAliases is not nil: %@", emailAliases);
+        if ([MailHeader isElCapitanOrGreater])
         {
-            MHLog(@"In El Capitan mode");
+            MHLog(@"In El Capitan or greater mode");
             NSArray *emailAddresses = [[emailAliases objectAtIndex:0] valueForKey:@"EmailAddresses"];
             for (int i=0; i<[emailAddresses count]; i++)
             {
                 NSString *emailId = [[emailAddresses objectAtIndex:i] valueForKey:@"EmailAddress"];
+                MHLog(@"emailId: %@", emailId);
                 
                 if ([emailId rangeOf:@","].location != NSNotFound)
                 {
@@ -193,7 +200,7 @@
         }
         else
         {
-            MHLog(@"Not a El Capitan mode");
+            MHLog(@"Lesser version than El Capitan mode");
             for(int i=0; i<[emailAliases count]; i++) {
                 [emailIds addObject:[emailAliases[i] valueForKey:@"alias"]];
             }

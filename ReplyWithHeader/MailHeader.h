@@ -55,7 +55,7 @@
 + (id)getConfigValue:(NSString *)key languageCode:(NSString *)code;
 + (NSString *)osxVersionString;
 + (BOOL)isYosemite;
-+ (BOOL)isElCapitan;
++ (BOOL)isElCapitanOrGreater;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

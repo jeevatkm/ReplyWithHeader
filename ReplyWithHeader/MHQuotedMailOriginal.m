@@ -119,8 +119,8 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     BOOL manageForwardHeader = GET_DEFAULT_BOOL(MHForwardHeaderEnabled);
     DOMDocumentFragment *headerFragment = nil;
     
-    if ([MailHeader isElCapitan]) {
-        MHLog(@"It's EL capitan, handle accordingly");
+    if ([MailHeader isElCapitanOrGreater]) {
+        MHLog(@"It's EL capitan or greater, handle accordingly");
         headerFragment = [self paragraphTagToSpanTagByString:[mailHeader getHTML]];
     } else {
         headerFragment = [[document htmlDocument] createFragmentForWebArchive:[mailHeader getWebArchive]];
@@ -242,7 +242,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     DOMNodeList *nodeList;
     DOMHTMLElement *emailDocument;
     
-    if (([MailHeader isYosemite] || [MailHeader isElCapitan]) && [self isBlockquoteTagPresent])
+    if (([MailHeader isYosemite] || [MailHeader isElCapitanOrGreater]) && [self isBlockquoteTagPresent])
     {
         emailDocument = (DOMHTMLElement *)[self getBlockquoteTagNode];
         nodeList = [emailDocument childNodes];
