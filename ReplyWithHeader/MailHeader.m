@@ -327,32 +327,48 @@
 + (BOOL)isLion // 10.7.x
 {
     double vn = floor(NSAppKitVersionNumber);
+    
+    // NSAppKitVersionNumber10_7 = 1138
     return vn >= NSAppKitVersionNumber10_7 && vn < NSAppKitVersionNumber10_8;
 }
 
 + (BOOL)isMountainLion // 10.8.x
 {
     double vn = floor(NSAppKitVersionNumber);
+    
+    // NSAppKitVersionNumber10_8 = 1187
     return vn >= NSAppKitVersionNumber10_8 && vn < NSAppKitVersionNumber10_9;
 }
 
 + (BOOL)isMavericks // 10.9.x
 {
     double vn = floor(NSAppKitVersionNumber);
+    
+    // NSAppKitVersionNumber10_9 = 1265
     return vn >= NSAppKitVersionNumber10_9 && vn < NSAppKitVersionNumber10_10;
 }
 
 + (BOOL)isYosemite // 10.10.x
 {
     double vn = floor(NSAppKitVersionNumber);
-    return vn >= NSAppKitVersionNumber10_10 && vn <= 1380; // some higher number but less 10.11 beta which starts from 1386
+    
+    // NSAppKitVersionNumber10_10 = 1343
+    // NSAppKitVersionNumber10_10_Max = 1349
+    return vn >= NSAppKitVersionNumber10_10 && vn <= NSAppKitVersionNumber10_10_Max;
 }
 
 + (BOOL)isElCapitanOrGreater // 10.11.x or greater
 {
-    // since AppKit Version for 10.11 beta starts from 1386
-    return floor(NSAppKitVersionNumber) >= 1386;
+    // NSAppKitVersionNumber10_11 = 1404
+    return floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_11;
 }
+
++ (BOOL)isSierraOrGreater // 10.12.x or greater
+{
+    // NSAppKitVersionNumber10_12 = 1504
+    return floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_12;
+}
+
 
 
 #pragma mark MVMailBundle class methods

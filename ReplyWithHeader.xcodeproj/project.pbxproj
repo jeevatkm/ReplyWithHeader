@@ -35,6 +35,7 @@
 		13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486718016F6400473407 /* MHUpdateAlert.m */; };
 		13AD486D18018D4600473407 /* MHUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486C18018D4600473407 /* MHUpdater.m */; };
 		13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */; };
+		13C7E6391E8EFC4D00B63957 /* MFSignature.h in Sources */ = {isa = PBXBuildFile; fileRef = 13C7E6381E8EFC4D00B63957 /* MFSignature.h */; };
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
 		9C27AEB81932CF540007486F /* MHSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C27AEB71932CF540007486F /* MHSignature.m */; };
 		9C3230E619BD578200757AA4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9C3230E519BD578200757AA4 /* Credits.rtf */; };
@@ -115,6 +116,7 @@
 		13AD486C18018D4600473407 /* MHUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHUpdater.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13B6E5D517F6F41E00878012 /* MHHeadersEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHHeadersEditor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHHeadersEditor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		13C7E6381E8EFC4D00B63957 /* MFSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSignature.h; sourceTree = "<group>"; };
 		13CBE93F18360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = sv; path = sv.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		13CBE94018360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = sv.lproj/Config.plist; sourceTree = "<group>"; };
 		13CBE94118360EC3003CDA1E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				9C27AEB4193160990007486F /* Signature.h */,
+				13C7E6381E8EFC4D00B63957 /* MFSignature.h */,
 			);
 			name = Mail;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */,
 				13AD486D18018D4600473407 /* MHUpdater.m in Sources */,
 				9C27AEB81932CF540007486F /* MHSignature.m in Sources */,
+				13C7E6391E8EFC4D00B63957 /* MFSignature.h in Sources */,
 				13882A2B18072C7D004BCC6D /* MLog.m in Sources */,
 				9CE4221D19BFAD3C005E7C07 /* MHDisplayNotes.m in Sources */,
 			);

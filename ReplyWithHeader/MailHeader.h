@@ -56,6 +56,7 @@
 + (NSString *)osxVersionString;
 + (BOOL)isYosemite;
 + (BOOL)isElCapitanOrGreater;
++ (BOOL)isSierraOrGreater;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

@@ -29,12 +29,14 @@
 #import "MHPreferences.h"
 #import "MHSignature.h"
 #import "Signature.h"
+#import "MFSignature.h"
 #import "MHDisplayNotes.h"
 
 
 @interface MHPreferences (MHNoImplementation)
 - (id)signatureAccounts;
 - (id)signatures;
+//+ (id)sharedInstance;
 @end
 
 @interface MHPreferences (PrivateMethods)
@@ -214,11 +216,20 @@
 
 - (void)loadSignatures
 {
-    id signatureBundle = [[NSClassFromString(@"SignatureBundle") alloc] init];
+    id signatureBundle;
+    if ([MailHeader isSierraOrGreater])
+    {
+        signatureBundle = [NSClassFromString(@"MFSignatureManager") sharedInstance];
+    } else
+    {
+        signatureBundle = [[NSClassFromString(@"SignatureBundle") alloc] init];
+    }
+    
     id signatures = [signatureBundle signatures];
     signaturesData = nil;
     signaturesData = [[NSMutableDictionary alloc] init];
     MHLog(@"signatures: %@", signatures);
+    MHLog(@"signature accounts: %@", [signatureBundle signatureAccounts]);
     
     NSInteger aCount = 0;
     for (id obj in [signatureBundle signatureAccounts])
@@ -252,9 +263,18 @@
             {
                 for (int sc = 0; sc<[signs count]; sc++)
                 {
-                    Signature *s = [signs objectAtIndex:sc];
-                    MHSignature *value = [[MHSignature alloc] initWithName:[s name] uniqueId:[s uniqueId] values:nil];
-                    [values setObject:value forKey:[self integerToString:sCount]];
+                    if ([MailHeader isSierraOrGreater])
+                    {
+                        MFSignature *s = [signs objectAtIndex:sc];
+                        MHSignature *value = [[MHSignature alloc] initWithName:[s name] uniqueId:[s uniqueId] values:nil];
+                        [values setObject:value forKey:[self integerToString:sCount]];
+                        
+                    } else
+                    {
+                        Signature *s = [signs objectAtIndex:sc];
+                        MHSignature *value = [[MHSignature alloc] initWithName:[s name] uniqueId:[s uniqueId] values:nil];
+                        [values setObject:value forKey:[self integerToString:sCount]];
+                    }
                     
                     sCount++;
                 }
@@ -284,7 +304,7 @@
     NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", aui];
     SET_USER_DEFAULT(sui, sKey);
     
-    NSLog(@"RWH: Signature mapping for account [%@, %@]: %@", [account name], aui, sui);
+    NSLog(@"RWH: Signature mapping for account [%@, %@]: %@ mapped to %@", [account name], aui, sui, sKey);
 }
 
 - (void)highlightSignatureRow
@@ -297,7 +317,7 @@
     
     if (nil == signatureId)
     {
-        NSLog(@"RWH: Signature mapping doesn't exist");
+        MHLog(@"RWH: Signature mapping doesn't exist");
         
         for (int ic=0; ic<[[[account values] allKeys] count]; ic++) {
             [_signaturesTableView deselectRow:ic];

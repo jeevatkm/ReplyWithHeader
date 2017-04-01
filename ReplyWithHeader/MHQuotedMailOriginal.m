@@ -205,22 +205,44 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
 
 - (void)initVars
 {
-    // identifying is this plain or html mail compose in reply or reply all;
-    // forward mail is not our compose since it falls
-    // into default setting of compose type in user mail client
-    // AppleOriginalContents: (isHTMLMail=YES) | ApplePlainTextBody: (isHTMLMail=NO)
-    if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL
-        || [[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == nil)
+    if ([MailHeader isSierraOrGreater])
     {
-        isHTMLMail = YES;
-        originalEmail=[[[document htmlDocument]
-                        descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
+        // OS Sierra improvements, Apple made complicated to detect HTML vs Plain
+        // So, first try HTML and fallback to Plain Text email.
+        // I feed sad for Plain text mail users.
+        if ([[document htmlDocument] descendantsWithClassName:AppleOriginalContents] != NULL
+            || [[document htmlDocument] descendantsWithClassName:AppleOriginalContents] != nil)
+        {
+            isHTMLMail = YES;
+            originalEmail=[[[document htmlDocument]
+                            descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
+        }
+        else
+        {
+            isHTMLMail = NO;
+            originalEmail=[[[document htmlDocument]
+                            descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
+        }
     }
     else
     {
-        isHTMLMail = NO;
-        originalEmail=[[[document htmlDocument]
-                        descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
+        // identifying is this plain or html mail compose in reply or reply all;
+        // forward mail is not our compose since it falls
+        // into default setting of compose type in user mail client
+        // AppleOriginalContents: (isHTMLMail=YES) | ApplePlainTextBody: (isHTMLMail=NO)
+        if ([[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == NULL
+            || [[document htmlDocument] descendantsWithClassName:ApplePlainTextBody] == nil)
+        {
+            isHTMLMail = YES;
+            originalEmail=[[[document htmlDocument]
+                            descendantsWithClassName:AppleOriginalContents] objectAtIndex:0];
+        }
+        else
+        {
+            isHTMLMail = NO;
+            originalEmail=[[[document htmlDocument]
+                            descendantsWithClassName:ApplePlainTextBody] objectAtIndex:0];
+        }
     }
     
     MHLog(@"Composing mail isHTMLMail %@", (isHTMLMail ? @"YES" : @"NO"));
