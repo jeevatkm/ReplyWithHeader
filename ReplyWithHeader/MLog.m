@@ -38,7 +38,7 @@ static BOOL __MLogOn = NO;
 	va_end(ap);
 	
 	// NSLog handles synchronization issues
-	NSLog(@"%s: %d %@", [[file lastPathComponent] UTF8String], lineNumber, print);
+	NSLog(@"RWH %s: %d %@", [[file lastPathComponent] UTF8String], lineNumber, print);
 	
 	
 	return;

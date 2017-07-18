@@ -107,8 +107,10 @@
             // Preparing Cc list
             NSArray *oldToList = [[self valueForKey:@"_toField"] addresses];
             NSMutableArray *currentCcList = [[[self valueForKey:@"_ccField"] addresses] mutableCopy];
+            
             if (currentCcList)
             {
+                // Removing current 'To' List from current 'CC' List
                 [currentCcList removeObjectsInArray:oldToList];
                 [[self valueForKey:@"_ccField"] setAddresses:currentCcList];
                 MHLog(@"Updated CC list: %@", currentCcList);
@@ -182,19 +184,22 @@
         if ([MailHeader isElCapitanOrGreater])
         {
             MHLog(@"In El Capitan or greater mode");
-            NSArray *emailAddresses = [[emailAliases objectAtIndex:0] valueForKey:@"EmailAddresses"];
-            for (int i=0; i<[emailAddresses count]; i++)
+            for (int i=0; i<[emailAliases count]; i++)
             {
-                NSString *emailId = [[emailAddresses objectAtIndex:i] valueForKey:@"EmailAddress"];
-                MHLog(@"emailId: %@", emailId);
-                
-                if ([emailId rangeOf:@","].location != NSNotFound)
+                NSArray *emailAddresses = [[emailAliases objectAtIndex:i] valueForKey:@"EmailAddresses"];
+                for (int j=0; j<[emailAddresses count]; j++)
                 {
-                    [emailIds addObjectsFromArray:[emailId componentsSeparatedByString:@", "]];
-                }
-                else
-                {
-                    [emailIds addObject:emailId];
+                    NSString *emailId = [[emailAddresses objectAtIndex:j] valueForKey:@"EmailAddress"];
+                    MHLog(@"emailId: %@", emailId);
+                    
+                    if ([emailId rangeOf:@","].location != NSNotFound)
+                    {
+                        [emailIds addObjectsFromArray:[emailId componentsSeparatedByString:@", "]];
+                    }
+                    else
+                    {
+                        [emailIds addObject:emailId];
+                    }
                 }
             }
         }
