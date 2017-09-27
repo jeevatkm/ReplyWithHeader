@@ -12,6 +12,7 @@
 #  1.2  Revising enable plugin logic
 #  1.3  Improved OS X version print and added color support to highlight text
 #  1.4  Added support for Mac OS Sierra
+#  1.5  Added support for Mac OS High Sierra
 #
 
 mh_user=${USER}
@@ -83,11 +84,12 @@ if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
 mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
     if [[ ! -z "${mh_mail_app_uuid}" ]]; then
         echo "RWH:: Adding UUID ${mh_mail_app_uuid}"
-        defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
-        
-        if [[ ${mh_mac_osx_version_p} == *"10.12"* ]]; then
-            echo "RWH:: Adding UUID ${mh_mail_app_uuid} for Sierra"
+        if [[ ${mh_mac_osx_version_p} == *"10.13"* ]]; then
+            defaults write ${mh_plugin_plist} Supported10.13PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        elif [[ ${mh_mac_osx_version_p} == *"10.12"* ]]; then
             defaults write ${mh_plugin_plist} Supported10.12PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        else 
+            defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
         fi
     fi
 fi
