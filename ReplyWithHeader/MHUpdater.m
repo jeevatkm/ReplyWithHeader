@@ -58,7 +58,7 @@
                                      [MailHeader bundleName],
                                      serverVersion,
                                      currentVersion];
-            NSLog(@"%@ v%@ now available! -- you have v%@",
+            NSLog(@"RWH %@ v%@ now available! -- you have v%@",
                   [MailHeader bundleName], serverVersion, currentVersion);
             
             NSString *releaseNotes = [latest objectForKey:@"releaseNotes"];            

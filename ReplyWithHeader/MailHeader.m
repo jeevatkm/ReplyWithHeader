@@ -369,6 +369,12 @@
     return floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_12;
 }
 
++ (BOOL)isHighSierraOrGreater // 10.13.x or greater
+{
+    // high sierra NSAppKitVersionNumber >= 1561
+    return floor(NSAppKitVersionNumber) >= 1561;
+}
+
 
 
 #pragma mark MVMailBundle class methods
@@ -403,7 +409,7 @@
     // If this class is not available that means Mail.app
     // doesn't allow bundles anymore. Fingers crossed that this never happens!
     if (!mvMailBundleClass) {
-        NSLog(@"Mail.app doesn't support bundles anymore, so have a beer and relax !");
+        NSLog(@"RWH Mail.app doesn't support bundles anymore, so have a beer and relax !");
         
         return;
     }
@@ -421,12 +427,12 @@
     [MHCodeInjector injectMailHeaderCode];
     
     // Bundle registered successfully
-    NSLog(@"%@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
+    NSLog(@"RWH %@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
     
     // Logger
     BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
     [MLog setLogOn:logEnabled];
-    NSLog(@"%@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
+    NSLog(@"RWH %@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
     
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
@@ -436,7 +442,7 @@
     
         NSString *msgStr = [NSString stringWithFormat:@"%@ is currently not supported in your Locale[ %@(%@) ] it may not work as expected, so disabling it.\nPlease contact plugin author - https://github.com/jeevatkm/ReplyWithHeader/issues.", [self bundleNameAndVersion], name, [self localeIdentifier]];
         
-        NSLog(@"WARNING :: %@", msgStr);
+        NSLog(@"RWH WARNING :: %@", msgStr);
         
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
         
@@ -450,7 +456,7 @@
 
     if (![self isEnabled])
     {
-        NSLog(@"%@ plugin is disabled in mail preferences", [self bundleName]);
+        NSLog(@"RWH %@ plugin is disabled in mail preferences", [self bundleName]);
     }
     
     if (GET_DEFAULT_BOOL(MHPluginNotifyNewVersion))

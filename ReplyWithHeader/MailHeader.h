@@ -57,6 +57,7 @@
 + (BOOL)isYosemite;
 + (BOOL)isElCapitanOrGreater;
 + (BOOL)isSierraOrGreater;
++ (BOOL)isHighSierraOrGreater;
 
 #pragma mark MVMailBundle methods
 + (BOOL)hasPreferencesPanel;

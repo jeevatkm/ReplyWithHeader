@@ -520,7 +520,7 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
             MHLog(@"After date: %@", [row string]);
         }
         @catch (NSException *exception) {
-            NSLog(@"RWH:: Unable to parse date [%@]", exception.description);
+            NSLog(@"RWH Unable to parse date [%@]", exception.description);
         }
     //}
 }

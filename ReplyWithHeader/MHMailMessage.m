@@ -43,12 +43,26 @@
 {
     [self MH_continueToSetupContentsForView: arg1 withParsedMessages: arg2];
     
+    [self MH_continueToSetupContentsForView:arg1 withMsg:arg2];
+}
+
+- (void)MH_continueToSetupContentsForView:(id)arg1 withMessageBodies:(id)arg2
+{
+    [self MH_continueToSetupContentsForView: arg1 withMessageBodies: arg2];
+    
+    [self MH_continueToSetupContentsForView:arg1 withMsg:arg2];
+}
+
+- (void)MH_continueToSetupContentsForView:(id)arg1 withMsg:(id)arg2
+{
+    MHLog(@"Called MH_continueToSetupContentsForView:withMsg:");
+    
     // 1=Reply, 2=Reply All, 3=Forward, 4=Draft, 5=New
     int msgCompose = [self type];
     
     MHLog(@"Message compose type is %d", msgCompose);
     
-	if (([MailHeader isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3))
+    if (([MailHeader isEnabled]) && (msgCompose == 1 || msgCompose == 2 || msgCompose == 3))
     {
         // Initailzing the quoted text from the original email
         MHQuotedMailOriginal *quotedText = [[MHQuotedMailOriginal alloc] initWithMailMessage:self msgComposeType:msgCompose];
@@ -64,6 +78,7 @@
 // for issue #24 - https://github.com/jeevatkm/ReplyWithHeader/issues/24
 - (BOOL)MHokToAddSignatureAutomatically
 {
+    MHLog(@"Called MHokToAddSignatureAutomatically");
     return (([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3))
         ? !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled) : [self MHokToAddSignatureAutomatically]);
 }
@@ -71,6 +86,8 @@
 // for issue #27 - https://github.com/jeevatkm/ReplyWithHeader/issues/27
 - (BOOL)MHincludeHeaders
 {
+    MHLog(@"Called MHincludeHeaders");
+    
     BOOL include = [self MHincludeHeaders];
     
     if([MailHeader isEnabled] && GET_DEFAULT_BOOL(MHForwardHeaderEnabled) && [self type] == 3)
@@ -81,6 +98,8 @@
 
 - (id)MHsignatureId
 {
+    MHLog(@"Called MHsignatureId");
+    
     if ([MailHeader isEnabled] && ([self type] == 1 || [self type] == 2 || [self type] == 3) && !GET_DEFAULT_BOOL(MHRemoveSignatureEnabled))
     {
         // for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/90

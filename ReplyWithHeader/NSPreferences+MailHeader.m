@@ -39,6 +39,8 @@
 
 - (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window
 {
+    MHLog(@"Called sizeForWindowShowingAllToolbarItems");
+    
     NSRect frame = [window frame];
     float width = 0.0f;
 	NSArray *subviews = [[[[[window toolbar]
@@ -55,6 +57,7 @@
 
 - (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window
 {
+    MHLog(@"Called resizeWindowToShowAllToolbarItems");
     NSRect frame = [window frame];
     frame.size = [self sizeForWindowShowingAllToolbarItems:window];
     [window setFrame:frame display:YES animate:YES];
@@ -62,6 +65,7 @@
 
 + (id)MHSharedPreferences
 {
+    MHLog(@"Called MHSharedPreferences");
 	static BOOL added = NO;
     
     id preferences = [self MHSharedPreferences];
@@ -79,6 +83,9 @@
     added = YES;
     
     NSWindow *preferencesPanel = [preferences valueForKey:@"_preferencesPanel"];
+    if(!preferencesPanel)
+        return preferences;
+    
     NSToolbar *toolbar = [preferencesPanel toolbar];
     
     // If the toolbar is nil, the setup will be done later by Mail.app.
@@ -92,6 +99,7 @@
 
 - (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize
 {
+    MHLog(@"Called MHWindowWillResize, %@", [self windowTitle]);
     //for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/80
     NSString *winTitles = @"Accounts, Rules, Signatures";
     
@@ -103,12 +111,14 @@
 
 - (void)MHToolbarItemClicked:(id)toolbarItem
 {
+    MHLog(@"Called MHToolbarItemClicked");
     [self MHToolbarItemClicked:toolbarItem];
     [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
 }
 
 - (void)MHShowPreferencesPanelForOwner:(id)owner
 {
+    MHLog(@"Called MHShowPreferencesPanelForOwner");
     [self MHShowPreferencesPanelForOwner:owner];
     [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
 }

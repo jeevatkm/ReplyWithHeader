@@ -386,7 +386,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         }
     }
     @catch (NSException *exception) {
-        NSLog(@"%@", [exception reason]);
+        NSLog(@"RWH %@", [exception reason]);
     }
 }
 

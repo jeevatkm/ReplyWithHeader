@@ -304,7 +304,7 @@
     NSString *sKey = [NSString stringWithFormat:@"MH-S-%@", aui];
     SET_USER_DEFAULT(sui, sKey);
     
-    NSLog(@"RWH: Signature mapping for account [%@, %@]: %@ mapped to %@", [account name], aui, sui, sKey);
+    NSLog(@"RWH Signature mapping for account [%@, %@]: %@ mapped to %@", [account name], aui, sui, sKey);
 }
 
 - (void)highlightSignatureRow
@@ -424,7 +424,7 @@
 #pragma mark NSPreferencesModule instance methods
 
 - (void)awakeFromNib
-{   
+{
     [self toggleMailPreferencesOptions:[MailHeader isEnabled]];
     
     [_MHHeaderInfoFontAndSize

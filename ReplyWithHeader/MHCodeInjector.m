@@ -48,16 +48,25 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
     {
         [composeBackEnd jrlp_addMethodsFromClass:NSClassFromString(@"MHMailMessage") error:&error];
         
-        [composeBackEnd jrlp_swizzleMethod:@selector(_continueToSetupContentsForView:withParsedMessages:) withMethod:@selector(MH_continueToSetupContentsForView:withParsedMessages:) error:&error];
+        if ([MailHeader isHighSierraOrGreater])
+        {
+            [composeBackEnd jrlp_swizzleMethod:@selector(_continueToSetupContentsForView:withMessageBodies:) withMethod:@selector(MH_continueToSetupContentsForView:withMessageBodies:) error:&error];
+        } else {
+            [composeBackEnd jrlp_swizzleMethod:@selector(_continueToSetupContentsForView:withParsedMessages:) withMethod:@selector(MH_continueToSetupContentsForView:withParsedMessages:) error:&error];
+        }
+        [self printSwizzleError:error];
         
         [composeBackEnd jrlp_swizzleMethod:@selector(includeHeaders)
                                 withMethod:@selector(MHincludeHeaders) error:&error];
+        [self printSwizzleError:error];
         
         [composeBackEnd jrlp_swizzleMethod:@selector(okToAddSignatureAutomatically)
                                 withMethod:@selector(MHokToAddSignatureAutomatically) error:&error];
+        [self printSwizzleError:error];
         
         [composeBackEnd jrlp_swizzleMethod:@selector(signatureId)
                                 withMethod:@selector(MHsignatureId) error:&error];
+        [self printSwizzleError:error];
     }
     
     Class headerEditor = NSClassFromString(@"HeadersEditor");
@@ -67,6 +76,7 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
         
         [headerEditor jrlp_swizzleMethod:@selector(loadHeadersFromBackEnd:)
                               withMethod:@selector(MHLoadHeadersFromBackEnd:) error:&error];
+        [self printSwizzleError:error];
     }
     
     
@@ -75,15 +85,28 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
     {
         [nsPref jrlp_swizzleClassMethod:@selector(sharedPreferences)
                         withClassMethod:@selector(MHSharedPreferences) error:&error];
+        [self printSwizzleError:error];
         
         [nsPref jrlp_swizzleMethod:@selector(windowWillResize:toSize:)
                         withMethod:@selector(MHWindowWillResize:toSize:) error:&error];
+        [self printSwizzleError:error];
         
         [nsPref jrlp_swizzleMethod:@selector(toolbarItemClicked:)
                         withMethod:@selector(MHToolbarItemClicked:) error:&error];
+        [self printSwizzleError:error];
         
         [nsPref jrlp_swizzleMethod:@selector(showPreferencesPanelForOwner:)
                         withMethod:@selector(MHShowPreferencesPanelForOwner:) error:&error];
+        [self printSwizzleError:error];
+    }
+}
+
++ (void) printSwizzleError:(NSError *) err
+{
+    if (err != nil)
+    {
+        NSLog(@"RWH It seems Apple have changed the method signature. \nPlease contact plugin author - https://github.com/jeevatkm/ReplyWithHeader/issues. \n\nError Info: %@", err);
+        err = nil;
     }
 }
 
