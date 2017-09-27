@@ -5,14 +5,14 @@
     "language": "en",
     "releases": {
         "latest": {
-            "title": "Version 5.3 (2 enhancements)",
-            "pubDate": "Sunday, Apr 02 2017 15:33:00 -0800",
-            "buildDate": "Sunday, Apr 02 2017 15:33:00 -0800",
-            "downloadUrl": "http://bit.ly/2n2qmFR",
-            "version": "5.3",
-            "shortVersion": "5.3",
-            "length": 209363,
-            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.3 (2 enhancements)</div><div><ul><li>Added support for OS Sierra 10.12.4</li><li>Fixed the manage signature tab for OS Sierra</li></ul></div></body></html>"
+            "title": "Version 5.4-beta (1 enhancements)",
+            "pubDate": "Sunday, Apr 02 2017 18:50:00 -0700",
+            "buildDate": "Sunday, Apr 02 2017 18:50:00 -0700",
+            "downloadUrl": "http://bit.ly/2suSfId",
+            "version": "5.4-beta",
+            "shortVersion": "5.4-beta",
+            "length": 246372,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:35px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>Version 5.4-beta (1 enhancements)</div><div><ul><li>Added support for OS High Sierra 10.13 (Functionality works, however RWH preference UI cuts off; need to work on)</li><li>Partially addressed the Outlook Reply All behavior.</li></ul></div></body></html>"
         }
     }
 }
