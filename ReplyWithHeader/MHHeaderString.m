@@ -58,6 +58,10 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 
 - (void)applyHeaderTypography
 {
+    if (noHeaders) {
+        return;
+    }
+    
     NSString *fontString = GET_DEFAULT_VALUE(MHHeaderFontName);
     NSString *fontSize = GET_DEFAULT_VALUE(MHHeaderFontSize);
     NSFont *font = [NSFont fontWithName:fontString size:fontSize.floatValue];
@@ -156,6 +160,10 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 // For now it does outlook mail label ordering
 - (void)applyHeaderLabelOptions
 {
+    if (noHeaders) {
+        return;
+    }
+    
     if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier]) {
         [self applyChoosenLanguageLabels];
     }
@@ -207,6 +215,13 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
         else
         {
             headerString = [mcMessageHeaders valueForKey:@"attributedString"];
+        }
+        
+        if ([allTrim([headerString string]) length] == 0)
+        {
+            noHeaders = true;
+            MHLog(@"headerString is empty, it could be due to Multi-email forward scenario");
+            return self;
         }
         
         NSArray *headers = [[headerString string]
@@ -640,6 +655,9 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
 - (NSMutableAttributedString *) getFinalHeader
 {
     NSMutableAttributedString *finalHeader = [[NSMutableAttributedString alloc] init];
+    if (noHeaders) {
+        return finalHeader;
+    }
     
     for (int i=0; i<[messageAttribution count]; i++)
     {

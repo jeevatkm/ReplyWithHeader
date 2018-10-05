@@ -44,6 +44,7 @@
     NSString *choosenLocaleIdentifier;
     NSMutableArray *allHeaders;
     NSString *impHeader;
+    BOOL noHeaders;
 }
 
 - (id)initWithMailMessage:(id)mailMessage;
