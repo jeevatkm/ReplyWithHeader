@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MHPreferences">
@@ -27,7 +27,7 @@
                 <outlet property="_MHSelectFont" destination="222" id="366"/>
                 <outlet property="_MHSubjectPrefixTextEnabled" destination="347" id="357"/>
                 <outlet property="_accountsTableView" destination="mpm-Uy-XZ6" id="Hbd-p3-LmI"/>
-                <outlet property="_preferencesView" destination="38" id="269"/>
+                <outlet property="_preferencesView" destination="38" id="G73-Ld-428"/>
                 <outlet property="_signaturesTableView" destination="ZfI-PK-O5I" id="Ej9-Qa-FY8"/>
             </connections>
         </customObject>
@@ -420,8 +420,8 @@
                                                     <rect key="frame" x="37" y="289" width="172" height="124"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="jwN-fc-SZa">
-                                                        <rect key="frame" x="1" y="23" width="170" height="100"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <rect key="frame" x="1" y="0.0" width="170" height="123"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView identifier="accountsTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="B21-Ba-2IN" id="mpm-Uy-XZ6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="170" height="100"/>
@@ -449,7 +449,6 @@
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZST-XV-x8K">
                                                         <rect key="frame" x="-100" y="-100" width="238" height="16"/>
@@ -477,8 +476,8 @@
                                                     <rect key="frame" x="217" y="289" width="184" height="124"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="xdQ-Qi-PXU">
-                                                        <rect key="frame" x="1" y="23" width="182" height="100"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <rect key="frame" x="1" y="0.0" width="182" height="123"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView identifier="signaturesTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="ZPZ-fU-fS7" id="ZfI-PK-O5I">
                                                                 <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
@@ -506,7 +505,6 @@
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="9Zc-Eh-se3">
                                                         <rect key="frame" x="-100" y="-100" width="182" height="16"/>
@@ -623,19 +621,16 @@
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <box autoresizesSubviews="NO" title="Your kind support" boxType="oldStyle" borderType="line" titlePosition="noTitle" id="xSL-yP-Ylj">
+                                                <box autoresizesSubviews="NO" boxType="oldStyle" borderType="line" title="Your kind support" titlePosition="noTitle" id="xSL-yP-Ylj">
                                                     <rect key="frame" x="29" y="89" width="489" height="59"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <view key="contentView" id="DGz-0t-7kb">
                                                         <rect key="frame" x="1" y="1" width="487" height="57"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="78d-Id-KCz">
+                                                            <box horizontalHuggingPriority="750" boxType="separator" id="78d-Id-KCz">
                                                                 <rect key="frame" x="318" y="9" width="5" height="38"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <font key="titleFont" metaFont="system"/>
                                                             </box>
                                                             <imageView toolTip="Click here to donate" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="vWI-VE-mHZ">
                                                                 <rect key="frame" x="330" y="15" width="147" height="27"/>
@@ -669,8 +664,6 @@
                                                             </imageView>
                                                         </subviews>
                                                     </view>
-                                                    <color key="borderColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </box>
                                             </subviews>
                                         </view>
@@ -696,8 +689,6 @@
                             </imageView>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
             </subviews>
             <point key="canvasLocation" x="176" y="133"/>

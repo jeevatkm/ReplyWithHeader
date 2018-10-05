@@ -534,7 +534,7 @@
 
 - (BOOL)isResizable
 {
-	return NO;
+	return TRUE;
 }
 
 - (void)dealloc

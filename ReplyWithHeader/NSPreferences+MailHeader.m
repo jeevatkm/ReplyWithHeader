@@ -43,12 +43,12 @@
     
     NSRect frame = [window frame];
     float width = 0.0f;
-	NSArray *subviews = [[[[[window toolbar]
+    NSArray *subviews = [[[[[window toolbar]
                             valueForKey:@"_toolbarView"] subviews] objectAtIndex:0] subviews];
     for (NSView *view in subviews)
     {
         width += view.frame.size.width;
-	}
+    }
     // Add padding to fit them all.
     width += 10;
     
@@ -66,7 +66,7 @@
 + (id)MHSharedPreferences
 {
     MHLog(@"Called MHSharedPreferences");
-	static BOOL added = NO;
+    static BOOL added = NO;
     
     id preferences = [self MHSharedPreferences];
     
