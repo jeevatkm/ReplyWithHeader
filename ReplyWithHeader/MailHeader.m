@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2017 Jeevanandam M.
+ * Copyright (c) 2013-2018 Jeevanandam M.
  *               2012, 2013 Jason Schroth
  *               2010, 2011 Saptarshi Guha
  *
@@ -31,6 +31,8 @@
 #import "MHPreferences.h"
 #import "MHUpdater.h"
 #import "NSString+MailHeader.h"
+#include <objc/objc-class.h>
+#import <objc/runtime.h>
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -395,6 +397,37 @@
     return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
 }
 
++ (void)objectInsights:(Class)clz
+{
+    Class currentClass = clz;
+    while (currentClass) {
+        // Iterate over all instance methods for this class
+        unsigned int methodCount;
+        Method *methodList = class_copyMethodList(currentClass, &methodCount);
+        unsigned int i = 0;
+        NSLog(@"RWH: Method List for:: %@", [currentClass className]);
+        for (; i < methodCount; i++) {
+            NSLog(@"RWH: %@ - %@", [NSString stringWithCString:class_getName(currentClass) encoding:NSUTF8StringEncoding], [NSString stringWithCString:sel_getName(method_getName(methodList[i])) encoding:NSUTF8StringEncoding]);
+        }
+        free(methodList);
+        
+        NSLog(@"RWH: Variables List for:: %@", [currentClass className]);
+        unsigned int count;
+        unsigned int j = 0;
+        Ivar *vars = class_copyIvarList(currentClass, &count);
+        for (; j<count; j++) {
+            Ivar var = vars[j];
+            NSLog(@"RWH: %s %s", ivar_getName(var), ivar_getTypeEncoding(var));
+        }
+        free(vars);
+        
+        currentClass = class_getSuperclass(currentClass);
+        if (currentClass == [NSObject class]) {
+            break;
+        }
+    }
+}
+
 
 #pragma mark MVMailBundle initialize
 
@@ -413,6 +446,10 @@
         
         return;
     }
+    // Logger
+    BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
+    [MLog setLogOn:logEnabled];
+    NSLog(@"RWH %@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
     
     // Registering plugin in Mail.app
     [mvMailBundleClass registerBundle];
@@ -428,12 +465,7 @@
     
     // Bundle registered successfully
     NSLog(@"RWH %@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
-    
-    // Logger
-    BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
-    [MLog setLogOn:logEnabled];
-    NSLog(@"RWH %@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
-    
+        
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
     {
