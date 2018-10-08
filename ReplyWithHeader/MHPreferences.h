@@ -35,40 +35,40 @@
  *
  * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
  */
-@interface MHPreferences : NSPreferencesModule <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
-{
-    NSMutableDictionary *signaturesData;
-    NSInteger accountIndex;
-    
-    IBOutlet NSTabView *_MHBundleTabBox;
-    IBOutlet NSButton *_MHBundleEnabled;
-    IBOutlet NSButton *_MHSelectFont;
-    IBOutlet NSButton *_MHNotifyNewVersion;
-    IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
-    IBOutlet NSButton *_MHRawHeadersEnabled;
-    IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
-    IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
-    IBOutlet NSColorWell *_MHColorWell;
-    IBOutlet NSPopUpButton *_MHLanguagePopup;
-    IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
-    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
-    IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
-    IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
-    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
-    IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
-    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
-    IBOutlet NSTableView *_accountsTableView;
-    IBOutlet NSTableView *_signaturesTableView;
-    IBOutlet NSButton *_MHPaypalBtn;
-}
-
-@property(weak, readonly) NSString *NameAndVersion, *Copyright;
-
-#pragma mark NSPreferencesModule instance methods
-
-- (void)awakeFromNib;
-- (NSString*)preferencesNibName;
-- (NSImage *)imageForPreferenceNamed:(NSString *)aName;
-- (BOOL)isResizable;
-
-@end
+//@interface MHPreferences : NSPreferencesModule <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
+//{
+//    NSMutableDictionary *signaturesData;
+//    NSInteger accountIndex;
+//    
+//    IBOutlet NSTabView *_MHBundleTabBox;
+//    IBOutlet NSButton *_MHBundleEnabled;
+//    IBOutlet NSButton *_MHSelectFont;
+//    IBOutlet NSButton *_MHNotifyNewVersion;
+//    IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
+//    IBOutlet NSButton *_MHRawHeadersEnabled;
+//    IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
+//    IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
+//    IBOutlet NSColorWell *_MHColorWell;
+//    IBOutlet NSPopUpButton *_MHLanguagePopup;
+//    IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
+//    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
+//    IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
+//    IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
+//    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
+//    IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
+//    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
+//    IBOutlet NSTableView *_accountsTableView;
+//    IBOutlet NSTableView *_signaturesTableView;
+//    IBOutlet NSButton *_MHPaypalBtn;
+//}
+//
+//@property(weak, readonly) NSString *NameAndVersion, *Copyright;
+//
+//#pragma mark NSPreferencesModule instance methods
+//
+//- (void)awakeFromNib;
+//- (NSString*)preferencesNibName;
+//- (NSImage *)imageForPreferenceNamed:(NSString *)aName;
+//- (BOOL)isResizable;
+//
+//@end

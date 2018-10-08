@@ -31,6 +31,7 @@
 #import "MHPreferences.h"
 #import "MHUpdater.h"
 #import "NSString+MailHeader.h"
+#import "MHMainMenu.h"
 #include <objc/objc-class.h>
 #import <objc/runtime.h>
 
@@ -381,21 +382,21 @@
 
 #pragma mark MVMailBundle class methods
 
-+ (BOOL)hasPreferencesPanel
-{
-    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
-    return YES;
-}
-
-+ (NSString*)preferencesOwnerClassName
-{
-    return NSStringFromClass([MHPreferences class]);
-}
-
-+ (NSString*)preferencesPanelName
-{
-    return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
-}
+//+ (BOOL)hasPreferencesPanel
+//{
+//    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
+//    return YES;
+//}
+//
+//+ (NSString*)preferencesOwnerClassName
+//{
+//    return NSStringFromClass([MHPreferences class]);
+//}
+//
+//+ (NSString*)preferencesPanelName
+//{
+//    return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
+//}
 
 + (void)objectInsights:(Class)clz
 {
@@ -428,7 +429,6 @@
     }
 }
 
-
 #pragma mark MVMailBundle initialize
 
 + (void)initialize
@@ -460,8 +460,12 @@
     // Assigning default value if not present
     [self assignUserDefaults];
     
+    [MHMainMenu addMainMenu];
+    
     // Add hooks into Mail.app Classes
     [MHCodeInjector injectMailHeaderCode];
+    
+    
     
     // Bundle registered successfully
     NSLog(@"RWH %@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);

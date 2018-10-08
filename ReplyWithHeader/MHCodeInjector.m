@@ -79,26 +79,25 @@ NSString *MailHeaderSwizzledMethodPrefix = @"MH";
         [self printSwizzleError:error];
     }
     
-    
-    Class nsPref = NSClassFromString(@"NSPreferences");
-    if (nsPref)
-    {
-        [nsPref jrlp_swizzleClassMethod:@selector(sharedPreferences)
-                        withClassMethod:@selector(MHSharedPreferences) error:&error];
-        [self printSwizzleError:error];
-        
-        [nsPref jrlp_swizzleMethod:@selector(windowWillResize:toSize:)
-                        withMethod:@selector(MHWindowWillResize:toSize:) error:&error];
-        [self printSwizzleError:error];
-        
-        [nsPref jrlp_swizzleMethod:@selector(toolbarItemClicked:)
-                        withMethod:@selector(MHToolbarItemClicked:) error:&error];
-        [self printSwizzleError:error];
-        
-        [nsPref jrlp_swizzleMethod:@selector(showPreferencesPanelForOwner:)
-                        withMethod:@selector(MHShowPreferencesPanelForOwner:) error:&error];
-        [self printSwizzleError:error];
-    }
+//    Class nsPref = NSClassFromString(@"NSPreferences");
+//    if (nsPref)
+//    {
+//        [nsPref jrlp_swizzleClassMethod:@selector(sharedPreferences)
+//                        withClassMethod:@selector(MHSharedPreferences) error:&error];
+//        [self printSwizzleError:error];
+//
+//        [nsPref jrlp_swizzleMethod:@selector(windowWillResize:toSize:)
+//                        withMethod:@selector(MHWindowWillResize:toSize:) error:&error];
+//        [self printSwizzleError:error];
+//
+//        [nsPref jrlp_swizzleMethod:@selector(toolbarItemClicked:)
+//                        withMethod:@selector(MHToolbarItemClicked:) error:&error];
+//        [self printSwizzleError:error];
+//
+//        [nsPref jrlp_swizzleMethod:@selector(showPreferencesPanelForOwner:)
+//                        withMethod:@selector(MHShowPreferencesPanelForOwner:) error:&error];
+//        [self printSwizzleError:error];
+//    }
 }
 
 + (void) printSwizzleError:(NSError *) err

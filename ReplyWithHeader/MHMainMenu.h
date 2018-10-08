@@ -23,44 +23,30 @@
  */
 
 //
-//  NSPreferences+MailHeader.h
+//  MHMainMenu.h
 //  ReplyWithHeader
 //
-//  Created by Jeevanandam M. on 9/30/13.
+//  Created by Jeevanandam M. on 10/5/18.
 //
-// Inspried by GPGMail NSPreferences extension approach to resize the Preferences to show all items
 
-//#import "NSPreferences.h"
-//
-//@interface NSPreferences (MailHeader)
-//
-//+ (id)MHSharedPreferences;
-//
-///**
-// Called when the preference pane is first shown, or the user
-// resizes the preference pane.
-// */
-//- (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize;
-//
-///**
-// Called whenever the user clicks on a toolbar item.
-// */
-//- (void)MHToolbarItemClicked:(id)toolbarItem;
-//
-///**
-// Called whenever the preference pane is displayed.
-// */
-//- (void)MHShowPreferencesPanelForOwner:(id)owner;
-//
-///**
-// Helper function to resize the preference pane window to fit all
-// toolbar items.
-// */
-//- (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window;
-//
-///**
-// Helper function - Returns the window size necessary to fit all toolbar items.
-// */
-//- (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window;
-//
-//@end
+#import "RWHPreferences.h"
+
+@interface MHMainMenu : NSObject {
+    RWHPreferences *preferences;
+    NSMenu *rwhMenu;
+    NSMenuItem *rwhEnable;
+    NSMenuItem *rwhAllHeaders;
+}
+
++ (instancetype)sharedInstance;
++ (void)rwhEnableAction:(id)sender;
++ (void)includeAllHeadersAction:(id)sender;
++ (void)showPreferencesAction:(id)sender;
++ (void)addMainMenu;
+
+@property(retain) RWHPreferences *preferences;
+@property(retain) NSMenu *rwhMenu;
+@property(retain) NSMenuItem *rwhEnable;
+@property(retain) NSMenuItem *rwhAllHeaders;
+
+@end

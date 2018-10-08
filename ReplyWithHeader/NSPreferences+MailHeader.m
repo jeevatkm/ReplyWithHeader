@@ -30,97 +30,97 @@
 //
 //
 
-#import "NSPreferences+MailHeader.h"
-#import "MHPreferences.h"
-#import "MailHeader.h"
-#import "NSString+MailHeader.h"
-
-@implementation NSPreferences (MailHeader)
-
-- (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window
-{
-    MHLog(@"Called sizeForWindowShowingAllToolbarItems");
-    
-    NSRect frame = [window frame];
-    float width = 0.0f;
-    NSArray *subviews = [[[[[window toolbar]
-                            valueForKey:@"_toolbarView"] subviews] objectAtIndex:0] subviews];
-    for (NSView *view in subviews)
-    {
-        width += view.frame.size.width;
-    }
-    // Add padding to fit them all.
-    width += 10;
-    
-    return NSMakeSize(width > frame.size.width ? width : frame.size.width, frame.size.height);
-}
-
-- (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window
-{
-    MHLog(@"Called resizeWindowToShowAllToolbarItems");
-    NSRect frame = [window frame];
-    frame.size = [self sizeForWindowShowingAllToolbarItems:window];
-    [window setFrame:frame display:YES animate:YES];
-}
-
-+ (id)MHSharedPreferences
-{
-    MHLog(@"Called MHSharedPreferences");
-    static BOOL added = NO;
-    
-    id preferences = [self MHSharedPreferences];
-    
-    if(preferences == nil)
-        return nil;
-    
-    if( ![MailHeader isLocaleSupported] || added)
-        return preferences;
-    
-    // Check modules, if MailHeaderPreferences is not yet in there.
-    NSPreferencesModule *mailHeaderPreferences = [MHPreferences sharedInstance];
-    NSString *preferencesName = [MailHeader preferencesPanelName];
-    [preferences addPreferenceNamed:preferencesName owner:mailHeaderPreferences];
-    added = YES;
-    
-    NSWindow *preferencesPanel = [preferences valueForKey:@"_preferencesPanel"];
-    if(!preferencesPanel)
-        return preferences;
-    
-    NSToolbar *toolbar = [preferencesPanel toolbar];
-    
-    // If the toolbar is nil, the setup will be done later by Mail.app.
-    if(!toolbar)
-        return preferences;
-    
-    [preferences resizeWindowToShowAllToolbarItems:preferencesPanel];
-    
-    return preferences;
-}
-
-- (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize
-{
-    MHLog(@"Called MHWindowWillResize, %@", [self windowTitle]);
-    //for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/80
-    NSString *winTitles = @"Accounts, Rules, Signatures";
-    
-    if ([winTitles rangeOf:[self windowTitle]].location != NSNotFound)
-        return [self MHWindowWillResize:window toSize:toSize];
-    else
-        return [self sizeForWindowShowingAllToolbarItems:window];
-}
-
-- (void)MHToolbarItemClicked:(id)toolbarItem
-{
-    MHLog(@"Called MHToolbarItemClicked");
-    [self MHToolbarItemClicked:toolbarItem];
-    [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
-}
-
-- (void)MHShowPreferencesPanelForOwner:(id)owner
-{
-    MHLog(@"Called MHShowPreferencesPanelForOwner");
-    [self MHShowPreferencesPanelForOwner:owner];
-    [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
-}
-
-@end
+//#import "NSPreferences+MailHeader.h"
+//#import "MHPreferences.h"
+//#import "MailHeader.h"
+//#import "NSString+MailHeader.h"
+//
+//@implementation NSPreferences (MailHeader)
+//
+//- (NSSize)sizeForWindowShowingAllToolbarItems:(NSWindow *)window
+//{
+//    MHLog(@"Called sizeForWindowShowingAllToolbarItems");
+//    
+//    NSRect frame = [window frame];
+//    float width = 0.0f;
+//    NSArray *subviews = [[[[[window toolbar]
+//                            valueForKey:@"_toolbarView"] subviews] objectAtIndex:0] subviews];
+//    for (NSView *view in subviews)
+//    {
+//        width += view.frame.size.width;
+//    }
+//    // Add padding to fit them all.
+//    width += 10;
+//    
+//    return NSMakeSize(width > frame.size.width ? width : frame.size.width, frame.size.height);
+//}
+//
+//- (void)resizeWindowToShowAllToolbarItems:(NSWindow *)window
+//{
+//    MHLog(@"Called resizeWindowToShowAllToolbarItems");
+//    NSRect frame = [window frame];
+//    frame.size = [self sizeForWindowShowingAllToolbarItems:window];
+//    [window setFrame:frame display:YES animate:YES];
+//}
+//
+//+ (id)MHSharedPreferences
+//{
+//    MHLog(@"Called MHSharedPreferences");
+//    static BOOL added = NO;
+//    
+//    id preferences = [self MHSharedPreferences];
+//    
+//    if(preferences == nil)
+//        return nil;
+//    
+//    if( ![MailHeader isLocaleSupported] || added)
+//        return preferences;
+//    
+//    // Check modules, if MailHeaderPreferences is not yet in there.
+//    NSPreferencesModule *mailHeaderPreferences = [MHPreferences sharedInstance];
+//    NSString *preferencesName = [MailHeader preferencesPanelName];
+//    [preferences addPreferenceNamed:preferencesName owner:mailHeaderPreferences];
+//    added = YES;
+//    
+//    NSWindow *preferencesPanel = [preferences valueForKey:@"_preferencesPanel"];
+//    if(!preferencesPanel)
+//        return preferences;
+//    
+//    NSToolbar *toolbar = [preferencesPanel toolbar];
+//    
+//    // If the toolbar is nil, the setup will be done later by Mail.app.
+//    if(!toolbar)
+//        return preferences;
+//    
+//    [preferences resizeWindowToShowAllToolbarItems:preferencesPanel];
+//    
+//    return preferences;
+//}
+//
+//- (NSSize)MHWindowWillResize:(id)window toSize:(NSSize)toSize
+//{
+//    MHLog(@"Called MHWindowWillResize, %@", [self windowTitle]);
+//    //for issue - https://github.com/jeevatkm/ReplyWithHeader/issues/80
+//    NSString *winTitles = @"Accounts, Rules, Signatures";
+//    
+//    if ([winTitles rangeOf:[self windowTitle]].location != NSNotFound)
+//        return [self MHWindowWillResize:window toSize:toSize];
+//    else
+//        return [self sizeForWindowShowingAllToolbarItems:window];
+//}
+//
+//- (void)MHToolbarItemClicked:(id)toolbarItem
+//{
+//    MHLog(@"Called MHToolbarItemClicked");
+//    [self MHToolbarItemClicked:toolbarItem];
+//    [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
+//}
+//
+//- (void)MHShowPreferencesPanelForOwner:(id)owner
+//{
+//    MHLog(@"Called MHShowPreferencesPanelForOwner");
+//    [self MHShowPreferencesPanelForOwner:owner];
+//    [self resizeWindowToShowAllToolbarItems:[self valueForKey:@"_preferencesPanel"]];
+//}
+//
+//@end

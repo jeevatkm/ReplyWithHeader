@@ -61,8 +61,8 @@
 + (void)objectInsights:(Class)clz;
 
 #pragma mark MVMailBundle methods
-+ (BOOL)hasPreferencesPanel;
-+ (NSString*)preferencesOwnerClassName;
-+ (NSString*)preferencesPanelName;
+//+ (BOOL)hasPreferencesPanel;
+//+ (NSString*)preferencesOwnerClassName;
+//+ (NSString*)preferencesPanelName;
 
 @end

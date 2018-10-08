@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1070" identifier="macosx"/>
+        <deployment version="101200" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -421,7 +421,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="jwN-fc-SZa">
                                                         <rect key="frame" x="1" y="0.0" width="170" height="123"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView identifier="accountsTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="B21-Ba-2IN" id="mpm-Uy-XZ6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="170" height="100"/>
@@ -432,7 +432,7 @@
                                                                 <tableColumns>
                                                                     <tableColumn editable="NO" width="167" minWidth="40" maxWidth="1000" id="zuf-5Y-BCz">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Accounts">
-                                                                            <font key="font" metaFont="titleBar" size="12"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
@@ -477,7 +477,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" id="xdQ-Qi-PXU">
                                                         <rect key="frame" x="1" y="0.0" width="182" height="123"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView identifier="signaturesTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="ZPZ-fU-fS7" id="ZfI-PK-O5I">
                                                                 <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
@@ -488,7 +488,7 @@
                                                                 <tableColumns>
                                                                     <tableColumn width="179" minWidth="40" maxWidth="1000" id="RpO-u9-S5l">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Signatures">
-                                                                            <font key="font" metaFont="titleBar" size="12"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </tableHeaderCell>
