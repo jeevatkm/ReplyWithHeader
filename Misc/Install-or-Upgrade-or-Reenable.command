@@ -13,12 +13,14 @@
 #  1.3  Improved OS X version print and added color support to highlight text
 #  1.4  Added support for Mac OS Sierra
 #  1.5  Added support for Mac OS High Sierra
+#  1.6  Added support for macOS Mojave
 #
 
+mh_current_dir=`dirname "$0"`
 mh_user=${USER}
 mh_install_path=${HOME}/Library/Mail/Bundles
 mh_plugin=${mh_install_path}/ReplyWithHeader.mailbundle
-mh_plugin_plist=${mh_plugin}/Contents/Info.plist
+mh_plugin_plist=${mh_current_dir}/ReplyWithHeader.mailbundle/Contents/Info.plist
 
 CC='\033[00m'
 RCB='\033[01;31m'
@@ -46,17 +48,6 @@ if [ ! -e ${mh_install_path} ]; then
 fi
 
 mh_enable_plugin=1
-if [ -s ${mh_plugin} ]; then
-	# mh_enable_plugin=0
-	echo "\nRWH:: Plugin is already installed, let's upgrade it"
-	rm -rf ${mh_plugin}
-else
-	echo "\nRWH:: Installing ReplyWithHeader Mail plugin"
-fi
-
-mh_current_dir=`dirname "$0"`
-cp -r "${mh_current_dir}/ReplyWithHeader.mailbundle" ${mh_install_path}
-
 mh_enb_success=0
 if [ ${mh_user} == root ] ; then
     echo "RWH:: Root users is installing plugin"
@@ -67,24 +58,26 @@ else
 fi
 
 if [ ${mh_enable_plugin} -eq 1 ]; then
-if [ -f ${domain} ]; then
-    echo "RWH:: Enabling plugin support in Mail.app"
-    defaults write "${domain}" EnableBundles -bool true
-    mh_enb_success=1
-fi
+    if [ -f ${domain} ]; then
+        echo "RWH:: Enabling plugin support in Mail.app"
+        defaults write "${domain}" EnableBundles -bool true
+        mh_enb_success=1
+    fi
 
-if [ ${mh_enb_success} -eq 0 ]; then
-	domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
-	defaults write "${domain}" EnableBundles -bool true
-fi
-echo "RWH:: Domain is ${domain}"
+    if [ ${mh_enb_success} -eq 0 ]; then
+        domain=/Users/${mh_user}/Library/Preferences/com.apple.mail.plist
+        defaults write "${domain}" EnableBundles -bool true
+    fi
+    echo "RWH:: Domain is ${domain}"
 fi
 
 if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
 mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
     if [[ ! -z "${mh_mail_app_uuid}" ]]; then
         echo "RWH:: Adding UUID ${mh_mail_app_uuid}"
-        if [[ ${mh_mac_osx_version_p} == *"10.13"* ]]; then
+        if [[ ${mh_mac_osx_version_p} == *"10.14"* ]]; then
+            defaults write ${mh_plugin_plist} Supported10.14PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+        elif [[ ${mh_mac_osx_version_p} == *"10.13"* ]]; then
             defaults write ${mh_plugin_plist} Supported10.13PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
         elif [[ ${mh_mac_osx_version_p} == *"10.12"* ]]; then
             defaults write ${mh_plugin_plist} Supported10.12PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
@@ -97,14 +90,25 @@ fi
 # for issue #66 - Version check condition updated
 mh_ver_chk=$(echo "${mh_mac_osx_version} == 10.7 || ${mh_mac_osx_version} == 10.8" | bc)
 if [ ${mh_ver_chk} -eq 1 ]; then
-if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
-mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
-    if [[ ! -z "${mh_msg_frwk_uuid}" ]]; then
-        echo "RWH:: Adding UUID ${mh_msg_frwk_uuid}"
-        defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_msg_frwk_uuid}"
+    if [ -f /System/Library/Frameworks/Message.framework/Resources/Info.plist ]; then
+    mh_msg_frwk_uuid=$(defaults read /System/Library/Frameworks/Message.framework/Resources/Info.plist PluginCompatibilityUUID)
+        if [[ ! -z "${mh_msg_frwk_uuid}" ]]; then
+            echo "RWH:: Adding UUID ${mh_msg_frwk_uuid}"
+            defaults write ${mh_plugin_plist} SupportedPluginCompatibilityUUIDs -array-add "${mh_msg_frwk_uuid}"
+        fi
     fi
 fi
+
+if [ -s ${mh_plugin} ]; then
+	# mh_enable_plugin=0
+	echo "\nRWH:: Plugin is already installed, let's upgrade it"
+	rm -rf ${mh_plugin}
+else
+	echo "\nRWH:: Installing ReplyWithHeader Mail plugin"
 fi
+
+# copy the RWH plugin
+yes | cp -rf "${mh_current_dir}/ReplyWithHeader.mailbundle" ${mh_install_path}
 
 # for issue #48 - Resolve Permission Issue while installed by Root user
 if [ ${mh_user} == root ] ; then
@@ -113,6 +117,8 @@ if [ ${mh_user} == root ] ; then
 	chown -R ${mh_cur_user_name} ${mh_install_path}
 	chmod -R 755 ${mh_install_path}
 fi
+
+yes | rm -rf "${HOME}/Library/Mail/Bundles (Disabled)/ReplyWithHeader.mailbundle"
 
 echo "RWH:: Installation complete" 
 
