@@ -1,0 +1,29 @@
+ReplyWithHeader (RWH) - Install Instructions for Mojave OS and Above.
+---------------------------------------------------------------------
+
+Author: Jeevanandam M. (https://github.com/jeevatkm, jeeva@myjeeva.com)
+
+1. Provide permisssion to "Terminal.app" for installing RWH plugin. 
+   - Go to "System Preferences > Security & Privacy > Privacy"
+   - Unlock if needed via clicking lower left "Lock Icon"
+   - Select "Application Data" (if you're upgraded from Mojave beta OS - you might have "Full Disk Access" as a label)
+   - Click the "+" icon
+   - Select "Terminal.app" and click "Add"
+   - Note: The "Terminal.app" have to be restarted for changes to take effect (if its already open).
+
+2. Double click or run "Install-or-Upgrade-or-Reenable.command" from downloaded RWH archive
+
+3. Enabling ReplyWithHeader plugin in Mail.app
+   - Go to "Mail > Preferences > General"
+   - Click "Manage Plug-ins" button
+   - Check mark the "ReplyWithHeader.mailbundle"
+   - Click "Apply and Restart Mail.app" button
+
+4. Congrats, you have successfully installed RWH plugin :) Now you should be seeing "RWH" menu in the menu bar.
+
+5. Promote and spreading word of ReplyWithHeader (RWH)
+   - Providing "Star" on Github - https://github.com/jeevatkm/ReplyWithHeader
+   - MacUpdate.com - https://www.macupdate.com/app/mac/49256/replywithheader 
+   - Softpedia.com - https://mac.softpedia.com/get/Internet-Utilities/ReplyWithHeaders.shtml
+
+Thank you for using ReplyWithHeader (RWH).
