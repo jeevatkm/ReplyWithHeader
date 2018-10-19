@@ -11,12 +11,11 @@
 		131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 131C192317F627B70053C587 /* SUStandardVersionComparator.m */; };
 		132C66631827E23400CD7C1A /* language.png in Resources */ = {isa = PBXBuildFile; fileRef = 132C66621827E23400CD7C1A /* language.png */; };
 		132F81292167FBBF007CC6EE /* MHMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 132F81282167FBBF007CC6EE /* MHMainMenu.m */; };
-		132F812D21680CCC007CC6EE /* RWHPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 132F812B21680CCC007CC6EE /* RWHPreferences.m */; };
-		132F812E21680CCC007CC6EE /* RWHPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 132F812C21680CCC007CC6EE /* RWHPreferences.xib */; };
+		132F812D21680CCC007CC6EE /* MHPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 132F812B21680CCC007CC6EE /* MHPreferences.m */; };
+		132F812E21680CCC007CC6EE /* MHPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 132F812C21680CCC007CC6EE /* MHPreferences.xib */; };
 		133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A916E17E9745A00E3CC62 /* MHHeaderString.m */; };
 		133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */; };
 		133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917717E9745A00E3CC62 /* MHMailMessage.m */; };
-		133A918617E9745A00E3CC62 /* MHPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 133A917B17E9745A00E3CC62 /* MHPreferences.m */; };
 		13423DA717EDACF700623E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		13423DA817EDACF700623E45 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		13423DA917EDACF700623E45 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5FF0A9127255C500A945C5 /* WebKit.framework */; };
@@ -25,8 +24,6 @@
 		135829F717FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 135829F517FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m */; };
 		1365843917FAC12700E8C57D /* MailHeader.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1365843B17FAC12700E8C57D /* MailHeader.strings */; };
 		1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */; };
-		1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1372350D17FD8316007E7B71 /* MHPreferencesView.xib */; };
-		1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */; };
 		13882A2B18072C7D004BCC6D /* MLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 13882A2A18072C7D004BCC6D /* MLog.m */; };
 		13882A3018073509004BCC6D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13882A2F18073509004BCC6D /* LICENSE.txt */; };
 		138BAEBC1820218C00738ADB /* MHUpdateAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138BAEBA1820218C00738ADB /* MHUpdateAlert.xib */; };
@@ -38,7 +35,6 @@
 		13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486718016F6400473407 /* MHUpdateAlert.m */; };
 		13AD486D18018D4600473407 /* MHUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD486C18018D4600473407 /* MHUpdater.m */; };
 		13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */; };
-		13B9D66421687E1800B498BE /* RWHMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B9D66321687E1800B498BE /* RWHMenu.m */; };
 		13C7E6391E8EFC4D00B63957 /* MFSignature.h in Sources */ = {isa = PBXBuildFile; fileRef = 13C7E6381E8EFC4D00B63957 /* MFSignature.h */; };
 		13E929FB1800CB1100AAE5CE /* MailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E929FA1800CB1000AAE5CE /* MailHeader.m */; };
 		9C27AEB81932CF540007486F /* MHSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C27AEB71932CF540007486F /* MHSignature.m */; };
@@ -70,9 +66,9 @@
 		132C66621827E23400CD7C1A /* language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = language.png; sourceTree = "<group>"; };
 		132F81272167FBBE007CC6EE /* MHMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMainMenu.h; sourceTree = "<group>"; };
 		132F81282167FBBF007CC6EE /* MHMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMainMenu.m; sourceTree = "<group>"; };
-		132F812A21680CCB007CC6EE /* RWHPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RWHPreferences.h; sourceTree = "<group>"; };
-		132F812B21680CCC007CC6EE /* RWHPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RWHPreferences.m; sourceTree = "<group>"; };
-		132F812C21680CCC007CC6EE /* RWHPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RWHPreferences.xib; sourceTree = "<group>"; };
+		132F812A21680CCB007CC6EE /* MHPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHPreferences.h; sourceTree = "<group>"; };
+		132F812B21680CCC007CC6EE /* MHPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHPreferences.m; sourceTree = "<group>"; };
+		132F812C21680CCC007CC6EE /* MHPreferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MHPreferences.xib; sourceTree = "<group>"; };
 		133A916D17E9745A00E3CC62 /* MHHeaderString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHHeaderString.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		133A916E17E9745A00E3CC62 /* MHHeaderString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHHeaderString.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		133A916F17E9745A00E3CC62 /* MHQuotedMailOriginal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHQuotedMailOriginal.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -80,8 +76,6 @@
 		133A917117E9745A00E3CC62 /* NSPreferencesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferencesModule.h; sourceTree = "<group>"; };
 		133A917617E9745A00E3CC62 /* MHMailMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHMailMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		133A917717E9745A00E3CC62 /* MHMailMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHMailMessage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		133A917A17E9745A00E3CC62 /* MHPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHPreferences.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		133A917B17E9745A00E3CC62 /* MHPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHPreferences.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		133B7F7117F1B5E4000531ED /* NSAttributedString+MailAttributedStringToHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MailAttributedStringToHTML.h"; sourceTree = "<group>"; };
 		13503BF71AB49B4800AF09CC /* btn_donate_pp_142x27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate_pp_142x27.png; sourceTree = "<group>"; };
 		135829F117FD5A6A00FC5C1F /* MHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -89,9 +83,7 @@
 		135829F617FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSMutableAttributedString+MailHeader.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1365843A17FAC12700E8C57D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ReplyWithHeader.icns; sourceTree = "<group>"; };
-		1372350E17FD8316007E7B71 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MHPreferencesView.xib; sourceTree = "<group>"; };
 		1372351117FD8C6B007E7B71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/MailHeader-Info.plist"; sourceTree = "<group>"; };
-		1372351417FD8F3D007E7B71 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MHPreferencesView.strings; sourceTree = "<group>"; };
 		1372352017FD90C8007E7B71 /* MailHeader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHeader_Prefix.pch; sourceTree = "<group>"; };
 		13882A2918072C7D004BCC6D /* MLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLog.h; sourceTree = "<group>"; };
 		13882A2A18072C7D004BCC6D /* MLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLog.m; sourceTree = "<group>"; };
@@ -125,8 +117,6 @@
 		13AD486C18018D4600473407 /* MHUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHUpdater.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13B6E5D517F6F41E00878012 /* MHHeadersEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MHHeadersEditor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MHHeadersEditor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		13B9D66221687E1800B498BE /* RWHMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RWHMenu.h; sourceTree = "<group>"; };
-		13B9D66321687E1800B498BE /* RWHMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RWHMenu.m; sourceTree = "<group>"; };
 		13C7E6381E8EFC4D00B63957 /* MFSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSignature.h; sourceTree = "<group>"; };
 		13CBE93F18360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = sv; path = sv.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		13CBE94018360EB1003CDA1E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = sv.lproj/Config.plist; sourceTree = "<group>"; };
@@ -226,8 +216,6 @@
 				133A917017E9745A00E3CC62 /* MHQuotedMailOriginal.m */,
 				133A917617E9745A00E3CC62 /* MHMailMessage.h */,
 				133A917717E9745A00E3CC62 /* MHMailMessage.m */,
-				133A917A17E9745A00E3CC62 /* MHPreferences.h */,
-				133A917B17E9745A00E3CC62 /* MHPreferences.m */,
 				13B6E5D517F6F41E00878012 /* MHHeadersEditor.h */,
 				13B6E5D617F6F41E00878012 /* MHHeadersEditor.m */,
 				13AD485F1801575600473407 /* MHCodeInjector.h */,
@@ -240,10 +228,8 @@
 				9C27AEB71932CF540007486F /* MHSignature.m */,
 				9CE4221A19BFAD3C005E7C07 /* MHDisplayNotes.h */,
 				9CE4221B19BFAD3C005E7C07 /* MHDisplayNotes.m */,
-				132F812A21680CCB007CC6EE /* RWHPreferences.h */,
-				132F812B21680CCC007CC6EE /* RWHPreferences.m */,
-				13B9D66221687E1800B498BE /* RWHMenu.h */,
-				13B9D66321687E1800B498BE /* RWHMenu.m */,
+				132F812A21680CCB007CC6EE /* MHPreferences.h */,
+				132F812B21680CCC007CC6EE /* MHPreferences.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -251,16 +237,14 @@
 		1371DD0117F864FE00320B54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				132F812C21680CCC007CC6EE /* RWHPreferences.xib */,
+				132F812C21680CCC007CC6EE /* MHPreferences.xib */,
 				9C5A95901B095EB000626B60 /* bitcoin-24.png */,
 				13503BF71AB49B4800AF09CC /* btn_donate_pp_142x27.png */,
 				9CE4222219BFDFE1005E7C07 /* MHDisplayNotes.xib */,
 				132C66621827E23400CD7C1A /* language.png */,
 				138BAEBA1820218C00738ADB /* MHUpdateAlert.xib */,
 				13882A2F18073509004BCC6D /* LICENSE.txt */,
-				1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */,
 				1372351017FD8C6B007E7B71 /* MailHeader-Info.plist */,
-				1372350D17FD8316007E7B71 /* MHPreferencesView.xib */,
 				1371DD0F17F864FE00320B54 /* ReplyWithHeader.icns */,
 				13A25F4617F9CE90002394DF /* Entitlements.plist */,
 				1365843B17FAC12700E8C57D /* MailHeader.strings */,
@@ -422,17 +406,15 @@
 			files = (
 				1371DD1817F864FE00320B54 /* ReplyWithHeader.icns in Resources */,
 				13A25F4717F9CE90002394DF /* Entitlements.plist in Resources */,
-				132F812E21680CCC007CC6EE /* RWHPreferences.xib in Resources */,
+				132F812E21680CCC007CC6EE /* MHPreferences.xib in Resources */,
 				138BAEBC1820218C00738ADB /* MHUpdateAlert.xib in Resources */,
 				9CE4222419BFDFE1005E7C07 /* MHDisplayNotes.xib in Resources */,
 				1365843917FAC12700E8C57D /* MailHeader.strings in Resources */,
-				1372350F17FD8316007E7B71 /* MHPreferencesView.xib in Resources */,
 				9C5A95911B095EB000626B60 /* bitcoin-24.png in Resources */,
 				13503BF91AB49B4800AF09CC /* btn_donate_pp_142x27.png in Resources */,
 				132C66631827E23400CD7C1A /* language.png in Resources */,
 				138BAEBD182022AA00738ADB /* Config.plist in Resources */,
 				9C3230E619BD578200757AA4 /* Credits.rtf in Resources */,
-				1372351517FD8F3D007E7B71 /* MHPreferencesView.strings in Resources */,
 				13882A3018073509004BCC6D /* LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,10 +447,9 @@
 				133A918017E9745A00E3CC62 /* MHHeaderString.m in Sources */,
 				133A918117E9745A00E3CC62 /* MHQuotedMailOriginal.m in Sources */,
 				133A918417E9745A00E3CC62 /* MHMailMessage.m in Sources */,
-				133A918617E9745A00E3CC62 /* MHPreferences.m in Sources */,
 				131C192417F627B70053C587 /* SUStandardVersionComparator.m in Sources */,
 				130238B01AABC48000AA2C01 /* NSString+MailHeader.m in Sources */,
-				132F812D21680CCC007CC6EE /* RWHPreferences.m in Sources */,
+				132F812D21680CCC007CC6EE /* MHPreferences.m in Sources */,
 				13B6E5D717F6F41E00878012 /* MHHeadersEditor.m in Sources */,
 				13A25F4417F9B0C7002394DF /* NSPreferences+MailHeader.m in Sources */,
 				135829F717FD5C0600FC5C1F /* NSMutableAttributedString+MailHeader.m in Sources */,
@@ -479,7 +460,6 @@
 				13AD486918016F6400473407 /* MHUpdateAlert.m in Sources */,
 				13AD486D18018D4600473407 /* MHUpdater.m in Sources */,
 				9C27AEB81932CF540007486F /* MHSignature.m in Sources */,
-				13B9D66421687E1800B498BE /* RWHMenu.m in Sources */,
 				13C7E6391E8EFC4D00B63957 /* MFSignature.h in Sources */,
 				13882A2B18072C7D004BCC6D /* MLog.m in Sources */,
 				9CE4221D19BFAD3C005E7C07 /* MHDisplayNotes.m in Sources */,
@@ -513,28 +493,12 @@
 			name = MailHeader.strings;
 			sourceTree = "<group>";
 		};
-		1372350D17FD8316007E7B71 /* MHPreferencesView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1372350E17FD8316007E7B71 /* en */,
-			);
-			name = MHPreferencesView.xib;
-			sourceTree = "<group>";
-		};
 		1372351017FD8C6B007E7B71 /* MailHeader-Info.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1372351117FD8C6B007E7B71 /* en */,
 			);
 			name = "MailHeader-Info.plist";
-			sourceTree = "<group>";
-		};
-		1372351317FD8F3D007E7B71 /* MHPreferencesView.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1372351417FD8F3D007E7B71 /* en */,
-			);
-			name = MHPreferencesView.strings;
 			sourceTree = "<group>";
 		};
 		138BAEBA1820218C00738ADB /* MHUpdateAlert.xib */ = {

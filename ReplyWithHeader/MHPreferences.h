@@ -2,8 +2,6 @@
  * The MIT License (MIT)
  *
  * Copyright (c) 2013-2018 Jeevanandam M.
- *               2012, 2013 Jason Schroth
- *               2010, 2011 Saptarshi Guha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,51 +22,42 @@
  * THE SOFTWARE.
  */
 
+//
+//  MHPreferences.h
+//  ReplyWithHeader
+//
+//  Created by Jeevanandam M. on 10/5/18.
+//
 
-#import "NSPreferencesModule.h"
+@interface MHPreferences : NSWindowController<NSTableViewDelegate, NSTableViewDataSource>
+{
+    NSMutableDictionary *signaturesData;
+    NSInteger accountIndex;
+    
+    IBOutlet NSTabView *_MHBundleTabBox;
+    IBOutlet NSButton *_MHBundleEnabled;
+    IBOutlet NSButton *_MHSelectFont;
+    IBOutlet NSButton *_MHNotifyNewVersion;
+    IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
+    IBOutlet NSButton *_MHRawHeadersEnabled;
+    IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
+    IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
+    IBOutlet NSColorWell *_MHColorWell;
+    IBOutlet NSPopUpButton *_MHLanguagePopup;
+    IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
+    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
+    IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
+    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
+    IBOutlet NSTableView *_accountsTableView;
+    IBOutlet NSTableView *_signaturesTableView;
+    IBOutlet NSButton *_MHPaypalBtn;
+}
 
-/*!
- * @class
- * The <code>MHPreferences</code> class is the subclass of
- * <code>NSPreferencesModule</code> that displays and manages preferences
- * specific to the MailHeader plugin.
- *
- * MHPreferences Class refactored & completely rewritten by Jeevanandam M. on Sep 23, 2013 
- */
-//@interface MHPreferences : NSPreferencesModule <NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource>
-//{
-//    NSMutableDictionary *signaturesData;
-//    NSInteger accountIndex;
-//    
-//    IBOutlet NSTabView *_MHBundleTabBox;
-//    IBOutlet NSButton *_MHBundleEnabled;
-//    IBOutlet NSButton *_MHSelectFont;
-//    IBOutlet NSButton *_MHNotifyNewVersion;
-//    IBOutlet NSButton *_MHSubjectPrefixTextEnabled;
-//    IBOutlet NSButton *_MHRawHeadersEnabled;
-//    IBOutlet NSMatrix *_MHRemoveSignatureEnabled;
-//    IBOutlet NSTextField *_MHHeaderInfoFontAndSize;
-//    IBOutlet NSColorWell *_MHColorWell;
-//    IBOutlet NSPopUpButton *_MHLanguagePopup;
-//    IBOutlet NSMatrix *_MHHeaderAttributionFromTagStyle;
-//    IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
-//    IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
-//    IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
-//    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
-//    IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
-//    IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
-//    IBOutlet NSTableView *_accountsTableView;
-//    IBOutlet NSTableView *_signaturesTableView;
-//    IBOutlet NSButton *_MHPaypalBtn;
-//}
-//
-//@property(weak, readonly) NSString *NameAndVersion, *Copyright;
-//
-//#pragma mark NSPreferencesModule instance methods
-//
-//- (void)awakeFromNib;
-//- (NSString*)preferencesNibName;
-//- (NSImage *)imageForPreferenceNamed:(NSString *)aName;
-//- (BOOL)isResizable;
-//
-//@end
+@property(weak, readonly) NSString *NameAndVersion, *Copyright;
+
+- (void)toggleMailPreferencesOptions:(BOOL *)state;
+
+@end

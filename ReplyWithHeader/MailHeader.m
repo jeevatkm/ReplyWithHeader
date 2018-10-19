@@ -28,12 +28,9 @@
 
 #import "MailHeader.h"
 #import "MHCodeInjector.h"
-#import "MHPreferences.h"
 #import "MHUpdater.h"
 #import "NSString+MailHeader.h"
 #import "MHMainMenu.h"
-#include <objc/objc-class.h>
-#import <objc/runtime.h>
 
 @interface MailHeader (MHNoImplementation)
 + (void)registerBundle;
@@ -376,57 +373,6 @@
 {
     // high sierra NSAppKitVersionNumber >= 1561
     return floor(NSAppKitVersionNumber) >= 1561;
-}
-
-
-
-#pragma mark MVMailBundle class methods
-
-//+ (BOOL)hasPreferencesPanel
-//{
-//    // LEOPARD Invoked on +initialize. Else, invoked from +registerBundle.
-//    return YES;
-//}
-//
-//+ (NSString*)preferencesOwnerClassName
-//{
-//    return NSStringFromClass([MHPreferences class]);
-//}
-//
-//+ (NSString*)preferencesPanelName
-//{
-//    return MHLocalizedStringByLocale(@"MAIL_HEADER_PREFERENCES", MHLocaleIdentifier);
-//}
-
-+ (void)objectInsights:(Class)clz
-{
-    Class currentClass = clz;
-    while (currentClass) {
-        // Iterate over all instance methods for this class
-        unsigned int methodCount;
-        Method *methodList = class_copyMethodList(currentClass, &methodCount);
-        unsigned int i = 0;
-        NSLog(@"RWH: Method List for:: %@", [currentClass className]);
-        for (; i < methodCount; i++) {
-            NSLog(@"RWH: %@ - %@", [NSString stringWithCString:class_getName(currentClass) encoding:NSUTF8StringEncoding], [NSString stringWithCString:sel_getName(method_getName(methodList[i])) encoding:NSUTF8StringEncoding]);
-        }
-        free(methodList);
-        
-        NSLog(@"RWH: Variables List for:: %@", [currentClass className]);
-        unsigned int count;
-        unsigned int j = 0;
-        Ivar *vars = class_copyIvarList(currentClass, &count);
-        for (; j<count; j++) {
-            Ivar var = vars[j];
-            NSLog(@"RWH: %s %s", ivar_getName(var), ivar_getTypeEncoding(var));
-        }
-        free(vars);
-        
-        currentClass = class_getSuperclass(currentClass);
-        if (currentClass == [NSObject class]) {
-            break;
-        }
-    }
 }
 
 #pragma mark MVMailBundle initialize

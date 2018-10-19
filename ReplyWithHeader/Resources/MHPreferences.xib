@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="RWHPreferences">
+        <customObject id="-2" userLabel="File's Owner" customClass="MHPreferences">
             <connections>
                 <outlet property="_MHBundleEnabled" destination="wrt-d3-OXs" id="UZf-HR-Enk"/>
                 <outlet property="_MHBundleTabBox" destination="poP-T6-MWI" id="WKA-CZ-l05"/>
@@ -647,7 +647,7 @@
                                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djX-M0-GTy">
                                                         <rect key="frame" x="330" y="13" width="147" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="squareTextured" title="Textured Button" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="X1B-9a-kFg">
+                                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="X1B-9a-kFg">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>

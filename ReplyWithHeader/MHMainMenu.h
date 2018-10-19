@@ -29,10 +29,10 @@
 //  Created by Jeevanandam M. on 10/5/18.
 //
 
-#import "RWHPreferences.h"
+#import "MHPreferences.h"
 
 @interface MHMainMenu : NSObject {
-    RWHPreferences *preferences;
+    MHPreferences *preferences;
     NSMenu *rwhMenu;
     NSMenuItem *rwhEnable;
     NSMenuItem *rwhAllHeaders;
@@ -44,7 +44,7 @@
 + (void)showPreferencesAction:(id)sender;
 + (void)addMainMenu;
 
-@property(retain) RWHPreferences *preferences;
+@property(retain) MHPreferences *preferences;
 @property(retain) NSMenu *rwhMenu;
 @property(retain) NSMenuItem *rwhEnable;
 @property(retain) NSMenuItem *rwhAllHeaders;

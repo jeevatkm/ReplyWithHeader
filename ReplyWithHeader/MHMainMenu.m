@@ -30,7 +30,7 @@
 //
 
 #import "MHMainMenu.h"
-#import "RWHPreferences.h"
+#import "MHPreferences.h"
 
 @interface MHMainMenu (MHNoImplementation)
 
@@ -79,7 +79,7 @@
         [sharedInstance.rwhMenu addItem:[NSMenuItem separatorItem]];
         [sharedInstance.rwhMenu addItem:rwhPrefMenu];
         
-        sharedInstance.preferences = [[RWHPreferences alloc] init];
+        sharedInstance.preferences = [[MHPreferences alloc] init];
     });
     return sharedInstance;
 }
@@ -90,40 +90,7 @@
     Class mailApp = NSClassFromString(@"MailApp");
     NSMenu *mainMenu = [[mailApp sharedApplication] mainMenu];
     
-//    NSMenu *rwhMenu = [[self sharedInstance] rwhMenu];
-//    NSMenuItem *rwhEnable = [[self sharedInstance] rwhEnable];
-//    NSMenuItem *rwhAllHeaders = [[self sharedInstance] rwhAllHeaders];
-//
-//    NSMenuItem *rwhPrefMenu = [[NSMenuItem alloc] initWithTitle:@"Preferences" action:@selector(showPreferencesAction:) keyEquivalent:@""];
-//    [rwhPrefMenu setTarget:self];
-//    [rwhPrefMenu setEnabled:TRUE];
-//
-//    rwhEnable = [[NSMenuItem alloc] initWithTitle:@"Enable" action:@selector(rwhEnableAction:) keyEquivalent:@""];
-//    [rwhEnable setTarget:self];
-//    [rwhEnable setEnabled:TRUE];
-//    if (GET_DEFAULT_BOOL(MHBundleEnabled))
-//    {
-//        [rwhEnable setState:NSOnState];
-//    }
-//
-//    rwhAllHeaders = [[NSMenuItem alloc] initWithTitle:@"Include All Headers" action:@selector(includeAllHeadersAction:) keyEquivalent:@""];
-//    [rwhAllHeaders setTarget:self];
-//    [rwhAllHeaders setEnabled:TRUE];
-//    if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
-//    {
-//        [rwhAllHeaders setState:NSOnState];
-//    }
-//
-//    rwhMenu = [[NSMenu alloc] initWithTitle:@"RWH"];
-//    [rwhMenu addItem:rwhEnable];
-//    [rwhMenu addItem:[NSMenuItem separatorItem]];
-//    [rwhMenu addItem:rwhAllHeaders];
-//    [rwhMenu addItem:[NSMenuItem separatorItem]];
-//    [rwhMenu addItem:rwhPrefMenu];
-    
-    
     NSMenuItem *rwhMainMenu = [[NSMenuItem alloc] init];
-//    NSMenuItem *rwhMainMenu = [[NSMenuItem alloc] initWithTitle:@"RWH" action:@selector(submenuActionTest:) keyEquivalent:@""];
     [rwhMainMenu setTitle:@"RWH"];
     [rwhMainMenu setSubmenu:[[self sharedInstance] rwhMenu]];
     [rwhMainMenu setTarget:self];
@@ -131,30 +98,28 @@
     [mainMenu insertItem:rwhMainMenu atIndex:[mainMenu numberOfItems] - 1];
     [[mailApp sharedApplication] setMainMenu:mainMenu];
     
-    NSLog(@"RWH: %@", [[mailApp sharedApplication] mainMenu]);
+    MHLog(@"RWH: %@", [[mailApp sharedApplication] mainMenu]);
     MHLog(@"RWH main menu added successfully");
 }
 
 + (void)rwhEnableAction:(id)sender
 {
-    NSLog(@"RWH: rwhEnableAction called");
+    MHLog(@"RWH: rwhEnableAction called");
     if ([MailHeader isEnabled])
     {
         SET_DEFAULT_BOOL(FALSE, MHBundleEnabled);
         [[[self sharedInstance] rwhEnable] setState:NSControlStateValueOff];
-        // [[[self sharedInstance] preferences] toggleMailPreferencesOptions:FALSE];
     }
     else
     {
         SET_DEFAULT_BOOL(TRUE, MHBundleEnabled);
         [[[self sharedInstance] rwhEnable] setState:NSControlStateValueOn];
-        // [[[self sharedInstance] preferences] toggleMailPreferencesOptions:TRUE];
     }
 }
 
 + (void)includeAllHeadersAction:(id)sender
 {
-    NSLog(@"RWH: includeAllHeadersAction called");
+    MHLog(@"RWH: includeAllHeadersAction called");
     if (GET_DEFAULT_BOOL(MHRawHeadersEnabled))
     {
         SET_DEFAULT_BOOL(FALSE, MHRawHeadersEnabled);

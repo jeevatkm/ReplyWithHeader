@@ -58,11 +58,5 @@
 + (BOOL)isElCapitanOrGreater;
 + (BOOL)isSierraOrGreater;
 + (BOOL)isHighSierraOrGreater;
-+ (void)objectInsights:(Class)clz;
-
-#pragma mark MVMailBundle methods
-//+ (BOOL)hasPreferencesPanel;
-//+ (NSString*)preferencesOwnerClassName;
-//+ (NSString*)preferencesPanelName;
 
 @end
