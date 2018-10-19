@@ -75,12 +75,26 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     {
         DOMNode *nodeRef = [self getBlockquoteTagNode];
         [nodeRef insertBefore:headerFragment refChild:[nodeRef firstChild]];
-        [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
+        if (GET_DEFAULT_BOOL(MHHeaderBlueLineBorderEnabled))
+        {
+            [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
+        }
+        else
+        {
+            [nodeRef insertBefore:headerBorderSpacer refChild:[nodeRef firstChild]];
+        }
     }
     else
     {
         [originalEmail insertBefore:headerFragment refChild: [originalEmail firstChild]];
-        [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
+        if (GET_DEFAULT_BOOL(MHHeaderBlueLineBorderEnabled))
+        {
+            [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
+        }
+        else
+        {            
+            [originalEmail insertBefore:headerBorderSpacer refChild: [originalEmail firstChild]];
+        }
     }
 }
 
@@ -255,6 +269,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     // now initialze header border string into html form
     headerBorder = [self createDocumentFragment:borderString];
+    headerBorderSpacer = [self createDocumentFragment:@"<br><br>"];
     
     textNodeLocation = 0;
 }

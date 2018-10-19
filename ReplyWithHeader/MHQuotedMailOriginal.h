@@ -38,6 +38,7 @@
 @private
     id document;
     DOMDocumentFragment *headerBorder;
+    DOMDocumentFragment *headerBorderSpacer;
     BOOL isHTMLMail;
     DOMHTMLDivElement *originalEmail;
     int textNodeLocation; //which

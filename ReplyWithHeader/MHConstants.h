@@ -66,8 +66,9 @@
 #define MHSubjectPrefixTextEnabled @"MHSubjectPrefixTextEnabled"
 #define MHRawHeadersEnabled @"MHRawHeadersEnabled"
 #define MHBundleHeaderLanguageCode @"MHBundleHeaderLanguageCode"
+#define MHHeaderBlueLineBorderEnabled @"MHHeaderBlueLineBorderEnabled"
 
-#define MHPreferencesNibName @"MHPreferencesView"
+#define MHPreferencesNibName @"MHPreferences"
 
 #define MHLogEnabled @"MHDebugLog"
 

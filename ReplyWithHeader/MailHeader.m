@@ -237,6 +237,7 @@
                           [NSArchiver archivedDataWithRootObject:[NSColor blackColor]], MHHeaderColor,
                           [NSNumber numberWithBool:NO], MHSubjectPrefixTextEnabled,
                           [NSNumber numberWithBool:NO], MHRawHeadersEnabled,
+                          [NSNumber numberWithBool:YES], MHHeaderBlueLineBorderEnabled,
                           [NSNumber numberWithBool:NO], MHRemoveSignatureEnabled,
                           [NSNumber numberWithInt:1], MHHeaderAttributionFromTagStyle,
                           [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
