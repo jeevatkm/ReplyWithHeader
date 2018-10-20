@@ -382,7 +382,7 @@
                                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZC1-WD-39h">
                                             <rect key="frame" x="15" y="14" width="453" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Include header bule line" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="07b-fo-ppP">
+                                            <buttonCell key="cell" type="check" title="Include header blue line" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="07b-fo-ppP">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -430,7 +430,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" id="ENT-ar-pmg">
                                                 <rect key="frame" x="1" y="0.0" width="170" height="123"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView identifier="accountsTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="se2-Yb-kQT" id="K8h-Si-GPy">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="100"/>
@@ -486,7 +486,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" id="8S4-Qn-zRb">
                                                 <rect key="frame" x="1" y="0.0" width="182" height="123"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView identifier="signaturesTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="6AI-Fx-LPe" id="N9n-PU-jta">
                                                         <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
