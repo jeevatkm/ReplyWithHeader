@@ -6,7 +6,7 @@ Author: Jeevanandam M. (https://github.com/jeevatkm, jeeva@myjeeva.com)
 1. Provide permisssion to "Terminal.app" for installing RWH plugin. 
    - Go to "System Preferences > Security & Privacy > Privacy"
    - Unlock if needed via clicking lower left "Lock Icon"
-   - Select "Application Data" (if you're upgraded from Mojave beta OS - you might have "Full Disk Access" as a label)
+   - Select "Full Disk Access or Application Data"
    - Click the "+" icon
    - Select "Terminal.app" and click "Add"
    - Note: The "Terminal.app" have to be restarted for changes to take effect (if its already open).

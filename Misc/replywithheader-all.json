@@ -5,6 +5,16 @@
     "language": "en",
     "releases": {
         "latest": {
+            "title": "v6.0 (1 new feature, 1 enhancements)",
+            "pubDate": "Saturday, Oct 20, 2018 18:33:00 -0700",
+            "buildDate": "Saturday, Oct 20, 2018 18:33:00 -0700",
+            "downloadUrl": "http://bit.ly/2PeIsBQ",
+            "version": "6.0",
+            "shortVersion": "6.0",
+            "length": 222902,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:30px;font-size:12.5px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>v6.0 (1 new feature, 1 enhancements)</div><div><ul><li>Added support for macOS Mojave Mail.app</li><li>Added RWH main menu and RWH preferences moved to Mail.app main menu</li></ul></div><p><strong>Please have a look Install-Instructions-Mojave-OS-and-Above.txt and follow the steps for Mojave OS</strong></p><div><p>Spread the word of ReplyWithHeader (RWH)</p><ul><li>Providing &quot;Star&quot; on Github - https://github.com/jeevatkm/ReplyWithHeader</li><li>Softpedia.com - https://mac.softpedia.com/get/Internet-Utilities/ReplyWithHeaders.shtml</li><li>MacUpdate.com - https://www.macupdate.com/app/mac/49256/replywithheader</li></ul></div></body></html>"
+        },
+        "v5.4-beta": {
             "title": "Version 5.4-beta (1 enhancements)",
             "pubDate": "Tuesday, Sep 26 2017 18:50:00 -0700",
             "buildDate": "Tuesday, Sep 26 2017 18:50:00 -0700",
