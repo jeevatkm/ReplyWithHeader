@@ -59,7 +59,7 @@
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Manage Headers" identifier="1" id="wzA-gN-HuN">
-                                <view key="view" ambiguous="YES" id="clf-P3-D9B">
+                                <view key="view" id="clf-P3-D9B">
                                     <rect key="frame" x="10" y="33" width="546" height="519"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -532,7 +532,7 @@
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="About" identifier="3" id="sdy-bG-MyX">
-                                <view key="view" id="YB9-TF-EQ4">
+                                <view key="view" ambiguous="YES" id="YB9-TF-EQ4">
                                     <rect key="frame" x="10" y="33" width="546" height="519"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>

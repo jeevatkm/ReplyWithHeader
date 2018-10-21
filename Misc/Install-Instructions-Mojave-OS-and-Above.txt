@@ -21,7 +21,7 @@ Author: Jeevanandam M. (https://github.com/jeevatkm, jeeva@myjeeva.com)
 
 4. Congrats, you have successfully installed RWH plugin :) Now you should be seeing "RWH" menu in the menu bar.
 
-5. Promote and spreading word of ReplyWithHeader (RWH)
+5. Spread the word of ReplyWithHeader (RWH)
    - Providing "Star" on Github - https://github.com/jeevatkm/ReplyWithHeader
    - MacUpdate.com - https://www.macupdate.com/app/mac/49256/replywithheader 
    - Softpedia.com - https://mac.softpedia.com/get/Internet-Utilities/ReplyWithHeaders.shtml
