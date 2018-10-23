@@ -79,10 +79,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         {
             [nodeRef insertBefore:headerBorder refChild:[nodeRef firstChild]];
         }
-        else
-        {
-            [nodeRef insertBefore:headerBorderSpacer refChild:[nodeRef firstChild]];
-        }
     }
     else
     {
@@ -90,10 +86,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         if (GET_DEFAULT_BOOL(MHHeaderBlueLineBorderEnabled))
         {
             [originalEmail insertBefore:headerBorder refChild: [originalEmail firstChild]];
-        }
-        else
-        {            
-            [originalEmail insertBefore:headerBorderSpacer refChild: [originalEmail firstChild]];
         }
     }
 }
@@ -163,7 +155,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         
         // Line space
         // https://github.com/jeevatkm/ReplyWithHeader/issues/84
-        int linesBeforeSep = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator) - 1;
+        int linesBeforeSep = GET_DEFAULT_INT(MHLineSpaceBeforeHeaderSeparator);
         for (int i=0; i<linesBeforeSep; i++) {
             DOMDocumentFragment *brFragment = [self createDocumentFragment:@"<br>"];
             [originalEmail insertBefore:brFragment refChild: [originalEmail firstChild]];
@@ -269,7 +261,6 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
     
     // now initialze header border string into html form
     headerBorder = [self createDocumentFragment:borderString];
-    headerBorderSpacer = [self createDocumentFragment:@"<br><br>"];
     
     textNodeLocation = 0;
 }
@@ -499,7 +490,7 @@ NSString *TAG_BLOCKQUOTE = @"BLOCKQUOTE";
         htmlString = [NSString stringWithFormat:@"%@%@", @"<br>", htmlString];
     }
     
-    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader) - 1;
+    int linesAfter = GET_DEFAULT_INT(MHLineSpaceAfterHeader);
     for (int i=0; i<linesAfter; i++)
     {
         htmlString = [NSString stringWithFormat:@"%@%@", htmlString, @"<br>"];
