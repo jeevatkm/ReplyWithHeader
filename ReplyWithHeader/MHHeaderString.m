@@ -500,43 +500,50 @@ NSString *MH_QUOTED_EMAIL_REGEX_STRING = @"\\s<([a-zA-Z0-9_@\\.\\-]*)>,?";
     // trying this universal solution
     //if ([MHLocaleIdentifier isNotEqualTo:choosenLocaleIdentifier])
     //{
-        range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
-        NSUInteger start = range.location + 2;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
-        MHLog(@"Date format: %@", [dateFormatter dateFormat]);
+    range = [[[row string] precomposedStringWithCanonicalMapping] rangeOf:@":"];
+    NSUInteger start = range.location + 2;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
+    MHLog(@"Date format: %@", [dateFormatter dateFormat]);
+    
+    @try {
+        NSString *dateTimeStr = [[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:start];
+        NSDate *date = [dateFormatter dateFromString:dateTimeStr];
+        MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
         
-        @try {
-            NSString *dateTimeStr = [[[row string] precomposedStringWithCanonicalMapping] substringFromIndex:start];
-            NSDate *date = [dateFormatter dateFromString:dateTimeStr];
-            MHLog(@"dateTimeStr: %@, date: %@", dateTimeStr, date);
-            
-            [dateFormatter setLocale:choosenLocale];
-            int dateTagStyle = GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle);
-//            if (dateTagStyle == 0) {
-//                NSLog(@"Default Date format: %@", [dateFormatter dateFormat]);
-//                [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a"];
-//            } else
-            if (dateTagStyle == 1) {
-                //[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-                NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-                [dateFormatter setTimeZone:gmt];
-                //[dateFormatter setDateFormat:@"EEEE, MMM d, yyyy 'at' h:mm:ss a Z"];
-                MHLog(@"Modified date format %@", [dateFormatter dateFormat]);
-            }
-            
-            NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
-            MHLog(@"Localized date: %@", newLocalDateStr);
-            
-            NSUInteger length = [[row string] length] - start;
-            MHLog(@"Before date: %@", [row string]);
-            [row replaceCharactersInRange:NSMakeRange(start, length) withString:newLocalDateStr];
-            MHLog(@"After date: %@", [row string]);
+        NSString *dateFormatTemplate = @"EEEE, MMMM d, yyyy";
+        int dateTagStyle = GET_DEFAULT_INT(MHHeaderAttributionDateTagStyle);
+        if (dateTagStyle == 1) {
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         }
-        @catch (NSException *exception) {
-            NSLog(@"RWH Unable to parse date [%@]", exception.description);
+        
+        int timeTagStyle = GET_DEFAULT_INT(MHHeaderAttributionTimeTagStyle);
+        if (timeTagStyle == 1) {
+            dateFormatTemplate = [dateFormatTemplate stringByAppendingString:@" H:mm"];
+        } else {
+            dateFormatTemplate = [dateFormatTemplate stringByAppendingString:@" h:mm a"];
         }
+        
+        BOOL includeShortTimeZoneInfo = GET_DEFAULT_BOOL(MHHeaderAttributionShortTimeZoneStyle);
+        if (includeShortTimeZoneInfo) {
+            dateFormatTemplate = [dateFormatTemplate stringByAppendingString:@" zzz"];
+        }
+        MHLog(@"dateFormatTemplate: %@", dateFormatTemplate);
+        
+        [dateFormatter setLocale:choosenLocale];
+        [dateFormatter setLocalizedDateFormatFromTemplate:dateFormatTemplate];
+        NSString *newLocalDateStr = [dateFormatter stringFromDate:date];
+        MHLog(@"Localized date: %@", newLocalDateStr);
+        
+        NSUInteger length = [[row string] length] - start;
+        MHLog(@"Before date: %@", [row string]);
+        [row replaceCharactersInRange:NSMakeRange(start, length) withString:newLocalDateStr];
+        MHLog(@"After date: %@", [row string]);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"RWH Unable to parse date [%@]", exception.description);
+    }
     //}
 }
 

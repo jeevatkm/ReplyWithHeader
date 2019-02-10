@@ -243,6 +243,8 @@
                           [NSNumber numberWithInt:1], MHHeaderAttributionToCcTagStyle,
                           [NSNumber numberWithInt:1], MHHeaderAttributionLblSeqTagStyle,
                           [NSNumber numberWithInt:0], MHHeaderAttributionDateTagStyle,
+                          [NSNumber numberWithInt:0], MHHeaderAttributionTimeTagStyle,
+                          [NSNumber numberWithBool:NO], MHHeaderAttributionShortTimeZoneStyle,
                           [NSNumber numberWithInt:0], MHLineSpaceBeforeHeader,
                           [NSNumber numberWithInt:1], MHLineSpaceAfterHeader,
                           [NSNumber numberWithInt:1], MHLineSpaceBeforeHeaderSeparator,
