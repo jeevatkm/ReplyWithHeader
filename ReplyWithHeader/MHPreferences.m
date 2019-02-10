@@ -75,10 +75,13 @@
     [_MHRawHeadersEnabled setEnabled:state];
     [_MHRemoveSignatureEnabled setEnabled:state];
     [_MHLanguagePopup setEnabled:state];
+    [_MHHeaderBlueLineBorderEnabled setEnabled:state];
     [_MHHeaderAttributionFromTagStyle setEnabled:state];
     [_MHHeaderAttributionToCcTagStyle setEnabled:state];
     [_MHHeaderAttributionLblSeqTagStyle setEnabled:state];
     [_MHHeaderAttributionDateTagStyle setEnabled:state];
+    [_MHHeaderAttributionTimeTagStyle setEnabled:state];
+    [_MHHeaderAttributionShortTimeZoneStyle setEnabled:state];
     
     [_MHLineSpaceBeforeHeaderPopup setEnabled:state];
     [_MHLineSpaceAfterHeaderPopup setEnabled:state];
@@ -497,6 +500,10 @@
     NSString *supportedLocales = @"";
     for (NSString *lang in localizations)
     {
+        if ([lang isEqual: @"Base"]) {
+            continue;
+        }
+        
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:lang];
         NSString *name = [locale displayNameForKey:NSLocaleIdentifier value:lang];
         supportedLocales = [supportedLocales stringByAppendingString:name];

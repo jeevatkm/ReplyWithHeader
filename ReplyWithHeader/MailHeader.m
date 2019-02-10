@@ -62,14 +62,15 @@
 {
     NSString *identifier = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0];
     
-    if ([identifier hasPrefix:@"en"])
+    if ([identifier hasPrefix:@"en-US"] || [identifier hasPrefix:@"en-GB"]){
+        // use as-is
+    } else if ([identifier hasPrefix:@"en"])
         identifier = @"en"; // for issue #39 - considering all en-* into one umberlla
     else if ([identifier hasPrefix:@"zh-Hans"] || [identifier isEqualToString:@"zh_CN"])
         identifier = @"zh-Hans";
     else if ([identifier hasPrefix:@"zh-Hant"] || [identifier isEqualToString:@"zh_TW"])
         identifier = @"zh-Hant";
-    else if ([identifier hasPrefix:@"no"]
-             || [identifier hasPrefix:@"nb"])
+    else if ([identifier hasPrefix:@"no"] || [identifier hasPrefix:@"nb"])
         identifier = @"nb"; // for issue #52 - 'Norwegian Bokmål (nb, no)' locale support
     else if ([identifier hasPrefix:@"de"])
         identifier = @"de";
@@ -85,11 +86,9 @@
         identifier = @"ko";
     else if ([identifier hasPrefix:@"nl"])
         identifier = @"nl";
-    else if ([identifier hasPrefix:@"pt-BR"])
-        identifier = @"pt-BR";
-    else if ([identifier hasPrefix:@"pt-PT"])
-        identifier = @"pt-PT";
-    else if ([identifier hasPrefix:@"pt"])
+    else if ([identifier hasPrefix:@"pt-BR"] || [identifier hasPrefix:@"pt-PT"]) {
+        // use as-is
+    } else if ([identifier hasPrefix:@"pt"])
         identifier = @"pt";
     else if ([identifier hasPrefix:@"ru"])
         identifier = @"ru";

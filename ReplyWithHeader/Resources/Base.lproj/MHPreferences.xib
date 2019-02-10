@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
+        <deployment version="101300" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +14,10 @@
                 <outlet property="_MHHeaderAttributionDateTagStyle" destination="0Nc-5w-oO7" id="H2A-4m-nyp"/>
                 <outlet property="_MHHeaderAttributionFromTagStyle" destination="d7Y-Iv-UP9" id="KW9-Fu-tsj"/>
                 <outlet property="_MHHeaderAttributionLblSeqTagStyle" destination="Sui-rG-x3j" id="P6O-Jv-esR"/>
+                <outlet property="_MHHeaderAttributionShortTimeZoneStyle" destination="uNd-JI-wTh" id="qkA-Ih-Dk4"/>
+                <outlet property="_MHHeaderAttributionTimeTagStyle" destination="Rg3-Ii-PEO" id="uBB-oX-cAo"/>
                 <outlet property="_MHHeaderAttributionToCcTagStyle" destination="Q7Q-i0-Xfd" id="Evp-Br-lpz"/>
+                <outlet property="_MHHeaderBlueLineBorderEnabled" destination="ZC1-WD-39h" id="L48-B6-4Kk"/>
                 <outlet property="_MHHeaderInfoFontAndSize" destination="Hst-EU-AW5" id="lf1-8K-hMg"/>
                 <outlet property="_MHLanguagePopup" destination="6Qi-sE-Elu" id="EDO-eE-LLp"/>
                 <outlet property="_MHLineSpaceAfterHeaderPopup" destination="Pfk-fW-ENp" id="i1Z-gQ-ppD"/>
@@ -421,7 +424,7 @@
                                             </connections>
                                         </button>
                                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNd-JI-wTh">
-                                            <rect key="frame" x="35" y="222" width="453" height="18"/>
+                                            <rect key="frame" x="36" y="222" width="453" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Include short timezone info" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="CdS-g3-ZiO">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -471,7 +474,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" id="ENT-ar-pmg">
                                                 <rect key="frame" x="1" y="0.0" width="170" height="123"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="accountsTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="se2-Yb-kQT" id="K8h-Si-GPy">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="100"/>
@@ -527,7 +530,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" id="8S4-Qn-zRb">
                                                 <rect key="frame" x="1" y="0.0" width="182" height="123"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="signaturesTable" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="6AI-Fx-LPe" id="N9n-PU-jta">
                                                         <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
@@ -578,7 +581,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeH-RO-2S6">
-                                            <rect key="frame" x="220" y="395" width="271" height="30"/>
+                                            <rect key="frame" x="220" y="446" width="271" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="copyright" id="3q7-0P-MIE">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -714,7 +717,6 @@
                                                     </imageView>
                                                 </subviews>
                                             </view>
-                                            <font key="titleFont" metaFont="smallSystem"/>
                                         </box>
                                     </subviews>
                                 </view>
@@ -725,7 +727,7 @@
                         </connections>
                     </tabView>
                     <popUpButton toolTip="Message attribution language" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Qi-sE-Elu">
-                        <rect key="frame" x="431" y="610" width="144" height="25"/>
+                        <rect key="frame" x="387" y="610" width="188" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JsF-Fo-4Tw">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -734,7 +736,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <imageView toolTip="Message attribution language" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHc-HM-K9W">
-                        <rect key="frame" x="415" y="614" width="16" height="16"/>
+                        <rect key="frame" x="367" y="614" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="language" id="U8N-AE-JOk"/>
                     </imageView>

@@ -48,9 +48,12 @@
     IBOutlet NSMatrix *_MHHeaderAttributionToCcTagStyle;
     IBOutlet NSMatrix *_MHHeaderAttributionLblSeqTagStyle;
     IBOutlet NSMatrix *_MHHeaderAttributionDateTagStyle;
+    IBOutlet NSMatrix *_MHHeaderAttributionTimeTagStyle;
+    IBOutlet NSButton *_MHHeaderAttributionShortTimeZoneStyle;
     IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderPopup;
     IBOutlet NSPopUpButton *_MHLineSpaceAfterHeaderPopup;
     IBOutlet NSPopUpButton *_MHLineSpaceBeforeHeaderSepPopup;
+    IBOutlet NSButton *_MHHeaderBlueLineBorderEnabled;
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
     IBOutlet NSButton *_MHPaypalBtn;

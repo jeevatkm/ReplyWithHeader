@@ -56,6 +56,10 @@
 		13074EBA221018D200CC739A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/MailHeader-Info.plist"; sourceTree = "<group>"; };
 		130BAA3122101B87009E8F85 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MailHeader.strings; sourceTree = "<group>"; };
 		130BAA3222101BE5009E8F85 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Config.plist; sourceTree = "<group>"; };
+		130BAA3322101FCB009E8F85 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MailHeader.strings"; sourceTree = "<group>"; };
+		130BAA3422101FCB009E8F85 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "en-GB"; path = "en-GB.lproj/Config.plist"; sourceTree = "<group>"; };
+		130BAA3522101FE6009E8F85 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/MailHeader.strings"; sourceTree = "<group>"; };
+		130BAA3622101FE6009E8F85 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "en-US"; path = "en-US.lproj/Config.plist"; sourceTree = "<group>"; };
 		1310991F1825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		131099201825524800C24D9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/Config.plist; sourceTree = "<group>"; };
 		13109921182554C900C24D9F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pt; path = pt.lproj/MailHeader.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -382,16 +386,16 @@
 				ru,
 				"zh-Hans",
 				"zh-Hant",
-				zh,
 				nl,
 				sv,
-				fi,
 				ko,
 				"pt-PT",
 				uk,
 				nb,
 				"pt-BR",
 				Base,
+				"en-GB",
+				"en-US",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ReplyWithHeader */;
 			projectDirPath = "";
@@ -501,6 +505,8 @@
 				9CFD41621C4DCDD80095AF0A /* pt-BR */,
 				13074EB8221018AF00CC739A /* Base */,
 				130BAA3122101B87009E8F85 /* en */,
+				130BAA3322101FCB009E8F85 /* en-GB */,
+				130BAA3522101FE6009E8F85 /* en-US */,
 			);
 			name = MailHeader.strings;
 			sourceTree = "<group>";
@@ -542,6 +548,8 @@
 				9CFD41631C4DCDD80095AF0A /* pt-BR */,
 				13074EB9221018BD00CC739A /* Base */,
 				130BAA3222101BE5009E8F85 /* en */,
+				130BAA3422101FCB009E8F85 /* en-GB */,
+				130BAA3622101FE6009E8F85 /* en-US */,
 			);
 			name = Config.plist;
 			sourceTree = "<group>";
@@ -625,7 +633,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/Base.lproj/MailHeader-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
@@ -639,7 +647,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SRCROOT}/ReplyWithHeader/Resources/Base.lproj/MailHeader-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = ReplyWithHeader;
 				SDKROOT = macosx;
 			};
