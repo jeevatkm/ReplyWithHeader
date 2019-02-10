@@ -176,7 +176,7 @@
     if(![localString isEqualToString:key])
         return localString;
     
-    return [self localizedString:key localeIdentifier:@"en"];
+    return [self localizedString:key localeIdentifier:@"Base"];
 }
 
 + (NSString *)localizedString:(NSString *)key localeIdentifier:(NSString *)identifier
