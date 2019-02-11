@@ -35,6 +35,7 @@
 #import "MFSignature.h"
 #import "MHDisplayNotes.h"
 #import "MHMainMenu.h"
+#import "MLog.h"
 
 @interface MHPreferences (PrivateMethods)
     - (IBAction)mailHeaderBundlePressed:(id)sender;
@@ -46,6 +47,7 @@
     - (IBAction)openSupport:(id)sender;
     - (IBAction)openCredits:(id)sender;
     - (IBAction)notifyNewVersionPressed:(id)sender;
+    - (IBAction)enableDebugModePressed:(id)sender;
 @end
 
 @interface MHPreferences (MHNoImplementation)
@@ -92,6 +94,8 @@
     
     // for labels
     [_MHHeaderInfoFontAndSize setEnabled:state];
+    
+    [_MHDebugLog setEnabled:state];
 }
 
 - (void)toggleHeaderTypograpghyOptions:(BOOL *)state
@@ -248,6 +252,13 @@
             [_MHNotifyNewVersion setState:YES];
         }
     }
+}
+
+- (IBAction)enableDebugModePressed:(id)sender
+{
+    MHLog(@"RWH: enableDebugModePressed");
+    [MLog setLogOn:[sender state]];
+    NSLog(@"RWH %@ debug mode enabled: %@", [MailHeader bundleNameAndVersion], [sender state] ? @"YES" : @"NO");
 }
 
 - (IBAction)openPaypal:(id)sender

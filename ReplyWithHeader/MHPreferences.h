@@ -57,6 +57,7 @@
     IBOutlet NSTableView *_accountsTableView;
     IBOutlet NSTableView *_signaturesTableView;
     IBOutlet NSButton *_MHPaypalBtn;
+    IBOutlet NSButton *_MHDebugLog;
 }
 
 @property(weak, readonly) NSString *NameAndVersion, *Copyright;

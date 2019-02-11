@@ -11,6 +11,7 @@
                 <outlet property="_MHBundleEnabled" destination="wrt-d3-OXs" id="UZf-HR-Enk"/>
                 <outlet property="_MHBundleTabBox" destination="poP-T6-MWI" id="WKA-CZ-l05"/>
                 <outlet property="_MHColorWell" destination="d92-5L-3hU" id="nG9-NQ-gTM"/>
+                <outlet property="_MHDebugLog" destination="ncx-bc-KOY" id="ISs-0J-c1L"/>
                 <outlet property="_MHHeaderAttributionDateTagStyle" destination="0Nc-5w-oO7" id="H2A-4m-nyp"/>
                 <outlet property="_MHHeaderAttributionFromTagStyle" destination="d7Y-Iv-UP9" id="KW9-Fu-tsj"/>
                 <outlet property="_MHHeaderAttributionLblSeqTagStyle" destination="Sui-rG-x3j" id="P6O-Jv-esR"/>
@@ -62,7 +63,7 @@
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Manage Headers" identifier="1" id="wzA-gN-HuN">
-                                <view key="view" ambiguous="YES" id="clf-P3-D9B">
+                                <view key="view" id="clf-P3-D9B">
                                     <rect key="frame" x="10" y="33" width="546" height="543"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -576,7 +577,7 @@
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="About" identifier="3" id="sdy-bG-MyX">
-                                <view key="view" id="YB9-TF-EQ4">
+                                <view key="view" ambiguous="YES" id="YB9-TF-EQ4">
                                     <rect key="frame" x="10" y="33" width="546" height="543"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -718,6 +719,18 @@
                                                 </subviews>
                                             </view>
                                         </box>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ncx-bc-KOY">
+                                            <rect key="frame" x="205" y="318" width="183" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Enable debug mode" bezelStyle="regularSquare" imagePosition="left" alignment="justified" controlSize="mini" state="on" inset="2" id="0Iy-f0-SmS">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="smallSystem"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="enableDebugModePressed:" target="-2" id="6Ut-xt-MWE"/>
+                                                <binding destination="mWN-2y-ZAu" name="value" keyPath="values.MHDebugLog" id="5La-4U-H6g"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </view>
                             </tabViewItem>

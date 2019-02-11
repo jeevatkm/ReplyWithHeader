@@ -397,7 +397,7 @@
     // Logger
     BOOL logEnabled = GET_DEFAULT_BOOL(MHLogEnabled);
     [MLog setLogOn:logEnabled];
-    NSLog(@"RWH %@ debug log enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
+    NSLog(@"RWH %@ debug mode enabled: %@", [self bundleNameAndVersion], logEnabled ? @"YES" : @"NO");
     
     // Registering plugin in Mail.app
     [mvMailBundleClass registerBundle];
