@@ -1,10 +1,20 @@
 {
     "title": "ReplyWithHeader Mail Plugin/Bundle's All Version Changelog",
-    "homepage": "http://myjeeva.com/replywithheader",
+    "homepage": "https://myjeeva.com/replywithheader",
     "description": "Most recent changes with release notes and links to updates.",
     "language": "en",
     "releases": {
         "latest": {
+            "title": "v6.1 (1 enhancement, 1 bug fix)",
+            "pubDate": "Thursday, Feb 14 2019 23:22:00 -0800",
+            "buildDate": "Thursday, Feb 14 2019 23:22:00 -0800",
+            "downloadUrl": "https://bit.ly/2TOIhw5",
+            "version": "6.1",
+            "shortVersion": "6.1",
+            "length": 234314,
+            "releaseNotes": "<html><body style='margin:0;padding:0'><div style='font-weight:bold;font-family:Helvetica,Georgia,Serif;background-color:#efefef;width:100%;line-height:30px;font-size:13px;border-bottom-style:dotted;border-bottom-color:#464646;border-width:1px;padding-left:8px'>v6.1 (1 enhancement, 1 bug fix)</div><div><ul><li>Improved options and Date header formatting</li><li>Added 'Enable debug mode' checkbox option inn the tab 'About'</li></ul></div><p><strong>Please have a look Install-Instructions-Mojave-OS-and-Above.txt and follow the steps for Mojave OS and above.</strong></p><div><p>Spread the word of ReplyWithHeader (RWH).</p></div></body></html>"
+        },
+        "v6.0": {
             "title": "v6.0 (1 new feature, 1 enhancements)",
             "pubDate": "Saturday, Oct 20, 2018 18:33:00 -0700",
             "buildDate": "Saturday, Oct 20, 2018 18:33:00 -0700",
