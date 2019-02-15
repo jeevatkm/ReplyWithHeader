@@ -416,7 +416,7 @@
     
     
     // Bundle registered successfully
-    NSLog(@"RWH %@ plugin loaded, OS X %@", [self bundleNameAndVersion], [self osxVersionString]);
+    NSLog(@"RWH %@ plugin loaded, macOS %@", [self bundleNameAndVersion], [self osxVersionString]);
         
     // fix for #26 https://github.com/jeevatkm/ReplyWithHeader/issues/26
     if ( ![self isLocaleSupported] )
