@@ -86,8 +86,10 @@
         identifier = @"ko";
     else if ([identifier hasPrefix:@"nl"])
         identifier = @"nl";
-    else if ([identifier hasPrefix:@"pt-BR"] || [identifier hasPrefix:@"pt-PT"]) {
+    else if ([identifier hasPrefix:@"pt-BR"]) {
         // use as-is
+    } else if ([identifier hasPrefix:@"pt_PT"] || [identifier hasPrefix:@"pt-PT"]) {
+        identifier = @"pt-PT";
     } else if ([identifier hasPrefix:@"pt"])
         identifier = @"pt";
     else if ([identifier hasPrefix:@"ru"])
@@ -105,9 +107,10 @@
 {
     MHLog(@"Supported Localization %@", [[self bundle] localizations]);
     
-    BOOL supported = [[[self bundle] localizations] containsObject:[self localeIdentifier]];
+    NSString *locale = [self localeIdentifier];
+    BOOL supported = [[[self bundle] localizations] containsObject:locale];
         
-    MHLog(@"%@ - Is locale supported: %@",[self bundleNameAndVersion], supported ? @"YES" : @"NO");
+    MHLog(@"%@ - Is locale(%@) supported? %@",[self bundleNameAndVersion], locale, supported ? @"YES" : @"NO");
     
     return supported;
 }
