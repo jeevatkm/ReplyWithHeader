@@ -38,22 +38,29 @@ mh_mac_osx_version_p=`sw_vers -productVersion | cut -d . -f 1,2,3`
 mh_mac_osx_version=`sw_vers -productVersion | cut -d . -f 1,2`
 echo "RWH:: Mac OS X version: ${mh_mac_osx_version_p}"
 
-mh_mail_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleShortVersionString)
-mh_mail_build_version=$(defaults read /Applications/Mail.app/Contents/Info CFBundleVersion)
+mh_os_ver_15grt_chk=$(echo "${mh_mac_osx_version} == 10.15" | bc)
+mh_mail_app_info_plist_path="/Applications/Mail.app/Contents/Info"
+if [ ${mh_os_ver_15grt_chk} -eq 1 ]; then
+    mh_mail_app_info_plist_path="/System/Applications/Mail.app/Contents/Info"
+fi
+echo "RWH:: Mail.app Info.plist path is ${mh_mail_app_info_plist_path}"
+
+mh_mail_version=$(defaults read "${mh_mail_app_info_plist_path}" CFBundleShortVersionString)
+mh_mail_build_version=$(defaults read "${mh_mail_app_info_plist_path}" CFBundleVersion)
 echo "RWH:: Mail.app ${mh_mail_version} [Build ${mh_mail_build_version}]"
 
 if [ ! -e ${mh_install_path} ]; then
-	echo "RWH:: '${mh_install_path}' directory not exists, creating one"
+	echo "RWH:: \"${mh_install_path}\" directory not exists, creating one"
     mkdir -p "${mh_install_path}"
 fi
 
 mh_enable_plugin=1
 mh_enb_success=0
-if [ ${mh_user} == root ] ; then
+if [ "${mh_user}" == "root" ] ; then
     echo "RWH:: Root users is installing plugin"
     domain=/Library/Preferences/com.apple.mail.plist
 else
-    echo "RWH:: user '${mh_user}' is installing plugin"
+    echo "RWH:: user \"${mh_user}\" is installing plugin"
    domain=/Users/${mh_user}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist
 fi
 
@@ -71,18 +78,16 @@ if [ ${mh_enable_plugin} -eq 1 ]; then
     echo "RWH:: Domain is ${domain}"
 fi
 
-if [ -f /Applications/Mail.app/Contents/Info.plist ]; then
-mh_mail_app_uuid=$(defaults read /Applications/Mail.app/Contents/Info.plist PluginCompatibilityUUID)
+mh_os_ver_chk=$(echo "${mh_mac_osx_version} == 10.12 || ${mh_mac_osx_version} == 10.13 || ${mh_mac_osx_version} == 10.14 || ${mh_mac_osx_version} == 10.15" | bc)
+if [ -f "${mh_mail_app_info_plist_path}.plist" ]; then
+mh_mail_app_uuid=$(defaults read "${mh_mail_app_info_plist_path}" PluginCompatibilityUUID)
     if [[ ! -z "${mh_mail_app_uuid}" ]]; then
         echo "RWH:: Adding UUID ${mh_mail_app_uuid}"
-        if [[ ${mh_mac_osx_version_p} == *"10.14"* ]]; then
-            defaults write "${mh_plugin_plist}" Supported10.14PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
-        elif [[ ${mh_mac_osx_version_p} == *"10.13"* ]]; then
-            defaults write "${mh_plugin_plist}" Supported10.13PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
-        elif [[ ${mh_mac_osx_version_p} == *"10.12"* ]]; then
-            defaults write "${mh_plugin_plist}" Supported10.12PluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
-        else 
-            defaults write "${mh_plugin_plist}" SupportedPluginCompatibilityUUIDs -array-add "${mh_mail_app_uuid}"
+echo "Supported${mh_mac_osx_version}PluginCompatibilityUUIDs"
+        if [ ${mh_os_ver_chk} -eq 1 ]; then
+            defaults write "${mh_plugin_plist}" "Supported${mh_mac_osx_version}PluginCompatibilityUUIDs" "(${mh_mail_app_uuid})"
+        else
+            defaults write "${mh_plugin_plist}" SupportedPluginCompatibilityUUIDs "(${mh_mail_app_uuid})"
         fi
     fi
 fi
@@ -101,7 +106,7 @@ fi
 
 if [ -s ${mh_plugin} ]; then
 	# mh_enable_plugin=0
-	echo "\nRWH:: Plugin is already installed, let's upgrade it"
+	echo "\nRWH:: Plugin is already installed, lets upgrade it"
 	rm -rf "${mh_plugin}"
 else
 	echo "\nRWH:: Installing ReplyWithHeader Mail plugin"
@@ -111,9 +116,9 @@ fi
 yes | cp -rf "${mh_current_dir}/ReplyWithHeader.mailbundle" "${mh_install_path}"
 
 # for issue #48 - Resolve Permission Issue while installed by Root user
-if [ ${mh_user} == root ] ; then
-	mh_cur_user_name=${HOME##*/}
-	echo "RWH:: Applying appropriate file permission for user '${mh_cur_user_name}'"
+if [ "${mh_user}" == "root" ] ; then
+	mh_cur_user_name="${HOME##*/}"
+	echo "RWH:: Applying appropriate file permission for user \"${mh_cur_user_name}\""
 	chown -R ${mh_cur_user_name} "${mh_install_path}"
 	chmod -R 755 "${mh_install_path}"
 fi
@@ -122,11 +127,10 @@ yes | rm -rf "${HOME}/Library/Mail/Bundles (Disabled)/ReplyWithHeader.mailbundle
 
 echo "RWH:: Installation complete" 
 
-if [[ ${mh_mac_osx_version_p} == *"10.14"* ]]; then
-echo "\nRWH:: ${GCB}Plugin copied into '${HOME}/Library/Mail/Bundles'${CC}. Follow the \"Step 3\" from \"Install-Instructions-Mojave-OS-and-Above.txt\"\n\n"
+if [ ${mh_os_ver_chk} -eq 1 ]; then
+    echo "\nRWH:: ${GCB}Plugin copied into \"${HOME}/Library/Mail/Bundles\"${CC}. Follow the \"Step 3\" from \"Install-Instructions-Mojave-OS-and-Above.txt\"\n\n"
 else
-echo "\n========================================================="
-echo "  ${GCB}RWH Plugin successfully installed${CC}, ${RCWHB} restart Mail.app ${CC}  "
-echo "=========================================================\n\n"
+    echo "\n========================================================="
+    echo "  ${GCB}RWH Plugin successfully installed${CC}, ${RCWHB} restart Mail.app ${CC}  "
+    echo "=========================================================\n\n"
 fi
-
